@@ -107,6 +107,7 @@ body::after {
 
 .main-nowPlayingWidget-coverExpanded > .main-coverSlotCollapsed-container {
     transform: translateX(-8px) scale(1) !important;
+}
 
 .progress-bar {
     --bg-color: rgba(var(--spice-rgb-selected-row),.3);
