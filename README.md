@@ -8,4 +8,3 @@ The main differences are the light/dark toggle, the background cover and the dyn
 ![demo-base](./poster.png)
 ![demo-base](./poster2.png)
 
-## Under connstruction 
