@@ -60,7 +60,6 @@ body::after {
 
 .main-navBar-navBarLinkActive,
 .main-collectionLinkButton-selected {
-  background-color: red !important;
   border-radius: 8px !important;
 }
 
