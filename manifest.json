@@ -5,7 +5,19 @@
     "readme": "README.md",
     "usercss": "user.css",
     "schemes": "color.ini",
-    "include": ["https://raw.githubusercontent.com/Astromations/Hazy/main/theme.js"],
-    "authors": [ { "name": "Astromations", "url": "https://github.com/Astromations" } ],
-    "tags": ["dark", "transparent", "hazy"]
+    "include": [
+        "https://raw.githubusercontent.com/Astromations/Hazy/main/theme.js",
+        "https://raw.githubusercontent.com/Astromations/Hazy/main/Vibrant.min.js"
+    ],
+    "authors": [
+        {
+            "name": "Astromations",
+            "url": "https://github.com/Astromations"
+        }
+    ],
+    "tags": [
+        "dark",
+        "transparent",
+        "hazy"
+    ]
 }
