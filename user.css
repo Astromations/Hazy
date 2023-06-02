@@ -95,7 +95,14 @@ body::after {
 
 .main-playPauseButton-button {
   background-color: transparent;
-  color: var(--spice-text);
+}
+
+.main-skipForwardButton-button,
+.main-skipBackButton-button, 
+.main-repeatButton-button, 
+.main-playPauseButton-button,
+.main-shuffleButton-button {
+  color: var(--spice-text)
 }
 
 .progress-bar {
@@ -431,7 +438,7 @@ Root__right-sidebar {
     background-color: var(--background-tinted-base)
 }
 .main-nowPlayingView-section {
-    background-color: var(--background-tinted-base);
+    background-color: var(--backdrop);
     border-radius: 8px;
     padding: 16px;
 }
