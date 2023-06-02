@@ -7,7 +7,8 @@ The main differences are the light/dark toggle, the background cover and the dyn
 
 ## Preview
 
-![demo-base](./Dark.gif)
+![demo-base](./poster.png)
+![demo-base](./poster2.png)
 
 ## Install / Update
 
