@@ -1,7 +1,6 @@
 # Hazy 
 
-This is a tweaked version of the Default theme.
-The main differences are the light/dark toggle, the background cover and the dynamic highlight color, ie. it will match the current album art.
+A translucent theme based on DynamicDefault and Bloom
 
 ## Preview
 
