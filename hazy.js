@@ -281,3 +281,4 @@ registerCoverListener();
 })();
 
 document.documentElement.style.setProperty("--warning_message", " ");
+songchange()
