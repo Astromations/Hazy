@@ -416,3 +416,5 @@ async function songchange() {
     })();
 
 songchange()
+registerCoverListener()
+document.documentElement.style.setProperty("--image_url", `url("${bgImage}")`)
