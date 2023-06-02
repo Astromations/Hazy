@@ -1,4 +1,5 @@
-let current = "4.0";
+(function Hazy() {
+    let current = "4.0";
 
 function waitForElement(els, func, timeout = 100) {
     const queries = els.map((el) => document.querySelector(el));
@@ -210,6 +211,7 @@ async function songchange() {
 }
 
 Spicetify.Player.addEventListener("songchange", songchange);
+Spicetify.Player.addEventListener("Startup", songchange);
 
 function pickCoverColor(img) {
     if (!img.currentSrc.startsWith("spotify:")) return;
@@ -281,4 +283,136 @@ registerCoverListener();
 })();
 
 document.documentElement.style.setProperty("--warning_message", " ");
+
+(function () {
+    sampleEle.innerHTML = "This code is invoked immediately as soon as it is defined";
+ })();
+
+ async function songchange() {
+    if (!document.querySelector(".main-trackInfo-container")) return setTimeout(songchange, 300);
+    try {
+        // warning popup
+        if (Spicetify.Platform.PlatformData.client_version_triple < "1.1.68") Spicetify.showNotification(`Your version of Spotify ${Spicetify.Platform.PlatformData.client_version_triple}) is un-supported`);
+    } catch (err) {
+        console.error(err);
+    }
+
+    let album_uri = Spicetify.Player.data.track.metadata.album_uri;
+    let bgImage = Spicetify.Player.data.track.metadata.image_url;
+    if (bgImage === undefined) {
+        bgImage = "/images/tracklist-row-song-fallback.svg";
+        textColor = "#509bf5";
+        updateColors(textColor);
+    }
+
+    if (album_uri !== undefined && !album_uri.includes("spotify:show")) {
+        const albumInfo = await getAlbumInfo(album_uri.replace("spotify:album:", ""));
+        let album_date = new Date(albumInfo.release_date);
+        let recent_date = new Date();
+        recent_date.setMonth(recent_date.getMonth() - 6);
+        album_date = album_date.toLocaleString("default", album_date > recent_date ? { year: "numeric", month: "short" } : { year: "numeric" });
+        nearArtistSpanText = `
+            <span style="display: none">
+                <span draggable="true" style="display: none">
+                    <a draggable="false" dir="auto" href="${album_uri}">${Spicetify.Player.data.track.metadata.album_title}</a>
+                </span>
+            </span>
+            <span style="display: none"> • ${album_date}</span>
+        `;
+    } else if (Spicetify.Player.data.track.uri.includes("spotify:episode")) {
+        // podcast
+        bgImage = bgImage.replace("spotify:image:", "https://i.scdn.co/image/");
+        nearArtistSpanText = Spicetify.Player.data.track.metadata.album_title;
+    } else if (Spicetify.Player.data.track.metadata.is_local == "true") {
+        // local file
+        nearArtistSpanText = Spicetify.Player.data.track.metadata.album_title;
+    } else if (Spicetify.Player.data.track.provider == "ad") {
+        // ad
+        nearArtistSpanText.innerHTML = "Advertisement";
+        return;
+    } else {
+        // When clicking a song from the homepage, songChange is fired with half empty metadata
+        // todo: retry only once?
+        setTimeout(songchange, 200);
+    }
+
+    if (!document.querySelector("#main-trackInfo-year")) {
+        waitForElement([".main-trackInfo-container"], (queries) => {
+            nearArtistSpan = document.createElement("div");
+            nearArtistSpan.id = "main-trackInfo-year";
+            nearArtistSpan.classList.add("main-trackInfo-release", "standalone-ellipsis-one-line", "main-type-finale");
+            nearArtistSpan.innerHTML = nearArtistSpanText;
+            queries[0].append(nearArtistSpan);
+        });
+    } else {
+        nearArtistSpan.innerHTML = nearArtistSpanText;
+    }
+    document.documentElement.style.setProperty("--image_url", `url("${bgImage}")`);
+    registerCoverListener();
+}
+
+async function songchange() {
+    if (!document.querySelector(".main-trackInfo-container")) return setTimeout(songchange, 300);
+    try {
+        // warning popup
+        if (Spicetify.Platform.PlatformData.client_version_triple < "1.1.68") Spicetify.showNotification(`Your version of Spotify ${Spicetify.Platform.PlatformData.client_version_triple}) is un-supported`);
+    } catch (err) {
+        console.error(err);
+    }
+
+    let album_uri = Spicetify.Player.data.track.metadata.album_uri;
+    let bgImage = Spicetify.Player.data.track.metadata.image_url;
+    if (bgImage === undefined) {
+        bgImage = "/images/tracklist-row-song-fallback.svg";
+        textColor = "#509bf5";
+        updateColors(textColor);
+    }
+
+    if (album_uri !== undefined && !album_uri.includes("spotify:show")) {
+        const albumInfo = await getAlbumInfo(album_uri.replace("spotify:album:", ""));
+        let album_date = new Date(albumInfo.release_date);
+        let recent_date = new Date();
+        recent_date.setMonth(recent_date.getMonth() - 6);
+        album_date = album_date.toLocaleString("default", album_date > recent_date ? { year: "numeric", month: "short" } : { year: "numeric" });
+        nearArtistSpanText = `
+            <span style="display: none">
+                <span draggable="true" style="display: none">
+                    <a draggable="false" dir="auto" href="${album_uri}">${Spicetify.Player.data.track.metadata.album_title}</a>
+                </span>
+            </span>
+            <span style="display: none"> • ${album_date}</span>
+        `;
+    } else if (Spicetify.Player.data.track.uri.includes("spotify:episode")) {
+        // podcast
+        bgImage = bgImage.replace("spotify:image:", "https://i.scdn.co/image/");
+        nearArtistSpanText = Spicetify.Player.data.track.metadata.album_title;
+    } else if (Spicetify.Player.data.track.metadata.is_local == "true") {
+        // local file
+        nearArtistSpanText = Spicetify.Player.data.track.metadata.album_title;
+    } else if (Spicetify.Player.data.track.provider == "ad") {
+        // ad
+        nearArtistSpanText.innerHTML = "Advertisement";
+        return;
+    } else {
+        // When clicking a song from the homepage, songChange is fired with half empty metadata
+        // todo: retry only once?
+        setTimeout(songchange, 200);
+    }
+
+    if (!document.querySelector("#main-trackInfo-year")) {
+        waitForElement([".main-trackInfo-container"], (queries) => {
+            nearArtistSpan = document.createElement("div");
+            nearArtistSpan.id = "main-trackInfo-year";
+            nearArtistSpan.classList.add("main-trackInfo-release", "standalone-ellipsis-one-line", "main-type-finale");
+            nearArtistSpan.innerHTML = nearArtistSpanText;
+            queries[0].append(nearArtistSpan);
+        });
+    } else {
+        nearArtistSpan.innerHTML = nearArtistSpanText;
+    }
+    document.documentElement.style.setProperty("--image_url", `url("${bgImage}")`);
+    registerCoverListener();
+}
+    })();
+
 songchange()
