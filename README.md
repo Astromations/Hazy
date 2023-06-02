@@ -1,0 +1,2 @@
+# Unnamed
+Transparent spicetify theme
