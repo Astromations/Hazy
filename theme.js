@@ -147,7 +147,7 @@ function updateColors(textColHex) {
 }
 
 let nearArtistSpanText = "";
-async function songchange() {
+function songchange() {
     if (!document.querySelector(".main-trackInfo-container")) return setTimeout(songchange, 300);
     try {
         // warning popup
@@ -165,7 +165,7 @@ async function songchange() {
     }
 
     if (album_uri !== undefined && !album_uri.includes("spotify:show")) {
-        const albumInfo = await getAlbumInfo(album_uri.replace("spotify:album:", ""));
+        const albumInfo = getAlbumInfo(album_uri.replace("spotify:album:", ""));
         let album_date = new Date(albumInfo.release_date);
         let recent_date = new Date();
         recent_date.setMonth(recent_date.getMonth() - 6);
@@ -288,7 +288,7 @@ document.documentElement.style.setProperty("--warning_message", " ");
     sampleEle.innerHTML = "This code is invoked immediately as soon as it is defined";
  })();
 
- async function songchange() {
+ async function otherthing() {
     if (!document.querySelector(".main-trackInfo-container")) return setTimeout(songchange, 300);
     try {
         // warning popup
@@ -351,7 +351,7 @@ document.documentElement.style.setProperty("--warning_message", " ");
     registerCoverListener();
 }
 
-async function songchange() {
+async function elsething() {
     if (!document.querySelector(".main-trackInfo-container")) return setTimeout(songchange, 300);
     try {
         // warning popup
