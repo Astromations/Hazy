@@ -1,6 +1,6 @@
 {
     "name": "Hazy",
-    "description": "a hazy spicetify theme",
+    "description": "A hazy spicetify theme",
     "preview": "https://github.com/Astromations/Hazy/blob/main/poster.png?raw=true",
     "readme": "https://github.com/Astromations/Hazy#readme",
     "usercss": "https://github.com/Astromations/Hazy/blob/main/user.css",
@@ -9,5 +9,5 @@
     "authors": [
         { "name": "Astromations", "url": "https://github.com/Astromations" }    
     ],
-    "tags": ["dark", "transparent", "dynamic-background", "glass", "frost", "hazy"]
+    "tags": ["dark", "transparent", "glass", "frost", "hazy"]
 }
