@@ -1,0 +1,14 @@
+{
+    "name": "Unnamed",
+    "description": "a clean, transparent spicetify theme",
+    "preview": "filepathFromGitRepo/theme.png",
+    "readme": "README.md",
+    "usercss": "filepathFromGitRepo/user.css",
+    "schemes": "filepathFromGitRepo/color.ini",
+    "include": ["https://your-github-username.github.io/your-repo/filepathFromGitRepo/extension.js"],
+    "branch": "beta-release",
+    "authors": [
+        { "name": "Astromations", "url": "https://github.com/Astromations" }    
+    ],
+    "tags": ["dark", "transparent", "dynamic-background", "glass"]
+}
