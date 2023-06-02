@@ -1,6 +1,6 @@
 # Hazy 
 
-A translucent theme based on DynamicDefault and Bloom
+A translucent theme based on <a href="https://github.com/JulienMaille/spicetify-dynamic-theme">DynamicDefault<a/> and <a href="https://github.com/nimsandu/spicetify-bloom">Bloom<a/>
 
 ## Preview
 
