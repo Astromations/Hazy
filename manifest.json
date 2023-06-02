@@ -5,7 +5,7 @@
     "readme": "README.md",
     "usercss": "user.css",
     "schemes": "color.ini",
-    "include": ["https://github.com/Astromations/Hazy/blob/main/hazy.js"],
+    "include": ["https://raw.githubusercontent.com/Astromations/Hazy/main/hazy.js"],
     "authors": [ { "name": "Astromations", "url": "https://github.com/Astromations" } ],
     "tags": ["dark", "transparent", "hazy"]
 }
