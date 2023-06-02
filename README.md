@@ -1,4 +1,4 @@
-# DefaultDynamic for [Spicetify](https://github.com/khanhas/spicetify-cli)
+# Unnamed for [Spicetify](https://github.com/khanhas/spicetify-cli)
 
 <a href="https://github.com/JulienMaille/spicetify-dynamic-theme/releases/latest"><img src="https://img.shields.io/github/release/JulienMaille/spicetify-dynamic-theme/all.svg"></a>
 
@@ -39,45 +39,6 @@ curl -fsSL https://raw.githubusercontent.com/JulienMaille/spicetify-dynamic-them
     spicetify config inject_css 1 replace_colors 1
     spicetify apply
     ```
-
-## IMPORTANT!
-
-From Spotify > v1.1.62, in sidebar, they use an adaptive render mechanic to actively show and hide items on scroll. It helps reducing number of items to render, hence there is significant performance boost if you have a large playlists collection. But the drawbacks is that item height is hard-coded, it messes up user interaction when we explicitly change, in CSS, playlist item height bigger than original value. So you need to add these 2 lines in Patch section in config file:
-
-```ini
-[Patch]
-xpui.js_find_8008 = ,(\w+=)32,
-xpui.js_repl_8008 = ,${1}28,
-```
-
-## Follow system dark/light theme (PowerShell)
-
-Automatic dark mode should work on MacOs and Linux out of the box.
-From Spotify > v1.1.70, dark mode is forced in Windows builds. You will need to patch Spotify.exe using this script:
-
-```powershell
-Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/JulienMaille/spicetify-dynamic-theme/master/patch-dark-mode.ps1" | Invoke-Expression
-```
-
-## Hide Window Controls:
-
-Windows user, please edit your Spotify shortcut and add flag `--transparent-window-controls` after the Spotify.exe
-
-![hide-controls](./windows-shortcut-instruction.png)
-
-## Uninstall
-
-### Windows (PowerShell)
-
-```powershell
-Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/JulienMaille/spicetify-dynamic-theme/master/uninstall.ps1" | Invoke-Expression
-```
-
-### Linux/MacOS (Bash)
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/JulienMaille/spicetify-dynamic-theme/master/uninstall.sh | sh
-```
 
 ### Manual Uninstall
 
