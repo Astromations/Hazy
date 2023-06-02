@@ -24,7 +24,7 @@ Then run these commands to apply:
 ```powershell
 spicetify config current_theme Hazy
 spicetify config inject_css 1 replace_colors 1 overwrite_assets 1
-spicetify config extensions themes.js
+spicetify config extensions theme.js
 spicetify apply
 ```
 
