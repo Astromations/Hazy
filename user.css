@@ -105,6 +105,9 @@ body::after {
   color: var(--spice-text)
 }
 
+.main-nowPlayingWidget-coverExpanded > .main-coverSlotCollapsed-container {
+    transform: translateX(-8px) scale(1) !important;
+
 .progress-bar {
     --bg-color: rgba(var(--spice-rgb-selected-row),.3);
     --fg-color: var(--spice-button);
