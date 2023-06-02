@@ -1,6 +1,4 @@
-# Unnamed for [Spicetify](https://github.com/khanhas/spicetify-cli)
-
-<a href="https://github.com/JulienMaille/spicetify-dynamic-theme/releases/latest"><img src="https://img.shields.io/github/release/JulienMaille/spicetify-dynamic-theme/all.svg"></a>
+# Translucent theme for [Spicetify](https://github.com/khanhas/spicetify-cli)
 
 This is a tweaked version of the Default theme.
 The main differences are the light/dark toggle, the background cover and the dynamic highlight color, ie. it will match the current album art.
