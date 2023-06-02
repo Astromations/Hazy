@@ -358,7 +358,7 @@ Root__right-sidebar {
   background: none !important;
   background-color: var(--backdrop) !important;
   transition: transform 0.2s ease;
-  border-radius: calc(var(--card-container-border-radius) + 2px);
+  border-radius: 6px;
 }
 
 .main-card-draggable {
@@ -615,6 +615,10 @@ Root__right-sidebar {
 
 .marketplace-header-icon-button:hover {
     background-color: rgba(255,255,255,0.01);
+}
+
+.Dropdown-control {
+  background-color: var(--backdrop);
 }
 
 /* ----BLOOM CONTEXT MENUS---- */
