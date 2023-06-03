@@ -1,10 +1,10 @@
-(function Hazy() {
+(function hazy() {
     if (!(Spicetify.Player.data && Spicetify.Platform)) {
-      setTimeout(Hazy, 100);
+      setTimeout(hazy, 100);
       return;
     }
 
-    console.log("Hazy running"); 
+    console.log("Hazy is running"); 
     function getAlbumInfo(uri) {
         return Spicetify.CosmosAsync.get(`https://api.spotify.com/v1/albums/${uri}`);
     }
