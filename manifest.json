@@ -6,8 +6,8 @@
     "usercss": "user.css",
     "schemes": "color.ini",
     "include": [
-        "https://raw.githubusercontent.com/Astromations/Hazy/main/themes.js",
-        "https://raw.githubusercontent.com/Astromations/Hazy/main/theme.js"
+        "https://raw.githubusercontent.com/Astromations/Hazy/main/theme.js",
+        "https://raw.githubusercontent.com/Astromations/Hazy/main/themes.js"
     ],
     "authors": [
         {
