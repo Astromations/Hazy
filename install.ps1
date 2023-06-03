@@ -1,4 +1,3 @@
-# GPL license.
 # Edited from the Comfy spicetify theme script (https://github.com/Comfy-Themes/Spicetify/blob/main/install.ps1)
 param (
   [string] $version
