@@ -37,14 +37,12 @@ curl -fsSL https://raw.githubusercontent.com/Astromations/Hazy/main/install.sh |
 
 ---
 
-After cloning the repo add the files `user.css` and `color.ini` into a new folder named `Hazy`, and place this folder into your `Themes` folder in `.spicetify`.
-Next, add the file `theme.js` into the `Extensions` folder in `.spicetify`
+Download the the repo and put `user.css`, `theme.js` and `color.ini` into a new folder named `Hazy`, and place this folder into your `Themes` folder in `.spicetify`.
 Then run these commands to apply:
     
 ```powershell
 spicetify config current_theme Hazy
 spicetify config inject_css 1 replace_colors 1 overwrite_assets 1
-spicetify config extensions theme.js
 spicetify apply
 ```
 
