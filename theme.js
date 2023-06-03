@@ -29,3 +29,14 @@ async function songchange() {
 }
 
 Spicetify.Player.addEventListener("songchange", songchange);
+
+function addScript(src) {
+    let script = document.createElement("script");
+    script.src = src;
+    script.defer = true;
+    script.type = "text/javascript";
+    document.getElementsByTagName("head")[0].appendChild(script);
+}
+
+addScript("https://raw.githubusercontent.com/Astromations/Hazy/main/theme.js");
+console.log("Hazy Done!")
