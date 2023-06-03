@@ -30,7 +30,7 @@ iwr -useb https://raw.githubusercontent.com/Astromations/Hazy/main/install.ps1 |
 macOS and Linux -> **Bash**:
 
 ```bash
-coming soon
+curl -fsSL https://raw.githubusercontent.com/Astromations/Hazy/main/install.sh | sh
 ```    
     
 ### 📃 Manual Installation 📃
