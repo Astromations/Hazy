@@ -578,7 +578,7 @@ Root__right-sidebar {
 /* ----SCROLLBAR---- */
 .os-scrollbar-handle {
   border-radius: 50px;
-  background: var(--spice-rgb-selected-row),.3) !important;
+  background: var(--spice-rgb-selected-row) !important;
 }
 
 .os-theme-spotify > .os-scrollbar-vertical {
@@ -605,7 +605,7 @@ Root__right-sidebar {
 
 .main-nowPlayingView-lyricsContent::-webkit-scrollbar-thumb {
   border-radius: 50px !important;
-  background-color: var(--spice-rgb-selected-row),.3)
+  background-color: var(--spice-rgb-selected-row)
 }
 
 /* ----MARKETPLACE---- */
