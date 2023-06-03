@@ -616,7 +616,7 @@ Root__right-sidebar {
 
 .searchbar-bar {
     border-style: none;
-    background-color: var(--backdrop)!important; 
+    background-color: var(--backdrop) !important; 
 }
 
 .marketplace-header-icon-button {
@@ -628,9 +628,9 @@ Root__right-sidebar {
 }
 
 #marketplace-readme {
-  background: var(--backdrop);
-  border-radius: 8px;
-  padding: 20px;
+  background: var(--backdrop) !important;
+  border-radius: 8px !important;
+  padding: 20px !important;
 }
 
 .Dropdown-control {
