@@ -627,6 +627,12 @@ Root__right-sidebar {
     background-color: rgba(255,255,255,0.01);
 }
 
+#marketplace-readme {
+  background: var(--backdrop);
+  border-radius: 8px;
+  padding: 20px;
+}
+
 .Dropdown-control {
   background-color: var(--backdrop);
 }
