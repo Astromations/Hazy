@@ -15,7 +15,10 @@ A translucent theme based on <a href="https://github.com/JulienMaille/spicetify-
 3. Copy the following settings:
   <div>
     <img width="500px" src="https://github.com/Astromations/Hazy/assets/80211195/72ce19d5-fff5-477b-949e-dcc7c5a6f65c"> <img>
-  <div/>
+  </div>
+  
+
+ <span>**Installing the theme from the marketplace automatically activates the sidebar. Undo these selections if you'd like to get rid of it**</span>    
     
 ### ⬇️ Automatic Installation ⬇️
 
