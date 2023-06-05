@@ -9,7 +9,30 @@
       return Spicetify.CosmosAsync.get(`https://api.spotify.com/v1/albums/${uri}`);
   }
 
+
+  async function fetchFadeTime() {
+    const response = await Spicetify.Platform.PlayerAPI._prefs.get({ key: "audio.crossfade_v2" });
+    const crossfadeEnabled = response.entries["audio.crossfade_v2"].bool;
+    
+    let FadeTime = "3s"; // Default value of 3 seconds
+    
+    if (crossfadeEnabled) {
+      const fadeTimeResponse = await Spicetify.Platform.PlayerAPI._prefs.get({ key: "audio.crossfade.time_v2" });
+      const fadeTime = fadeTimeResponse.entries["audio.crossfade.time_v2"].number;
+      const dividedTime = fadeTime / 1000;
+      FadeTime = dividedTime + "s";
+    }
+    
+    document.documentElement.style.setProperty("--fade-time", FadeTime);
+    console.log(FadeTime);
+    // Use the CSS variable "--fade-time" for transition time
+;
+  }
+
   async function songchange() {
+
+      fetchFadeTime(); // Call fetchFadeTime after songchange
+
       let album_uri = Spicetify.Player.data.track.metadata.album_uri;
       let bgImage = Spicetify.Player.data.track.metadata.image_url;
   
@@ -34,6 +57,7 @@
   
   Spicetify.Player.addEventListener("songchange", songchange);
   songchange(); 
+  
 
   (function sidebar() {
     // Sidebar settings
