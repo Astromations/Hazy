@@ -9,7 +9,6 @@
       return Spicetify.CosmosAsync.get(`https://api.spotify.com/v1/albums/${uri}`);
   }
 
-
   async function fetchFadeTime() {
     const response = await Spicetify.Platform.PlayerAPI._prefs.get({ key: "audio.crossfade_v2" });
     const crossfadeEnabled = response.entries["audio.crossfade_v2"].bool;
@@ -57,6 +56,7 @@
   
   Spicetify.Player.addEventListener("songchange", songchange);
   songchange(); 
+  windowControls();
   
 
   (function sidebar() {
@@ -95,5 +95,17 @@
       reload = false
     }
   })()
+
+  function windowControls() {
+    function detectOS() {
+      const userAgent = window.navigator.userAgent;
+      
+      if (userAgent.indexOf('Win') !== -1) {
+        document.body.classList.add('windows');
+      }
+    }
+    // Call detectOS() immediately
+    detectOS();
+  }
   
 })()
