@@ -17,8 +17,12 @@ A translucent theme based on <a href="https://github.com/JulienMaille/spicetify-
     <img width="500px" src="https://github.com/Astromations/Hazy/assets/80211195/72ce19d5-fff5-477b-949e-dcc7c5a6f65c"> <img>
   </div>
   
+ <span>**Click the new "Now Playing View" button to activate the sidebar**</span>
+  
+<span>
+  <img src="https://github.com/Astromations/Hazy/assets/80211195/ee64d41c-33f2-41ed-9c70-03a639383570"><img>
+ </span>
 
- <span>**Installing the theme from the marketplace automatically activates the sidebar. Undo these selections if you'd like to get rid of it**</span>    
     
 ### ⬇️ Automatic Installation ⬇️
 
