@@ -14,7 +14,7 @@
     const response = await Spicetify.Platform.PlayerAPI._prefs.get({ key: "audio.crossfade_v2" });
     const crossfadeEnabled = response.entries["audio.crossfade_v2"].bool;
     
-    let FadeTime = "3s"; // Default value of 3 seconds
+    let FadeTime = "2s"; // Default value of 2 seconds
     
     if (crossfadeEnabled) {
       const fadeTimeResponse = await Spicetify.Platform.PlayerAPI._prefs.get({ key: "audio.crossfade.time_v2" });
