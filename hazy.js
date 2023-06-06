@@ -31,7 +31,6 @@
   async function songchange() {
 
       fetchFadeTime(); // Call fetchFadeTime after songchange
-      updateLyricsMaxWidth(); //Bloom Lyrics Page
 
       let album_uri = Spicetify.Player.data.track.metadata.album_uri;
       let bgImage = Spicetify.Player.data.track.metadata.image_url;
@@ -52,12 +51,14 @@
           setTimeout(songchange, 200);
       }
       document.documentElement.style.setProperty("--image_url", `url("${bgImage}")`);
+      updateLyricsMaxWidth(); //Bloom Lyrics Page
   
   }
   
   Spicetify.Player.addEventListener("songchange", songchange);
-  windowControls();
   songchange();
+  windowControls();
+  
   
 
   (function sidebar() {
@@ -98,7 +99,6 @@
   })()
 
   async function onResize() {
-    centerTopbar();
     updateLyricsMaxWidth();
   }
   window.onresize = onResize;
