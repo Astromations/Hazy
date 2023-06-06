@@ -144,6 +144,16 @@ Root__right-sidebar {
     --background-base: var(--backdrop)!important;
 }
 
+.main-nowPlayingView-sectionHeaderSpacing.main-nowPlayingView-lyricsGradient {
+    background-color: var(--background-tinted-base)
+}
+
+.main-nowPlayingView-section {
+    background-color: var(--backdrop);
+    border-radius: 8px;
+    padding: 16px;
+}
+
 /* ---PLAYLIST VIEW---- */
 
 .Root__main-view {
@@ -461,14 +471,6 @@ Root__right-sidebar {
     background-color: var(--backdrop);
 }
 
-.main-nowPlayingView-sectionHeaderSpacing.main-nowPlayingView-lyricsGradient {
-    background-color: var(--background-tinted-base)
-}
-.main-nowPlayingView-section {
-    background-color: var(--backdrop);
-    border-radius: 8px;
-    padding: 16px;
-}
 
 /* ----BLOOM LYRICS---- */
 
