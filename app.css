@@ -240,7 +240,7 @@ Root__right-sidebar {
 }
 
 .nav-ylx .x-searchInput-searchInputInput,
-.nav-ylx .x-searchInput-searchInputInput:hover{
+.nav-ylx .x-searchInput-searchInputInput:hover {
   background-color: var(--backdrop) !important;
   border-radius: 4px;
   color: rgba(var(--spice-rgb-selected-row),.7);
@@ -249,7 +249,8 @@ Root__right-sidebar {
 }
 
 .search-searchCategory-SearchCategory {
-    background: none;
+  background: none;
+  position: static;
 }
 
 .nav-ylx .x-searchInput-searchInputInput:hover {
@@ -452,8 +453,12 @@ Root__right-sidebar {
 }
 
 .artist-artistOverview-artistOverviewContent {
-  background-color: var(--backdrops);
+  background-color: transparent;
   margin-top: 10px !important;
+}
+
+.artist-artistAbout-container {
+    background-color: var(--backdrop);
 }
 
 .main-nowPlayingView-sectionHeaderSpacing.main-nowPlayingView-lyricsGradient {
