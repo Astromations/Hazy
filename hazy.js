@@ -137,7 +137,6 @@
 
   // fixes container shifting & active line clipping | taken from Bloom: https://github.com/nimsandu/spicetify-bloom
   function updateLyricsPageProperties() {
-
     function setLyricsPageProperties() {
       function detectTextDirection() {
         // 0, 1 - blank lines
@@ -197,7 +196,7 @@
         const lyricsMaxWidth = calculateLyricsMaxWidth(
           lyricsTextDirection,
           lyricsContentWrapper,
-          lyricsContentWrapper
+          lyricsContentContainer
         );
         lyricsContentWrapper.style.setProperty('--lyrics-active-max-width', `${lyricsMaxWidth}px`);
         lockLyricsWrapperWidth(lyricsContentWrapper);
