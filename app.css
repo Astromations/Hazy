@@ -474,7 +474,7 @@ Root__right-sidebar {
 
 /* ----BLOOM LYRICS---- */
 
-#main {
+:root {
   --lyrics-text-direction: left;
 }
 
