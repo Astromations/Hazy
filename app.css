@@ -474,31 +474,8 @@ Root__right-sidebar {
 
 /* ----BLOOM LYRICS---- */
 
-#main {
+:root {
   --lyrics-text-direction: left;
-}
-
-/* Needed for lyrics cinema */
-.Root__top-bar {
-  z-index: 5 !important;
-  display: unset !important;
-}
-
-.main-lyricsCinema-controls {
-  top: 80px !important;
-}
-
-#lyrics-backdrop {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-#lyrics-backdrop-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: var(--spice-main);
 }
 
 .lyrics-lyrics-background {
@@ -584,21 +561,6 @@ Root__right-sidebar {
 
 .lyrics-lyricsContainer-Provider {
   background: none !important;
-}
-
-/* lyrics pages fix */
-
-.main-lyricsCinema-nonDisplayedArea .main-topBar-topbarContent {
-  display: none;
-}
-
-.lyrics-lyricsContainer-LyricsBackground {
-  margin-bottom: -110px;
-  margin-top: -10px;
-}
-
-.lyrics-lyrics-container {
-  margin-top: 0;
 }
 
 /* ----SCROLLBAR---- */
