@@ -399,7 +399,7 @@ Root__right-sidebar {
 
 .ButtonInner-lg-iconOnly {
   border-radius: 8px !important;
-  transform: scale(0.8);
+  transform: scale(0.8); 
   transition: transform 0.2s ease
 }
 
@@ -471,6 +471,19 @@ Root__right-sidebar {
     background-color: var(--backdrop);
 }
 
+.main-trackCreditsModal-container,
+.main-aboutRecsModal-container,
+.main-playlistEditDetailsModal-container,
+.profile-userEditDetails-container,
+.artist-artistAbout-modal {
+  background-color: rgba(0,0,0,0.5) !important;
+  backdrop-filter: blur(25px);
+  border-radius: 8px
+}
+
+.uJjmxe0T11dUVeW6Biz8 {
+  background: none
+}
 
 /* ----BLOOM LYRICS---- */
 
