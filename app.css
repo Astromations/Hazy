@@ -84,13 +84,15 @@ height: 31px;
 }
 
 .main-coverSlotCollapsed-container {
-  border-radius: 8px !important;
-}
-
-.main-coverSlotCollapsed-container {
   border-radius: 4px !important;
   transform: scale(1.2) !important;
   margin-right: 10px;
+}
+
+
+.main-nowPlayingWidget-nowPlaying {
+  display: -webkit-box !important;
+  width: 70% !important;
 }
 
 .main-playPauseButton-button {
