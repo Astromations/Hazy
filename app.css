@@ -69,7 +69,10 @@
     --background-highlight: rgba(255,255,255,0.05) !important;
     --background-press: rgba(255,255,255,0.05);
   }
-  
+
+  .main-yourLibraryX-listItem > div > div > div.Areas__HeaderSideArea-sc-8gfrea-1.HeaderSideArea {
+    box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 10%);
+  }
   
   /* ----NOW PLAYING BAR---- */
   
@@ -433,7 +436,9 @@
   .main-buddyFeed-link,
   .main-trackInfo-name,
   .main-trackInfo-contentWrapper,
-  .main-trackInfo-contentWrapper {
+  .main-trackInfo-contentWrapper,
+  .queue-queuePage-header,
+  .marketplace-header__left{
     text-shadow: -1px 3px 20px rgb(0 0 0 / 20%);
   }
 
@@ -498,15 +503,31 @@
   }
   
   .main-card-card:hover > .main-card-draggable {
-    transform: translateY(-4px);
-    z-index: 5
+    transform: translateY(-2px);
   }
   
   .main-heroCard-PlayButtonContainer {
       -webkit-box-shadow: unest;
       box-shadow: unset;
   }
+
+  .main-card-card .main-cardImage-imageWrapper {
+    transition: transform 0.35s ease;
+    transform-origin: 50% -40px;
+    overflow: hidden;
+  }
+
+  .main-card-card:hover .main-cardImage-imageWrapper {
+      transform: perspective(75em) rotateX(10deg);
+  }
   
+  .marketplace-header__left {
+      position: absolute !important;
+      left: 0 !important;
+  }
+  .view-homeShortcutsGrid-shortcut {
+      background: rgba(0, 0, 0, 0.3) !important;
+  }
 
   .Button-lg-buttonPrimary-useBrowserDefaultFocusStyle:hover 
   .ButtonFocus-sc-2hq6ey-0,
