@@ -57,6 +57,7 @@
   Spicetify.Player.addEventListener("songchange", onSongChange);
   onSongChange();
   windowControls();
+  galaxyFade();
   
   
 
@@ -231,9 +232,73 @@
       });
     });
   }
+
+  function galaxyFade() { //Shamelessly stolen from the Galaxy theme | https://github.com/harbassan/spicetify-galaxy/
+    
+  
+    let isDim = false;
+  
+    function waitForElement(els, func, timeout = 100) {
+      const queries = els.map(el => document.querySelector(el));
+      if (queries.every(a => a)) {
+        func(queries);
+      } else if (timeout > 0) {
+        setTimeout(waitForElement, 50, els, func, --timeout);
+      }
+    }
+  
+    // create the background elements
+    const bgContainer = document.createElement("div");
+    bgContainer.innerHTML = `</div><div class="bg-image-container"><img class="bg-main-image"></div><div class="bg-main-shadow">`;
+  
+    // add fade and dimness effects to mainview scroll node
+    waitForElement([".Root__main-view .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
+      scrollNode.addEventListener("scroll", () => {
+        // dim
+        if (!isDim) {
+          bgContainer.children[0].style.webkitMaskImage = `linear-gradient(rgba(0, 0, 0, ${
+            0.75 - scrollNode.scrollTop / 1000 < 0.3 ? 0.3 : 0.75 - scrollNode.scrollTop / 1000
+          }) 0px, rgba(0, 0, 0, 0.1) 90%)`;
+        }
+        // fade
+        if (scrollNode.scrollTop == 0) {
+          scrollNode.setAttribute("fade", "bottom");
+        } else if (scrollNode.scrollHeight - scrollNode.scrollTop - scrollNode.clientHeight == 0) {
+          scrollNode.setAttribute("fade", "top");
+        } else {
+          scrollNode.setAttribute("fade", "full");
+        }
+      });
+    });
+  
+    waitForElement([".Root__nav-bar .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
+      scrollNode.setAttribute("fade", "bottom");
+      scrollNode.addEventListener("scroll", () => {
+        // fade
+        if (scrollNode.scrollTop == 0) {
+          scrollNode.setAttribute("fade", "bottom");
+        } else if (scrollNode.scrollHeight - scrollNode.scrollTop - scrollNode.clientHeight == 0) {
+          scrollNode.setAttribute("fade", "top");
+        } else {
+          scrollNode.setAttribute("fade", "full");
+        }
+      });
+    });
+  
+  waitForElement([".Root__nav-right-sidebar .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
+    scrollNode.setAttribute("fade", "bottom");
+    scrollNode.addEventListener("scroll", () => {
+      // fade
+      if (scrollNode.scrollTop == 0) {
+        scrollNode.setAttribute("fade", "bottom");
+      } else if (scrollNode.scrollHeight - scrollNode.scrollTop - scrollNode.clientHeight == 0) {
+        scrollNode.setAttribute("fade", "top");
+      } else {
+        scrollNode.setAttribute("fade", "full");
+      }
+    });
+  });    
+  }
+
 })()
-
-
-
-
 
