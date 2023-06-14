@@ -136,8 +136,6 @@
   .Root__right-sidebar[fade="full"] {
       -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, transparent 100%);
   }
-/*--------------*/
-
   
   .spotify__os--is-windows .nav-ylx .main-nowPlayingView-nowPlayingWidget {
       padding-top: 0px;
@@ -169,6 +167,10 @@
       border-radius: 8px;
       padding: 16px;
   }
+
+  .main-nowPlayingView-sectionHeaderSpacing.main-nowPlayingView-lyricsGradient {
+      box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 10%);
+    }
   
   /* ---PLAYLIST VIEW---- */
   
@@ -189,7 +191,15 @@
       background: none !important;
       background-color: transparent !important;
   }
-  
+
+   .main-trackList-rowSectionStart > img {
+    box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 15%); 
+  }
+
+  .main-trackList-rowMainContent > div {
+  text-shadow: 0 0 10px rgb(0 0 0 / 40%);
+  }
+
   .main-entityHeader-image{
     border-radius: 8px !important
   }
@@ -198,7 +208,42 @@
     -webkit-box-shadow: none;
     box-shadow: none;
   }
+
+  .main-entityHeader-container {
+    justify-content: center;
+    padding-top: 100px;
+  }
   
+  .playlist-playlist-playlistImageContainer {
+    --icon-width: 180px;
+    align-self: center;
+    flex-shrink: 0;
+    height: var(--icon-width);
+    width: var(--icon-width);
+    min-width: var(--icon-width);
+    box-shadow: -2px 4px 9px 3px rgb(0 0 0 / 15%);
+    position: sticky;
+    margin-top: auto
+  }
+
+  .main-nowPlayingView-nowPlayingWidget > div > div:nth-child(1) > div {
+    box-shadow: 0px 4px 10px 3px rgb(0 0 0 / 12%);
+  }
+
+  .main-entityHeader-headerText > span.Type__TypeElement-sc-goli3j-0.TypeElement-mestoBold-type {
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+
+  .main-view-container__scroll-node-child > main > div > section > .main-entityHeader-container.main-entityHeader-nonWrapped {
+    min-height: 300px;
+  }
+  
+  .Button-sm-buttonSecondary-useBrowserDefaultFocusStyle,
+  .Button-sc-y0gtbx-0.Button-sm-buttonSecondary-iconLeading-useBrowserDefaultFocusStyle.I3oc8sxg8Duq4kYUGnMo.LEZf9K5hG4hfCKfgr5Xo {
+    border-radius: var(--button-border)
+  }
+
   /* ----TOP BAR---- */
   
   .main-topBar-background {
@@ -272,7 +317,6 @@
     background: rgba(0,0,0,0.5);
     border-radius: var(--button-border);
     right: 4px;
-    transform: scale(0.85)
     }
 
   .ButtonInner-md-iconOnly:hover {
@@ -375,7 +419,24 @@
   .xcTrtCsYOPtSElbX9inq {
       background: none
   }
-  
+
+
+  /* ----TEXT SHADOWS---- */
+  .main-entityHeader-topbarTitle,
+  .main-shelf-title,
+  .main-entityHeader-titleButton,
+  .main-entityHeader-metaData,
+  .playlist-playlist-playlistDescription,
+  .main-entityHeader-detailsText,
+  .main-entityHeader-title,
+  .artist-artistVerifiedBadge-wrapper > span,
+  .main-buddyFeed-link,
+  .main-trackInfo-name,
+  .main-trackInfo-contentWrapper,
+  .main-trackInfo-contentWrapper {
+    text-shadow: -1px 3px 20px rgb(0 0 0 / 20%);
+  }
+
   /* ----ALBUM VIEW---- */
   
   .x-album-releasesDropdown {
@@ -578,6 +639,7 @@
   .main-nowPlayingView-lyricsContent > .lyrics-lyricsContent-lyric {
     max-width: 90% !important;
   }
+
   
   /* New Lyrics Plus style */
   
@@ -707,5 +769,31 @@
     height: auto;
   }
 
-
+  /* ----ANIMATIONS ----*/
+  
+  .x-downloadButton-button,
+  .x-contributorButton-button,
+  .Button-sm-buttonSecondary-useBrowserDefaultFocusStyle,
+  .main-moreButton-button,
+  .Button-sc-y0gtbx-0.Button-sm-buttonSecondary-iconLeading-useBrowserDefaultFocusStyle.I3oc8sxg8Duq4kYUGnMo.LEZf9K5hG4hfCKfgr5Xo,
+  .playlist-playlist-playlist span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set,
+  .Root__top-bar span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set,
+  .ButtonInner-sc-14ud5tc-0.ButtonInner-lg-iconOnly.encore-bright-accent-set,
+  .artist-followButton-button{
+    transition: transform 0.2s ease
+  }
+  
+  .x-downloadButton-button:hover,
+  .x-contributorButton-button:hover,
+  .main-moreButton-button:hover,
+  .playlist-playlist-playlist span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set:hover,
+  .Root__top-bar span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set:hover {
+    transform: scale(1.1)
+  }
+  
+  .Button-sm-buttonSecondary-useBrowserDefaultFocusStyle:hover,
+  .artist-followButton-button:hover {
+    transform: scale(1.05);
+    border-color: hsla(0,0%,100%,.5);
+  }
 
