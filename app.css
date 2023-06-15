@@ -153,8 +153,9 @@
   }
   
   .main-nowPlayingView-content.main-nowPlayingView-gradient,
-  Root__right-sidebar {
+  .Root__right-sidebar {
       background: none !important;
+    
   }
   
   .main-buddyFeed-container.main-buddyFeed-panelTransition {
@@ -260,9 +261,10 @@
   
   .nav-ylx .main-trackList-trackListHeaderStuck.main-trackList-trackListHeader {
     background: none;
-    position: static !important
-    
+    position: static !important;
+    box-shadow: unset;
   }
+
 
   .I4p8r1UNjIGk9yv3H2Ms,
   .IAyWaeDamLJLjxuPeVKw, 
@@ -423,6 +425,9 @@
       background: none
   }
 
+  .ChipComponent-checkbox-chip-useBrowserDefaultFocusStyle > span {
+    border-radius: var(--button-border) !important
+  }
 
   /* ----TEXT SHADOWS---- */
   .main-entityHeader-topbarTitle,
@@ -743,8 +748,9 @@
   }
   
   .searchbar-bar {
-      border-style: none;
-      background-color: var(--backdrop) !important; 
+    border-style: none;
+    background-color: var(--backdrop) !important; 
+    height: 100%
   }
   
   .marketplace-header-icon-button {
@@ -817,4 +823,3 @@
     transform: scale(1.05);
     border-color: hsla(0,0%,100%,.5);
   }
-
