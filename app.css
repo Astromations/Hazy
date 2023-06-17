@@ -118,10 +118,10 @@
 
   /* ---SIDEBAR---- */
 
-  .spotify__os--is-windows .nav-ylx .main-buddyFeed-header {
+  .main-buddyFeed-header {
     padding-top: 0px;
     padding-bottom: 0px;
-    padding-inline-start: 3px
+    padding-inline-start: 3px;
   }
 
   /* Fade from Galaxy */
@@ -135,8 +135,9 @@
       -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, transparent 100%);
   }
 
-  .spotify__os--is-windows .nav-ylx .main-nowPlayingView-nowPlayingWidget {
-      padding-top: 0px;
+  .spotify__os--is-windows .nav-ylx .main-nowPlayingView-nowPlayingWidget,
+  .main-nowPlayingView-nowPlayingWidget {
+    padding-top: 0px !important; 
   }
 
   .spotify__os--is-windows .nav-ylx .main-buddyFeed-content {
@@ -149,7 +150,8 @@
 
   .main-nowPlayingView-content.main-nowPlayingView-gradient,
   Root__right-sidebar {
-      background: none !important;
+    background: none !important;
+    padding-top: 2px
   }
 
   .main-buddyFeed-container.main-buddyFeed-panelTransition {
@@ -265,11 +267,14 @@
   .Button-md-24-buttonTertiary-condensedAll-useBrowserDefaultFocusStyle,
   .main-topBar-buddyFeed{
     border-radius: var(--button-border) !important
+    
   }
 
   .Fxnb0xe6bL7I7W8V0p6C,
   .main-topBar-buddyFeed,
-  .main-userWidget-boxCondensed {
+  .main-userWidget-boxCondensed,
+  .SFgYidQmrqrFEVh65Zrg, 
+  .SFgYidQmrqrFEVh65Zrg:hover {
     background-color: var(--backdrop) !important;
   }
 
