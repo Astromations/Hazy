@@ -559,7 +559,14 @@
     background-color: var(--backdrop);
   }
 
+  input:hover:not([disabled], :active) ~ .x-toggle-indicatorWrapper {
+  background-color: rgb(255 255 255 / 10%)
+  }
 
+  input:hover ~ .x-toggle-indicatorWrapper {
+  background-color: var(--backdrop)
+  }
+    
   /*----ARTIST PAGE---- */
 
   .main-entityHeader-title h1 {
