@@ -253,7 +253,8 @@
       opacity: 0.2 !important;
   }
 
-  .nav-ylx .main-trackList-trackListHeaderStuck.main-trackList-trackListHeader {
+  .nav-ylx .main-trackList-trackListHeaderStuck.main-trackList-trackListHeader,
+  .main-trackList-trackListHeader.main-trackList-trackListHeaderStuck {
     background: none;
     position: static !important;
     box-shadow: unset;
