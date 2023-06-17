@@ -255,8 +255,8 @@
 
   .nav-ylx .main-trackList-trackListHeaderStuck.main-trackList-trackListHeader {
     background: none;
-    position: static !important
-    
+    position: static !important;
+    box-shadow: unset;
   }
 
   .I4p8r1UNjIGk9yv3H2Ms,
