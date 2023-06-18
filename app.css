@@ -354,7 +354,9 @@
   }
 
   .nav-ylx .x-searchInput-searchInputInput,
-  .nav-ylx .x-searchInput-searchInputInput:hover {
+  .nav-ylx .x-searchInput-searchInputInput:hover,
+  .x-searchInput-searchInputInput,
+  .x-searchInput-searchInputInput:hover {
     background-color: var(--backdrop) !important;
     border-radius: 4px;
     color: rgba(var(--spice-rgb-selected-row),.7);
@@ -367,11 +369,13 @@
     position: static;
   }
 
-  .nav-ylx .x-searchInput-searchInputInput:hover {
+  .nav-ylx .x-searchInput-searchInputInput:hover,
+  .x-searchInput-searchInputInput:hover{
       box-shadow: 0 0 0 1px rgba(255,255,255,0.1);
   }
 
-  .nav-ylx .x-searchInput-searchInputInput:focus {
+  .nav-ylx .x-searchInput-searchInputInput:focus,
+  .x-searchInput-searchInputInput:focus {
       box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
   }
 
@@ -597,6 +601,10 @@
     background-color: rgba(0,0,0,0.5) !important;
     backdrop-filter: blur(25px);
     border-radius: 8px
+  }
+
+  .GenericModal {
+    background: none
   }
 
   .uJjmxe0T11dUVeW6Biz8 {
