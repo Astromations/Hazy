@@ -266,7 +266,10 @@
   .Button-md-24-buttonTertiary-condensedAll-useBrowserDefaultFocusStyle,
   .main-topBar-buddyFeed{
     border-radius: var(--button-border) !important
-    
+  }
+
+  .SFgYidQmrqrFEVh65Zrg > figure > div > img {
+    border-radius: 6px !important
   }
 
   .Fxnb0xe6bL7I7W8V0p6C,
@@ -381,6 +384,15 @@
 
   .x-searchInput-searchInputSearchIcon {
     margin-top: 3px;
+  }
+
+  .x-searchHistoryEntries-clearSingleSearchHistory > button {
+    border-radius: var(--button-border)
+  }
+
+  .x-searchHistoryEntries-clearSingleSearchHistoryButton:focus, .x-searchHistoryEntries-clearSingleSearchHistoryButton:hover {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
   }
 
   /* ----MISCELLANEOUS---- */
