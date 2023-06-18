@@ -285,7 +285,7 @@
     -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 95%, transparent 100%);
   }
   [fade="top"] {
-    -webkit-mask-image: linear-gradient(transparent 10%, rgba(0, 0, 0, 1) 30%);
+    -webkit-mask-image: linear-gradient(transparent 9%, rgba(0, 0, 0, 1) 15%);
   }
   [fade="full"] {
     -webkit-mask-image: linear-gradient(transparent 9%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 1) 95%, transparent 100%);
@@ -613,14 +613,20 @@
 
   /* Color Artist Image */
   .under-main-view div,
-  .main-entityHeader-imageContainer {
+  .main-entityHeader-imageContainer{
     opacity: 0.9;
     filter: grayscale(10%)  brightness(80%);
+
+  }
+
+  .main-entityHeader-background.main-entityHeader-gradient {
+    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 90%, transparent 100%);
   }
 
   .artist-artistOverview-artistOverviewContent {
     background-color: transparent;
     margin-top: 10px !important;
+    
   }
 
   .artist-artistAbout-container {
@@ -647,6 +653,11 @@
 
   .SxHlW6byhoJSUJNugaE1 > figure > div > img {
     border-radius: 8px
+  }
+
+  .mYvNDps8FDVgHSCzpeqC,
+  .o6lOM3qmit24hWlOBbw0 > img {
+    border-radius: 8px !important
   }
 
   .Kujbn0F68QOf_o44cNxw {
@@ -784,10 +795,11 @@
     border-radius: 4px;
     height: 32px;
   }
-
+  
   .marketplace-tabBar-headerItemLink {
     padding: 2px 16px;
-    transition: background-color 0.3s ease
+    transition: background-color 0.3s ease;
+    height: 32px;
   }
 
   .marketplace-tabBar-headerItemLink:hover {
