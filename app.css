@@ -620,8 +620,8 @@
   .main-playlistEditDetailsModal-container,
   .profile-userEditDetails-container,
   .artist-artistAbout-modal {
-    background-color: rgba(0,0,0,0.5) !important;
-    backdrop-filter: blur(25px);
+    background-color: rgba(0,0,0,0.4) !important;
+    backdrop-filter: blur(5px);
     border-radius: 8px
   }
 
