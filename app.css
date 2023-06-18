@@ -29,13 +29,13 @@
   /* ----TRANSPARENT WINDOW CONTROLS----*/
 
   body.windows::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  z-index: 999;
-  backdrop-filter: brightness(2.12);
-  width: 135px;
-  height: 31px;
+    content: '';
+    position: absolute;
+    right: 0;
+    z-index: 999;
+    backdrop-filter: brightness(2.12);
+    width: 135px;
+    height: 31px;
   }
 
   /* ----NAVBAR---- */
@@ -120,6 +120,14 @@
       --is-active-fg-color: var(--spice-button-active);
   }
 
+  
+  .ChipClearComponent-chipClear-useBrowserDefaultFocusStyle,
+  .ChipInnerComponent,
+  .ChipComponent-checkbox-chip-useBrowserDefaultFocusStyle > span {
+    border-radius: var(--button-border) !important;
+  }
+
+
   /* ---SIDEBAR---- */
 
   .main-buddyFeed-header {
@@ -134,7 +142,7 @@
       -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%);
   }
   .Root__nav-bar [fade="full"] {
-      -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, transparent 100%);
+      -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 1) 80%, transparent 100%);
   }
 
   .spotify__os--is-windows .nav-ylx .main-nowPlayingView-nowPlayingWidget,
@@ -394,10 +402,6 @@
     color: var(--spice-text)
   }
 
-  .ChipInnerComponent-selected {
-    background-color: transparent;
-  }
-
   .search-searchCategory-categoryGridItem > button {
     height: 32px !important
   }
@@ -413,10 +417,6 @@
 
   .search-searchCategory-categoryGridItem  > button[aria-checked="true"]:hover {
     background-color: rgba(0,0,0,0.2);
-  }
-
-  .Chip__ChipComponent-sc-ry3uox-0:hover > .ChipInnerComponent-selected.ChipInnerComponent-selected {
-    background-color: transparent !important
   }
 
   .search-searchCategory-categoryGridItembutton[aria-checked="false"]  > button:hover {
