@@ -395,8 +395,30 @@
     display: none;
   }
 
-  .queue-tabBar-active {
-      background-color: var(--backdrop);
+
+  .queue-tabBar-active,
+  .lyrics-tabBar-active {
+    background-color: var(--backdrop);
+    height: 32px
+  }
+
+  .queue-tabBar-headerItemLink,
+  .lyrics-tabBar-active,
+  .lyrics-tabBar-headerItemLink{
+    padding: 2px 16px;
+    transition: background-color 0.3s ease;
+    height: 32px
+  }
+
+  .queue-tabBar-headerItemLink:hover,
+  .lyrics-tabBar-headerItemLink:hover {
+    padding: 2px 16px;
+    background-color: rgba(0,0,0,0.2);
+    height: 32px
+  }
+
+  .lyrics-config-button {
+    background-color: var(--backdrop)
   }
 
   .IAyWaeDamLJLjxuPeVKw {
@@ -736,9 +758,20 @@
   }
 
   /* ----MARKETPLACE---- */
-  .marketplace-tabBar-active {
-      background-color: var(--backdrop);
-      border-radius: 4px;
+  .marketplace-tabBar-headerItemLink.marketplace-tabBar-active {
+    background-color: var(--backdrop);
+    border-radius: 4px;
+    height: 32px;
+  }
+
+  .marketplace-tabBar-headerItemLink {
+    padding: 2px 16px;
+    transition: background-color 0.3s ease
+  }
+
+  .marketplace-tabBar-headerItemLink:hover {
+    padding: 2px 16px;
+    background-color: rgba(0,0,0,0.2);
   }
 
   .searchbar-bar {
