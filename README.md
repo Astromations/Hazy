@@ -4,8 +4,8 @@ A translucent theme based on <a href="https://github.com/JulienMaille/spicetify-
 
 ## Preview
 
-![demo-base](./poster.png)
-![demo-base](./poster2.png)
+![demo-base](./poster8.png)
+![demo-base](./poster9.png)
 
   
 ### ⏹️ How To Get Sidebar ⏹️
