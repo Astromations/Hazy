@@ -68,6 +68,10 @@
     --background-press: rgba(255,255,255,0.05);
   }
 
+  .main-yourLibraryX-isScrolled {
+    -webkit-box-shadow: 0 8px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 6px rgba(0, 0, 0, 0.3);
+  }
 
   /* ----NOW PLAYING BAR---- */
 
@@ -126,12 +130,10 @@
 
   /* Fade from Galaxy */
   /* add scroll fade to ylx and right sidebar */
-  .Root__nav-bar [fade="top"],
-  .Root__right-sidebar [fade="top"] {
+  .Root__nav-bar [fade="top"] {
       -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%);
   }
-  .Root__nav-bar [fade="full"],
-  .Root__right-sidebar[fade="full"] {
+  .Root__nav-bar [fade="full"] {
       -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, transparent 100%);
   }
 
@@ -386,8 +388,45 @@
     margin-top: 3px;
   }
 
+  .search-searchCategory-categoryGridItem  > button > span {
+    border-radius: var(--button-border);
+    font-weight: 700 !important;
+    color: var(--spice-text)
+  }
+
+  .ChipInnerComponent-selected {
+    background-color: transparent;
+  }
+
+  .search-searchCategory-categoryGridItem > button {
+    height: 32px !important
+  }
+
+  .search-searchCategory-categoryGridItem > button {
+    border-radius: var(--button-border);
+    font-weight: 700 !important;
+  }
+
+  .search-searchCategory-categoryGridItem  > button[aria-checked="true"] {
+    background-color: var(--backdrop);
+  }
+
+  .search-searchCategory-categoryGridItem  > button[aria-checked="true"]:hover {
+    background-color: rgba(0,0,0,0.2);
+  }
+
+  .Chip__ChipComponent-sc-ry3uox-0:hover > .ChipInnerComponent-selected.ChipInnerComponent-selected {
+    background-color: transparent !important
+  }
+
+  .search-searchCategory-categoryGridItembutton[aria-checked="false"]  > button:hover {
+    background-color: rgba(0,0,0,0.2) !important;
+    color: var(--spicet-text)
+  }
+
   .x-searchHistoryEntries-clearSingleSearchHistory > button {
-    border-radius: var(--button-border)
+    border-radius: var(--button-border);
+    background-color: var(--backdrop);
   }
 
   .x-searchHistoryEntries-clearSingleSearchHistoryButton:focus, .x-searchHistoryEntries-clearSingleSearchHistoryButton:hover {
@@ -463,6 +502,9 @@
       background: none
   }
 
+  .main-buddyFeed-scrollBarContainer.os-host-transition > div.os-padding > div{
+    -webkit-mask-image: linear-gradient(transparent 1%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 96%, transparent 100%);
+  }
 
   /* ----TEXT SHADOWS---- */
   .main-entityHeader-topbarTitle,
@@ -620,13 +662,12 @@
   }
 
   .main-entityHeader-background.main-entityHeader-gradient {
-    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 82%, transparent 100%);
   }
 
   .artist-artistOverview-artistOverviewContent {
     background-color: transparent;
     margin-top: 10px !important;
-    
   }
 
   .artist-artistAbout-container {
