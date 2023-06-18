@@ -5,6 +5,7 @@ A translucent theme based on <a href="https://github.com/JulienMaille/spicetify-
 ## Preview
 
 ![demo-base](./poster8.png)
+![demo-base](./poster10.png)
 ![demo-base](./poster9.png)
 
   
