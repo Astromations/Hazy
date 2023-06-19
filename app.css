@@ -68,9 +68,17 @@
     --background-press: rgba(255,255,255,0.05);
   }
 
+  .main-rootlist-wrapper {
+    --spice-rgb-shadow: !important;
+  }
+
   .main-yourLibraryX-isScrolled {
     -webkit-box-shadow: 0 8px 6px rgba(0, 0, 0, 0.3);
     box-shadow: 0 8px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .main-yourLibraryX-listRowEntityImage {
+    box-shadow: -2px 4px 6px 2px rgb(0 0 0 / 14%);;
   }
 
   /* ----NOW PLAYING BAR---- */
@@ -356,7 +364,8 @@
 
   .search-searchCategory-carouselButton,
   .search-searchCategory-carouselButton:hover {
-      background-color: var(--backdrop);
+    background-color: transparent;
+    border-radius: var(--button-border)
   }
 
 
@@ -522,7 +531,9 @@
   .main-buddyFeed-link,
   .main-trackInfo-name,
   .main-trackInfo-contentWrapper,
-  .main-trackInfo-contentWrapper {
+  .main-trackInfo-contentWrapper,
+  .main-yourLibraryX-listRowSubtitle,
+  .ListRowTitle__LineClamp-sc-1xe2if1-0 {
     text-shadow: -1px 3px 20px rgb(0 0 0 / 20%);
   }
 
@@ -581,7 +592,7 @@
     background-color: var(--backdrop) !important;
     transition: transform 0.2s ease;
     border-radius: 6px;
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 0px 15px rgb(0 0 0 / 20%);
   }
 
   .main-card-draggable {
