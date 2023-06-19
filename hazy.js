@@ -480,41 +480,82 @@
     };
 
     function setValue(blur_am, cont, satu, bright, desc) {
-      const valueRow = document.createElement("div");
-      const blur_val = localStorage.getItem(blur_am);
-      const cont_val = localStorage.getItem(cont);
-      const satu_val = localStorage.getItem(satu);
-      const bright_val = localStorage.getItem(bright);
+      let valueRow = document.createElement("div");
+      let blur_val = localStorage.getItem(blur_am);
+      let cont_val = localStorage.getItem(cont);
+      let satu_val = localStorage.getItem(satu);
+      let bright_val = localStorage.getItem(bright);
+
+    if (localStorage.getItem(blur_am) === null) {
+      bright_val = "15";
+    }
+
+    if (localStorage.getItem(cont) === null) {
+      cont_val = "50";
+    }
+
+    if (localStorage.getItem(satu) === null) {
+      satu_val = "70";
+    }
+
+    if (localStorage.getItem(bright) === null) {
+      bright_val = "120";
+    }
     
       valueRow.classList.add("hazyOptionRow");
       valueRow.innerHTML = `
       <div class="blur-amount" style='width: 100%'>
       <p>${desc}</p>
-      <div>
+      <div class="slider-container">
         <label for="blur-input">Blur:</label>
-        <input id="blur-input" type="number" min="0" max="100" value="${blur_val}" placeholder="15">
+        <input class="slider" id="blur-input" type="range" min="0" max="50" step="1" value="${blur_val}">
+        <div id="blur-value">${blur_val}px</div>
       </div>
-      <div>
-        <label for="cont-input">Contrast:</label>
-        <input id="cont-input" type="number" min="0" max="999" value="${cont_val}" placeholder="50">
-      </div>
-      <div>
-        <label for="satu-input">Saturation:</label>
-        <input id="satu-input" type="number" min="0" max="999" value="${satu_val}" placeholder="70">
-      </div>
-      <div>
-        <label for="bright-input">Brightness:</label>
-        <input id="bright-input" type="number" min="0" max="999" value="${bright_val}" placeholder="120">
-      </div>
-    </div>`;
     
-      valueSet();
+      <div class="slider-container">
+        <label for="cont-input">Contrast:</label>
+        <input class="slider" id="cont-input" type="range" min="0" max="200" step="1" value="${cont_val}">
+        <div id="cont-value">${cont_val}%</div>
+      </div>
 
-      valueList.appendChild(valueRow);
-      valueRow.setAttribute("blur_am", blur_am);
-      valueRow.setAttribute("cont", cont);
-      valueRow.setAttribute("satu", satu);
-      valueRow.setAttribute("bright", bright);
+      <div class="slider-container">
+        <label for="satu-input">Saturation:</label>
+        <input class="slider"  id="satu-input" type="range" min="0" max="200" step="1" value="${satu_val}">
+        <div id="satu-value">${satu_val}%</div>
+      </div>
+
+      <div class="slider-container">
+        <label for="bright-input">Brightness:</label>
+        <input class="slider" id="bright-input" type="range" min="0" max="200" step="1" value="${bright_val}">
+        <div id="bright-value">${bright_val}%</div>
+      </div>
+
+    </div>`;
+  
+  
+    valueRow.querySelector("#blur-input").addEventListener("input", function() {
+    valueRow.querySelector("#blur-value").textContent = valueRow.querySelector("#blur-input").value + "px";
+    });
+
+    valueRow.querySelector("#cont-input").addEventListener("input", function() {
+    valueRow.querySelector("#cont-value").textContent = valueRow.querySelector("#cont-input").value + "%";
+      });
+
+    valueRow.querySelector("#satu-input").addEventListener("input", function() {
+    valueRow.querySelector("#satu-value").textContent = valueRow.querySelector("#satu-input").value + "%";
+      });
+
+    valueRow.querySelector("#bright-input").addEventListener("input", function() {
+    valueRow.querySelector("#bright-value").textContent = valueRow.querySelector("#bright-input").value + "%";
+    });
+
+    valueSet();
+
+    valueList.appendChild(valueRow);
+    valueRow.setAttribute("blur_am", blur_am);
+    valueRow.setAttribute("cont", cont);
+    valueRow.setAttribute("satu", satu);
+    valueRow.setAttribute("bright", bright);
     };
 
     const srcInput = document.createElement("input");
@@ -541,6 +582,10 @@
     removeButton.onclick = () => {
       content.querySelector("img").src = defImage;
     };
+
+    const resetButton = document.createElement("button");
+    resetButton.id = "value-reset";
+    resetButton.innerHTML = "Reset";
 
     const saveButton = document.createElement("button");
     saveButton.id = "home-save";
@@ -570,12 +615,38 @@
         localStorage.setItem(value.getAttribute("bright"), brightValueInput.value);
 
         valueSet()
-      });           
+      });  
 
       parseOptions();
       loopOptions("/")
     });
 
+    resetButton.addEventListener("click", () => {
+      [...valueList.children].forEach(value => {
+
+        document.querySelector(".hazyOptionRow #blur-input").value = 15;
+        document.querySelector(".hazyOptionRow #cont-input").value = 50;
+        document.querySelector(".hazyOptionRow #satu-input").value = 70;
+        document.querySelector(".hazyOptionRow #bright-input").value = 120;
+
+        document.querySelector(".hazyOptionRow #blur-value").textContent = "15px";
+        document.querySelector(".hazyOptionRow #cont-value").textContent = "50%";
+        document.querySelector(".hazyOptionRow #satu-value").textContent = "70%";
+        document.querySelector(".hazyOptionRow #bright-value").textContent = "120%";
+
+
+        localStorage.setItem(value.getAttribute("blur_am"), 8);
+        localStorage.setItem(value.getAttribute("cont"), 50);
+        localStorage.setItem(value.getAttribute("satu"), 70);
+        localStorage.setItem(value.getAttribute("bright"), 120);
+        valueSet()
+      });  
+
+      parseOptions();
+      loopOptions("/")
+    });
+
+    content.append(resetButton);
     content.append(saveButton);
 
     const issueButton = document.createElement("a");
