@@ -91,21 +91,18 @@
   windowControls();
   galaxyFade();
 
-  function scrollToElement() {
-    const elementToScroll = document.querySelector('.contentSpacing');
-    const scrollOptions = {
-      behavior: 'smooth',
-      block: 'start'
-    };
-  
-    elementToScroll.scrollIntoView(scrollOptions);
+  function scrollToTop() {
+    const element = document.querySelector(".main-entityHeader-container");
+  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   
-  waitForElement(['span.main-entityHeader-topbarTitle'], () => {
-    const spanElement = document.querySelector('.main-entityHeader-topbarTitle');
-    spanElement.addEventListener('click', scrollToElement);
-    scrollToElement();
+  document.addEventListener('click', (event) => {
+    const clickedElement = event.target;
+    if (clickedElement.closest('.main-entityHeader-topbarTitle')) {
+      scrollToTop();
+    }
   });
+  
 
   (function sidebar() {
     // Sidebar settings
