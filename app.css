@@ -3,6 +3,10 @@
     --button-border: 8px
   }
 
+  svg {
+  filter: drop-shadow(-2px 2px 2px rgb(0 0 0 / 15%));
+  }
+
   /* ---ALBUM ART BACKGROUND---- */
   .Root__top-container::before {
       content: "";
