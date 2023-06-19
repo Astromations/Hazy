@@ -120,7 +120,7 @@
       --is-active-fg-color: var(--spice-button-active);
   }
 
-  
+
   .ChipClearComponent-chipClear-useBrowserDefaultFocusStyle,
   .ChipInnerComponent,
   .ChipComponent-checkbox-chip-useBrowserDefaultFocusStyle > span {
@@ -269,6 +269,10 @@
     background: none;
     position: static !important;
     box-shadow: unset;
+  }
+
+  .main-entityHeader-topbarTitle {
+    cursor: pointer;
   }
 
   .I4p8r1UNjIGk9yv3H2Ms,
@@ -836,7 +840,7 @@
     border-radius: 4px;
     height: 32px;
   }
-  
+
   .marketplace-tabBar-headerItemLink {
     padding: 2px 16px;
     transition: background-color 0.3s ease;
@@ -906,7 +910,8 @@
   .playlist-playlist-playlist span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set,
   .Root__top-bar span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set,
   .ButtonInner-sc-14ud5tc-0.ButtonInner-lg-iconOnly.encore-bright-accent-set,
-  .artist-followButton-button{
+  .artist-followButton-button,
+  .IconWrapper__Wrapper-sc-1hf1hjl-0.Wrapper-lg-28-only {
     transition: transform 0.2s ease
   }
 
@@ -914,7 +919,8 @@
   .x-contributorButton-button:hover,
   .main-moreButton-button:hover,
   .playlist-playlist-playlist span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set:hover,
-  .Root__top-bar span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set:hover {
+  .Root__top-bar span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set:hover,
+  .IconWrapper__Wrapper-sc-1hf1hjl-0.Wrapper-lg-28-only:hover {
     transform: scale(1.1)
   }
 
@@ -1058,6 +1064,38 @@
     margin: 0;
   }
 
+  .blur-amount:has(#blur-input:valid) > div:nth-child(2)::before {
+    content: "px"; /* Add the percentage symbol */
+    position: absolute;
+    margin-right: -15px; /* Adjust the left position as needed */
+    scale: 0.8;
+    opacity: 0.7
+  }
+
+  .blur-amount > div:nth-child(3)::before {
+    content: "%"; /* Add the percentage symbol */
+    position: absolute;
+    margin-right: -15px; /* Adjust the left position as needed */
+    scale: 0.8;
+    opacity: 0.7
+  }
+
+  .blur-amount > div:nth-child(4)::before {
+    content: "%"; /* Add the percentage symbol */
+    position: absolute;
+    margin-right: -15px; /* Adjust the left position as needed */
+    scale: 0.8;
+    opacity: 0.7
+  }
+
+  .blur-amount > div:nth-child(5)::before {
+    content: "%"; /* Add the percentage symbol */
+    position: absolute;
+    margin-right: -15px; /* Adjust the left position as needed */
+    scale: 0.8;
+    opacity: 0.7
+  }
+
   /*-------------------
   POPUP MODAL
   -------------------*/
@@ -1070,6 +1108,7 @@
         ". save-button"
         "disclaimer disclaimer";
   }
+
   #banner-select {
     grid-area: banner-image;
     width: auto;
