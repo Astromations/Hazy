@@ -90,8 +90,6 @@
   onSongChange();
   windowControls();
   galaxyFade();
-  
-  
 
   (function sidebar() {
     // Sidebar settings
@@ -155,6 +153,21 @@
       setTimeout(waitForElement, 300, elements, func, timeout - 1);
     }
   }
+
+  waitForElement(['span.main-entityHeader-topbarTitle'], (scrollToElement) => {
+    const spanElement = document.querySelector('span.main-entityHeader-topbarTitle');
+    const elementToScroll = document.querySelector('.contentSpacing');
+    const scrollOptions = {
+      behavior: 'smooth',
+      block: 'start'
+    };
+  
+    function scrollToElement() {
+      elementToScroll.scrollIntoView(scrollOptions);
+    }
+  
+    spanElement.addEventListener('click', scrollToElement);  
+  });
 
   waitForElement(['.Root__lyrics-cinema'], () => {
     const lyricsCinema = document.getElementsByClassName('Root__lyrics-cinema')[0];
@@ -481,19 +494,19 @@
       <p>${desc}</p>
       <div>
         <label for="blur-input">Blur:</label>
-        <input id="blur-input" type="number" min="0" max="100" value="${blur_val}" placeholder="15px">
+        <input id="blur-input" type="number" min="0" max="100" value="${blur_val}" placeholder="15">
       </div>
       <div>
         <label for="cont-input">Contrast:</label>
-        <input id="cont-input" type="number" min="0" max="999" value="${cont_val}" placeholder="50%">
+        <input id="cont-input" type="number" min="0" max="999" value="${cont_val}" placeholder="50">
       </div>
       <div>
         <label for="satu-input">Saturation:</label>
-        <input id="satu-input" type="number" min="0" max="999" value="${satu_val}" placeholder="70%">
+        <input id="satu-input" type="number" min="0" max="999" value="${satu_val}" placeholder="70">
       </div>
       <div>
         <label for="bright-input">Brightness:</label>
-        <input id="bright-input" type="number" min="0" max="999" value="${bright_val}" placeholder="120%">
+        <input id="bright-input" type="number" min="0" max="999" value="${bright_val}" placeholder="120">
       </div>
     </div>`;
     
