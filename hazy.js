@@ -91,6 +91,22 @@
   windowControls();
   galaxyFade();
 
+  function scrollToElement() {
+    const elementToScroll = document.querySelector('.contentSpacing');
+    const scrollOptions = {
+      behavior: 'smooth',
+      block: 'start'
+    };
+  
+    elementToScroll.scrollIntoView(scrollOptions);
+  }
+  
+  waitForElement(['span.main-entityHeader-topbarTitle'], () => {
+    const spanElement = document.querySelector('.main-entityHeader-topbarTitle');
+    spanElement.addEventListener('click', scrollToElement);
+    scrollToElement();
+  });
+
   (function sidebar() {
     // Sidebar settings
     const item = localStorage.getItem("spicetify-exp-features");
@@ -153,21 +169,6 @@
       setTimeout(waitForElement, 300, elements, func, timeout - 1);
     }
   }
-
-  waitForElement(['span.main-entityHeader-topbarTitle'], (scrollToElement) => {
-    const spanElement = document.querySelector('span.main-entityHeader-topbarTitle');
-    const elementToScroll = document.querySelector('.contentSpacing');
-    const scrollOptions = {
-      behavior: 'smooth',
-      block: 'start'
-    };
-  
-    function scrollToElement() {
-      elementToScroll.scrollIntoView(scrollOptions);
-    }
-  
-    spanElement.addEventListener('click', scrollToElement);  
-  });
 
   waitForElement(['.Root__lyrics-cinema'], () => {
     const lyricsCinema = document.getElementsByClassName('Root__lyrics-cinema')[0];
