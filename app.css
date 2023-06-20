@@ -102,6 +102,7 @@
     border-radius: 4px !important;
     transform: scale(1.2) !important;
     margin-right: 10px;
+    box-shadow: -2px 1px 10px 3px rgb(0 0 0 / 20%);
   }
 
 
@@ -190,7 +191,7 @@
       padding: 16px;
   }
 
-  .main-nowPlayingView-sectionHeaderSpacing.main-nowPlayingView-lyricsGradient {
+  .main-nowPlayingView-section {
       box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 10%);
     }
 
@@ -318,7 +319,6 @@
   }
 
   /*--------*/
-
 
   .main-playButton-PlayButton, .main-playButton-PlayButton {
       transition: transform 0.2s ease
@@ -500,6 +500,7 @@
 
   .Psc33HXPyazZYAAr1tgz, .I4p8r1UNjIGk9yv3H2Ms {
       background: var(--backdrop);
+    border-radius: var(--button-border)
   }
 
   .main-shelf-shelfGrid.main-shelf-showAll {
@@ -524,6 +525,7 @@
   }
 
   /* ----TEXT SHADOWS---- */
+
   .main-entityHeader-topbarTitle,
   .main-shelf-title,
   .main-entityHeader-titleButton,
@@ -817,6 +819,10 @@
 
   .lyrics-lyricsContainer-Provider {
     background: none !important;
+  }
+
+  .Root__lyrics-cinema .os-viewport-native-scrollbars-invisible {
+    -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, transparent 100%);
   }
 
   /* ----SCROLLBAR---- */
@@ -1152,6 +1158,9 @@
     width: 9px;
   }
 
+  .slider::-webkit-slider-thumb:active {
+  cursor: grab;
+  }
   /*-------------------
   POPUP MODAL
   -------------------*/
