@@ -1218,6 +1218,48 @@
     margin-right: 12px;
   }
 
+  .slider-value {
+    padding-left: 0;
+    width: 45px;
+    display: flex;
+  }
+
+  .slider-value::-webkit-scrollbar-thumb {
+    height: 2px;
+    width: 2px
+  }
+
+  .slider-value > div[id="unit"] {
+    flex-shrink: 0;
+  }
+
+
+  .slider-value > div[id="unit"],
+  .slider-value > div[contenteditable="true"] {
+    color: rgb(255 255 255 / 60%);
+    font-size: 0.8rem;
+    margin-top: 0px;
+    transition: all 0.3s ease !important;
+  }
+
+
+  .slider-value > div[contenteditable="true"]:hover,
+  .slider-value > div[contenteditable="true"]:focus {
+    box-shadow: 0 1px 0 0 rgb(255 255 255 / 60%);
+  }
+
+  .slider-value > div[contenteditable="true"]:hover + div[id="unit"],
+  .slider-value > div[contenteditable="true"]:focus + div[id="unit"]{
+    box-shadow: 0 1px 0 0 rgb(255 255 255 / 60%);
+  }
+
+  .slider-container label {
+    text-align: right;
+    margin-right: 10px;
+    font-size: 0.875rem;
+  }
+
+
   /* Mouse-over effects */
   .slider:hover {
     opacity: 1; /* Fully shown on mouse-over */
