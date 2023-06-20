@@ -563,6 +563,9 @@
     srcInput.classList.add("main-playlistEditDetailsModal-textElement", "main-playlistEditDetailsModal-titleInput");
     srcInput.id = "src-input";
     srcInput.placeholder = "Background image URL (recommended due to size limits)";
+    if (!startImage.startsWith("data:image")) {
+      srcInput.value = startImage;
+    }    
     content.append(srcInput);
 
     createOption("UseCustomBackground", "Custom background:", false);
