@@ -271,8 +271,13 @@
     border-radius: 8px
   }
 
+  .main-image-image.main-trackList-rowImage.main-image-loaded {
+    border-radius: 3px
+  }
+
   .main-image-image.main-avatar-image.main-image-loaded {
     box-shadow: -2px 4px 9px 3px rgb(0 0 0 / 15%);
+    border-radius: var(--button-border)
   }
 
   .main-nowPlayingView-nowPlayingWidget > div > div:nth-child(1) > div {
@@ -289,7 +294,8 @@
   }
 
   .Button-sm-buttonSecondary-useBrowserDefaultFocusStyle,
-  .Button-sc-y0gtbx-0.Button-sm-buttonSecondary-iconLeading-useBrowserDefaultFocusStyle.I3oc8sxg8Duq4kYUGnMo.LEZf9K5hG4hfCKfgr5Xo {
+  .Button-sc-y0gtbx-0.Button-sm-buttonSecondary-iconLeading-useBrowserDefaultFocusStyle.I3oc8sxg8Duq4kYUGnMo.LEZf9K5hG4hfCKfgr5Xo,
+  .main-buddyFeed-closeButton{
     border-radius: var(--button-border)
   }
 
@@ -769,6 +775,11 @@
     border-radius: 8px
   }
 
+  .main-cardImage-circular,
+  .main-cardImage-imageWrapper {
+    border-radius: var(--button-border) !important
+  }
+
   .GenericModal {
     background: none
   }
@@ -812,7 +823,7 @@
     transform-origin: var(--lyrics-text-direction);
     margin: 0.3rem 0;
     transform: scale(1);
-    text-shadow: none;
+        text-shadow: -1px 3px 20px rgb(0 0 0 / 20%);
     transition: transform 400ms ease, text-shadow 400ms ease, color 50ms ease;
   }
 
