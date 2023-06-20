@@ -509,44 +509,92 @@
       <div class="slider-container">
         <label for="blur-input">Blur:</label>
         <input class="slider" id="blur-input" type="range" min="0" max="50" step="1" value="${blur_val}">
-        <div id="blur-value">${blur_val}px</div>
+        <div class="slider-value">
+          <div id="blur-value" contenteditable="true" >${blur_val}</div>
+          <div id="unit" class="blur-editable">px</div>
+        </div>
       </div>
     
       <div class="slider-container">
         <label for="cont-input">Contrast:</label>
-        <input class="slider" id="cont-input" type="range" min="0" max="200" step="1" value="${cont_val}">
-        <div id="cont-value">${cont_val}%</div>
+        <input class="slider" id="cont-input" type="range" min="0" max="200" step="2" value="${cont_val}">
+        <div class="slider-value">
+          <div id="cont-value" contenteditable="true" >${cont_val}</div>
+          <div id="unit" class="cont-editable">%</div>
+        </div>
       </div>
 
       <div class="slider-container">
         <label for="satu-input">Saturation:</label>
-        <input class="slider"  id="satu-input" type="range" min="0" max="200" step="1" value="${satu_val}">
-        <div id="satu-value">${satu_val}%</div>
+        <input class="slider"  id="satu-input" type="range" min="0" max="200" step="2" value="${satu_val}">
+        <div class="slider-value">
+          <div id="satu-value" contenteditable="true">${satu_val}</div>
+          <div id="unit" class="satu-editable">%</div>
+        </div>
       </div>
 
       <div class="slider-container">
         <label for="bright-input">Brightness:</label>
-        <input class="slider" id="bright-input" type="range" min="0" max="200" step="1" value="${bright_val}">
-        <div id="bright-value">${bright_val}%</div>
+        <input class="slider" id="bright-input" type="range" min="0" max="200" step="2" value="${bright_val}">
+        <div class="slider-value">
+          <div id="bright-value" contenteditable="true">${bright_val}</div>
+          <div id="unit" class="bright-editable">%</div>
+        </div>
       </div>
 
     </div>`;
-  
-  
+
+    valueRow.querySelector("#blur-value").addEventListener("input", function() {
+      let content = valueRow.querySelector("#blur-value").textContent.trim();
+      let number = parseInt(content);
+      if (content.length > 3) {
+        content = valueRow.querySelector("#blur-value").textContent = content.slice(0, 3); // Truncate the content to 3 characters
+      }
+        valueRow.querySelector("#blur-input").value = number;
+      });
+
+    valueRow.querySelector("#cont-value").addEventListener("input", function() {
+      let content = valueRow.querySelector("#cont-value").textContent.trim();
+      let number = parseInt(content);
+      if (content.length > 3) {
+        content = valueRow.querySelector("#cont-value").textContent = content.slice(0, 3); // Truncate the content to 3 characters
+      }
+        valueRow.querySelector("#cont-input").value = number;
+      });
+
+    valueRow.querySelector("#satu-value").addEventListener("input", function() {
+      let content = valueRow.querySelector("#satu-value").textContent.trim();
+      let number = parseInt(content);
+      if (content.length > 3) {
+        content = valueRow.querySelector("#satu-value").textContent = content.slice(0, 3); // Truncate the content to 3 characters
+      }
+        valueRow.querySelector("#satu-input").value = number;
+      });
+
+    valueRow.querySelector("#bright-value").addEventListener("input", function() {
+      let content = valueRow.querySelector("#bright-value").textContent.trim();
+      let number = parseInt(content);
+      if (content.length > 3) {
+        content = valueRow.querySelector("#bright-value").textContent = content.slice(0, 3); // Truncate the content to 3 characters
+        console.log("bals")
+      }
+        valueRow.querySelector("#bright-input").value = number;
+      });
+
     valueRow.querySelector("#blur-input").addEventListener("input", function() {
-    valueRow.querySelector("#blur-value").textContent = valueRow.querySelector("#blur-input").value + "px";
+    valueRow.querySelector("#blur-value").textContent = valueRow.querySelector("#blur-input").value;
     });
 
     valueRow.querySelector("#cont-input").addEventListener("input", function() {
-    valueRow.querySelector("#cont-value").textContent = valueRow.querySelector("#cont-input").value + "%";
+    valueRow.querySelector("#cont-value").textContent = valueRow.querySelector("#cont-input").value;
       });
 
     valueRow.querySelector("#satu-input").addEventListener("input", function() {
-    valueRow.querySelector("#satu-value").textContent = valueRow.querySelector("#satu-input").value + "%";
+    valueRow.querySelector("#satu-value").textContent = valueRow.querySelector("#satu-input").value;
       });
 
     valueRow.querySelector("#bright-input").addEventListener("input", function() {
-    valueRow.querySelector("#bright-value").textContent = valueRow.querySelector("#bright-input").value + "%";
+    valueRow.querySelector("#bright-value").textContent = valueRow.querySelector("#bright-input").value;
     });
 
     valueSet();
