@@ -551,7 +551,8 @@
     -webkit-mask-image: linear-gradient(transparent 1%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 96%, transparent 100%);
   }
 
-  .ButtonInner-sc-14ud5tc-0 {
+  .main-playlistEditDetailsModal-save > button > span,
+  .main-duplicateTrackModal-buttonContainer > button > span {
     margin-left: auto;
     position: relative;
     color: #fff;
@@ -570,12 +571,16 @@
     padding-block: 12px;
   }
 
-  .ButtonInner-sc-14ud5tc-0:hover {
+  .main-playlistEditDetailsModal-save > button > span:hover,
+  .main-duplicateTrackModal-buttonContainer > button > span:hover {
     background-color: #23c483 !important;
     box-shadow:  0px 0px 15px 5px rgba(46, 229, 157, 0.4);
     transform: scale(1) !important
   }
 
+  .main-playlistEditDetailsModal-closeBtn {
+    border-radius: var(--button-border)
+  }
 
   /* ----TEXT SHADOWS---- */
 
