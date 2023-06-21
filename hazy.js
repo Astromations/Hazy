@@ -640,7 +640,7 @@
 
     const saveButton = document.createElement("button");
     saveButton.id = "home-save";
-    saveButton.innerHTML = "Save";
+    saveButton.innerHTML = "Apply";
 
     saveButton.addEventListener("click", () => {
       // update changed bg image
