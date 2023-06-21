@@ -266,6 +266,10 @@
     margin-top: auto;
   }
 
+  .main-playlistEditDetailsModal-imageDropDownButton {
+    border-radius: var(--button-border)
+  }
+
   .main-editImageButton-overlay {
     background-color: rgba(var(--spice-rgb-shadow),.6);
     border-radius: 8px
