@@ -478,9 +478,22 @@
     color: var(--spicet-text)
   }
 
-  .x-searchHistoryEntries-clearSingleSearchHistory > button {
-    border-radius: var(--button-border);
+  .x-searchHistoryEntries-clearSingleSearchHistory {
+    top: 20px;
+    margin-right: 12px;
+    opacity: 0;
+    transition: all 0.2s ease;
+    border-radius: var(--button-border) !important;
+  }
+
+  .x-searchHistoryEntries-searchHistoryEntry:hover > .x-searchHistoryEntries-clearSingleSearchHistory {
+      opacity: 1;
+  }
+
+  .x-searchHistoryEntries-clearSingleSearchHistoryButton {
+    border-radius: var(--button-border) !important;
     background-color: var(--backdrop);
+    transition: all 0.2s ease;
   }
 
   .x-searchHistoryEntries-clearSingleSearchHistoryButton:focus, .x-searchHistoryEntries-clearSingleSearchHistoryButton:hover {
@@ -546,6 +559,7 @@
 
   .x-categoryCard-CategoryCard {
     transition: transform 0.2s ease;
+    box-shadow: -3px -2px 15px rgb(0 0 0 / 20%);
   }
 
   .x-categoryCard-CategoryCard:hover {
@@ -621,7 +635,8 @@
       background-color: var(--backdrop);
   }
 
-  .nav-ylx .artist-artistDiscography-headerContainer {
+  .nav-ylx .artist-artistDiscography-headerContainer,
+  .artist-artistDiscography-headerContainer{
     background: none;
   }
 
@@ -629,11 +644,23 @@
     position: fixed
   }
 
-  .nav-ylx .artist-artistDiscography-topBar.artist-artistDiscography-topBarScrolled {
+  .nav-ylx .artist-artistDiscography-topBar.artist-artistDiscography-topBarScrolled,
+  .artist-artistDiscography-topBar.artist-artistDiscography-topBarScrolled{
       background: none;
       border-bottom: none;
       -webkit-box-shadow: unset;
       box-shadow: unset;
+  }
+
+  .artist-artistDiscography-button.artist-artistDiscography-active, .artist-artistDiscography-button:focus, .artist-artistDiscography-button:hover {
+      border-radius: var(--button-border);
+  }
+
+  .ButtonInner-sm-iconOnly,
+  .Button-sm-buttonPrimary-useBrowserDefaultFocusStyle:hover .ButtonInner-sc-14ud5tc-0 {
+    background: none ;
+    color: var(--background-base,#ffffff);
+    scale: 1.2
   }
 
   /* ----HOME VIEW---- */
@@ -683,10 +710,21 @@
   }
 
   .main-heroCard-PlayButtonContainer {
-      -webkit-box-shadow: unest;
-      box-shadow: unset;
+    -webkit-box-shadow: unest;
+    box-shadow: unset;
   }
 
+  .main-gridContainer-gridContainer {
+    padding-bottom: 16px !important
+  }
+
+  .main-shelf-shelf {
+    margin-bottom: unset !important;
+  }
+
+  .artist-artistOverview-artistShelfSpacer {
+    margin-bottom: 16px !important;
+  }
 
   .Button-lg-buttonPrimary-useBrowserDefaultFocusStyle:hover 
   .ButtonFocus-sc-2hq6ey-0,
