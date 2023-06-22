@@ -1,13 +1,17 @@
 # Hazy 
 
-A translucent theme based on <a href="https://github.com/JulienMaille/spicetify-dynamic-theme">DynamicDefault</a> and <a href="https://github.com/nimsandu/spicetify-bloom">Bloom</a>. Thanks to <a href="https://github.com/harbassan/spicetify-galaxy">Harbassan</a> for the code for customized backgrounds. 
+A translucent theme based on <a href="https://github.com/JulienMaille/spicetify-dynamic-theme">DynamicDefault</a> and <a href="https://github.com/nimsandu/spicetify-bloom">Bloom</a>.
 
 ## Preview
+**Custom Backgrounds**
 
-![demo-base](./poster8.png)
-![demo-base](./poster10.png)
-![demo-base](./poster9.png)
+![demo-base](./hazy_home.png)
+![demo-base](./hazy_lyrics.png)
+![demo-base](./hazy_play.png)
 
+**Set Background To Album Art**  
+
+![demo-base](./custom_bg.png)
   
 ### ⏹️ How To Get Sidebar ⏹️
 ---
