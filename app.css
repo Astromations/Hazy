@@ -946,7 +946,7 @@
   }
 
   .os-theme-spotify > .os-scrollbar-vertical {
-    margin-right: 2px;
+    margin: 12px 2px 12px 0
   }
 
   .os-scrollbar-vertical {
@@ -1052,6 +1052,10 @@
     background-color: rgba(var(--spice-rgb-card), 0.6) !important;
   }
 
+  .x-filterBox-filterInput {
+    height: 36px
+  }
+
   .main-contextMenu-filterPlaylistSearchContainer {
     height: auto;
   }
@@ -1129,6 +1133,7 @@
     border-radius: 12px;
     display: flex;
     align-items: center;
+    cursor: pointer
   }
 
   span.toggle {
@@ -1137,7 +1142,7 @@
     border-radius: 10px;
     background-color: white;
     margin-left: 2px;
-    transition: 0.2s cubic-bezier(0.45, 0.05, 0.55, 0.95)
+    transition: 0.25s cubic-bezier(0.45, 0.05, 0.55, 0.95)
   }
 
   span.toggleWrapper:has(span.toggle.enabled) {
@@ -1175,9 +1180,7 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 2.5px;
-    background-color: rgb(66 180 114);
     border: none;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
     cursor: pointer;
   }
@@ -1191,22 +1194,19 @@
     height: 38px;
     color: #ffffff;
     border-radius: var(--button-border);
-    background-color: var(--spice-button);
     padding-bottom: 1px;
     font-size: 12.5px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 2.5px;
-    background-color: rgb(65 173 110);
     border: none;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
     cursor: pointer;
     background-color: #ea5d5d;
   }
 
   #home-save:hover {
-    background-color: #23c483;
+    background-color: var(--spice-button);
     box-shadow:  0px 0px 15px 5px rgba(46, 229, 157, 0.4);
   }
 
@@ -1322,7 +1322,6 @@
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    background: #04AA6D;
     cursor: pointer;
     background-color: var(--spice-text);
     border: 0;
