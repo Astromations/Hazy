@@ -124,6 +124,21 @@
     color: var(--spice-text)
   }
 
+  .Button-sm-16-buttonTertiary-iconOnly-useBrowserDefaultFocusStyle:hover {
+    transform: unset !important;
+  }
+
+  .main-repeatButton-button.main-repeatButton-active,
+  .main-shuffleButton-button.main-shuffleButton-active,
+  .Button-sm-16-buttonTertiary-iconOnly-useBrowserDefaultFocusStyle {
+    transition: all 0.3s ease;
+  }
+
+  .main-repeatButton-button.main-repeatButton-active:not([disabled]):hover,
+  .main-genericButton-buttonActive:not([disabled]):hover {
+    filter: drop-shadow(0 0 6px var(--spice-button))
+  }
+
   .main-nowPlayingWidget-coverExpanded > .main-coverSlotCollapsed-container {
       transform: translateX(-8px) scale(1) !important;
   }
@@ -145,6 +160,19 @@
     box-shadow: -2px 1px 7px 1px rgb(0 0 0 / 14%)
   }
 
+
+  .main-addButton-active,
+  .control-button-heart {
+    transition: filter 0.25s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  }
+
+  .main-addButton-button[aria-label="Remove from Your Library"]:hover {
+    filter: drop-shadow(0 0 6px var(--spice-button));
+  }
+
+  .main-addButton-button[aria-label="Save to Your Library"]:hover {
+    filter: drop-shadow(0 0 2px rgba(var(--spice-rgb-selected-row),.7));
+  }
 
   /* ---SIDEBAR---- */
 
@@ -383,12 +411,33 @@
     color: var(--spice-text) !important
   }
 
-  .ButtonInner-sc-14ud5tc-0.ButtonInner-md-iconOnly.encore-bright-accent-set {
+  .main-card-PlayButtonContainer > .main-playButton-PlayButton > button > span {
     color: var(--spice-text) !important;
-    background: rgba(0,0,0,0.5);
+    background: rgb(0 0 0 / 0%);
     border-radius: var(--button-border);
     right: 4px;
-    }
+  }
+
+  .main-card-PlayButtonContainer > div > button > span > span > svg {
+    filter: drop-shadow(-1px 1px 6px rgba(0, 0, 0, 1)) !important
+  }
+
+  .view-homeShortcutsGrid-PlayButtonContainer > .main-playButton-PlayButton > button > span {
+    color: var(--spice-text) !important;
+    background: transparent;
+    border-radius: var(--button-border);
+    right: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .view-homeShortcutsGrid-PlayButtonContainer > .main-playButton-PlayButton > button > span:hover {
+    background: none;
+    scale: 1.1
+  }
+
+  .Button-md-buttonPrimary-useBrowserDefaultFocusStyle:hover .ButtonInner-sc-14ud5tc-0 {
+    background: none
+  }
 
   .ButtonInner-md-iconOnly:hover {
     box-shadow: unset;
@@ -706,7 +755,7 @@
 
   .main-card-card:hover > .main-card-draggable {
     transform: translateY(-4px);
-    z-index: 5
+    z-index: 5;
   }
 
   .main-heroCard-PlayButtonContainer {
@@ -716,6 +765,15 @@
 
   .main-gridContainer-gridContainer {
     padding-bottom: 16px !important
+  }
+
+  .main-cardImage-imageWrapper {
+    transition: opacity 0.25s ease;
+  }
+
+  .main-card-card:hover > .main-card-draggable > .main-card-imageContainer > .main-cardImage-imageWrapper {
+    border-radius: var(--button-border) !important;
+    opacity: 0.8
   }
 
   .main-shelf-shelf {
@@ -782,20 +840,18 @@
   /*----ARTIST PAGE---- */
 
   .main-entityHeader-title h1 {
-      font-size: 56px !important;
-      line-height: 56px !important;
+    font-size: 56px !important;
+    line-height: 56px !important;
   }
 
   /* Color Artist Image */
-  .under-main-view div,
-  .main-entityHeader-imageContainer{
+  .under-main-view div {
     opacity: 0.9;
-    filter: grayscale(10%)  brightness(80%);
-
+    filter: grayscale(5%)  brightness(94%);
   }
 
   .main-entityHeader-background.main-entityHeader-gradient {
-    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 65%, transparent 100%);
+    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 58%, transparent 100%);
   }
 
   .artist-artistOverview-artistOverviewContent {
@@ -865,7 +921,7 @@
     transform-origin: var(--lyrics-text-direction);
     margin: 0.3rem 0;
     transform: scale(1);
-        text-shadow: -1px 3px 20px rgb(0 0 0 / 20%);
+    text-shadow: -1px 3px 20px rgb(0 0 0 / 15%);
     transition: transform 400ms ease, text-shadow 400ms ease, color 50ms ease;
   }
 
@@ -963,13 +1019,62 @@
     display: none;
   }
 
-  .main-nowPlayingView-lyricsContent::-webkit-scrollbar{
+  .main-nowPlayingView-lyricsContent::-webkit-scrollbar {
     width: 2px !important;
   }
 
   .main-nowPlayingView-lyricsContent::-webkit-scrollbar-thumb {
     border-radius: 50px !important;
     background-color: var(--spice-rgb-selected-row)
+  }
+
+  /* ----EXP FEATURES---- */
+  .GenericModal > .main-embedWidgetGenerator-container {
+    background-color: var(--backdrop) !important;
+    backdrop-filter: blur(15px);
+    height: 680px;
+  }
+
+  .main-embedWidgetGenerator-container > .main-trackCreditsModal-mainSection::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .main-embedWidgetGenerator-container > .main-trackCreditsModal-mainSection::-webkit-scrollbar-thumb {
+  border-radius: 8px
+  }
+
+  .spicetify-exp-features button.switch {
+    border-radius: var(--button-border) !important
+  }
+
+  .spicetify-exp-features input.search {
+    border: none !important;
+    background-color: rgba(var(--spice-rgb-selected-row),.1) !important;
+    border-radius: var(--button-border);
+    padding: 10px 36px;
+    color: var(--spice-text);
+    width: 100%;
+  }
+
+  .spicetify-exp-features button.reset {
+    height: 38px;
+    color: #ffffff;
+    border-radius: var(--button-border) !important;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    border: none !important;
+    transition: all 0.3s ease;
+    background-color: #ea5d5d !important;
+  }
+
+  .spicetify-exp-features button.reset:hover {
+    background-color: #ec6f6f;
+    box-shadow: 0px 0px 15px 5px rgb(229 46 46 / 40%);
+    transform: scale(1) !important
+  }
+
+  .spicetify-exp-features .setting-row .col.description {
+    font-size: 0.95rem;
   }
 
   /* ----MARKETPLACE---- */
@@ -1305,13 +1410,6 @@
   .slider-value > div[contenteditable="true"]:focus + div[id="unit"]{
     box-shadow: 0 1px 0 0 rgb(255 255 255 / 60%);
   }
-
-  .slider-container label {
-    text-align: right;
-    margin-right: 10px;
-    font-size: 0.875rem;
-  }
-
 
   /* Mouse-over effects */
   .slider:hover {
