@@ -252,6 +252,10 @@
       background-color: transparent !important;
   }
 
+  .main-rootlist-wrapper > div[role="presentation"] > div[aria-selected="true"] {
+    background-color: hsla(0,0%,100%,.1);
+  }
+
   .main-trackList-rowSectionStart > img {
     box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 15%); 
   }
@@ -360,7 +364,8 @@
   .I4p8r1UNjIGk9yv3H2Ms,
   .IAyWaeDamLJLjxuPeVKw, 
   .Button-md-24-buttonTertiary-condensedAll-useBrowserDefaultFocusStyle,
-  .main-topBar-buddyFeed{
+  .main-topBar-buddyFeed,
+  .main-noConnection-isNotice {
     border-radius: var(--button-border) !important
   }
 
@@ -387,7 +392,7 @@
     -webkit-mask-image: linear-gradient(transparent 9%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 1) 95%, transparent 100%);
   }
 
-  /*--------*/
+  /*----PLAY BUTTONS----*/
 
   .main-playButton-PlayButton, .main-playButton-PlayButton {
       transition: transform 0.2s ease
@@ -415,18 +420,7 @@
     color: var(--spice-text) !important
   }
 
-  .main-card-PlayButtonContainer > .main-playButton-PlayButton > button > span {
-    color: var(--spice-text) !important;
-    background: rgb(0 0 0 / 0%);
-    border-radius: var(--button-border);
-    right: 4px;
-  }
-
-  .main-card-PlayButtonContainer > div > button > span > span > svg {
-    filter: drop-shadow(-1px 1px 6px rgba(0, 0, 0, 1)) !important
-  }
-
-  .view-homeShortcutsGrid-PlayButtonContainer > .main-playButton-PlayButton > button > span {
+  .main-playButton-PlayButton > button > span {
     color: var(--spice-text) !important;
     background: transparent;
     border-radius: var(--button-border);
@@ -434,7 +428,12 @@
     transition: all 0.2s ease;
   }
 
-  .view-homeShortcutsGrid-PlayButtonContainer > .main-playButton-PlayButton > button > span:hover {
+  .main-card-PlayButtonContainer > div > button > span > span > svg,
+  .main-heroCard-PlayButtonContainer > div > button > span > span > svg {
+    filter: drop-shadow(-1px 1px 6px rgba(0, 0, 0, 1)) !important
+  }
+
+  .main-playButton-PlayButton > button > span:hover {
     background: none;
     scale: 1.1
   }
@@ -506,7 +505,6 @@
   .search-searchCategory-categoryGridItem  > button > span {
     border-radius: var(--button-border);
     font-weight: 700 !important;
-    color: var(--spice-text)
   }
 
   .search-searchCategory-categoryGridItem > button {
@@ -1181,16 +1179,19 @@
   .ButtonInner-sc-14ud5tc-0.ButtonInner-lg-iconOnly.encore-bright-accent-set,
   .artist-followButton-button,
   .IconWrapper__Wrapper-sc-1hf1hjl-0.Wrapper-lg-28-only {
-    transition: transform 0.2s ease
+    transition: transform 0.25s ease
   }
 
   .x-downloadButton-button:hover,
   .x-contributorButton-button:hover,
   .main-moreButton-button:hover,
-  .playlist-playlist-playlist span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set:hover,
-  .Root__top-bar span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set:hover,
   .IconWrapper__Wrapper-sc-1hf1hjl-0.Wrapper-lg-28-only:hover {
     transform: scale(1.1)
+  }
+
+  .Root__top-bar span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set:hover
+  .playlist-playlist-playlist span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set:hover {
+    transform: scale(1.05)
   }
 
   .Button-sm-buttonSecondary-useBrowserDefaultFocusStyle:hover,
