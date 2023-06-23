@@ -499,7 +499,8 @@
       box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
   }
 
-  .x-searchInput-searchInputSearchIcon {
+  .x-searchInput-searchInputSearchIcon,
+  .x-searchInput-searchInputClearButton {
     margin-top: 3px;
   }
 
