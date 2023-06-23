@@ -254,6 +254,7 @@
 
   .main-rootlist-wrapper > div[role="presentation"] > div[aria-selected="true"] {
     background-color: hsla(0,0%,100%,.1);
+    border-radius: 8px
   }
 
   .main-trackList-rowSectionStart > img {
