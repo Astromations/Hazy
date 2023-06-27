@@ -42,8 +42,8 @@
     right: 0;
     z-index: 999;
     backdrop-filter: brightness(2.12);
-    width: 135px;
-    height: 31px;
+    width: var(--control-width);
+    height: var(--control-height);
   }
 
   /* ----NAVBAR---- */
@@ -366,8 +366,10 @@
   .IAyWaeDamLJLjxuPeVKw, 
   .Button-md-24-buttonTertiary-condensedAll-useBrowserDefaultFocusStyle,
   .main-topBar-buddyFeed,
-  .main-noConnection-isNotice {
-    border-radius: var(--button-border) !important
+  .main-noConnection-isNotice,
+  .main-topBar-whatsNewFeed {
+    border-radius: var(--button-border) !important;
+    transition: 0.2s ease
   }
 
   .SFgYidQmrqrFEVh65Zrg > figure > div > img {
@@ -378,7 +380,9 @@
   .main-topBar-buddyFeed,
   .main-userWidget-boxCondensed,
   .SFgYidQmrqrFEVh65Zrg, 
-  .SFgYidQmrqrFEVh65Zrg:hover {
+  .SFgYidQmrqrFEVh65Zrg:hover,.main-userWidget-boxCondensed:focus-visible, 
+  .main-userWidget-boxCondensed:hover, .main-userWidget-boxCondensed[data-context-menu-open=true],
+  .main-topBar-whatsNewFeed {
     background-color: var(--backdrop) !important;
   }
 
