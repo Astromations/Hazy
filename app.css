@@ -192,7 +192,7 @@
       -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%);
   }
   .Root__nav-bar [fade="full"] {
-      -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 1) 80%, transparent 100%);
+      -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 12%, rgba(0, 0, 0, 1) 92%, transparent 100%);
   }
 
   .spotify__os--is-windows .nav-ylx .main-nowPlayingView-nowPlayingWidget,
