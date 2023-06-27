@@ -78,7 +78,6 @@
           return;
       } else {
           // When clicking a song from the homepage, songChange is fired with half empty metadata
-          // todo: retry only once?
           setTimeout(onSongChange, 200);
       }
 
@@ -89,6 +88,7 @@
   Spicetify.Player.addEventListener("songchange", onSongChange);
   onSongChange();
   windowControls();
+  controlDimensions();
   galaxyFade();
 
   function scrollToTop() {
@@ -153,6 +153,23 @@
     // Call detectOS() immediately
     detectOS();
   }
+
+  function controlDimensions() {
+    Spicetify.Platform.PlayerAPI._prefs.get({ key: 'app.browser.zoom-level' }).then((value) => {
+      const  zoomLevel = value.entries['app.browser.zoom-level'].number;
+      const multiplier = zoomLevel != 0 ? zoomLevel/50 : 0;
+      constant = 0.912872807
+
+        final_width = 135 * (constant**(multiplier));
+        final_height = 31 * (constant**(multiplier));
+        document.documentElement.style.setProperty("--control-width", Math.abs(final_width) + "px");
+        document.documentElement.style.setProperty("--control-height", Math.abs(final_height) + "px");
+    });
+  }
+  
+  window.addEventListener('resize', function() {
+    controlDimensions();
+  });
 
   window.onresize = updateLyricsPageProperties;
 
