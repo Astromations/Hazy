@@ -798,9 +798,15 @@
     transition: transform 0.2s ease;
   }
 
-  .main-card-card:hover > .main-card-draggable {
-    transform: translateY(-4px);
-    z-index: 5;
+  .main-card-card .main-cardImage-imageWrapper {
+      transition: all 0.35s ease;
+      transform-origin: 50% -40px;
+      overflow: hidden;
+  }
+
+  .main-card-card:hover .main-cardImage-imageWrapper {
+    transform: perspective(76em) rotateX(14deg) translateY(-1px);
+    opacity: 0.8
   }
 
   .main-heroCard-PlayButtonContainer {
@@ -816,10 +822,6 @@
     transition: opacity 0.25s ease;
   }
 
-  .main-card-card:hover > .main-card-draggable > .main-card-imageContainer > .main-cardImage-imageWrapper {
-    border-radius: var(--button-border) !important;
-    opacity: 0.8
-  }
 
   .main-shelf-shelf {
     margin-bottom: unset !important;
