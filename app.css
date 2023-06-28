@@ -181,9 +181,13 @@
   /* ---SIDEBAR---- */
 
   .main-buddyFeed-header {
-    padding-top: 0px;
+    padding-top: 0px !important;
     padding-bottom: 0px;
     padding-inline-start: 3px;
+  }
+
+  .main-buddyFeed-content {
+    padding-top: 5px
   }
 
   /* Fade from Galaxy */
@@ -230,6 +234,39 @@
 
   .main-nowPlayingView-section {
       box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 10%);
+  }
+
+  /*** What's New***/
+  .main-whatsNewFeed-listRow {
+    background-color: tran !important;
+    margin: 4px 0;
+    padding: 12px 8px 2px 8px!important;
+    gap: 2px 12px;
+  }
+
+  .main-whatsNewFeed-listRow:hover {
+    --background-highlight:      ;
+    --spice-highlight:     ;
+    --background-elevated-press:    ;
+    --background-press:     ;
+    background-color: var(--backdrop) !important;
+  }
+
+  .main-whatsNewFeed-list {
+      margin-top: 2px;
+  }
+
+  .main-whatsNewFeed-content {
+    padding: 2px 16px 16px 16px;
+  }
+
+  .main-whatsNewFeed-content > p {
+    display: none
+  }
+
+  .main-whatsNewFeed-list:last-child,
+  .main-buddyFeed-content > div:nth-child(3) > ol:last-child {
+    padding-bottom: 8px
   }
 
   /* ---PLAYLIST VIEW---- */
