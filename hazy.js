@@ -307,6 +307,18 @@
     // add fade and dimness effects to mainview scroll node
     waitForElement([".Root__main-view .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
       scrollNode.addEventListener("scroll", () => {
+        //artist fade
+        scrollNode.addEventListener("scroll", () => {
+          var scrollValue = scrollNode.scrollTop;
+          if (scrollValue >= 0 && scrollValue <= 340) {
+            var artist_fade = (-0.3 * scrollValue + 100)/100;
+            document.documentElement.style.setProperty('--artist-fade', artist_fade);    
+          }
+          else if (scrollValue > 340) {
+            document.documentElement.style.setProperty('--artist-fade', 0);
+          }
+        });
+        
         // fade
         if (scrollNode.scrollTop == 0) {
           scrollNode.setAttribute("fade", "bottom");
