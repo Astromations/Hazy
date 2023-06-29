@@ -711,6 +711,25 @@
     border-radius: var(--button-border)
   }
 
+  .main-popper-container {
+    background-color: rgba(0,0,0, 0.45);
+    backdrop-filter: blur(25px) !important
+  }
+
+  .hcuLp8V4uEEfWZ4k6aLV {
+    background: none;
+    border-radius: 8px;
+  }
+
+  .main-devicePicker-controlButton[aria-expanded="true"] {
+    fill: #fff;
+    color: #fff;
+  }
+
+  .main-popper-arrow, .main-popper-arrow:before {
+    display: none;
+  }
+
   /* ----TEXT SHADOWS---- */
 
   .main-entityHeader-topbarTitle,
