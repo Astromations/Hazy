@@ -898,7 +898,7 @@
   }
 
   .main-entityHeader-background.main-entityHeader-gradient {
-    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 58%, transparent 100%);
+    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, var(--artist-fade)) 58%, transparent 100%);
   }
 
   .artist-artistOverview-artistOverviewContent {
