@@ -153,6 +153,17 @@
       --is-active-fg-color: var(--spice-button-active);
   }
 
+  /* smooth progress bar from Galaxy */
+  .x-progressBar-fillColor {
+      transition: transform 1s linear;
+  }
+  .progress-bar__slider {
+      transition: left 1s linear;
+  }
+  .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .x-progressBar-fillColor,
+  .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .progress-bar__slider {
+      transition: none;
+  }
 
   .ChipClearComponent-chipClear-useBrowserDefaultFocusStyle,
   .ChipInnerComponent,
