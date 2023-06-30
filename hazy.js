@@ -293,6 +293,30 @@
     });
   }
 
+  const observer = new MutationObserver(function(mutationsList) {
+    for (let mutation of mutationsList) {
+      if (mutation.addedNodes.length) {
+        const addedNode = mutation.addedNodes[0];
+        if (addedNode.matches('.main-lyricsCinema-container')) {
+          const expandButton = document.querySelector('.main-coverSlotCollapsed-expandButton');
+          if (expandButton) {
+            expandButton.style.pointerEvents = 'none';
+          }
+        }
+      } else if (mutation.removedNodes.length) {
+        const removedNode = mutation.removedNodes[0];
+        if (removedNode.matches('.main-lyricsCinema-container')) {
+          const expandButton = document.querySelector('.main-coverSlotCollapsed-expandButton');
+          if (expandButton) {
+            expandButton.style.pointerEvents = ''; // Reset pointer events to default
+          }
+        }
+      }
+    }
+  });
+  
+  observer.observe(document.body, { childList: true, subtree: true });
+  
   function galaxyFade() { //Shamelessly stolen from the Galaxy theme | https://github.com/harbassan/spicetify-galaxy/
     
     function waitForElement(els, func, timeout = 100) {
