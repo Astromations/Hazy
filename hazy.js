@@ -293,7 +293,7 @@
     });
   }
 
-  const observer = new MutationObserver(function(mutationsList) {
+  const cinemaObserver = new MutationObserver(function(mutationsList) {
     for (let mutation of mutationsList) {
       if (mutation.addedNodes.length) {
         const addedNode = mutation.addedNodes[0];
@@ -315,8 +315,8 @@
     }
   });
   
-  observer.observe(document.body, { childList: true, subtree: true });
-  
+  cinemaObserver.observe(document.body, { childList: true, subtree: true });
+
   function galaxyFade() { //Shamelessly stolen from the Galaxy theme | https://github.com/harbassan/spicetify-galaxy/
     
     function waitForElement(els, func, timeout = 100) {
