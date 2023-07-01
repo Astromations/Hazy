@@ -122,17 +122,19 @@
       "enablePanelSizeCoordination"
     ];
   
-    // Loop over the array
-    for (const feature of features) {
-      // Ignore if feature not present
-      if (!parsedObject[feature]) continue;
-  
-      // Change value if disabled
-      if (!parsedObject[feature].value) {
-        parsedObject[feature].value = true;
-        reload = true;
+    if (!localStorage.getItem('Hazy Sidebar Activated')) {
+      localStorage.setItem('Hazy Sidebar Activated', true);
+      for (const feature of features) {
+        // Ignore if feature not present
+        if (!parsedObject[feature]) continue;
+    
+        // Change value if disabled
+        if (!parsedObject[feature].value) {
+          parsedObject[feature].value = true;
+          reload = true;
+        }
       }
-    }
+    }    
   
     localStorage.setItem("spicetify-exp-features", JSON.stringify(parsedObject));
     if (reload) {
