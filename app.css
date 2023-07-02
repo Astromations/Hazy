@@ -36,7 +36,7 @@
 
   /* ----TRANSPARENT WINDOW CONTROLS----*/
 
-  body.windows::after {
+  body.windows:not(.video-full-window)::after {
     content: '';
     position: absolute;
     right: 0;
@@ -241,10 +241,17 @@
       background-color: var(--backdrop);
       border-radius: 8px;
       padding: 16px;
+      box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 10%);
   }
 
-  .main-nowPlayingView-section {
-      box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 10%);
+  .main-nowPlayingView-section.main-nowPlayingView-sectionHeaderSpacing {
+    display: var(--showLyricsDisplay)
+  }
+
+  .main-nowPlayingView-artistBioButton:hover {
+    -webkit-transform: scale(1) !important;
+    transform: scale(1) !important;
+    cursor: pointer;
   }
 
   /*** What's New***/
@@ -638,6 +645,9 @@
     padding: 2px 16px;
     background-color: rgba(0,0,0,0.2);
     height: 32px
+  }
+  .main-nowPlayingView-sectionHeaderSpacing .main-nowPlayingView-lyricsContent:hover {
+    padding-right: unset !important
   }
 
   .lyrics-config-button {
