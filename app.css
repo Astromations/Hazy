@@ -650,7 +650,7 @@
     height: 32px
   }
   .main-nowPlayingView-sectionHeaderSpacing .main-nowPlayingView-lyricsContent:hover {
-    padding-right: unset !important
+    padding-right: 16px !important
   }
 
   .lyrics-config-button {
