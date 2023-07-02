@@ -295,31 +295,101 @@
     });
   }
 
-  const cinemaObserver = new MutationObserver(function(mutationsList) {
+  function lyricsPadding() {
+      const mainViewElement = document.querySelector('.Root__main-view');
+      const lyricsContainerElement = document.querySelector('.Root__lyrics-cinema');
+    
+      if (mainViewElement && lyricsContainerElement) {
+        const width = mainViewElement.offsetWidth;
+        lyricsContainerElement.style.width = `${width}px`;
+      }
+      updateLyricsPageProperties();
+  }
+
+  function trackSidebarWidth() {
+    const sidebarWidthChange = (entries) => {
+      for (const entry of entries) {
+        if (entry.target.classList.contains('Root__right-sidebar')) {
+          lyricsPadding();
+        }
+      }
+    };
+  
+    const resizeObserver = new ResizeObserver(sidebarWidthChange);
+    const rightSidebarElement = document.querySelector('.Root__right-sidebar');
+  
+    if (rightSidebarElement) {
+      resizeObserver.observe(rightSidebarElement);
+    }
+  }
+
+  function trackLibraryExpansion() {
+    const handleWidthChange = (entries) => {
+      for (const entry of entries) {
+        if (entry.target.classList.contains('main-yourLibraryX-libraryContainer')) {
+          lyricsPadding();
+        }
+      }
+    };
+
+    const resizeObserver = new ResizeObserver(handleWidthChange);
+    const libraryContainerElement = document.querySelector('.main-yourLibraryX-libraryContainer');
+
+    if (libraryContainerElement) {
+      resizeObserver.observe(libraryContainerElement);
+    }
+  }
+
+  function undoLyricCinema() {
+    const lyricsContainerElement = document.querySelector('.Root__lyrics-cinema');
+    lyricsContainerElement.style.width = `unset`;
+  }
+
+  trackSidebarWidth();
+  let sidebarCheck = null; // Declare sidebarCheck variable outside the scope of the function
+
+  const lyricsCheck = new MutationObserver(function(mutationsList) {
     for (let mutation of mutationsList) {
       if (mutation.addedNodes.length) {
         const addedNode = mutation.addedNodes[0];
         if (addedNode.matches('.main-lyricsCinema-container')) {
-          const expandButton = document.querySelector('.main-coverSlotCollapsed-expandButton');
-          if (expandButton) {
-            expandButton.style.pointerEvents = 'none';
+          if (!sidebarCheck) {
+            sidebarCheck = new MutationObserver(function(sidebarMutationsList) {
+              for (let sidebarMutation of sidebarMutationsList) {
+                if (sidebarMutation.addedNodes.length) {
+                  const sidebarAddedNode = sidebarMutation.addedNodes[0];
+                  if (sidebarAddedNode.matches('.main-buddyFeed-container')) {
+                    document.documentElement.style.setProperty("--showLyricsDisplay", "none");
+                    lyricsPadding(); 
+                    trackSidebarWidth();
+                    trackLibraryExpansion();
+                  } 
+                } else if (sidebarMutation.removedNodes.length) {
+                  const sidebarRemovedNode = sidebarMutation.removedNodes[0];
+                  if (sidebarRemovedNode.matches('.main-buddyFeed-container')) {
+                    document.documentElement.style.setProperty("--showLyricsDisplay", "flex");
+                  }
+                }
+              }
+            });
+            sidebarCheck.observe(document.body, { childList: true, subtree: true });
           }
         }
       } else if (mutation.removedNodes.length) {
         const removedNode = mutation.removedNodes[0];
-        if (removedNode.matches('.main-lyricsCinema-container')) {
-          const expandButton = document.querySelector('.main-coverSlotCollapsed-expandButton');
-          if (expandButton) {
-            expandButton.style.pointerEvents = ''; // Reset pointer events to default
-          }
+        if (removedNode.matches('.main-lyricsCinema-container') && sidebarCheck) {
+          document.documentElement.style.setProperty("--showLyricsDisplay", "flex");
+          undoLyricCinema();
+          sidebarCheck.disconnect();
+          sidebarCheck = null;
         }
       }
     }
   });
   
-  cinemaObserver.observe(document.body, { childList: true, subtree: true });
+  lyricsCheck.observe(document.body, { childList: true, subtree: true });
 
-  function galaxyFade() { //Shamelessly stolen from the Galaxy theme | https://github.com/harbassan/spicetify-galaxy/
+  function galaxyFade() { //Borrowed from the Galaxy theme | https://github.com/harbassan/spicetify-galaxy/
     
     function waitForElement(els, func, timeout = 100) {
       const queries = els.map(el => document.querySelector(el));
@@ -355,7 +425,7 @@
         }
       });
     });
-  
+
     waitForElement([".Root__nav-bar .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
       scrollNode.setAttribute("fade", "bottom");
       scrollNode.addEventListener("scroll", () => {
@@ -397,11 +467,10 @@
     if (page === "/") {
       if (config.useCurrSongAsHome) {
         document.documentElement.style.setProperty("--image_url", `url("${startImage}")`);
-        console.log('song background set');
       } else {
         let bgImage = Spicetify.Player.data.track.metadata.image_url
         document.documentElement.style.setProperty("--image_url", `url("${bgImage}")`);
-        console.log('custom background set');
+
       }
     } 
   }
@@ -631,7 +700,6 @@
       let number = parseInt(content);
       if (content.length > 3) {
         content = valueRow.querySelector("#bright-value").textContent = content.slice(0, 3); // Truncate the content to 3 characters
-        console.log("bals")
       }
         valueRow.querySelector("#bright-input").value = number;
       });
