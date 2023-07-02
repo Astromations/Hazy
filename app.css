@@ -159,8 +159,12 @@
       transition: left 1s linear;
   }
 
-  .x-progressBar-fillColor {
+  .playback-bar .x-progressBar-fillColor {
     transition: transform 1s linear, background-color 0.3s ease !important;
+  }
+
+  .volume-bar__slider-container .x-progressBar-fillColor {
+    transition: background-color 0.3s ease !important;
   }
 
   .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .x-progressBar-fillColor,
