@@ -139,7 +139,8 @@
   }
 
   .main-repeatButton-button.main-repeatButton-active:not([disabled]):hover,
-  .main-genericButton-buttonActive:not([disabled]):hover {
+  .main-genericButton-buttonActive:not([disabled]):hover,
+  .main-shuffleButton-button[aria-checked="true"]:hover {
     filter: drop-shadow(0 0 6px var(--spice-button))
   }
 
@@ -154,12 +155,14 @@
   }
 
   /* smooth progress bar from Galaxy */
-  .x-progressBar-fillColor {
-      transition: transform 1s linear;
-  }
   .progress-bar__slider {
       transition: left 1s linear;
   }
+
+  .x-progressBar-fillColor {
+    transition: transform 1s linear, background-color 0.3s ease !important;
+  }
+
   .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .x-progressBar-fillColor,
   .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .progress-bar__slider {
       transition: none;
