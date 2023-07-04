@@ -292,6 +292,23 @@
     padding-bottom: 8px
   }
 
+  .main-buddyFeed-overlay {
+    border-radius: var(--button-border) !important;
+    transition: all 0.3s ease
+  }
+
+  .main-avatar-avatar.main-avatar-withBadge:after {
+    background: var(--spice-button);
+    -webkit-box-shadow: 0 0 0 1px #000;
+    box-shadow: 0 0 8px 2px rgba(0,0,0,0.6);
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 30px;
+    bottom: unset !important;
+    top: 30px;
+  }
+
   /* ---PLAYLIST VIEW---- */
 
   .Root__main-view {
