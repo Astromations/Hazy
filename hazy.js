@@ -400,9 +400,10 @@
       }
     }
   
-    // add fade and dimness effects to mainview scroll node
+    // add fade and dimness effects to mainview and the the artist image on scroll
     waitForElement([".Root__main-view .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
       scrollNode.addEventListener("scroll", () => {
+        //artist fade
         const scrollValue = scrollNode.scrollTop;
         const artist_fade = Math.max(0, (-0.3 * scrollValue + 100) / 100);
         document.documentElement.style.setProperty('--artist-fade', artist_fade);
