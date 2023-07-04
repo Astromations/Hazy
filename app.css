@@ -249,7 +249,7 @@
       box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 10%);
   }
 
-  .main-nowPlayingView-section.main-nowPlayingView-sectionHeaderSpacing {
+  .main-nowPlayingView-section.main-nowPlayingView-sectionHeaderSpacing:not(.main-nowPlayingView-lyricsGradient) {
     display: var(--showLyricsDisplay)
   }
 
