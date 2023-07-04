@@ -1,6 +1,6 @@
 # Hazy 
 
-A translucent theme based on <a href="https://github.com/JulienMaille/spicetify-dynamic-theme">DynamicDefault</a> and <a href="https://github.com/nimsandu/spicetify-bloom">Bloom</a>. If you're liking Hazy, please don't forget to ⭐ the project.
+A translucent theme based on <a href="https://github.com/JulienMaille/spicetify-dynamic-theme">DynamicDefault</a> and <a href="https://github.com/nimsandu/spicetify-bloom">Bloom</a>. If you're liking Hazy, please don't forget to ⭐ the project. 99% of the code was written by ChatGPT.
 
 
 ## Preview
