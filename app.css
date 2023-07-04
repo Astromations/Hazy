@@ -955,6 +955,12 @@
       background-color: var(--backdrop);
   }
 
+  .artist-artistAbout-container:hover {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    cursor: pointer
+  }
+
   .main-trackCreditsModal-container,
   .main-aboutRecsModal-container,
   .main-playlistEditDetailsModal-container,
