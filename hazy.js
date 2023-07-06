@@ -438,19 +438,16 @@
       });
     });
   
-  waitForElement([".Root__nav-right-sidebar .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
-    scrollNode.setAttribute("fade", "bottom");
-    scrollNode.addEventListener("scroll", () => {
-      // fade
-      if (scrollNode.scrollTop == 0) {
-        scrollNode.setAttribute("fade", "bottom");
-      } else if (scrollNode.scrollHeight - scrollNode.scrollTop - scrollNode.clientHeight == 0) {
-        scrollNode.setAttribute("fade", "top");
-      } else {
-        scrollNode.setAttribute("fade", "full");
-      }
-    });
-  });    
+    waitForElement([".Root__right-sidebar .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
+      scrollNode.addEventListener("scroll", () => {
+        if (scrollNode.scrollTop == 0) {
+          sideFade = '0%'
+        } else {
+          sideFade = '5%'
+        }
+        document.documentElement.style.setProperty('--side-fade', sideFade);
+      });
+    });    
   }
 
   const config = {}
