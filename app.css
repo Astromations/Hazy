@@ -709,7 +709,7 @@
   }
 
   .main-buddyFeed-scrollBarContainer.os-host-transition > div.os-padding > div {
-    -webkit-mask-image: linear-gradient(transparent 1%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 96%, transparent 100%);
+    -webkit-mask-image: linear-gradient(transparent 1%, rgba(0, 0, 0, 1) var(--side-fade), rgba(0, 0, 0, 1) 96%, transparent 100%);
   }
 
   .main-playlistEditDetailsModal-save > button > span,
