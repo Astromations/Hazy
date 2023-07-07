@@ -355,6 +355,10 @@
       border-radius: var(--button-border);
   }
 
+  .main-entityHeader-imageContainer{
+    border-radius: 10px !important;
+  }
+
   .main-entityHeader-image{
     border-radius: 8px !important;
     box-shadow: -2px 4px 9px 3px rgb(0 0 0 / 15%);
