@@ -444,7 +444,7 @@
           sideFade_1 = '0%'
           sideFade_ = '0%'
         } else {
-          sideFade_1 = '0.8%'
+          sideFade_1 = '1%'
           sideFade_2 = '5%'
         }
         document.documentElement.style.setProperty('--side-fade-1', sideFade_1);
