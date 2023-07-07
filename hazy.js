@@ -441,11 +441,14 @@
     waitForElement([".Root__right-sidebar .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
       scrollNode.addEventListener("scroll", () => {
         if (scrollNode.scrollTop == 0) {
-          sideFade = '0%'
+          sideFade_1 = '0%'
+          sideFade_ = '0%'
         } else {
-          sideFade = '5%'
+          sideFade_1 = '0.8%'
+          sideFade_2 = '5%'
         }
-        document.documentElement.style.setProperty('--side-fade', sideFade);
+        document.documentElement.style.setProperty('--side-fade-1', sideFade_1);
+        document.documentElement.style.setProperty('--side-fade-2', sideFade_2);
       });
     });    
   }
