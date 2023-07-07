@@ -708,7 +708,7 @@
       background: none
   }
 
-  .main-buddyFeed-scrollBarContainer.os-host-transition > div.os-padding > div {
+  .main-buddyFeed-scrollBarContainer .os-viewport-native-scrollbars-invisible {
     -webkit-mask-image: linear-gradient(transparent var(--side-fade-1), rgba(0, 0, 0, 1) var(--side-fade-2), rgba(0, 0, 0, 1) 96%, transparent 100%);
   }
 
@@ -760,6 +760,10 @@
 
   .main-popper-arrow, .main-popper-arrow:before {
     display: none;
+  }
+
+  .LyricsScrollContainer {
+    -webkit-mask-image: linear-gradient(transparent 5%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 1) 85%, transparent 100%);
   }
 
   /* ----TEXT SHADOWS---- */
