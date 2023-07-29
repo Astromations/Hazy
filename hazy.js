@@ -442,7 +442,7 @@
       scrollNode.addEventListener("scroll", () => {
         if (scrollNode.scrollTop == 0) {
           sideFade_1 = '0%'
-          sideFade_ = '0%'
+          sideFade_2 = '0%'
         } else {
           sideFade_1 = '1%'
           sideFade_2 = '5%'
