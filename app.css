@@ -204,10 +204,6 @@
     padding-inline-start: 3px;
   }
 
-  .main-buddyFeed-content {
-    padding-top: 5px
-  }
-
   /* Fade from Galaxy */
   /* add scroll fade to ylx and right sidebar */
   .Root__nav-bar [fade="top"] {
@@ -248,6 +244,19 @@
       padding: 16px;
       box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 10%);
   }
+
+  .main-nowPlayingView-section.vbsB4OQJkFHLU8SbSGzS {
+    padding: 8px !important
+  }
+
+  .hd6a3g_3QyF8MFL0wWs1 {
+    background: none !important
+  }
+
+  .GTmlByXpJj7V6AwVq0Vk.ouorHKa6NI5cm666H3tp {
+    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 85%, transparent 100%) !important;
+  }
+
 
   .main-nowPlayingView-section.main-nowPlayingView-sectionHeaderSpacing:not(.main-nowPlayingView-lyricsGradient) {
     display: var(--showLyricsDisplay)
@@ -356,7 +365,7 @@
   }
 
   .main-entityHeader-imageContainer {
-     border-radius: 10px
+    border-radius: 10px
   }
 
   .main-entityHeader-image{
