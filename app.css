@@ -230,7 +230,8 @@
     background: none !important;
   }
 
-  .main-buddyFeed-container.main-buddyFeed-panelTransition {
+  .main-buddyFeed-container.main-buddyFeed-panelTransition,
+  .main-buddyFeed-container {
       --background-base: var(--backdrop)!important;
   }
 
