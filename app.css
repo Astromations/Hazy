@@ -421,10 +421,6 @@
     transition: opacity 0.3s ease;
   }
 
-  .main-view-container__scroll-node-child > main > div > section > .main-entityHeader-container.main-entityHeader-nonWrapped {
-    min-height: 300px;
-  }
-
   .Button-sm-buttonSecondary-useBrowserDefaultFocusStyle,
   .Button-sc-y0gtbx-0.Button-sm-buttonSecondary-iconLeading-useBrowserDefaultFocusStyle.I3oc8sxg8Duq4kYUGnMo.LEZf9K5hG4hfCKfgr5Xo,
   .main-buddyFeed-closeButton{
