@@ -173,29 +173,29 @@
     controlDimensions();
   });
 
-  window.onresize = updateLyricsPageProperties;
-
-  Spicetify.Platform.History.listen(updateLyricsPageProperties);
-
   function waitForElement(elements, func, timeout = 100) {
     const queries = elements.map((element) => document.querySelector(element));
     if (queries.every((a) => a)) {
-      func();
+      func(queries);
     } else if (timeout > 0) {
       setTimeout(waitForElement, 300, elements, func, timeout - 1);
     }
   }
 
-  waitForElement(['.Root__lyrics-cinema'], () => {
-    const lyricsCinema = document.getElementsByClassName('Root__lyrics-cinema')[0];
+  Spicetify.Platform.History.listen(updateLyricsPageProperties);
+
+  waitForElement(['.Root__lyrics-cinema'], ([lyricsCinema]) => {
     const lyricsCinemaObserver = new MutationObserver(updateLyricsPageProperties);
     const lyricsCinemaObserverConfig = {
       attributes: true,
       attributeFilter: ['class'],
-      childList: false,
-      subtree: false,
     };
     lyricsCinemaObserver.observe(lyricsCinema, lyricsCinemaObserverConfig);
+  });
+
+  waitForElement(['.main-view-container'], ([mainViewContainer]) => {
+    const mainViewContainerResizeObserver = new ResizeObserver(updateLyricsPageProperties);
+    mainViewContainerResizeObserver.observe(mainViewContainer);
   });
 
   // fixes container shifting & active line clipping | taken from Bloom: https://github.com/nimsandu/spicetify-bloom
@@ -203,38 +203,24 @@
     function setLyricsPageProperties() {
       function detectTextDirection() {
         // 0, 1 - blank lines
-        const lyric = document.getElementsByClassName('lyrics-lyricsContent-lyric')[2];
-        // https://stackoverflow.com/questions/13731909/how-to-detect-that-text-typed-in-text-area-is-rtl
+        const lyric = document.querySelectorAll('.lyrics-lyricsContent-lyric')[2];
         const rtl_rx = /[\u0591-\u07FF]/;
-        return rtl_rx.test(lyric.innerHTML) ? 'rtl' : 'ltr';
+        return rtl_rx.test(lyric.innerText) ? 'rtl' : 'ltr';
       }
 
       function setLyricsTransformOrigin(textDirection) {
-        const root = document.querySelector(':root');
         if (textDirection === 'rtl') {
-          root.style.setProperty('--lyrics-text-direction', 'right');
+          document.documentElement.style.setProperty('--lyrics-text-direction', 'right');
         } else {
-          root.style.setProperty('--lyrics-text-direction', 'left');
+          document.documentElement.style.setProperty('--lyrics-text-direction', 'left');
         }
       }
 
-      function calculateLyricsMaxWidth(textDirection, lyricsWrapper, lyricsContainer) {
-        let offset;
-        let maxWidth;
-  
-        if (textDirection === 'rtl') {
-          offset =
-          lyricsWrapper.offsetRight +
-            parseInt(window.getComputedStyle(lyricsWrapper).marginRight, 10);
-          maxWidth = Math.round(0.95 * (lyricsContainer.clientWidth - offset));
-        } else {
-          offset =
-          lyricsWrapper.offsetLeft +
-            parseInt(window.getComputedStyle(lyricsWrapper).marginLeft, 10);
-          maxWidth = Math.round(0.95 * (lyricsContainer.clientWidth - offset));
-        }
-  
-        return maxWidth;
+      function calculateLyricsMaxWidth(lyricsContentWrapper) {
+        const lyricsContentContainer = lyricsContentWrapper.parentElement;
+        const marginLeft = parseInt(window.getComputedStyle(lyricsContentWrapper).marginLeft, 10);
+        const totalOffset = lyricsContentWrapper.offsetLeft + marginLeft;
+        return Math.round(0.95 * (lyricsContentContainer.clientWidth - totalOffset));
       }
 
       function lockLyricsWrapperWidth(lyricsWrapper) {
@@ -243,163 +229,39 @@
         lyricsWrapper.style.width = `${lyricsWrapperWidth}px`;
       }
 
-      waitForElement(['.lyrics-lyrics-contentWrapper'], () => {
-        const lyricsContentWrapper = document.getElementsByClassName(
-          'lyrics-lyrics-contentWrapper'
-        )[0];
-        const lyricsContentContainer = document.getElementsByClassName(
-          'lyrics-lyrics-contentContainer'
-        )[0];
-
+      waitForElement(['.lyrics-lyrics-contentWrapper'], ([lyricsContentWrapper]) => {
         lyricsContentWrapper.style.maxWidth = '';
         lyricsContentWrapper.style.width = '';
 
         const lyricsTextDirection = detectTextDirection();
         setLyricsTransformOrigin(lyricsTextDirection);
-        const lyricsMaxWidth = calculateLyricsMaxWidth(
-          lyricsTextDirection,
-          lyricsContentWrapper,
-          lyricsContentContainer
-        );
-        lyricsContentWrapper.style.setProperty('--lyrics-active-max-width', `${lyricsMaxWidth}px`);
+        const lyricsMaxWidth = calculateLyricsMaxWidth(lyricsContentWrapper);
+        document.documentElement.style.setProperty('--lyrics-active-max-width', `${lyricsMaxWidth}px`);
         lockLyricsWrapperWidth(lyricsContentWrapper);
       });
     }
 
     function lyricsCallback(mutationsList, lyricsObserver) {
-      for (let i = 0; i < mutationsList.length; i += 1) {
-        for (let a = 0; a < mutationsList[i].addedNodes?.length; a += 1) {
-          if (mutationsList[i].addedNodes[a].classList?.contains('lyrics-lyricsContent-provider')) {
+      mutationsList.forEach((mutation) => {
+        mutation.addedNodes?.forEach((addedNode) => {
+          if (addedNode.classList?.contains('lyrics-lyricsContent-provider')) {
             setLyricsPageProperties();
           }
-        }
-      }
+        });
+      });
       lyricsObserver.disconnect;
     }
 
-    waitForElement(['.lyrics-lyrics-contentWrapper'], () => {
-      waitForElement(['.lyrics-lyricsContent-provider'], () => {
-        setLyricsPageProperties();
-
-        const lyricsContentWrapper = document.getElementsByClassName(
-          'lyrics-lyrics-contentWrapper'
-        )[0];
-        const lyricsObserver = new MutationObserver(lyricsCallback);
-        const lyricsObserverConfig = {
-          attributes: false,
-          childList: true,
-          subtree: false,
-        };
-        lyricsObserver.observe(lyricsContentWrapper, lyricsObserverConfig);
-      });
+    waitForElement(['.lyrics-lyricsContent-provider'], ([lyricsContentProvider]) => {
+      const lyricsContentWrapper = lyricsContentProvider.parentElement;
+      setLyricsPageProperties();
+      const lyricsObserver = new MutationObserver(lyricsCallback);
+      const lyricsObserverConfig = { childList: true };
+      lyricsObserver.observe(lyricsContentWrapper, lyricsObserverConfig);
     });
   }
 
-  function lyricsPadding() {
-      const mainViewElement = document.querySelector('.Root__main-view');
-      const lyricsContainerElement = document.querySelector('.Root__lyrics-cinema');
-    
-      if (mainViewElement && lyricsContainerElement) {
-        const width = mainViewElement.offsetWidth;
-        lyricsContainerElement.style.width = `${width}px`;
-      }
-      updateLyricsPageProperties();
-  }
-
-  function trackSidebarWidth() {
-    const sidebarWidthChange = (entries) => {
-      for (const entry of entries) {
-        if (entry.target.classList.contains('Root__right-sidebar')) {
-          lyricsPadding();
-        }
-      }
-    };
-  
-    const resizeObserver = new ResizeObserver(sidebarWidthChange);
-    const rightSidebarElement = document.querySelector('.Root__right-sidebar');
-  
-    if (rightSidebarElement) {
-      resizeObserver.observe(rightSidebarElement);
-    }
-  }
-
-  function trackLibraryExpansion() {
-    const handleWidthChange = (entries) => {
-      for (const entry of entries) {
-        if (entry.target.classList.contains('main-yourLibraryX-libraryContainer')) {
-          lyricsPadding();
-        }
-      }
-    };
-
-    const resizeObserver = new ResizeObserver(handleWidthChange);
-    const libraryContainerElement = document.querySelector('.main-yourLibraryX-libraryContainer');
-
-    if (libraryContainerElement) {
-      resizeObserver.observe(libraryContainerElement);
-    }
-  }
-
-  function undoLyricCinema() {
-    const lyricsContainerElement = document.querySelector('.Root__lyrics-cinema');
-    lyricsContainerElement.style.width = `unset`;
-  }
-
-  trackSidebarWidth();
-  let sidebarCheck = null; // Declare sidebarCheck variable outside the scope of the function
-
-  const lyricsCheck = new MutationObserver(function(mutationsList) {
-    for (let mutation of mutationsList) {
-      if (mutation.addedNodes.length) {
-        const addedNode = mutation.addedNodes[0];
-        if (addedNode.matches('.main-lyricsCinema-container')) {
-          if (!sidebarCheck) {
-            sidebarCheck = new MutationObserver(function(sidebarMutationsList) {
-              for (let sidebarMutation of sidebarMutationsList) {
-                if (sidebarMutation.addedNodes.length) {
-                  const sidebarAddedNode = sidebarMutation.addedNodes[0];
-                  if (sidebarAddedNode.matches('.main-buddyFeed-container')) {
-                    document.documentElement.style.setProperty("--showLyricsDisplay", "none");
-                    lyricsPadding(); 
-                    trackSidebarWidth();
-                    trackLibraryExpansion();
-                  } 
-                } else if (sidebarMutation.removedNodes.length) {
-                  const sidebarRemovedNode = sidebarMutation.removedNodes[0];
-                  if (sidebarRemovedNode.matches('.main-buddyFeed-container')) {
-                    document.documentElement.style.setProperty("--showLyricsDisplay", "flex");
-                  }
-                }
-              }
-            });
-            sidebarCheck.observe(document.body, { childList: true, subtree: true });
-          }
-        }
-      } else if (mutation.removedNodes.length) {
-        const removedNode = mutation.removedNodes[0];
-        if (removedNode.matches('.main-lyricsCinema-container') && sidebarCheck) {
-          document.documentElement.style.setProperty("--showLyricsDisplay", "flex");
-          undoLyricCinema();
-          sidebarCheck.disconnect();
-          sidebarCheck = null;
-        }
-      }
-    }
-  });
-  
-  lyricsCheck.observe(document.body, { childList: true, subtree: true });
-
   function galaxyFade() { //Borrowed from the Galaxy theme | https://github.com/harbassan/spicetify-galaxy/
-    
-    function waitForElement(els, func, timeout = 100) {
-      const queries = els.map(el => document.querySelector(el));
-      if (queries.every(a => a)) {
-        func(queries);
-      } else if (timeout > 0) {
-        setTimeout(waitForElement, 50, els, func, --timeout);
-      }
-    }
-  
     // add fade and dimness effects to mainview and the the artist image on scroll
     waitForElement([".Root__main-view .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
       scrollNode.addEventListener("scroll", () => {

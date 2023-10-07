@@ -258,11 +258,6 @@
     -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 85%, transparent 100%) !important;
   }
 
-
-  .main-nowPlayingView-section.main-nowPlayingView-sectionHeaderSpacing:not(.main-nowPlayingView-lyricsGradient) {
-    display: var(--showLyricsDisplay)
-  }
-
   .main-nowPlayingView-artistBioButton:hover {
     -webkit-transform: scale(1) !important;
     transform: scale(1) !important;
@@ -1035,6 +1030,10 @@
     --lyrics-text-direction: left;
   }
 
+  .Root__lyrics-cinema {
+    grid-area: main-view;
+  }
+
   .lyrics-lyrics-background {
     visibility: hidden !important;
   }
@@ -1083,11 +1082,6 @@
 
   .lyrics-lyricsContainer-LyricsBackground {
     visibility: hidden !important;
-  }
-
-  /* hide horizontal scrollbar */
-  .lyrics-lyricsContainer-SyncedLyricsPage {
-    overflow-x: hidden;
   }
 
   .lyrics-lyricsContainer-LyricsContainer {
