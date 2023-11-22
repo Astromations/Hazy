@@ -64,16 +64,16 @@
   async function onSongChange() {
       fetchFadeTime(); // Call fetchFadeTime after songchange
 
-      let album_uri = Spicetify.Player.data.track.metadata.album_uri;
-      let bgImage = Spicetify.Player.data.track.metadata.image_url;
+      let album_uri = Spicetify.Player.data.item.metadata.album_uri;
+      let bgImage = Spicetify.Player.data.item.metadata.image_url;
   
       if (album_uri !== undefined && !album_uri.includes("spotify:show")) {
           const albumInfo = await getAlbumInfo(album_uri.replace("spotify:album:", ""));
-      } else if (Spicetify.Player.data.track.uri.includes("spotify:episode")) {
+      } else if (Spicetify.Player.data.item.uri.includes("spotify:episode")) {
           // podcast
           bgImage = bgImage.replace("spotify:image:", "https://i.scdn.co/image/");
           
-      } else if (Spicetify.Player.data.track.provider == "ad") {
+      } else if (Spicetify.Player.data.item.provider == "ad") {
           // ad
           return;
       } else {
@@ -328,7 +328,7 @@
       if (config.useCurrSongAsHome) {
         document.documentElement.style.setProperty("--image_url", `url("${startImage}")`);
       } else {
-        let bgImage = Spicetify.Player.data.track.metadata.image_url
+        let bgImage = Spicetify.Player.data.item.metadata.image_url
         document.documentElement.style.setProperty("--image_url", `url("${bgImage}")`);
 
       }
