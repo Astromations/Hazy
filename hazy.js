@@ -40,6 +40,7 @@
       document.documentElement.style.setProperty("--bright", `120%`);
     }
   }
+
   valueSet()
 
   async function fetchFadeTime() {
@@ -261,6 +262,32 @@
     });
   }
 
+  const LyricsTobserver = new MutationObserver(function(mutationsList) {
+    const topBar = document.querySelector('.main-topBar-container');
+    const banner = document.querySelector(".under-main-view div")
+    for (let mutation of mutationsList) {
+      if (mutation.addedNodes.length) {
+        const addedNode = mutation.addedNodes[0];
+        if (addedNode.matches('.main-lyricsCinema-container')) {
+          if (topBar) {
+            topBar.style.display = 'none';
+            banner.style.display = 'none'
+          }
+        }
+      } else if (mutation.removedNodes.length) {
+        const removedNode = mutation.removedNodes[0];
+        if (removedNode.matches('.main-lyricsCinema-container')) {
+          if (topBar) {
+            topBar.style.display = 'flex';
+            banner.style.display = 'block'
+          }
+        }
+      }
+    }
+  });
+  
+  LyricsTobserver.observe(document.body, { childList: true, subtree: true });
+
   function galaxyFade() { //Borrowed from the Galaxy theme | https://github.com/harbassan/spicetify-galaxy/
     // add fade and dimness effects to mainview and the the artist image on scroll
     waitForElement([".Root__main-view .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
@@ -299,20 +326,6 @@
         }
       });
     });
-  
-    waitForElement([".Root__right-sidebar .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
-      scrollNode.addEventListener("scroll", () => {
-        if (scrollNode.scrollTop == 0) {
-          sideFade_1 = '0%'
-          sideFade_2 = '0%'
-        } else {
-          sideFade_1 = '1%'
-          sideFade_2 = '5%'
-        }
-        document.documentElement.style.setProperty('--side-fade-1', sideFade_1);
-        document.documentElement.style.setProperty('--side-fade-2', sideFade_2);
-      });
-    });    
   }
 
   const config = {}
