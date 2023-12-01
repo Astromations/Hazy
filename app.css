@@ -4,37 +4,49 @@
 }
 
 svg {
-filter: drop-shadow(-2px 2px 2px rgb(0 0 0 / 15%));
+  filter: drop-shadow(-2px 2px 2px rgb(0 0 0 / 15%));
 }
 
-/* ---ALBUM ART BACKGROUND---- */
+/*-----------------
+EXPERIMENTAL STYLES
+-------------------
+
+.Root__main-view,
+.main-buddyFeed-container,
+.Root__now-playing-bar,
+.main-yourLibraryX-entryPoints{
+  backdrop-filter: blur(8px)
+}
+
+/*-------------------
+ALBUM ART BACKGROUND
+-------------------*/
+
 .Root__top-container::before {
-    content: "";
-    background-image: var(--image_url);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    transition: background-image var(--fade-time) ease !important;
-    position: fixed;
-    display: block;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    filter: blur(var(--blur)) contrast(var(--cont)) saturate(var(--satu)) brightness(var(--bright));
-    pointer-events: none;
-    backface-visibility: hidden;
-    will-change: transform;
-    transition: background-image var(--transition);
-    opacity: 0.55;
-    z-index: 0;
+  content: "";
+  background-image: var(--image_url);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  transition: background-image var(--fade-time) ease !important;
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  filter: blur(var(--blur)) contrast(var(--cont)) saturate(var(--satu)) brightness(var(--bright));
+  pointer-events: none;
+  backface-visibility: hidden;
+  will-change: transform;
+  transition: background-image var(--transition);
+  opacity: 0.55;
+  z-index: 0;
 }
 
-.Root__top-container {
-  background: none
-}
-
-/* ----TRANSPARENT WINDOW CONTROLS----*/
+/*-------------------------
+TRANSPARENT WINDOW CONTROLS
+--------------------------*/
 
 html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-full-window)::after {
   content: '';
@@ -46,24 +58,27 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   height: var(--control-height);
 }
 
-/* ----NAVBAR---- */
+/*------------
+NAVIGATION BAR
+-------------*/
+
 .Root__nav-bar  {
-    background-color: transparent
+  background-color: transparent
 } 
-.main-yourLibraryX-entryPoints, .playlist-playlist-playlistContent {
-    background-color: var(--backdrop) !important
+
+.Root__nav-bar [fade="top"] {
+  -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%);
+}
+.Root__nav-bar [fade="full"] {
+  -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 12%, rgba(0, 0, 0, 1) 92%, transparent 100%);
+}
+
+.main-yourLibraryX-entryPoints {
+  background-color: var(--backdrop) !important
 }
 
 .main-yourLibraryX-header .main-yourLibraryX-collapseButtonWrapper {
   color: var(--spice-subtext);
-}
-
-.BoxComponent-group-tinted-isInteractive-hasLeadingOrMedia-paddingBlockStart_8px-paddingBlockEnd_8px-minBlockSize_56px-padding_8px {
-    background-color: var(--background-tinted-base,rgba(0,0,0,0.08));
-}
-
-.BoxComponent-group-tinted-isInteractive-hasLeadingOrMedia-paddingBlockStart_8px-paddingBlockEnd_8px-minBlockSize_56px-padding_8px:hover {
-    background-color: var(--background-tinted-base,rgba(0,0,0,0.08));
 }
 
 .main-navBar-navBarLinkActive,
@@ -90,7 +105,9 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   box-shadow: -2px 4px 6px 2px rgb(0 0 0 / 14%);;
 }
 
-/* ----NOW PLAYING BAR---- */
+/*-------------
+NOW PLAYING BAR
+--------------*/
 
 .Root__now-playing-bar {
   background-color: var(--backdrop) !important;
@@ -107,6 +124,7 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   border-radius: 4px !important;
   transform: scale(1.2) !important;
   margin-right: 10px;
+  margin-left: 10px;
   box-shadow: -2px 1px 10px 3px rgb(0 0 0 / 20%);
 }
 
@@ -128,14 +146,10 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   color: var(--spice-text)
 }
 
-.Button-sm-16-buttonTertiary-iconOnly-useBrowserDefaultFocusStyle:hover {
-  transform: unset !important;
-}
-
 .main-repeatButton-button.main-repeatButton-active,
 .main-shuffleButton-button.main-shuffleButton-active,
-.Button-sm-16-buttonTertiary-iconOnly-useBrowserDefaultFocusStyle {
-  transition: all 0.3s ease;
+.main-genericButton-button {
+  transition: all 0.2s ease;
 }
 
 .main-repeatButton-button.main-repeatButton-active:not([disabled]):hover,
@@ -144,19 +158,23 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   filter: drop-shadow(0 0 6px var(--spice-button))
 }
 
+.Button-small-small-buttonTertiary-iconOnly-useBrowserDefaultFocusStyle:hover {
+    transform: unset !important;
+}
+
+
 .main-nowPlayingWidget-coverExpanded > .main-coverSlotCollapsed-container {
-    transform: translateX(-8px) scale(1) !important;
+  transform: translateX(-8px) scale(1) !important;
 }
 
 .progress-bar {
-    --bg-color: rgba(var(--spice-rgb-selected-row),.3);
-    --fg-color: var(--spice-button);
-    --is-active-fg-color: var(--spice-button-active);
+  --bg-color: rgba(var(--spice-rgb-selected-row),.3);
+  --fg-color: var(--spice-button);
+  --is-active-fg-color: var(--spice-button-active);
 }
 
-/* smooth progress bar from Galaxy */
 .progress-bar__slider {
-    transition: left 1s linear;
+  transition: left 1s linear;
 }
 
 .playback-bar .x-progressBar-fillColor {
@@ -169,19 +187,12 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
 
 .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .x-progressBar-fillColor,
 .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .progress-bar__slider {
-    transition: none;
-}
-
-.ChipClearComponent-chipClear-useBrowserDefaultFocusStyle,
-.ChipInnerComponent,
-.ChipComponent-checkbox-chip-useBrowserDefaultFocusStyle > span {
-  border-radius: var(--button-border) !important;
+  transition: none;
 }
 
 .x-progressBar-sliderArea {
   box-shadow: -2px 1px 7px 1px rgb(0 0 0 / 14%)
 }
-
 
 .main-addButton-active,
 .control-button-heart {
@@ -196,7 +207,13 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   filter: drop-shadow(0 0 2px rgba(var(--spice-rgb-selected-row),.7));
 }
 
-/* ---SIDEBAR---- */
+/*-----
+SIDEBAR
+------*/
+
+.main-buddyFeed-container {
+  --background-base: var(--backdrop)!important;
+}
 
 .main-buddyFeed-header {
   padding-top: 0px !important;
@@ -204,60 +221,38 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   padding-inline-start: 3px;
 }
 
-/* Fade from Galaxy */
-/* add scroll fade to ylx and right sidebar */
-.Root__nav-bar [fade="top"] {
-    -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%);
-}
-.Root__nav-bar [fade="full"] {
-    -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 12%, rgba(0, 0, 0, 1) 92%, transparent 100%);
-}
-
-.spotify__os--is-windows .nav-ylx .main-nowPlayingView-nowPlayingWidget,
 .main-nowPlayingView-nowPlayingWidget {
   padding-top: 0px !important; 
-}
-
-.spotify__os--is-windows .nav-ylx .main-buddyFeed-content {
-    margin-top: 0;
-}
-
-.main-nowPlayingView-section > .main-nowPlayingView-sectionHeaderSpacing > .main-nowPlayingView-lyricsGradient {
-  opacity: 0.2
 }
 
 .main-nowPlayingView-content.main-nowPlayingView-gradient {
   background: none !important;
 }
 
-.main-buddyFeed-container.main-buddyFeed-panelTransition,
-.main-buddyFeed-container {
-    --background-base: var(--backdrop)!important;
-}
-
 .main-nowPlayingView-sectionHeaderSpacing.main-nowPlayingView-lyricsGradient {
-    background-color: var(--background-tinted-base)
+  background-color: var(--background-tinted-base);
 }
 
 .main-nowPlayingView-section {
-    background-color: var(--backdrop);
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 10%);
+  background-color: var(--backdrop);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 10%);
 }
 
-.Button-small-buttonSecondary-useBrowserDefaultFocusStyle {
+.Button-sc-y0gtbx-0  {
   border-radius: var(--button-border) !important;
-  transition: transform 0.15s !important;
+  transition: 0.2s ease !important;
+  border-width: 2px
 }
 
-.Button-small-buttonSecondary-useBrowserDefaultFocusStyle:hover {
-    transform: scale(1.04);
-    border-color: none !important;
+.Button-sc-y0gtbx-0:hover {
+  transform: none;
+  box-shadow: 0px 0px 8px 1px rgb(255 255 255 / 20%);
 }
 
 .main-nowPlayingView-section.vbsB4OQJkFHLU8SbSGzS {
-  padding: 8px !important
+  padding: 0px !important
 }
 
 .hd6a3g_3QyF8MFL0wWs1 {
@@ -265,7 +260,7 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
 }
 
 .GTmlByXpJj7V6AwVq0Vk.ouorHKa6NI5cm666H3tp {
-  -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 85%, transparent 100%) !important;
+  -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0.95) 75%, transparent 100%) !important;
 }
 
 .main-nowPlayingView-artistBioButton:hover {
@@ -274,7 +269,10 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   cursor: pointer;
 }
 
-/*** What's New***/
+/*--------
+WHAT'S NEW
+---------*/
+
 .main-whatsNewFeed-listRow {
   background-color: tran !important;
   margin: 4px 0;
@@ -291,7 +289,7 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
 }
 
 .main-whatsNewFeed-list {
-    margin-top: 2px;
+  margin-top: 2px;
 }
 
 .main-whatsNewFeed-content {
@@ -328,28 +326,30 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   border-radius: var(--button-border) !important
 }
 
-/* ---PLAYLIST VIEW---- */
+/*-----------
+PLAYLIST VIEW
+------------*/
 
 .Root__main-view {
-    background-color: var(--backdrop) !important;
+  background-color: var(--backdrop) !important;
 }
 
 .main-trackList-trackListRow:focus-within,
 .main-trackList-trackListRow:hover {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
+
 .main-trackList-trackListRow.main-trackList-selected,
 .main-trackList-trackListRow.main-trackList-selected:hover {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .playlist-playlist-playlistContent {
-    background: none !important;
-    background-color: transparent !important;
+  background: none !important;
 }
 
 .main-rootlist-wrapper > div[role="presentation"] > div[aria-selected="true"] {
-  background-color: hsla(0,0%,100%,.1);
+  background-color: hsla(0, 0%, 100% ,.1);
   border-radius: 8px
 }
 
@@ -369,9 +369,8 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   text-shadow: 0 0 10px rgb(0 0 0 / 20%);
 }
 
-
 .x-filterBox-filterInput {
-    border-radius: var(--button-border);
+  border-radius: var(--button-border);
 }
 
 .main-entityHeader-imageContainer {
@@ -436,15 +435,27 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   border-radius: var(--button-border)
 }
 
-/* ----TOP BAR---- */
+/*-----
+TOP BAR
+------*/
+
+[fade="bottom"] {
+  -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 95%, transparent 100%);
+}
+[fade="top"] {
+  -webkit-mask-image: linear-gradient(transparent 9%, rgba(0, 0, 0, 1) 15%);
+}
+[fade="full"] {
+  -webkit-mask-image: linear-gradient(transparent 9%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 1) 95%, transparent 100%);
+}
 
 .main-topBar-background {
-    background: none !important;
+  background: none !important;
 }
 
 .main-topBar-overlay {
-    background-color: transparent !important;
-    opacity: 0.2 !important;
+  background-color: transparent !important;
+  opacity: 0.2 !important;
 }
 
 .nav-ylx .main-trackList-trackListHeaderStuck.main-trackList-trackListHeader,
@@ -482,32 +493,13 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   background-color: var(--backdrop) !important;
 }
 
-/* Fade From Galaxy */
-[fade="bottom"] {
-  -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 95%, transparent 100%);
-}
-[fade="top"] {
-  -webkit-mask-image: linear-gradient(transparent 9%, rgba(0, 0, 0, 1) 15%);
-}
-[fade="full"] {
-  -webkit-mask-image: linear-gradient(transparent 9%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 1) 95%, transparent 100%);
-}
-
-/*----PLAY BUTTONS----*/
+/*----------
+PLAY BUTTONS
+----------*/
 
 .main-playButton-PlayButton, .main-playButton-PlayButton {
-    transition: transform 0.2s ease;
-    transform-origin: center;
-}
-
-  /* remove main play button background */
-.ButtonInner-sc-14ud5tc-0.ButtonInner-lg-iconOnly.encore-bright-accent-set {
-    background: none;
-    color: var(--spice-text)
-}
-
-.playlist-playlist-playlistContent {
-  background: none !important;
+  transition: transform 0.2s ease;
+  transform-origin: center;
 }
 
 .playlist-playlist-playlist span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set,
@@ -524,14 +516,13 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   transition: all 0.2s ease;
 }
 
-.Button-medium-buttonPrimary-useBrowserDefaultFocusStyle:hover .ButtonInner-sc-14ud5tc-0,
-.Button-small-buttonPrimary-useBrowserDefaultFocusStyle:hover .ButtonInner-sc-14ud5tc-0 {
-    background: none !important;
+.main-playButton-PlayButton > button > span{
+  background: none !important;
 }
 
 .view-homeShortcutsGrid-shortcut .view-homeShortcutsGrid-PlayButtonContainer .view-homeShortcutsGrid-playButton {
-    -webkit-box-shadow: none !important;
-    opacity: 0;
+  -webkit-box-shadow: none !important;
+  opacity: 0;
 }
 
 .main-card-PlayButtonContainer > div > button > span > span > svg,
@@ -540,21 +531,12 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
 }
 
 .main-playButton-PlayButton > button > span:hover {
-
   transform: scale(1.2) !important;
 }
 
 .main-playButton-PlayButton:focus, .main-playButton-PlayButton:hover {
-    -webkit-transform: none !important;
-    transform: none !important
-}
-
-.Button-md-buttonPrimary-useBrowserDefaultFocusStyle:hover .ButtonInner-sc-14ud5tc-0 {
-  background: none
-}
-
-.ButtonInner-md-iconOnly:hover {
-  box-shadow: unset;
+  -webkit-transform: none !important;
+  transform: none !important
 }
 
 .main-playButton-PlayButton {
@@ -572,8 +554,9 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   border-radius: var(--button-border)
 }
 
-
-/* ----SEARCH---- */
+/*--------
+SEARCH BAR
+--------*/
 
 .main-heroCard-card {
   background: var(--backdrop) !important;
@@ -583,15 +566,14 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   background: rgba(0,0,0,0.2) !important;
 }
 
-.nav-ylx .x-searchInput-searchInputInput,
-.nav-ylx .x-searchInput-searchInputInput:hover,
 .x-searchInput-searchInputInput,
 .x-searchInput-searchInputInput:hover {
   background-color: var(--backdrop) !important;
   border-radius: 4px;
   color: rgba(var(--spice-rgb-selected-row),.7);
   height: 32px;
-  border-radius: 8px
+  border-radius: 8px;
+  transition: 0.2s ease
 }
 
 .search-searchCategory-SearchCategory {
@@ -599,14 +581,12 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   position: static;
 }
 
-.nav-ylx .x-searchInput-searchInputInput:hover,
-.x-searchInput-searchInputInput:hover{
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.1);
+.x-searchInput-searchInputInput:hover {
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.1);
 }
 
-.nav-ylx .x-searchInput-searchInputInput:focus,
 .x-searchInput-searchInputInput:focus {
-    box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
 }
 
 .x-searchInput-searchInputSearchIcon,
@@ -650,7 +630,7 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
 }
 
 .x-searchHistoryEntries-searchHistoryEntry:hover > .x-searchHistoryEntries-clearSingleSearchHistory {
-    opacity: 1;
+  opacity: 1;
 }
 
 .x-searchHistoryEntries-clearSingleSearchHistoryButton {
@@ -664,7 +644,9 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   transform: scale(1.05);
 }
 
-/* ----MISCELLANEOUS---- */
+/*-----------
+MISCELLANEOUS
+-----------*/
 
 .main-actionBarBackground-background,
 .main-nowPlayingBar-container {
@@ -675,7 +657,6 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
 .main-entityHeader-backgroundColor {
   display: none;
 }
-
 
 .queue-tabBar-active,
 .lyrics-tabBar-active {
@@ -706,21 +687,21 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
 }
 
 .IAyWaeDamLJLjxuPeVKw {
-    background-color: var(--backdrop);
-    color: rgba(var(--spice-rgb-selected-row),.7);
+  background-color: var(--backdrop);
+  color: rgba(var(--spice-rgb-selected-row),.7);
 }
 
 .SxHlW6byhoJSUJNugaE1 .Kujbn0F68QOf_o44cNxw {
-    border: 1px solid var(--backdrop);
+  border: 1px solid var(--backdrop);
 }
 
 .Psc33HXPyazZYAAr1tgz, .I4p8r1UNjIGk9yv3H2Ms {
-    background: var(--backdrop);
+  background: var(--backdrop);
   border-radius: var(--button-border)
 }
 
 .main-shelf-shelfGrid.main-shelf-showAll {
-    padding-top: 4px
+  padding-top: 4px
 }
 
 .x-categoryCard-CategoryCard {
@@ -734,11 +715,11 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
 
 .Ft1cMGlqDsCbqmXQyeKN,
 .xcTrtCsYOPtSElbX9inq {
-    background: none
+  background: none
 }
 
 .main-buddyFeed-scrollBarContainer .os-viewport-native-scrollbars-invisible {
-  -webkit-mask-image: linear-gradient(transparent var(--side-fade-1), rgba(0, 0, 0, 1) var(--side-fade-2), rgba(0, 0, 0, 1) 96%, transparent 100%);
+  -webkit-mask-image: linear-gradient(transparent 1%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 96%, transparent 100%);
 }
 
 .main-playlistEditDetailsModal-save > button > span,
@@ -765,7 +746,7 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
 .main-duplicateTrackModal-buttonContainer > button > span:hover {
   background-color: #23c483 !important;
   box-shadow:  0px 0px 15px 5px rgba(46, 229, 157, 0.4);
-  transform: scale(1) !important
+  transform: scale(1) !important;
 }
 
 .main-playlistEditDetailsModal-closeBtn {
@@ -795,7 +776,9 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   -webkit-mask-image: linear-gradient(transparent 5%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 1) 85%, transparent 100%);
 }
 
-/* ----TEXT SHADOWS---- */
+/*----------
+TEXT SHADOWS
+----------*/
 
 .main-entityHeader-topbarTitle,
 .main-shelf-title,
@@ -818,10 +801,12 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   text-shadow: -1px 3px 20px rgb(0 0 0 / 20%);
 }
 
-/* ----ALBUM VIEW---- */
+/*--------
+ALBUM VIEW
+--------*/
 
 .x-album-releasesDropdown {
-    background-color: var(--backdrop);
+  background-color: var(--backdrop);
 }
 
 .nav-ylx .artist-artistDiscography-headerContainer,
@@ -835,14 +820,14 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
 
 .nav-ylx .artist-artistDiscography-topBar.artist-artistDiscography-topBarScrolled,
 .artist-artistDiscography-topBar.artist-artistDiscography-topBarScrolled{
-    background: none;
-    border-bottom: none;
-    -webkit-box-shadow: unset;
-    box-shadow: unset;
+  background: none;
+  border-bottom: none;
+  -webkit-box-shadow: unset;
+  box-shadow: unset;
 }
 
 .artist-artistDiscography-button.artist-artistDiscography-active, .artist-artistDiscography-button:focus, .artist-artistDiscography-button:hover {
-    border-radius: var(--button-border);
+  border-radius: var(--button-border);
 }
 
 .ButtonInner-sm-iconOnly,
@@ -852,7 +837,9 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   scale: 1.2
 }
 
-/* ----HOME VIEW---- */
+/*-------
+HOME VIEW
+-------*/
 
 .main-home-homeHeader {
   background: none;
@@ -860,8 +847,8 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
 }
 
 .view-homeShortcutsGrid-grid {
-    --item-height: 56px;
-    grid-template-columns: repeat(3,1fr);
+  --item-height: 56px;
+  grid-template-columns: repeat(3,1fr);
 }
 
 .view-homeShortcutsGrid-shortcut {
@@ -889,9 +876,9 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
 }
 
 .main-card-card .main-cardImage-imageWrapper {
-    transition: all 0.35s ease;
-    transform-origin: 50% -40px;
-    overflow: hidden;
+  transition: all 0.35s ease;
+  transform-origin: 50% -40px;
+  overflow: hidden;
 }
 
 .main-card-card:hover .main-cardImage-imageWrapper {
@@ -912,20 +899,12 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   transition: opacity 0.25s ease;
 }
 
-
 .main-shelf-shelf {
   margin-bottom: unset !important;
 }
 
 .artist-artistOverview-artistShelfSpacer {
   margin-bottom: 16px !important;
-}
-
-.Button-lg-buttonPrimary-useBrowserDefaultFocusStyle:hover 
-.ButtonFocus-sc-2hq6ey-0,
-.Button-lg-buttonPrimary-useBrowserDefaultFocusStyle:hover 
-.ButtonInner-sc-14ud5tc-0 {
-  transform: unset
 }
 
 .main-coverSlotCollapsed-expandButton {
@@ -948,17 +927,23 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
   box-shadow: none;
 }
 
+/*------
+SETTINGS
+------*/
+
 .x-settings-equalizerSection {
   background-color: var(--backdrop);
   border-radius: 6px
 }
 
-.main-dropDown-dropDown {
-  background-color: var(--backdrop);
+.x-settings-button {
+  border-radius: var(--button-border)
 }
 
+.main-dropDown-dropDown,
 .x-settings-input {
   background-color: var(--backdrop);
+  border-radius: var(--button-border)
 }
 
 .x-toggle-indicatorWrapper,
@@ -967,21 +952,22 @@ html:not(.spotify__container--is-desktop.fullscreen) body.windows:not(.video-ful
 }
 
 input:hover:not([disabled], :active) ~ .x-toggle-indicatorWrapper {
-background-color: rgb(255 255 255 / 10%)
+  background-color: rgb(255 255 255 / 10%)
 }
 
 input:hover ~ .x-toggle-indicatorWrapper {
-background-color: var(--backdrop)
+  background-color: var(--backdrop)
 }
   
-/*----ARTIST PAGE---- */
+/*---------
+ARTIST PAGE
+---------*/
 
 .main-entityHeader-title h1 {
   font-size: 50px !important;
   line-height: 50px !important;
 }
 
-/* Color Artist Image */
 .under-main-view div {
   opacity: 0.9;
   filter: grayscale(5%)  brightness(94%);
@@ -997,7 +983,7 @@ background-color: var(--backdrop)
 }
 
 .artist-artistAbout-container {
-    background-color: var(--backdrop);
+  background-color: var(--backdrop);
 }
 
 .artist-artistAbout-container:hover {
@@ -1019,6 +1005,10 @@ background-color: var(--backdrop)
 .main-cardImage-circular,
 .main-cardImage-imageWrapper {
   border-radius: var(--button-border) !important
+}
+
+.ChipInner__ChipInnerComponent-sc-1ly6j4j-0 {
+  border-radius: 8px !important
 }
 
 .GenericModal {
@@ -1043,7 +1033,9 @@ background-color: var(--backdrop)
   right: -10px !important
 }
 
-/* ----BLOOM LYRICS---- */
+/*----------
+BLOOM LYRICS
+----------*/
 
 :root {
   --lyrics-text-direction: left;
@@ -1096,9 +1088,7 @@ background-color: var(--backdrop)
   max-width: 90% !important;
 }
 
-
 /* New Lyrics Plus style */
-
 .lyrics-lyricsContainer-LyricsBackground {
   visibility: hidden !important;
 }
@@ -1138,7 +1128,10 @@ background-color: var(--backdrop)
   -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, transparent 100%);
 }
 
-/* ----SCROLLBAR---- */
+/*-------
+SCROLLBAR
+-------*/
+
 .os-scrollbar-handle {
   border-radius: 50px;
 }
@@ -1170,7 +1163,10 @@ background-color: var(--backdrop)
   background-color: var(--spice-rgb-selected-row)
 }
 
-/* ----EXP FEATURES---- */
+/*-------------------
+EXPERIMENTAL FEATURES
+-------------------*/
+
 .GenericModal > .main-embedWidgetGenerator-container {
   background-color: var(--backdrop) !important;
   backdrop-filter: blur(15px);
@@ -1182,7 +1178,7 @@ background-color: var(--backdrop)
 }
 
 .main-embedWidgetGenerator-container > .main-trackCreditsModal-mainSection::-webkit-scrollbar-thumb {
-border-radius: 8px
+  border-radius: 8px
 }
 
 .spicetify-exp-features button.switch {
@@ -1219,7 +1215,10 @@ border-radius: 8px
   font-size: 0.95rem;
 }
 
-/* ----MARKETPLACE---- */
+/*---------
+MARKETPLACE
+---------*/
+
 .marketplace-tabBar-headerItemLink.marketplace-tabBar-active,
 .Dropdown-control {
   background-color: var(--backdrop);
@@ -1250,7 +1249,7 @@ border-radius: 8px
 }
 
 .Dropdown-arrow {
-    top: 15px;
+  top: 15px;
 }
 
 .marketplace-tabBar-headerItemLink:hover {
@@ -1259,16 +1258,16 @@ border-radius: 8px
 }
 
 .searchbar-bar {
-    border-style: none;
-    background-color: var(--backdrop) !important; 
-}
+  border-style: none;
+  background-color: var(--backdrop) !important; 
+  }
 
 .marketplace-header-icon-button {
-    background-color: var(--backdrop);
+  background-color: var(--backdrop);
 }
 
 .marketplace-header-icon-button:hover {
-    background-color: rgba(255,255,255,0.01);
+  background-color: rgba(255,255,255,0.01);
 }
 
 .marketplace-header {
@@ -1286,7 +1285,9 @@ border-radius: 8px
   background-color: rgba(0,0,0,0.2);
 }
 
-/* ----BLOOM CONTEXT MENUS---- */
+/*-----------------
+CONTEXT MENUS
+-----------------*/
 
 div#context-menu:before,
 .main-contextMenu-menu:before {
@@ -1316,7 +1317,7 @@ div#context-menu:before,
 }
 
 .main-contextMenu-menuItemButton {
-    border-radius: var(--button-border);
+  border-radius: var(--button-border);
 }
 
 .main-contextMenu-menu,
@@ -1365,30 +1366,33 @@ div#context-menu:before,
   border-color: hsla(0,0%,100%,.5);
 }
 
-/* 
--------------------
+/*--------
 HOME POPUP 
--------------------
-*/
+--------*/
+
 #home-select {
   width: 100%;
   height: 200px;
   margin-bottom: 20px;
 }
+
 div[aria-label="Hazy Settings"] .main-trackCreditsModal-mainSection {
   overflow-y: hidden;
   padding: 24px;
 }
+
 .main-trackCreditsModal-container {
   max-height: 100%;
 }
+
 .main-trackCreditsModal-originalCredits {
   padding-bottom: 0;
 }
+
 .main-userWidget-dropDownMenu li.main-contextMenu-menuItem > div {
-  left: calc(225px + 185px) !important;
   width: 225px;
 }
+
 .hazyOptionRow {
   display: flex;
   justify-content: space-between;
@@ -1581,11 +1585,9 @@ span.toggle.enabled {
   box-shadow: 0 1px 0 0 rgb(255 255 255 / 60%);
 }
 
-/* Mouse-over effects */
 .slider:hover {
-  opacity: 1; /* Fully shown on mouse-over */
+  opacity: 1;
 }
-
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -1601,12 +1603,12 @@ span.toggle.enabled {
 }
 
 .slider::-webkit-slider-thumb:active {
-cursor: grab;
+  cursor: grab;
 }
+
 /*-------------------
 POPUP MODAL
 -------------------*/
-
 
 #banner-select {
   grid-area: banner-image;
