@@ -1,6 +1,8 @@
 :root {
   --backdrop: rgba(0,0,0,0.3);
-  --button-border: 8px
+  --button-border: 8px;
+  --spice-text: #FFFFFF;
+  --spice-button: #30bf63
 }
 
 svg {
@@ -168,13 +170,15 @@ NOW PLAYING BAR
 }
 
 .progress-bar {
-  --bg-color: rgba(var(--spice-rgb-selected-row),.3);
-  --fg-color: var(--spice-button);
-  --is-active-fg-color: var(--spice-button-active);
+  --bg-color: rgba(255,555,255,.2);
+  --fg-color: #1db954;
+  --is-active-fg-color: #2bc260;
 }
 
 .progress-bar__slider {
   transition: left 1s linear;
+  width: 11px;
+  height: 11px
 }
 
 .playback-bar .x-progressBar-fillColor {
@@ -243,7 +247,8 @@ SIDEBAR
 .Button-sc-y0gtbx-0  {
   border-radius: var(--button-border) !important;
   transition: 0.2s ease !important;
-  border-width: 2px
+  border-width: 2px;
+  border-color: rgb(255 255 255 / 60%)
 }
 
 .Button-sc-y0gtbx-0:hover {
@@ -322,7 +327,8 @@ WHAT'S NEW
 }
 
 .main-userWidget-boxCondensed,
-.main-avatar-avatar {
+.main-avatar-avatar,
+.main-avatar-placeholderWrapper {
   border-radius: var(--button-border) !important
 }
 
@@ -332,6 +338,10 @@ PLAYLIST VIEW
 
 .Root__main-view {
   background-color: var(--backdrop) !important;
+}
+
+[dir=ltr] .main-actionBar-ActionBarRow>:not(:last-child) {
+  margin-right: 24px;
 }
 
 .main-trackList-trackListRow:focus-within,
@@ -407,7 +417,7 @@ PLAYLIST VIEW
 }
 
 .main-editImageButton-overlay {
-  background-color: rgba(var(--spice-rgb-shadow),.6);
+  background-color: rgb(0 0 0 / 50%);
   border-radius: 8px
 }
 
@@ -431,13 +441,26 @@ PLAYLIST VIEW
 
 .Button-sm-buttonSecondary-useBrowserDefaultFocusStyle,
 .Button-sc-y0gtbx-0.Button-sm-buttonSecondary-iconLeading-useBrowserDefaultFocusStyle.I3oc8sxg8Duq4kYUGnMo.LEZf9K5hG4hfCKfgr5Xo,
-.main-buddyFeed-closeButton{
+.main-buddyFeed-closeButton {
   border-radius: var(--button-border)
+}
+
+.Button-large-large-buttonTertiary-iconOnly-condensed-useBrowserDefaultFocusStyle {
+  scale: 0.9;
+  transition: all 0.2s ease
+}
+
+.Button-large-large-buttonTertiary-iconOnly-condensed-useBrowserDefaultFocusStyle:hover {
+  scale: 1
 }
 
 /*-----
 TOP BAR
 ------*/
+
+.main-topBar-container.coBkWVskipFo8KxLKief:before {
+  display: none
+}
 
 [fade="bottom"] {
   -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 95%, transparent 100%);
@@ -455,7 +478,6 @@ TOP BAR
 
 .main-topBar-overlay {
   background-color: transparent !important;
-  opacity: 0.2 !important;
 }
 
 .nav-ylx .main-trackList-trackListHeaderStuck.main-trackList-trackListHeader,
@@ -474,7 +496,8 @@ TOP BAR
 .Button-md-24-buttonTertiary-condensedAll-useBrowserDefaultFocusStyle,
 .main-topBar-buddyFeed,
 .main-noConnection-isNotice,
-.main-topBar-whatsNewFeed {
+.main-topBar-whatsNewFeed,
+.main-userWidget-boxCondensed {
   border-radius: var(--button-border) !important;
   transition: 0.2s ease
 }
@@ -516,8 +539,9 @@ PLAY BUTTONS
   transition: all 0.2s ease;
 }
 
-.main-playButton-PlayButton > button > span{
+.main-playButton-PlayButton > button > span {
   background: none !important;
+  transform: scale(1.1) !important;
 }
 
 .view-homeShortcutsGrid-shortcut .view-homeShortcutsGrid-PlayButtonContainer .view-homeShortcutsGrid-playButton {
