@@ -262,32 +262,6 @@
     });
   }
 
-  const LyricsTobserver = new MutationObserver(function(mutationsList) {
-    const topBar = document.querySelector('.main-topBar-container');
-    const banner = document.querySelector(".under-main-view div")
-    for (let mutation of mutationsList) {
-      if (mutation.addedNodes.length) {
-        const addedNode = mutation.addedNodes[0];
-        if (addedNode.matches('.main-lyricsCinema-container')) {
-          if (topBar) {
-            topBar.style.display = 'none';
-            banner.style.display = 'none'
-          }
-        }
-      } else if (mutation.removedNodes.length) {
-        const removedNode = mutation.removedNodes[0];
-        if (removedNode.matches('.main-lyricsCinema-container')) {
-          if (topBar) {
-            topBar.style.display = 'flex';
-            banner.style.display = 'block'
-          }
-        }
-      }
-    }
-  });
-  
-  LyricsTobserver.observe(document.body, { childList: true, subtree: true });
-
   function galaxyFade() { //Borrowed from the Galaxy theme | https://github.com/harbassan/spicetify-galaxy/
     // add fade and dimness effects to mainview and the the artist image on scroll
     waitForElement([".Root__main-view .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
