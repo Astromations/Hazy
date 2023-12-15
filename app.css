@@ -1152,6 +1152,12 @@ BLOOM LYRICS
   -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, transparent 100%);
 }
 
+/* fix artist page being visible under lyrics cinema */
+.Root__top-container:has(.main-lyricsCinema-lyricsCinemaVisible) .main-topBar-container,
+.Root__top-container:has(.main-lyricsCinema-lyricsCinemaVisible) .under-main-view {
+  display: none;
+}
+
 /*-------
 SCROLLBAR
 -------*/
