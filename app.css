@@ -919,6 +919,10 @@ HOME VIEW
   padding-bottom: 16px !important
 }
 
+.artist-artistDiscography-cardGrid {
+  padding-top: 34px !important
+}
+
 .main-cardImage-imageWrapper {
   transition: opacity 0.25s ease;
 }
