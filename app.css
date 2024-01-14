@@ -1080,7 +1080,7 @@ BLOOM LYRICS
   margin: 0.3rem 0;
   transform: scale(1);
   text-shadow: -1px 3px 20px rgb(0 0 0 / 5%);
-  color: rgb(0 0 0 / 85%);
+  color: rgb(0 0 0 / 95%);
   transition: text-shadow 400ms ease, color 50ms ease;
 }
 
