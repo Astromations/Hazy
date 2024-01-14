@@ -181,14 +181,6 @@ NOW PLAYING BAR
   height: 11px
 }
 
-.playback-bar .x-progressBar-fillColor {
-  transition: transform 1s linear, background-color 0.3s ease !important;
-}
-
-.volume-bar__slider-container .x-progressBar-fillColor {
-  transition: background-color 0.3s ease !important;
-}
-
 .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .x-progressBar-fillColor,
 .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .progress-bar__slider {
   transition: none;
@@ -458,7 +450,7 @@ PLAYLIST VIEW
 TOP BAR
 ------*/
 
-.main-topBar-container.coBkWVskipFo8KxLKief:before {
+.main-topBar-withBackgroundBlur:before {
   display: none
 }
 
@@ -1087,7 +1079,8 @@ BLOOM LYRICS
 .lyrics-lyricsContent-lyric {
   margin: 0.3rem 0;
   transform: scale(1);
-  text-shadow: -1px 3px 20px rgb(0 0 0 / 15%);
+  text-shadow: -1px 3px 20px rgb(0 0 0 / 5%);
+  color: rgb(0 0 0 / 85%);
   transition: text-shadow 400ms ease, color 50ms ease;
 }
 
@@ -1277,16 +1270,11 @@ MARKETPLACE
   background-color: var(--backdrop);
   border-radius: 6px !important;
   color: var(--spice-text);
+  height: 32px;
   padding: 6px 36px 8px 16px;
   transition: all .3s ease;
   font-size: 0.875rem;
   font-weight: 700;
-}
-
-.marketplace-header {
-  padding-bottom: 80px;
-  position: relative;
-  margin-top: -55px
 }
 
 .Dropdown-arrow {
@@ -1305,19 +1293,31 @@ MARKETPLACE
 .searchbar-bar {
   border-style: none;
   background-color: var(--backdrop) !important; 
+  height: 32px
   }
 
 .marketplace-header-icon-button {
   background-color: var(--backdrop);
 }
 
+#marketplace-settings-button {
+  height: 32px;
+  width: 32
+}
+
 .marketplace-header-icon-button:hover {
   background-color: rgba(255,255,255,0.01);
 }
 
+.marketplace-header:has(.marketplace-header__left  .marketplace-sortBox-header) {
+  padding-bottom: 80px;
+  position: relative;
+  margin-top: -55px
+}
+
 .marketplace-header {
   padding-top: 10px;
-  background: none
+  background: none;
 }
 
 #marketplace-readme {
