@@ -260,7 +260,7 @@ SIDEBAR
   -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0.95) 75%, transparent 100%) !important;
 }
 
-.main-nowPlayingView-artistBioButton:hover {
+.main-nowPlayingView-aboutArtistButton:hover {
   -webkit-transform: scale(1) !important;
   transform: scale(1) !important;
   cursor: pointer;
