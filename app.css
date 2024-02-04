@@ -9,17 +9,6 @@ svg {
   filter: drop-shadow(-2px 2px 2px rgb(0 0 0 / 15%));
 }
 
-/*-----------------
-EXPERIMENTAL STYLES
--------------------
-
-.Root__main-view,
-.main-buddyFeed-container,
-.Root__now-playing-bar,
-.main-yourLibraryX-entryPoints{
-  backdrop-filter: blur(8px)
-}
-
 /*-------------------
 ALBUM ART BACKGROUND
 -------------------*/
@@ -176,7 +165,6 @@ NOW PLAYING BAR
 }
 
 .progress-bar__slider {
-  transition: left 1s linear;
   width: 11px;
   height: 11px
 }
@@ -239,13 +227,15 @@ SIDEBAR
 .Button-sc-y0gtbx-0  {
   border-radius: var(--button-border) !important;
   transition: 0.2s ease !important;
-  border-width: 2px;
-  border-color: rgb(255 255 255 / 60%)
+  border-width: 1px;
+  border-color: rgb(255 255 255 / 60%);
+  
 }
 
 .Button-sc-y0gtbx-0:hover {
   transform: none;
   box-shadow: 0px 0px 8px 1px rgb(255 255 255 / 20%);
+  border-width: 1px
 }
 
 .main-nowPlayingView-section.vbsB4OQJkFHLU8SbSGzS {
@@ -256,8 +246,12 @@ SIDEBAR
   background: none !important
 }
 
-.GTmlByXpJj7V6AwVq0Vk.ouorHKa6NI5cm666H3tp {
+.main-nowPlayingView-aboutArtistV2ImageContainer.main-nowPlayingView-aboutArtistV2Image {
   -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0.95) 75%, transparent 100%) !important;
+}
+
+.main-nowPlayingView-aboutArtistV2Button {
+  background: none;
 }
 
 .main-nowPlayingView-aboutArtistButton:hover {
@@ -562,6 +556,22 @@ PLAY BUTTONS
 .main-topBar-historyButtons .main-topBar-button {
   background-color: var(--backdrop);
   border-radius: 6px;
+}
+
+.WtC1lGbmQRplD6JBhNFU {
+  border-radius: var(--button-border);
+  background-color: var(--backdrop);
+}
+
+.main-topBar-buddyFeed {
+  box-shadow: none !important;
+  width: 32px;
+  height: 32px
+}
+
+.main-topBar-buddyFeed,
+.main-topBar-buddyFeed:active {
+  border-style: none !important;
 }
 
 .search-searchCategory-carouselButton,
@@ -879,6 +889,11 @@ HOME VIEW
   transform: scale(1.02);
 }
 
+.view-homeShortcutsGrid-shortcut:hover .view-homeShortcutsGrid-equaliser, 
+.view-homeShortcutsGrid-shortcut:hover .view-homeShortcutsGrid-shortcutNewEpisodeIndicator {
+  display: none
+}
+
 .main-card-card {
   background: none !important;
   background-color: var(--backdrop) !important;
@@ -985,7 +1000,6 @@ ARTIST PAGE
 
 .main-entityHeader-title h1 {
   font-size: 50px !important;
-  line-height: 50px !important;
 }
 
 .under-main-view div {
