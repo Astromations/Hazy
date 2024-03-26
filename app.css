@@ -887,6 +887,7 @@ HOME VIEW
 .view-homeShortcutsGrid-grid {
   --item-height: 56px;
   grid-template-columns: repeat(3,1fr);
+  padding-top: 20px;
 }
 
 .view-homeShortcutsGrid-shortcut {
