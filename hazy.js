@@ -323,7 +323,7 @@
     } 
   }
 
-  const defImage = `https://elmina.club/uploads/posts/2023-05/1684477431_elmina-club-p-uyutnii-fon-dlya-rabochego-stola-foni-pint-52.png`;
+  const defImage = `https://i.imgur.com/Wl2D0h0.png`;
   let startImage = localStorage.getItem("hazy:startupBg") || defImage;
 
   // input for custom background images
