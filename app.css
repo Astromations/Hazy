@@ -205,6 +205,10 @@ SIDEBAR
   padding-inline-start: 3px;
 }
 
+.main-buddyFeed-closeButton {
+  border-radius: var(--button-border)
+}
+
 .main-nowPlayingView-nowPlayingWidget {
   padding-top: 0px !important; 
 }
@@ -420,18 +424,8 @@ PLAYLIST VIEW
   box-shadow: 0px 4px 10px 3px rgb(0 0 0 / 12%);
 }
 
-.main-entityHeader-headerText > span.Type__TypeElement-sc-goli3j-0.TypeElement-mestoBold-type {
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
-}
-
-.Button-sm-buttonSecondary-useBrowserDefaultFocusStyle,
-.Button-sc-y0gtbx-0.Button-sm-buttonSecondary-iconLeading-useBrowserDefaultFocusStyle.I3oc8sxg8Duq4kYUGnMo.LEZf9K5hG4hfCKfgr5Xo,
-.main-buddyFeed-closeButton {
-  border-radius: var(--button-border)
-}
-
-.Button-large-large-buttonTertiary-iconOnly-condensed-useBrowserDefaultFocusStyle {
+.Button-large-large-buttonTertiary-iconOnly-condensed-useBrowserDefaultFocusStyle,
+.dMIqbdzkrLhKTMkTrFvJ {
   scale: 0.9;
   transition: all 0.2s ease
 }
@@ -477,8 +471,6 @@ TOP BAR
   cursor: pointer;
 }
 
-.I4p8r1UNjIGk9yv3H2Ms,
-.IAyWaeDamLJLjxuPeVKw, 
 .Button-md-24-buttonTertiary-condensedAll-useBrowserDefaultFocusStyle,
 .main-topBar-buddyFeed,
 .main-noConnection-isNotice,
@@ -512,7 +504,8 @@ PLAY BUTTONS
 }
 
 .playlist-playlist-playlist span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set,
-.Root__top-bar span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set {
+.ix_8kg3iUb9VS5SmTnBY span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set,
+.view-homeShortcutsGrid-playButton > span > svg /* Home Shortcut Grid Play Button */{
   background: none !important;
   color: var(--spice-text) !important
 }
@@ -530,9 +523,13 @@ PLAY BUTTONS
   transform: scale(1.1) !important;
 }
 
-.view-homeShortcutsGrid-shortcut .view-homeShortcutsGrid-PlayButtonContainer .view-homeShortcutsGrid-playButton {
+.view-homeShortcutsGrid-playButton {
   -webkit-box-shadow: none !important;
-  opacity: 0;
+  background-color: transparent;
+}
+
+.Button-small-buttonPrimary-useBrowserDefaultFocusStyle:hover .ButtonInner-sc-14ud5tc-0 {
+  background: none !important
 }
 
 .main-card-PlayButtonContainer > div > button > span > span > svg,
@@ -691,7 +688,7 @@ MISCELLANEOUS
 }
 
 .MnW5SczTcbdFHxLZ_Z8j {
-  display: none;
+  display: none
 }
 
 .queue-tabBar-headerItemLink,
@@ -867,6 +864,19 @@ ALBUM VIEW
   scale: 1.2
 }
 
+.ix_8kg3iUb9VS5SmTnBY > button > span {
+  color: var(--spice-text);
+  background: none;
+  scale: 1.2;
+  transition: all 0.2s ease
+}
+
+.ix_8kg3iUb9VS5SmTnBY > button > span:hover {
+  color: var(--spice-text);
+  background: none;
+  scale: 1.3
+}
+
 /*-------
 HOME VIEW
 -------*/
@@ -891,7 +901,7 @@ HOME VIEW
 .view-homeShortcutsGrid-grid {
   --item-height: 56px;
   grid-template-columns: repeat(3,1fr);
-  padding-top: 20px;
+  padding-top: 20px
 }
 
 .view-homeShortcutsGrid-shortcut {
@@ -911,25 +921,32 @@ HOME VIEW
   display: none
 }
 
+.PpFTgmA5yHE2_VdobCMS {
+  margin-inline: unset !important;
+}
+
+.main-gridContainer-gridContainer {
+  grid-gap: 24px;
+}
+
 .main-card-card {
-  background: none !important;
+  background-color: var(--backdrop);
+}
+
+.main-card-draggable {
   background-color: var(--backdrop) !important;
   transition: transform 0.2s ease;
   border-radius: 6px;
   box-shadow: 4px 0px 15px rgb(0 0 0 / 20%);
 }
 
-.main-card-draggable {
-  transition: transform 0.2s ease;
-}
-
-.main-card-card .main-cardImage-imageWrapper {
+.main-card-draggable .main-cardImage-imageWrapper {
   transition: all 0.35s ease;
   transform-origin: 50% -40px;
   overflow: hidden;
 }
 
-.main-card-card:hover .main-cardImage-imageWrapper {
+.main-card-draggable:hover .main-cardImage-imageWrapper {
   transform: perspective(76em) rotateX(14deg) translateY(-1px);
   opacity: 0.8
 }
@@ -1283,6 +1300,12 @@ EXPERIMENTAL FEATURES
 /*---------
 MARKETPLACE
 ---------*/
+
+.marketplace-grid .main-card-draggable {
+  background-color: transparent !important;
+  box-shadow: none !important;
+
+}
 
 .marketplace-tabBar-headerItemLink.marketplace-tabBar-active,
 .Dropdown-control {
