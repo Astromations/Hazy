@@ -160,7 +160,8 @@
   function controlDimensions() {
     Spicetify.Platform.PlayerAPI._prefs.get({ key: 'app.browser.zoom-level' }).then((value) => {
       const  zoomLevel = value.entries['app.browser.zoom-level'].number;
-      const multiplier = zoomLevel != 0 ? zoomLevel/50 : 0;
+      const zoomNum = Number(zoomLevel)
+      const multiplier = zoomNum != 0 ? zoomNum/50 : 0;
       constant = 0.912872807
 
         final_width = 135 * (constant**(multiplier));
