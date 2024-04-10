@@ -269,18 +269,20 @@ WHAT'S NEW
 ---------*/
 
 .main-whatsNewFeed-listRow {
-  background-color: tran !important;
+  background-color: transparent !important;
   margin: 4px 0;
-  padding: 12px 8px 2px 8px!important;
+
   gap: 2px 12px;
 }
 
 .main-whatsNewFeed-listRow:hover {
-  --background-highlight:      ;
-  --spice-highlight:     ;
-  --background-elevated-press:    ;
-  --background-press:     ;
-  background-color: var(--backdrop) !important;
+  --background-highlight:  var(--backdrop)    ;
+}
+
+.main-whatsNewFeed-listRow:hover+.main-whatsNewFeed-listRow > .main-whatsNewFeed-divider, 
+.main-whatsNewFeed-listRow:hover>.main-whatsNewFeed-divider, 
+.main-whatsNewFeed-listRow:only-child .main-whatsNewFeed-divider {
+    visibility: unset;
 }
 
 .main-whatsNewFeed-list {
@@ -745,7 +747,7 @@ MISCELLANEOUS
   background: none
 }
 
-.main-buddyFeed-scrollBarContainer .os-viewport-native-scrollbars-invisible {
+.main-buddyFeed-scrollBarContainer [data-overlayscrollbars-viewport] {
   -webkit-mask-image: linear-gradient(transparent 1%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 96%, transparent 100%);
 }
 
@@ -886,22 +888,21 @@ HOME VIEW
   background-color: var(--backdrops) !important
 }
 
+.search-searchCategory-catergoryGrid > div > button > span {
+  border-radius: var(--button-border);
+}
+
 .f59DF4qQ_FphIrVeRYkI {
-  position: fixed !important;
+  display: none
 }
 
 .rX_OmqCngvY5ZCoYBZgb {
   display: none !important
 }
 
-.main-home-home {
-  padding-top: 40px
-}
-
 .view-homeShortcutsGrid-grid {
   --item-height: 56px;
   grid-template-columns: repeat(3,1fr);
-  padding-top: 20px
 }
 
 .view-homeShortcutsGrid-shortcut {
@@ -921,6 +922,10 @@ HOME VIEW
   display: none
 }
 
+.BoxComponent-group-card-naked-isInteractive-draggable-paddingBlockStart_12px-paddingBlockEnd_12px-paddingInlineStart_12px-paddingInlineEnd_12px:hover::after {
+    background-color: unset;
+}
+
 .PpFTgmA5yHE2_VdobCMS {
   margin-inline: unset !important;
 }
@@ -930,6 +935,10 @@ HOME VIEW
 }
 
 .main-card-card {
+  background-color: var(--backdrop);
+}
+
+.main-card-card:hover, .main-card-card[data-context-menu-open=true] {
   background-color: var(--backdrop);
 }
 
@@ -949,14 +958,6 @@ HOME VIEW
 .main-card-draggable:hover .main-cardImage-imageWrapper {
   transform: perspective(76em) rotateX(14deg) translateY(-1px);
   opacity: 0.8
-}
-
-.main-card-card:hover, .main-card-card[data-context-menu-open=true] {
-    background: var(--backdrop);
-}
-
-.BoxComponent-group-card-naked-isInteractive-draggable-paddingBlockStart_12px-paddingBlockEnd_12px-paddingInlineStart_12px-paddingInlineEnd_12px:hover::after {
-    background-color: var(--backdrop);
 }
 
 .main-heroCard-PlayButtonContainer {
@@ -1208,7 +1209,7 @@ BLOOM LYRICS
   background: none !important;
 }
 
-.Root__lyrics-cinema .os-viewport-native-scrollbars-invisible {
+.Root__lyrics-cinema [data-overlayscrollbars-viewport] {
   -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, transparent 100%);
 }
 
@@ -1223,11 +1224,11 @@ SCROLLBAR
 -------*/
 
 .os-scrollbar-handle {
-  border-radius: 50px;
+  border-radius: 50px !important;
 }
 
 .os-theme-spotify > .os-scrollbar-vertical {
-  margin: 12px 2px 12px 0
+  margin: 12px 2px 12px 0 !important
 }
 
 .os-scrollbar-vertical {
@@ -1241,7 +1242,7 @@ SCROLLBAR
 }
 
 .os-scrollbar-horizontal {
-  display: none;
+  display: none !important;
 }
 
 .main-nowPlayingView-lyricsContent::-webkit-scrollbar {
