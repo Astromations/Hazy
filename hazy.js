@@ -266,7 +266,7 @@
 
   function galaxyFade() { //Borrowed from the Galaxy theme | https://github.com/harbassan/spicetify-galaxy/
     // add fade and dimness effects to mainview and the the artist image on scroll
-    waitForElement([".Root__main-view .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
+    waitForElement([".Root__main-view [data-overlayscrollbars-viewport]"], ([scrollNode]) => {
       scrollNode.addEventListener("scroll", () => {
         //artist fade
         const scrollValue = scrollNode.scrollTop;
@@ -289,7 +289,7 @@
       });
     });
 
-    waitForElement([".Root__nav-bar .os-viewport.os-viewport-native-scrollbars-invisible"], ([scrollNode]) => {
+    waitForElement([".Root__nav-bar [data-overlayscrollbars-viewport]"], ([scrollNode]) => {
       scrollNode.setAttribute("fade", "bottom");
       scrollNode.addEventListener("scroll", () => {
         // fade
