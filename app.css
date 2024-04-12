@@ -844,7 +844,7 @@ ALBUM VIEW
 }
 
 .artist-artistDiscography-topBar {
-  position: fixed
+  position: absolute
 }
 
 .nav-ylx .artist-artistDiscography-topBar.artist-artistDiscography-topBarScrolled,
