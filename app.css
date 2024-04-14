@@ -805,6 +805,10 @@ MISCELLANEOUS
   -webkit-mask-image: linear-gradient(transparent 5%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 1) 85%, transparent 100%);
 }
 
+.app-module__StatsButton___gLukm_nameDthatDtune {
+    position: unset !important;
+}
+
 /*----------
 TEXT SHADOWS
 ----------*/
