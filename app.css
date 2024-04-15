@@ -1,8 +1,6 @@
 :root {
   --backdrop: rgba(0,0,0,0.3);
   --button-border: 8px;
-  --spice-text: #FFFFFF;
-  --spice-button: #30bf63
 }
 
 svg {
