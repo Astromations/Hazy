@@ -50,7 +50,7 @@ curl -fsSL https://raw.githubusercontent.com/Astromations/Hazy/main/install.sh |
 
 ---
 
-Download the the repo and put `user.css`, `theme.js` and `color.ini` into a new folder named `Hazy`, and place this folder into your `Themes` folder in `.spicetify`.
+Download the repo and put `user.css`, `theme.js` and `color.ini` into a new folder named `Hazy`, and place this folder into your `Themes` folder in `.spicetify`.
 Then run these commands to apply:
     
 ```powershell
