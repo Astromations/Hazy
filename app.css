@@ -244,7 +244,7 @@ SIDEBAR
   padding: 0px !important
 }
 
-.hd6a3g_3QyF8MFL0wWs1 {
+.IkRGajTjItEFQkRMeH6v.f2UE9n5nZcbgZrGYTU3r {
   background: none !important
 }
 
@@ -332,6 +332,12 @@ PLAYLIST VIEW
 
 [dir=ltr] .main-actionBar-ActionBarRow>:not(:last-child) {
   margin-right: 24px;
+}
+
+._2ajKWDiy6YvJu5wo8I1g.main-trackList-trackListHeader {
+  background: none !important;
+  box-shadow: none !important;
+  position: static
 }
 
 .main-trackList-trackListRow:focus-within,
@@ -458,6 +464,14 @@ TOP BAR
 
 .main-topBar-overlay {
   background-color: transparent !important;
+}
+
+.hIFR8WDm_54EEIa1gwpC {
+  background-color: transparent !important;
+}
+
+.mjZrvVI3CxfHJXu7y0Lg {
+    opacity: 0 !important;
 }
 
 .nav-ylx .main-trackList-trackListHeaderStuck.main-trackList-trackListHeader,
@@ -705,9 +719,6 @@ MISCELLANEOUS
   background-color: rgba(0,0,0,0.2);
   height: 32px
 }
-.main-nowPlayingView-sectionHeaderSpacing .main-nowPlayingView-lyricsContent:hover {
-  padding-right: 16px !important
-}
 
 .lyrics-config-button {
   background-color: var(--backdrop)
@@ -890,6 +901,10 @@ HOME VIEW
   background-color: var(--backdrops) !important
 }
 
+.S4OmZ_IZexmZ5dasPqW5 { /*top playlist grid*/
+  background: none !important
+}
+
 .search-searchCategory-catergoryGrid > div > button > span {
   border-radius: var(--button-border);
 }
@@ -899,6 +914,10 @@ HOME VIEW
 }
 
 .rX_OmqCngvY5ZCoYBZgb {
+  display: none !important
+}
+
+.LVMjmN2CaPruPAo62RAY { 
   display: none !important
 }
 
@@ -951,13 +970,17 @@ HOME VIEW
   box-shadow: 4px 0px 15px rgb(0 0 0 / 20%);
 }
 
-.main-card-draggable .main-cardImage-imageWrapper {
+.BoxComponent-group-card-naked-isInteractive-draggable:hover::after {
+  display: none
+}
+
+.main-card-draggable .main-card-imageContainer {
   transition: all 0.35s ease;
   transform-origin: 50% -40px;
   overflow: hidden;
 }
 
-.main-card-draggable:hover .main-cardImage-imageWrapper {
+.main-card-draggable:hover .main-card-imageContainer {
   transform: perspective(76em) rotateX(14deg) translateY(-1px);
   opacity: 0.8
 }
@@ -1215,9 +1238,14 @@ BLOOM LYRICS
   -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, transparent 100%);
 }
 
+.FUYNhisXTCmbzt9IDxnT {
+  --lyrics-color-background:  !important;
+  padding-top: 80px
+}
+
 /* fix artist page being visible under lyrics cinema */
-.Root__top-container:has(.main-lyricsCinema-lyricsCinemaVisible) .main-topBar-container,
-.Root__top-container:has(.main-lyricsCinema-lyricsCinemaVisible) .under-main-view {
+.Root__top-container:has(.FUYNhisXTCmbzt9IDxnT) .main-topBar-container,
+.Root__top-container:has(.FUYNhisXTCmbzt9IDxnT) .under-main-view {
   display: none;
 }
 
