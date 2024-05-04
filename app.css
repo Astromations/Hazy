@@ -603,11 +603,10 @@ SEARCH BAR
   background: rgba(0,0,0,0.2) !important;
 }
 
-.x-searchInput-searchInputInput,
-.x-searchInput-searchInputInput:hover {
+.NtkAQg9R1r5CjuP0XHwl,
+.NtkAQg9R1r5CjuP0XHwl:hover {
   background-color: var(--backdrop) !important;
   border-radius: 4px;
-  color: rgba(var(--spice-rgb-selected-row),.7);
   height: 32px;
   border-radius: 8px;
   transition: 0.2s ease
@@ -636,21 +635,19 @@ SEARCH BAR
   font-weight: 700 !important;
 }
 
-.search-searchCategory-categoryGridItem > button {
-  height: 32px !important
-}
-
-.search-searchCategory-categoryGridItem > button {
+.mXNT9H2GU7lDW4cGx0q1 {
+  background-color: var(--backdrop);
   border-radius: var(--button-border);
   font-weight: 700 !important;
 }
 
-.search-searchCategory-categoryGridItem  > button[aria-checked="true"] {
-  background-color: var(--backdrop);
+.mXNT9H2GU7lDW4cGx0q1:hover {
+  background-color: rgba(0,0,0,0.2);
 }
 
-.search-searchCategory-categoryGridItem  > button[aria-checked="true"]:hover {
-  background-color: rgba(0,0,0,0.2);
+.NI1OxoVdokxENPAjoeOk {
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 .search-searchCategory-categoryGridItembutton[aria-checked="false"]  > button:hover {
@@ -658,27 +655,30 @@ SEARCH BAR
   color: var(--spicet-text)
 }
 
-.x-searchHistoryEntries-clearSingleSearchHistory {
+.sHDdcNIw9AQLbLrpdcqO {
   top: 20px;
   margin-right: 12px;
-  opacity: 0;
   transition: all 0.2s ease;
   border-radius: var(--button-border) !important;
 }
 
-.x-searchHistoryEntries-searchHistoryEntry:hover > .x-searchHistoryEntries-clearSingleSearchHistory {
-  opacity: 1;
+.main-card-draggable:not(:hover) > .sHDdcNIw9AQLbLrpdcqO {
+  opacity: 0 !important;
 }
 
-.x-searchHistoryEntries-clearSingleSearchHistoryButton {
+.sHDdcNIw9AQLbLrpdcqO {
   border-radius: var(--button-border) !important;
   background-color: var(--backdrop);
   transition: all 0.2s ease;
 }
 
-.x-searchHistoryEntries-clearSingleSearchHistoryButton:focus, .x-searchHistoryEntries-clearSingleSearchHistoryButton:hover {
+.sHDdcNIw9AQLbLrpdcqO:focus, .sHDdcNIw9AQLbLrpdcqO:hover {
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
+}
+
+.qG4q41T8PJl0SkVgUeJc {
+  background: none
 }
 
 /*-----------
@@ -816,6 +816,10 @@ MISCELLANEOUS
 
 .app-module__StatsButton___gLukm_nameDthatDtune {
     position: unset !important;
+}
+
+.N_8iI7NKHP0iG2jp3g0R {
+  background: none
 }
 
 /*----------
@@ -1114,6 +1118,10 @@ ARTIST PAGE
 }
 
 .GenericModal {
+  background: none
+}
+
+.EmeHQXR87mUskYK6xEde {
   background: none
 }
 
