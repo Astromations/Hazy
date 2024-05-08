@@ -5,6 +5,7 @@
 
 svg {
   filter: drop-shadow(-2px 2px 2px rgb(0 0 0 / 15%));
+  overflow: visible;
 }
 
 /*-------------------
@@ -115,6 +116,7 @@ NOW PLAYING BAR
   margin-right: 10px;
   margin-left: 10px;
   box-shadow: -2px 1px 10px 3px rgb(0 0 0 / 20%);
+  aspect-ratio: 1 / 1;
 }
 
 
@@ -133,6 +135,7 @@ NOW PLAYING BAR
 .main-playPauseButton-button,
 .main-shuffleButton-button {
   color: var(--spice-text)
+  overflow: visible;
 }
 
 .main-repeatButton-button.main-repeatButton-active,
