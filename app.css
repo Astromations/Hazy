@@ -134,8 +134,7 @@ NOW PLAYING BAR
 .main-repeatButton-button, 
 .main-playPauseButton-button,
 .main-shuffleButton-button {
-  color: var(--spice-text)
-  overflow: visible;
+  color: var(--spice-text);
 }
 
 .main-repeatButton-button.main-repeatButton-active,
