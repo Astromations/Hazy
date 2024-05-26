@@ -652,10 +652,10 @@
         document.querySelector(".hazyOptionRow #satu-input").value = 70;
         document.querySelector(".hazyOptionRow #bright-input").value = 120;
 
-        document.querySelector(".hazyOptionRow #blur-value").textContent = "15px";
-        document.querySelector(".hazyOptionRow #cont-value").textContent = "50%";
-        document.querySelector(".hazyOptionRow #satu-value").textContent = "70%";
-        document.querySelector(".hazyOptionRow #bright-value").textContent = "120%";
+        document.querySelector(".hazyOptionRow #blur-value").textContent = "15";
+        document.querySelector(".hazyOptionRow #cont-value").textContent = "50";
+        document.querySelector(".hazyOptionRow #satu-value").textContent = "70";
+        document.querySelector(".hazyOptionRow #bright-value").textContent = "120";
 
 
         localStorage.setItem(value.getAttribute("blur_am"), 8);
