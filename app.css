@@ -195,8 +195,13 @@ NOW PLAYING BAR
 SIDEBAR
 ------*/
 
-.main-buddyFeed-container {
+.main-buddyFeed-container, .ffFwfKcPDbmAPLXzxzKq {
   --background-base: var(--backdrop)!important;
+}
+
+/* tentative fix for sidebar box shadow */
+.main-nowPlayingView-nowPlayingWidget > div > div:nth-child(1) > div {
+  box-shadow: none !important;
 }
 
 .main-buddyFeed-header {
