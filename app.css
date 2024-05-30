@@ -160,9 +160,10 @@ NOW PLAYING BAR
 
 .progress-bar {
   --bg-color: rgba(255,555,255,.2);
-  --fg-color: #1db954;
-  --is-active-fg-color: #2bc260;
+  --fg-color: var(--spice-accent);
+  --is-active-fg-color: var(--spice-button-active);
 }
+
 
 .progress-bar__slider {
   width: 11px;
