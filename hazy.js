@@ -162,10 +162,11 @@
       const  zoomLevel = value.entries['app.browser.zoom-level'].number;
       const zoomNum = Number(zoomLevel)
       const multiplier = zoomNum != 0 ? zoomNum/50 : 0;
+      const isGlobalNav = document.querySelector(".Root__globalNav");
       constant = 0.912872807
 
         final_width = 135 * (constant**(multiplier));
-        final_height = 40 * (constant**(multiplier));
+        final_height = (isGlobalNav ? 64 : 40) * (constant**(multiplier));
         document.documentElement.style.setProperty("--control-width", Math.abs(final_width) + "px");
         document.documentElement.style.setProperty("--control-height", Math.abs(final_height) + "px");
         console.log("zoom adjusted")
