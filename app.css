@@ -1356,6 +1356,14 @@ EXPERIMENTAL FEATURES
 MARKETPLACE
 ---------*/
 
+a[aria-label="Marketplace"],
+a[href="/marketplace"]{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 40px;
+}
+
 .marketplace-grid .main-card-draggable {
   background-color: transparent !important;
   box-shadow: none !important;
