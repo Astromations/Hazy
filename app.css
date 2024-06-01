@@ -326,7 +326,8 @@ WHAT'S NEW
 
 .main-userWidget-boxCondensed,
 .main-avatar-avatar,
-.main-avatar-placeholderWrapper {
+.main-avatar-placeholderWrapper,
+.main-userWidget-box {
   border-radius: var(--button-border) !important
 }
 
