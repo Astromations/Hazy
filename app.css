@@ -1435,10 +1435,12 @@ a[href="/marketplace"]{
   background-color: rgba(255,255,255,0.01);
 }
 
-.marketplace-header:has(.marketplace-header__left  .marketplace-sortBox-header) {
-  padding-bottom: 80px;
-  position: relative;
-  margin-top: -55px
+.marketplace-header {
+  position: static;
+}
+
+.Root.global-nav .marketplace-header {
+  padding-top: 4rem;
 }
 
 .marketplace-header {
