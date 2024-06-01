@@ -611,12 +611,13 @@ SEARCH BAR
   background: rgba(0,0,0,0.2) !important;
 }
 
+.x-searchInput-searchInputInput,
+.main-globalNav-searchInputContainer input,
 .NtkAQg9R1r5CjuP0XHwl,
 .NtkAQg9R1r5CjuP0XHwl:hover {
   background-color: var(--backdrop) !important;
-  border-radius: 4px;
   height: 32px;
-  border-radius: 8px;
+  border-radius: var(--button-border) !important;
   transition: 0.2s ease
 }
 
@@ -1040,6 +1041,13 @@ HOME VIEW
 .main-card-PlayButtonContainer {
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+/* For buttons inside the Search Container */
+.main-globalNav-searchContainer button{
+  background-color: var(--backdrop) !important;
+  border-radius:var(--button-border) !important;
+  transition: 0.2s ease;
 }
 
 /*------
