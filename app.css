@@ -158,9 +158,11 @@ NOW PLAYING BAR
   transform: translateX(-8px) scale(1) !important;
 }
 
+
+
 .progress-bar {
   --bg-color: rgba(255,555,255,.2);
-  --fg-color: var(--spice-accent);
+  --fg-color: var(--spice-button);
   --is-active-fg-color: var(--spice-button-active);
 }
 
@@ -1435,10 +1437,6 @@ a[href="/marketplace"]{
   background-color: rgba(255,255,255,0.01);
 }
 
-.marketplace-header {
-  position: static;
-}
-
 .Root.global-nav .marketplace-header {
   padding-top: 4rem;
 }
@@ -1446,6 +1444,7 @@ a[href="/marketplace"]{
 .marketplace-header {
   padding-top: 10px;
   background: none;
+  position: relative
 }
 
 #marketplace-readme {
