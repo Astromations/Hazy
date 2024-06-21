@@ -44,14 +44,18 @@
   valueSet()
 
   async function fetchFadeTime() {
+    /* It seems that ._prefs isnt available anymore. Therefore the crossfade is being disabled for now.
     const response = await Spicetify.Platform.PlayerAPI._prefs.get({ key: "audio.crossfade_v2" });
     const crossfadeEnabled = response.entries["audio.crossfade_v2"].bool;
+    */
+   const crossfadeEnabled = false
     
     let FadeTime = "0.4s"; // Default value of 0.4 seconds, otherwise syncs with crossfade time
     
     if (crossfadeEnabled) {
-      const fadeTimeResponse = await Spicetify.Platform.PlayerAPI._prefs.get({ key: "audio.crossfade.time_v2" });
-      const fadeTime = fadeTimeResponse.entries["audio.crossfade.time_v2"].number;
+      /*const fadeTimeResponse = await Spicetify.Platform.PlayerAPI._prefs.get({ key: "audio.crossfade.time_v2" });
+      const fadeTime = fadeTimeResponse.entries["audio.crossfade.time_v2"].number;*/
+      const fadeTime = FadeTime
       const dividedTime = fadeTime / 1000;
       FadeTime = dividedTime + "s";
     }
@@ -158,19 +162,26 @@
   }
 
   function controlDimensions() {
+    
+    /*
+    ._prefs isn't available
     Spicetify.Platform.PlayerAPI._prefs.get({ key: 'app.browser.zoom-level' }).then((value) => {
       const  zoomLevel = value.entries['app.browser.zoom-level'].number;
       const zoomNum = Number(zoomLevel)
-      const multiplier = zoomNum != 0 ? zoomNum/50 : 0;
-      const isGlobalNav = document.querySelector(".Root__globalNav");
-      constant = 0.912872807
+    */
 
-        final_width = 135 * (constant**(multiplier));
-        final_height = (isGlobalNav ? 64 : 40) * (constant**(multiplier));
-        document.documentElement.style.setProperty("--control-width", Math.abs(final_width) + "px");
-        document.documentElement.style.setProperty("--control-height", Math.abs(final_height) + "px");
-        console.log("zoom adjusted")
-    });
+    // Using natives instead of Spicetify's API
+    const pixelRatio = window.devicePixelRatio || 1;
+    const multiplier = pixelRatio !== 1 ? pixelRatio / 1 : 0;
+    const isGlobalNav = document.querySelector(".Root__globalNav");
+    const constant = 0.912872807;
+
+    final_width = 135 * (constant**(multiplier));
+    final_height = (isGlobalNav ? 64 : 40) * (constant**(multiplier));
+    document.documentElement.style.setProperty("--control-width", Math.abs(final_width) + "px");
+    document.documentElement.style.setProperty("--control-height", Math.abs(final_height) + "px");
+    console.log("zoom adjusted")
+    //});
   }
   
   window.addEventListener('resize', function() {
