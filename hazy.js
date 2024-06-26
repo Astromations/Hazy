@@ -173,6 +173,13 @@
     document.documentElement.style.setProperty("--control-width", `${width}px`);
   }
 
+  async function setMainWindowControlHeight(height) {
+    await Spicetify.CosmosAsync.post("sp://messages/v1/container/control", {
+      type: "update_titlebar",
+      height: height,
+    });
+  }
+
   function calculateBrowserZoom() {
     const viewportWidth = window.innerWidth;
     const windowWidth = window.outerWidth;
@@ -205,11 +212,20 @@
       document.querySelector(".global-nav") ||
       document.querySelector(".Root__globalNav");
 
-    const baseHeight = isGlobalNav ? 64 : 40;
+    const baseHeight = isGlobalNav ? 64 : 42;
     const baseWidth = 135;
+    const constant = 0.912872807;
 
     const normalZoom = calculateBrowserZoom();
     const inverseZoom = calculateInverseBrowserZoom();
+
+    const finalControlHeight = Math.round(
+      (normalZoom ** constant * 100) / 100 - (isGlobalNav ? 3 : 25)
+    );
+
+    console.log(finalControlHeight);
+
+    await setMainWindowControlHeight(finalControlHeight);
 
     const paddingStart = calculateScaledPx(64, inverseZoom, 1);
     const paddingEnd = calculateScaledPx(baseWidth, inverseZoom, 1);
@@ -225,12 +241,7 @@
 `;
     }
     if (Spicetify.Platform.PlatformData.os_name === "windows" || "Windows") {
-      const transparentControlHeight = calculateScaledPx(
-        baseHeight,
-        inverseZoom,
-        1
-      );
-
+      const transparentControlHeight = baseHeight;
       const transparentControlWidth = calculateScaledPx(
         baseWidth,
         inverseZoom,
