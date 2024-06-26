@@ -95,7 +95,7 @@
   Spicetify.Player.addEventListener("songchange", onSongChange);
   onSongChange();
   windowControls();
-  controlDimensions();
+  setTopBarStyles();
   galaxyFade();
 
   function scrollToTop() {
@@ -165,37 +165,87 @@
     detectOS();
   }
 
-  function controlDimensions() {
-    /*
-    ._prefs isn't available
-    Spicetify.Platform.PlayerAPI._prefs.get({ key: 'app.browser.zoom-level' }).then((value) => {
-      const  zoomLevel = value.entries['app.browser.zoom-level'].number;
-      const zoomNum = Number(zoomLevel)
-    */
-
-    // Using natives instead of Spicetify's API
-    const pixelRatio = window.devicePixelRatio || 1;
-    const multiplier = pixelRatio !== 1 ? pixelRatio / 1 : 0;
-    const isGlobalNav = document.querySelector(".Root__globalNav");
-    const constant = 0.912872807;
-
-    final_width = 135 * constant ** multiplier;
-    final_height = (isGlobalNav ? 64 : 40) * constant ** multiplier;
-    document.documentElement.style.setProperty(
-      "--control-width",
-      Math.abs(final_width) + "px"
-    );
+  /* Transparent Controls */
+  function addTransparentControls(height, width) {
     document.documentElement.style.setProperty(
       "--control-height",
-      Math.abs(final_height) + "px"
+      `${height}px`
     );
-    console.log("zoom adjusted");
-    //});
+    document.documentElement.style.setProperty("--control-width", `${width}px`);
+  }
+
+  function calculateBrowserZoom() {
+    const viewportWidth = window.innerWidth;
+    const windowWidth = window.outerWidth;
+    const zoomLevel = (windowWidth / viewportWidth) * 100;
+    return zoomLevel;
+  }
+
+  function calculateInverseBrowserZoom() {
+    const viewportWidth = window.innerWidth;
+    const windowWidth = window.outerWidth;
+    const inverseZoomLevel = viewportWidth / windowWidth;
+    return inverseZoomLevel;
+  }
+
+  function calculateScaledPx(
+    baseWidth,
+    inverseZoom,
+    scalingFactorOut = 1,
+    minWidth = 0,
+    maxWidth = Infinity
+  ) {
+    const scaledWidth = baseWidth * (inverseZoom + scalingFactorOut - 1);
+    return Math.max(minWidth, Math.min(scaledWidth, maxWidth));
+  }
+
+  /* Topbar styles */
+  const topBarStyleSheet = document.createElement("style");
+  async function setTopBarStyles() {
+    const isGlobalNav =
+      document.querySelector(".global-nav") ||
+      document.querySelector(".Root__globalNav");
+
+    const baseHeight = isGlobalNav ? 64 : 40;
+    const baseWidth = 135;
+
+    const normalZoom = calculateBrowserZoom();
+    const inverseZoom = calculateInverseBrowserZoom();
+
+    const paddingStart = calculateScaledPx(64, inverseZoom, 1);
+    const paddingEnd = calculateScaledPx(baseWidth, inverseZoom, 1);
+
+    console.log(normalZoom, inverseZoom);
+
+    if (isGlobalNav) {
+      topBarStyleSheet.innerText = `
+.spotify__container--is-desktop.spotify__os--is-windows .Root__globalNav {
+  padding-inline-end: ${paddingEnd}px !important;
+  padding-inline-start: ${paddingStart}px !important;
+}
+`;
+    }
+    if (Spicetify.Platform.PlatformData.os_name === "windows" || "Windows") {
+      const transparentControlHeight = calculateScaledPx(
+        baseHeight,
+        inverseZoom,
+        1
+      );
+
+      const transparentControlWidth = calculateScaledPx(
+        baseWidth,
+        inverseZoom,
+        1
+      );
+      addTransparentControls(transparentControlHeight, transparentControlWidth);
+    }
   }
 
   window.addEventListener("resize", function () {
-    controlDimensions();
+    setTopBarStyles();
   });
+
+  document.head.appendChild(topBarStyleSheet);
 
   function waitForElement(elements, func, timeout = 100) {
     const queries = elements.map((element) => document.querySelector(element));
