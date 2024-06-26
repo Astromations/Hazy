@@ -95,7 +95,6 @@
   Spicetify.Player.addEventListener("songchange", onSongChange);
   onSongChange();
   windowControls();
-  setTopBarStyles();
   galaxyFade();
 
   function scrollToTop() {
@@ -244,6 +243,7 @@
   window.addEventListener("resize", function () {
     setTopBarStyles();
   });
+  setTopBarStyles();
 
   document.head.appendChild(topBarStyleSheet);
 
