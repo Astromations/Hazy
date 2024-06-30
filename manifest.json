@@ -1,22 +1,16 @@
 {
-    "name": "Hazy",
-    "description": "A Hazy spicetify theme",
-    "preview": "hazy_home.png",
-    "readme": "README.md",
-    "usercss": "user.css",
-    "schemes": "color.ini",
-    "include": [
-        "https://raw.githubusercontent.com/Astromations/Hazy/main/theme.js"
-    ],
-    "authors": [
-        {
-            "name": "Astromations",
-            "url": "https://github.com/Astromations"
-        }
-    ],
-    "tags": [
-        "dark",
-        "transparent",
-        "hazy"
-    ]
+  "name": "Hazy",
+  "description": "A Hazy spicetify theme",
+  "preview": "hazy_home.png",
+  "readme": "README.md",
+  "usercss": "https://astromations.github.io/Hazy/app.css",
+  "schemes": "https://astromations.github.io/Hazy/color.ini",
+  "include": ["https://astromations.github.io/Hazy/hazy.js"],
+  "authors": [
+    {
+      "name": "Astromations",
+      "url": "https://github.com/Astromations"
+    }
+  ],
+  "tags": ["dark", "transparent", "hazy"]
 }
