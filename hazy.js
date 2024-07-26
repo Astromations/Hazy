@@ -13,33 +13,33 @@
 
   function valueSet() {
     // Check if blurValue is NaN
-    const blurValue = parseInt(localStorage.getItem("blurAmount"));
-    const contValue = parseInt(localStorage.getItem("contAmount"));
-    const satuValue = parseInt(localStorage.getItem("satuAmount"));
-    const brightValue = parseInt(localStorage.getItem("brightAmount"));
+    const blurValue = Number.parseInt(localStorage.getItem("blurAmount"));
+    const contValue = Number.parseInt(localStorage.getItem("contAmount"));
+    const satuValue = Number.parseInt(localStorage.getItem("satuAmount"));
+    const brightValue = Number.parseInt(localStorage.getItem("brightAmount"));
 
-    if (!isNaN(blurValue)) {
+    if (!Number.isNaN(blurValue)) {
       document.documentElement.style.setProperty("--blur", `${blurValue}px`);
     } else {
-      document.documentElement.style.setProperty("--blur", `15px`);
+      document.documentElement.style.setProperty("--blur", "15px");
     }
 
-    if (!isNaN(contValue)) {
+    if (!Number.isNaN(contValue)) {
       document.documentElement.style.setProperty("--cont", `${contValue}%`);
     } else {
-      document.documentElement.style.setProperty("--cont", `50%`);
+      document.documentElement.style.setProperty("--cont", "50%");
     }
 
-    if (!isNaN(satuValue)) {
+    if (!Number.isNaN(satuValue)) {
       document.documentElement.style.setProperty("--satu", `${satuValue}%`);
     } else {
-      document.documentElement.style.setProperty("--satu", `70%`);
+      document.documentElement.style.setProperty("--satu", "70%");
     }
 
-    if (!isNaN(brightValue)) {
+    if (!Number.isNaN(brightValue)) {
       document.documentElement.style.setProperty("--bright", `${brightValue}%`);
     } else {
-      document.documentElement.style.setProperty("--bright", `120%`);
+      document.documentElement.style.setProperty("--bright", "120%");
     }
   }
 
@@ -59,7 +59,7 @@
       const fadeTime = fadeTimeResponse.entries["audio.crossfade.time_v2"].number;*/
       const fadeTime = FadeTime;
       const dividedTime = fadeTime / 1000;
-      FadeTime = dividedTime + "s";
+      FadeTime = `${dividedTime}s`;
     }
 
     document.documentElement.style.setProperty("--fade-time", FadeTime);
@@ -70,7 +70,7 @@
   async function onSongChange() {
     fetchFadeTime(); // Call fetchFadeTime after songchange
 
-    let album_uri = Spicetify.Player.data.item.metadata.album_uri;
+    const album_uri = Spicetify.Player.data.item.metadata.album_uri;
     let bgImage = Spicetify.Player.data.item.metadata.image_url;
 
     if (album_uri !== undefined && !album_uri.includes("spotify:show")) {
@@ -80,7 +80,7 @@
     } else if (Spicetify.Player.data.item.uri.includes("spotify:episode")) {
       // podcast
       bgImage = bgImage.replace("spotify:image:", "https://i.scdn.co/image/");
-    } else if (Spicetify.Player.data.item.provider == "ad") {
+    } else if (Spicetify.Player.data.item.provider === "ad") {
       // ad
       return;
     } else {
@@ -199,7 +199,7 @@
     inverseZoom,
     scalingFactorOut = 1,
     minWidth = 0,
-    maxWidth = Infinity
+    maxWidth = Number.POSITIVE_INFINITY
   ) {
     const scaledWidth = baseWidth * (inverseZoom + scalingFactorOut - 1);
     return Math.max(minWidth, Math.min(scaledWidth, maxWidth));
@@ -240,7 +240,10 @@
 }
 `;
     }
-    if (Spicetify.Platform.PlatformData.os_name === "windows" || "Windows") {
+    if (
+      Spicetify.Platform.PlatformData.os_name === "windows" ||
+      Spicetify.Platform.PlatformData.os_name === "Windows"
+    ) {
       const transparentControlHeight = baseHeight;
       const transparentControlWidth = calculateScaledPx(
         baseWidth,
@@ -251,7 +254,7 @@
     }
   }
 
-  window.addEventListener("resize", function () {
+  window.addEventListener("resize", () => {
     setTopBarStyles();
   });
   setTopBarStyles();
@@ -315,7 +318,7 @@
 
       function calculateLyricsMaxWidth(lyricsContentWrapper) {
         const lyricsContentContainer = lyricsContentWrapper.parentElement;
-        const marginLeft = parseInt(
+        const marginLeft = Number.parseInt(
           window.getComputedStyle(lyricsContentWrapper).marginLeft,
           10
         );
@@ -350,13 +353,13 @@
     }
 
     function lyricsCallback(mutationsList, lyricsObserver) {
-      mutationsList.forEach((mutation) => {
-        mutation.addedNodes?.forEach((addedNode) => {
+      for (const mutation of mutationsList) {
+        for (addedNode of mutation.addedNodes) {
           if (addedNode.classList?.contains("lyrics-lyricsContent-provider")) {
             setLyricsPageProperties();
           }
-        });
-      });
+        }
+      }
       lyricsObserver.disconnect;
     }
 
@@ -399,12 +402,12 @@
           scrollNode.setAttribute("fade", fadeDirection);
 
           // fade
-          if (scrollNode.scrollTop == 0) {
+          if (scrollNode.scrollTop === 0) {
             scrollNode.setAttribute("fade", "bottom");
           } else if (
             scrollNode.scrollHeight -
               scrollNode.scrollTop -
-              scrollNode.clientHeight ==
+              scrollNode.clientHeight ===
             0
           ) {
             scrollNode.setAttribute("fade", "top");
@@ -421,12 +424,12 @@
         scrollNode.setAttribute("fade", "bottom");
         scrollNode.addEventListener("scroll", () => {
           // fade
-          if (scrollNode.scrollTop == 0) {
+          if (scrollNode.scrollTop === 0) {
             scrollNode.setAttribute("fade", "bottom");
           } else if (
             scrollNode.scrollHeight -
               scrollNode.scrollTop -
-              scrollNode.clientHeight ==
+              scrollNode.clientHeight ===
             0
           ) {
             scrollNode.setAttribute("fade", "top");
@@ -456,7 +459,7 @@
           `url("${startImage}")`
         );
       } else {
-        let bgImage = Spicetify.Player.data.item.metadata.image_url;
+        const bgImage = Spicetify.Player.data.item.metadata.image_url;
         document.documentElement.style.setProperty(
           "--image_url",
           `url("${bgImage}")`
@@ -465,7 +468,7 @@
     }
   }
 
-  const defImage = `https://i.imgur.com/Wl2D0h0.png`;
+  const defImage = "https://i.imgur.com/Wl2D0h0.png";
   let startImage = localStorage.getItem("hazy:startupBg") || defImage;
 
   // input for custom background images
@@ -484,7 +487,7 @@
 
   // listen for edit playlist popup
   const editObserver = new MutationObserver((mutation_list) => {
-    for (let mutation of mutation_list) {
+    for (const mutation of mutation_list) {
       if (mutation.addedNodes.length) {
         const popupContent = mutation.addedNodes[0].querySelector(
           ".main-trackCreditsModal-container"
@@ -522,7 +525,7 @@
           );
 
         optButton.onclick = () => {
-          localStorage.removeItem("hazy:playlistBg:" + uid);
+          localStorage.removeItem(`hazy:playlistBg:${uid}`);
           bannerSelect.querySelector("img").src =
             coverSelect.querySelector("img").src;
         };
@@ -543,7 +546,7 @@
         );
         save.addEventListener("click", () => {
           if (srcInput.value) {
-            localStorage.setItem("hazy:playlistBg:" + uid, srcInput.value);
+            localStorage.setItem(`hazy:playlistBg:${uid}`, srcInput.value);
           }
         });
       }
@@ -571,7 +574,7 @@
         document.querySelector("#home-select img").src = result;
       } else {
         try {
-          localStorage.setItem("hazy:playlistBg:" + uid, result);
+          localStorage.setItem(`hazy:playlistBg:${uid}`, result);
         } catch {
           Spicetify.showNotification("File too large");
           return;
@@ -622,27 +625,11 @@
     }
 
     function setValue(blur_am, cont, satu, bright, desc) {
-      let valueRow = document.createElement("div");
-      let blur_val = localStorage.getItem(blur_am);
-      let cont_val = localStorage.getItem(cont);
-      let satu_val = localStorage.getItem(satu);
-      let bright_val = localStorage.getItem(bright);
-
-      if (localStorage.getItem(blur_am) === null) {
-        bright_val = "15";
-      }
-
-      if (localStorage.getItem(cont) === null) {
-        cont_val = "50";
-      }
-
-      if (localStorage.getItem(satu) === null) {
-        satu_val = "70";
-      }
-
-      if (localStorage.getItem(bright) === null) {
-        bright_val = "120";
-      }
+      const valueRow = document.createElement("div");
+      const blur_val = localStorage.getItem(blur_am) || "15";
+      const cont_val = localStorage.getItem(cont) || "50";
+      const satu_val = localStorage.getItem(satu) || "70";
+      const bright_val = localStorage.getItem(bright) || "120";
 
       valueRow.classList.add("hazyOptionRow");
       valueRow.innerHTML = `
@@ -686,89 +673,67 @@
 
     </div>`;
 
-      valueRow
-        .querySelector("#blur-value")
-        .addEventListener("input", function () {
-          let content = valueRow
-            .querySelector("#blur-value")
-            .textContent.trim();
-          let number = parseInt(content);
-          if (content.length > 3) {
-            content = valueRow.querySelector("#blur-value").textContent =
-              content.slice(0, 3); // Truncate the content to 3 characters
-          }
-          valueRow.querySelector("#blur-input").value = number;
-        });
+      valueRow.querySelector("#blur-value").addEventListener("input", () => {
+        let content = valueRow.querySelector("#blur-value").textContent.trim();
+        const number = Number.parseInt(content);
+        if (content.length > 3) {
+          content = valueRow.querySelector("#blur-value").textContent =
+            content.slice(0, 3); // Truncate the content to 3 characters
+        }
+        valueRow.querySelector("#blur-input").value = number;
+      });
 
-      valueRow
-        .querySelector("#cont-value")
-        .addEventListener("input", function () {
-          let content = valueRow
-            .querySelector("#cont-value")
-            .textContent.trim();
-          let number = parseInt(content);
-          if (content.length > 3) {
-            content = valueRow.querySelector("#cont-value").textContent =
-              content.slice(0, 3); // Truncate the content to 3 characters
-          }
-          valueRow.querySelector("#cont-input").value = number;
-        });
+      valueRow.querySelector("#cont-value").addEventListener("input", () => {
+        let content = valueRow.querySelector("#cont-value").textContent.trim();
+        const number = Number.parseInt(content);
+        if (content.length > 3) {
+          content = valueRow.querySelector("#cont-value").textContent =
+            content.slice(0, 3); // Truncate the content to 3 characters
+        }
+        valueRow.querySelector("#cont-input").value = number;
+      });
 
-      valueRow
-        .querySelector("#satu-value")
-        .addEventListener("input", function () {
-          let content = valueRow
-            .querySelector("#satu-value")
-            .textContent.trim();
-          let number = parseInt(content);
-          if (content.length > 3) {
-            content = valueRow.querySelector("#satu-value").textContent =
-              content.slice(0, 3); // Truncate the content to 3 characters
-          }
-          valueRow.querySelector("#satu-input").value = number;
-        });
+      valueRow.querySelector("#satu-value").addEventListener("input", () => {
+        let content = valueRow.querySelector("#satu-value").textContent.trim();
+        const number = Number.parseInt(content);
+        if (content.length > 3) {
+          content = valueRow.querySelector("#satu-value").textContent =
+            content.slice(0, 3); // Truncate the content to 3 characters
+        }
+        valueRow.querySelector("#satu-input").value = number;
+      });
 
-      valueRow
-        .querySelector("#bright-value")
-        .addEventListener("input", function () {
-          let content = valueRow
-            .querySelector("#bright-value")
-            .textContent.trim();
-          let number = parseInt(content);
-          if (content.length > 3) {
-            content = valueRow.querySelector("#bright-value").textContent =
-              content.slice(0, 3); // Truncate the content to 3 characters
-          }
-          valueRow.querySelector("#bright-input").value = number;
-        });
+      valueRow.querySelector("#bright-value").addEventListener("input", () => {
+        let content = valueRow
+          .querySelector("#bright-value")
+          .textContent.trim();
+        const number = Number.parseInt(content);
+        if (content.length > 3) {
+          content = valueRow.querySelector("#bright-value").textContent =
+            content.slice(0, 3); // Truncate the content to 3 characters
+        }
+        valueRow.querySelector("#bright-input").value = number;
+      });
 
-      valueRow
-        .querySelector("#blur-input")
-        .addEventListener("input", function () {
-          valueRow.querySelector("#blur-value").textContent =
-            valueRow.querySelector("#blur-input").value;
-        });
+      valueRow.querySelector("#blur-input").addEventListener("input", () => {
+        valueRow.querySelector("#blur-value").textContent =
+          valueRow.querySelector("#blur-input").value;
+      });
 
-      valueRow
-        .querySelector("#cont-input")
-        .addEventListener("input", function () {
-          valueRow.querySelector("#cont-value").textContent =
-            valueRow.querySelector("#cont-input").value;
-        });
+      valueRow.querySelector("#cont-input").addEventListener("input", () => {
+        valueRow.querySelector("#cont-value").textContent =
+          valueRow.querySelector("#cont-input").value;
+      });
 
-      valueRow
-        .querySelector("#satu-input")
-        .addEventListener("input", function () {
-          valueRow.querySelector("#satu-value").textContent =
-            valueRow.querySelector("#satu-input").value;
-        });
+      valueRow.querySelector("#satu-input").addEventListener("input", () => {
+        valueRow.querySelector("#satu-value").textContent =
+          valueRow.querySelector("#satu-input").value;
+      });
 
-      valueRow
-        .querySelector("#bright-input")
-        .addEventListener("input", function () {
-          valueRow.querySelector("#bright-value").textContent =
-            valueRow.querySelector("#bright-input").value;
-        });
+      valueRow.querySelector("#bright-input").addEventListener("input", () => {
+        valueRow.querySelector("#bright-value").textContent =
+          valueRow.querySelector("#bright-input").value;
+      });
 
       valueSet();
 
@@ -829,7 +794,7 @@
       onSongChange();
 
       // save options to local storage
-      [...optionList.children].forEach((option) => {
+      for (const option of [...optionList.children]) {
         localStorage.setItem(
           option.getAttribute("name"),
           option.querySelector(".toggle").classList.contains("enabled")
@@ -839,13 +804,13 @@
             .querySelector(".toggle")
             .classList.contains("enabled")}`
         );
-      });
+      }
 
-      [...valueList.children].forEach((value) => {
-        let blurValueInput = value.querySelector("#blur-input");
-        let contValueInput = value.querySelector("#cont-input");
-        let satuValueInput = value.querySelector("#satu-input");
-        let brightValueInput = value.querySelector("#bright-input");
+      for (const value of [...valueList.children]) {
+        const blurValueInput = value.querySelector("#blur-input");
+        const contValueInput = value.querySelector("#cont-input");
+        const satuValueInput = value.querySelector("#satu-input");
+        const brightValueInput = value.querySelector("#bright-input");
 
         localStorage.setItem(
           value.getAttribute("blur_am"),
@@ -859,14 +824,14 @@
         );
 
         valueSet();
-      });
+      }
 
       parseOptions();
       loopOptions("/");
     });
 
     resetButton.addEventListener("click", () => {
-      [...valueList.children].forEach((value) => {
+      for (const value of [...valueList.children]) {
         document.querySelector(".hazyOptionRow #blur-input").value = 15;
         document.querySelector(".hazyOptionRow #cont-input").value = 50;
         document.querySelector(".hazyOptionRow #satu-input").value = 70;
@@ -883,7 +848,7 @@
         localStorage.setItem(value.getAttribute("satu"), 70);
         localStorage.setItem(value.getAttribute("bright"), 120);
         valueSet();
-      });
+      }
 
       parseOptions();
       loopOptions("/");
