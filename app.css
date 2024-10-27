@@ -1213,15 +1213,27 @@ ARTIST PAGE
 }
 
 .under-main-view div {
-  opacity: 0.9;
+  opacity: .92;
   filter: grayscale(5%) brightness(94%);
 }
 
-.main-entityHeader-background.main-entityHeader-gradient {
-  -webkit-mask-image: linear-gradient(rgba(0, 0, 0, var(--artist-fade)) 58%,
-      transparent 100%);
-  mask-image: linear-gradient(rgba(0, 0, 0, var(--artist-fade)) 58%,
-      transparent 100%);
+.under-main-view div:after {
+  display: none
+}
+
+.I0bVSxvqA3rm5HvciMap {
+  background: none
+}
+
+.main-entityHeader-background.main-entityHeader-gradient, .sv5suqIPUwjgUF_BzM41 {
+  -webkit-mask-image: linear-gradient(
+    rgba(0, 0, 0, var(--artist-fade)) 58%,
+    transparent 100%
+  );
+    mask-image: linear-gradient(
+    rgba(0, 0, 0, var(--artist-fade)) 58%,
+    transparent 100%
+  );
 }
 
 .artist-artistOverview-artistOverviewContent {
