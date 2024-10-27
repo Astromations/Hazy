@@ -5,6 +5,7 @@
   }
 
   console.log("Hazy is running");
+
   function getAlbumInfo(uri) {
     return Spicetify.CosmosAsync.get(
       `https://api.spotify.com/v1/albums/${uri}`
@@ -108,7 +109,6 @@
       scrollToTop();
     }
   });
-
   (function sidebar() {
     // Sidebar settings
     const item = localStorage.getItem("spicetify-exp-features");
@@ -180,86 +180,41 @@
     });
   }
 
-  function calculateBrowserZoom() {
-    const viewportWidth = window.innerWidth;
-    const windowWidth = window.outerWidth;
-    const zoomLevel = (windowWidth / viewportWidth) * 100;
-    return zoomLevel;
-  }
+  // Window Zoom Variable
+  function updateZoomVariable() {
+    let prevOuterWidth = window.outerWidth;
+    let prevInnerWidth = window.innerWidth;
+    let prevRatio = window.devicePixelRatio;
 
-  function calculateInverseBrowserZoom() {
-    const viewportWidth = window.innerWidth;
-    const windowWidth = window.outerWidth;
-    const inverseZoomLevel = viewportWidth / windowWidth;
-    return inverseZoomLevel;
-  }
+    function calculateAndApplyZoom() {
+      const newOuterWidth = window.outerWidth;
+      const newInnerWidth = window.innerWidth;
+      const newRatio = window.devicePixelRatio;
 
-  function calculateScaledPx(
-    baseWidth,
-    inverseZoom,
-    scalingFactorOut = 1,
-    minWidth = 0,
-    maxWidth = Number.POSITIVE_INFINITY
-  ) {
-    const scaledWidth = baseWidth * (inverseZoom + scalingFactorOut - 1);
-    return Math.max(minWidth, Math.min(scaledWidth, maxWidth));
-  }
+      if (
+        prevOuterWidth <= 160 ||
+        prevRatio !== newRatio ||
+        prevOuterWidth !== newOuterWidth ||
+        prevInnerWidth !== newInnerWidth
+      ) {
+        const zoomFactor = newOuterWidth / newInnerWidth || 1;
+        document.documentElement.style.setProperty("--zoom", zoomFactor);
+        console.debug(
+          `Zoom Updated: ${newOuterWidth} / ${newInnerWidth} = ${zoomFactor}`
+        );
 
-  /* Topbar styles */
-  const topBarStyleSheet = document.createElement("style");
-  async function setTopBarStyles() {
-    const isGlobalNav =
-      document.querySelector(".global-nav") ||
-      document.querySelector(".Root__globalNav");
-
-    const baseHeight = isGlobalNav ? 64 : 42;
-    const baseWidth = 135;
-    const constant = 0.912872807;
-
-    const normalZoom = calculateBrowserZoom();
-    const inverseZoom = calculateInverseBrowserZoom();
-
-    const finalControlHeight = Math.round(
-      (normalZoom ** constant * 100) / 100 - (isGlobalNav ? 3 : 25)
-    );
-
-    console.log(finalControlHeight);
-
-    await setMainWindowControlHeight(finalControlHeight);
-
-    const paddingStart = calculateScaledPx(64, inverseZoom, 1);
-    const paddingEnd = calculateScaledPx(baseWidth, inverseZoom, 1);
-
-    console.log(normalZoom, inverseZoom);
-
-    if (isGlobalNav) {
-      topBarStyleSheet.innerText = `
-.spotify__container--is-desktop.spotify__os--is-windows .Root__globalNav {
-  padding-inline-end: ${paddingEnd}px !important;
-  padding-inline-start: ${paddingStart}px !important;
-}
-`;
+        // Update previous values
+        prevOuterWidth = newOuterWidth;
+        prevInnerWidth = newInnerWidth;
+        prevRatio = newRatio;
+      }
     }
-    if (
-      Spicetify.Platform.PlatformData.os_name === "windows" ||
-      Spicetify.Platform.PlatformData.os_name === "Windows"
-    ) {
-      const transparentControlHeight = baseHeight;
-      const transparentControlWidth = calculateScaledPx(
-        baseWidth,
-        inverseZoom,
-        1
-      );
-      addTransparentControls(transparentControlHeight, transparentControlWidth);
-    }
+
+    calculateAndApplyZoom();
+    window.addEventListener("resize", calculateAndApplyZoom);
   }
 
-  window.addEventListener("resize", () => {
-    setTopBarStyles();
-  });
-  setTopBarStyles();
-
-  document.head.appendChild(topBarStyleSheet);
+  updateZoomVariable();
 
   function waitForElement(elements, func, timeout = 100) {
     const queries = elements.map((element) => document.querySelector(element));
@@ -269,6 +224,22 @@
       setTimeout(waitForElement, 300, elements, func, timeout - 1);
     }
   }
+
+  function getAndApplyNav(element) {
+    const isCenteredGlobalNav = Spicetify.Platform.version >= "1.2.46.462";
+
+    document.body.classList.add(
+      `${
+        element?.[0]?.classList.contains("Root__globalNav")
+          ? isCenteredGlobalNav
+            ? "global-nav-centered"
+            : "global-nav"
+          : "control-nav"
+      }`
+    );
+  }
+
+  waitForElement([".Root__globalNav"], getAndApplyNav, 10000);
 
   Spicetify.Platform.History.listen(updateLyricsPageProperties);
 
