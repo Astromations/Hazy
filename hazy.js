@@ -185,6 +185,24 @@
     }
   }
 
+  //creates a list of rgb values from image data
+  const buildRgb = (imageData) => {
+    const rgbValues = [];
+    // note that we are loopin every 4!
+    // for every Red, Green, Blue and Alpha
+    for (let i = 0; i < imageData.length; i += 4) {
+      const rgb = {
+        r: imageData[i],
+        g: imageData[i + 1],
+        b: imageData[i + 2],
+      };
+
+      rgbValues.push(rgb);
+    }
+
+    return rgbValues;
+  };
+
   //converts RGB to Hex
   function rgbToHex(r, g, b) {
     return "#" + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
