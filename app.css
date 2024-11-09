@@ -1,5 +1,16 @@
 :root {
-  --button-border: 8px;
+    --backdrop: rgba(0, 0, 0, 0.3);
+    --button-border: 8px;
+
+    /* root variables from color.ini
+    --spice-main: 0A0A0A;
+    --spice-subtext: F0F0F0;
+    --spice-shadow: 000000;
+    --spice-text: FFFFFF;
+    --spice-button: FFC0EA;
+    --spice-button-active: FFC0EA;
+    --spice-accent: FFC0EA;
+    */
 }
 
 svg {
