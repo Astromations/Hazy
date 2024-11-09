@@ -91,7 +91,226 @@
 
     loopOptions("/");
     updateLyricsPageProperties();
+
+    //custom code added by lily
+    if (!config.useCustomColor) {
+      let imageUrl;
+      if (!config.useCurrSongAsHome) {
+        imageUrl = Spicetify.Player.data.item.metadata.image_url.replace("spotify:image:", "https://i.scdn.co/image/");
+      } else {
+        const defImage = "https://i.imgur.com/Wl2D0h0.png";
+        imageUrl = localStorage.getItem("hazy:startupBg") || defImage;
+      }
+
+      changeAccentColors(imageUrl);
+    } else {
+      let color = localStorage.getItem("CustomColor") || "#FFC0EA";
+      document.querySelector(':root').style.setProperty('--spice-button', color);
+      document.querySelector(':root').style.setProperty('--spice-button-active', color);
+      document.querySelector(':root').style.setProperty('--spice-accent', color);
+    }
   }
+
+  //functions added by lily
+  //changes the accent colors to the most prominent color
+  //in the background image when the background is changed
+  //-------------------------------------
+
+  function changeAccentColors(imageUrl) {
+    getMostProminentColor(imageUrl, function (color) {
+      document.querySelector(':root').style.setProperty('--spice-button', color);
+      document.querySelector(':root').style.setProperty('--spice-button-active', color);
+      document.querySelector(':root').style.setProperty('--spice-accent', color);
+    });
+  }
+
+  function getMostProminentColor(imageUrl, callback) {
+    const img = new Image();
+    img.crossOrigin = "Anonymous"; // allows CORS-enabled images
+
+    img.onload = function () {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      let rgbList = buildRgb(imageData);
+
+      // attempt with filters
+      let hexColor = findColor(rgbList);
+
+      // retry without filters if no color is found
+      if (!hexColor) {
+        hexColor = findColor(rgbList, true);
+      }
+
+      callback(hexColor);
+    };
+
+    img.onerror = function () {
+      console.error("Image load error");
+      callback(null);
+    };
+
+    img.src = imageUrl;
+  }
+
+  //gets the most prominent color in a list of rgb values
+  function findColor(rgbList, skipFilters = false) {
+    const colorCount = {};
+    let maxColor = '';
+    let maxCount = 0;
+
+    for (let i = 0; i < rgbList.length; i++) {
+      if (!skipFilters && (isTooDark(rgbList[i]) || isTooCloseToWhite(rgbList[i]))) {
+        continue;
+      }
+
+      const color = `${rgbList[i].r},${rgbList[i].g},${rgbList[i].b}`;
+      colorCount[color] = (colorCount[color] || 0) + 1;
+
+      if (colorCount[color] > maxCount) {
+        maxColor = color;
+        maxCount = colorCount[color];
+      }
+    }
+
+    if (maxColor) {
+      const [r, g, b] = maxColor.split(',').map(Number);
+      return rgbToHex(r, g, b);
+    } else {
+      return null; // no color found
+    }
+  }
+
+  //quantizes a list of rgb values (currently unused)
+  const quantization = (rgbValues, depth) => {
+    const MAX_DEPTH = 4;
+
+    // Base case
+    if (depth === MAX_DEPTH || rgbValues.length === 0) {
+      const color = rgbValues.reduce(
+        (prev, curr) => {
+          prev.r += curr.r;
+          prev.g += curr.g;
+          prev.b += curr.b;
+
+          return prev;
+        },
+        {
+          r: 0,
+          g: 0,
+          b: 0,
+        }
+      );
+
+      color.r = Math.round(color.r / rgbValues.length);
+      color.g = Math.round(color.g / rgbValues.length);
+      color.b = Math.round(color.b / rgbValues.length);
+
+      return [color];
+    }
+
+    /**
+     *  Recursively do the following:
+     *  1. Find the pixel channel (red,green or blue) with biggest difference/range
+     *  2. Order by this channel
+     *  3. Divide in half the rgb colors list
+     *  4. Repeat process again, until desired depth or base case
+     */
+    const componentToSortBy = findBiggestColorRange(rgbValues);
+    rgbValues.sort((p1, p2) => {
+      return p1[componentToSortBy] - p2[componentToSortBy];
+    });
+
+    const mid = rgbValues.length / 2;
+    return [
+      ...quantization(rgbValues.slice(0, mid), depth + 1),
+      ...quantization(rgbValues.slice(mid + 1), depth + 1),
+    ];
+  };
+
+  // returns what color channel has the biggest difference (currently unused)
+  const findBiggestColorRange = (rgbValues) => {
+    /**
+     * Min is initialized to the maximum value posible
+     * from there we procced to find the minimum value for that color channel
+     *
+     * Max is initialized to the minimum value posible
+     * from there we procced to fin the maximum value for that color channel
+     */
+    let rMin = Number.MAX_VALUE;
+    let gMin = Number.MAX_VALUE;
+    let bMin = Number.MAX_VALUE;
+
+    let rMax = Number.MIN_VALUE;
+    let gMax = Number.MIN_VALUE;
+    let bMax = Number.MIN_VALUE;
+
+    rgbValues.forEach((pixel) => {
+      rMin = Math.min(rMin, pixel.r);
+      gMin = Math.min(gMin, pixel.g);
+      bMin = Math.min(bMin, pixel.b);
+
+      rMax = Math.max(rMax, pixel.r);
+      gMax = Math.max(gMax, pixel.g);
+      bMax = Math.max(bMax, pixel.b);
+    });
+
+    const rRange = rMax - rMin;
+    const gRange = gMax - gMin;
+    const bRange = bMax - bMin;
+
+    // determine which color has the biggest difference
+    const biggestRange = Math.max(rRange, gRange, bRange);
+    if (biggestRange === rRange) {
+      return "r";
+    } else if (biggestRange === gRange) {
+      return "g";
+    } else {
+      return "b";
+    }
+  };
+
+  //creates a list of rgb values from image data
+  const buildRgb = (imageData) => {
+    const rgbValues = [];
+    // note that we are loopin every 4!
+    // for every Red, Green, Blue and Alpha
+    for (let i = 0; i < imageData.length; i += 4) {
+      const rgb = {
+        r: imageData[i],
+        g: imageData[i + 1],
+        b: imageData[i + 2],
+      };
+
+      rgbValues.push(rgb);
+    }
+
+    return rgbValues;
+  };
+
+  //converts RGB to Hex
+  function rgbToHex(r, g, b) {
+    return "#" + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+  }
+
+  //checks if a color is too dark
+  function isTooDark(rgb) {
+    const brightness = 0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b;
+    const threshold = 100; // adjust this value to control the "darkness" threshold
+    return brightness < threshold;
+  }
+
+  //checks if a color is too close to white
+  function isTooCloseToWhite(rgb) {
+    const threshold = 200;
+    return rgb.r > threshold && rgb.g > threshold && rgb.b > threshold;
+  }
+
+  //-------------------------------------
 
   Spicetify.Player.addEventListener("songchange", onSongChange);
   onSongChange();
@@ -418,6 +637,14 @@
     config.useCurrSongAsHome = JSON.parse(
       localStorage.getItem("UseCustomBackground")
     );
+
+    //save the selected custom color 
+    //to the config (added by lily)
+    //-------------------------
+    config.useCustomColor = JSON.parse(
+      localStorage.getItem("UseCustomColor")
+    );
+    //-------------------------
   }
 
   parseOptions();
@@ -732,6 +959,32 @@
     createOption("UseCustomBackground", "Custom background:", false);
     setValue("blurAmount", "contAmount", "satuAmount", "brightAmount", " ");
 
+    //additional settings (added by lily)
+    //-------------------
+
+    //color label
+    const colorLabel = document.createElement("label");
+    colorLabel.id = "color-label";
+    colorLabel.htmlFor = "color";
+    colorLabel.textContent = "Color:";
+    colorLabel.style.textAlign = "right";
+    colorLabel.style.marginRight = "10px";
+    colorLabel.style.fontSize = "0.875rem";
+    optionList.append(colorLabel);
+
+    //color picker
+    const colorInput = document.createElement("input");
+    colorInput.type = "color";
+    colorInput.id = "color-input";
+    colorInput.value = localStorage.getItem("CustomColor") || "#FFC0EA";
+    colorInput.style.border = "none";
+    optionList.append(colorInput);
+
+    //color toggle
+    createOption("UseCustomColor", "Custom color:", false);
+
+    //-------------------
+
     content.append(optionList);
     content.append(valueList);
 
@@ -762,10 +1015,26 @@
       // update changed bg image
       startImage = srcInput.value || content.querySelector("img").src;
       localStorage.setItem("hazy:startupBg", startImage);
+
+      //save the selected custom color (added by lily)
+      //-------------------------
+      let colorElem = document.getElementById("color-input");
+      localStorage.setItem("CustomColor", colorElem.value);
+      //-------------------------
+
       onSongChange();
 
       // save options to local storage
       for (const option of [...optionList.children]) {
+
+        //ignore the color changing options
+        //as they are handled differently (added by lily)
+        //-------------------------
+        if (option.id == "color-input" || option.id == "color-label") {
+          continue;
+        }
+        //-------------------------
+
         localStorage.setItem(
           option.getAttribute("name"),
           option.querySelector(".toggle").classList.contains("enabled")
