@@ -887,12 +887,12 @@
     const colorInput = document.createElement("input");
     colorInput.type = "color";
     colorInput.id = "color-input";
-    colorInput.value = localStorage.getItem("CustomColor") || "#FFC0EA";
+    colorInput.value = localStorage.getItem("CustomColor") || "#30bf63";
     colorInput.style.border = "none";
     optionList.append(colorInput);
 
     //color toggle
-    createOption("UseCustomColor", "Custom color:", false);
+    createOption("UseCustomColor", "Custom color:", true);
 
     //-------------------
 
