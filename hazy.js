@@ -95,7 +95,7 @@
     //custom code added by lily
     if (!config.useCustomColor) {
       let imageUrl;
-      if (!config.useCurrSongAsHome) {
+      if (!config.useCurrSongAsHome && Spicetify.Player.data.item.metadata.image_url) {
         imageUrl = Spicetify.Player.data.item.metadata.image_url.replace("spotify:image:", "https://i.scdn.co/image/");
       } else {
         const defImage = "https://i.imgur.com/Wl2D0h0.png";
