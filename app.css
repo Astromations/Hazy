@@ -129,6 +129,7 @@ NAVIGATION BAR
 .main-yourLibraryX-libraryContainer {
   --background-highlight: rgba(255, 255, 255, 0.05) !important;
   --background-press: rgba(255, 255, 255, 0.05);
+	background: none !important
 }
 
 .main-rootlist-wrapper {
