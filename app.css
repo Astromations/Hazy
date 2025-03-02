@@ -1733,7 +1733,7 @@ button.hazyOptionToggle {
 span.toggleWrapper {
   width: 42px;
   height: 25px;
-  background-color: rgb(131, 131, 131);
+  background-color: rgb(30, 30, 30);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -1744,13 +1744,17 @@ span.toggle {
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  background-color: white;
+  background-color: rgb(30, 30, 30);
   margin-left: 2px;
   transition: 0.25s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
 span.toggleWrapper:has(span.toggle.enabled) {
-  background-color: var(--spice-button);
+  background-color: rgb(230, 230, 230);
+}
+
+span.toggleWrapper:not(:has(span.toggle.enabled)) span.toggle {
+  background-color: rgb(130, 130, 130);
 }
 
 span.toggle.enabled {
@@ -1776,17 +1780,30 @@ span.toggle.enabled {
   left: 230px;
   width: 80px;
   height: 38px;
-  color: #fff;
+  color: rgb(30, 30, 30);
   border-radius: var(--button-border);
-  background-color: var(--spice-button);
+  background-color: rgb(230, 230, 230);
   padding-bottom: 1px;
   font-size: 12.5px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 2.5px;
   border: none;
-  transition: all 0.3s ease 0s;
+  transition: background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
+}
+
+#home-save.applied, #home-save.applied:hover {
+  background-color: rgb(100, 200, 100);
+  color: white;
+  letter-spacing: 2px;
+  cursor: default;
+  box-shadow: 0px 0px 15px 5px rgb(75, 150, 75, 0.4);
+}
+
+#home-save:hover {
+  opacity: 0.9;
+  box-shadow: 0px 0px 15px 5px rgba(200, 200, 200, 0.4);
 }
 
 #value-reset {
@@ -1807,11 +1824,6 @@ span.toggle.enabled {
   transition: all 0.3s ease 0s;
   cursor: pointer;
   background-color: #ea5d5d;
-}
-
-#home-save:hover {
-  background-color: var(--spice-button);
-  box-shadow: 0px 0px 15px 5px rgba(46, 229, 157, 0.4);
 }
 
 #value-reset:hover {

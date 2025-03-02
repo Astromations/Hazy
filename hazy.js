@@ -923,6 +923,18 @@
     saveButton.innerHTML = "Apply";
 
     saveButton.addEventListener("click", () => {
+       // Change the button text to "Applied!", add "applied" class, and disable the button
+       saveButton.innerHTML = "Applied!";
+       saveButton.classList.add("applied");
+       saveButton.disabled = true;
+ 
+       // Revert back to "Apply", remove "applied" class, and enable the button after 2 seconds
+       setTimeout(() => {
+         saveButton.innerHTML = "Apply";
+         saveButton.classList.remove("applied");
+         saveButton.disabled = false;
+       }, 2000);
+
       // update changed bg image
       startImage = srcInput.value || content.querySelector("img").src;
       localStorage.setItem("hazy:startupBg", startImage);
