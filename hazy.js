@@ -6,11 +6,7 @@
 
   console.log("Hazy is running");
 
-  function getAlbumInfo(uri) {
-    return Spicetify.CosmosAsync.get(
-      `https://api.spotify.com/v1/albums/${uri}`
-    );
-  }
+  const defImage = "https://i.imgur.com/Wl2D0h0.png";
 
   function valueSet() {
     // Check if blurValue is NaN
@@ -63,9 +59,8 @@
       FadeTime = `${dividedTime}s`;
     }
 
-    document.documentElement.style.setProperty("--fade-time", FadeTime);
-    console.log(FadeTime);
     // Use the CSS variable "--fade-time" for transition time
+    document.documentElement.style.setProperty("--fade-time", FadeTime);
   }
 
   async function onSongChange() {
@@ -74,11 +69,7 @@
     const album_uri = Spicetify.Player.data.item.metadata.album_uri;
     let bgImage = Spicetify.Player.data.item.metadata.image_url;
 
-    if (album_uri !== undefined && !album_uri.includes("spotify:show")) {
-      const albumInfo = await getAlbumInfo(
-        album_uri.replace("spotify:album:", "")
-      );
-    } else if (Spicetify.Player.data.item.uri.includes("spotify:episode")) {
+    if (Spicetify.Player.data.item.uri.includes("spotify:episode")) {
       // podcast
       bgImage = bgImage.replace("spotify:image:", "https://i.scdn.co/image/");
     } else if (Spicetify.Player.data.item.provider === "ad") {
@@ -95,19 +86,30 @@
     //custom code added by lily
     if (!config.useCustomColor) {
       let imageUrl;
-      if (!config.useCurrSongAsHome && Spicetify.Player.data.item.metadata.image_url) {
-        imageUrl = Spicetify.Player.data.item.metadata.image_url.replace("spotify:image:", "https://i.scdn.co/image/");
+      if (
+        !config.useCurrSongAsHome &&
+        Spicetify.Player.data.item.metadata.image_url
+      ) {
+        imageUrl = Spicetify.Player.data.item.metadata.image_url.replace(
+          "spotify:image:",
+          "https://i.scdn.co/image/"
+        );
       } else {
-        const defImage = "https://i.imgur.com/Wl2D0h0.png";
         imageUrl = localStorage.getItem("hazy:startupBg") || defImage;
       }
 
       changeAccentColors(imageUrl);
     } else {
       let color = localStorage.getItem("CustomColor") || "#FFC0EA";
-      document.querySelector(':root').style.setProperty('--spice-button', color);
-      document.querySelector(':root').style.setProperty('--spice-button-active', color);
-      document.querySelector(':root').style.setProperty('--spice-accent', color);
+      document
+        .querySelector(":root")
+        .style.setProperty("--spice-button", color);
+      document
+        .querySelector(":root")
+        .style.setProperty("--spice-button-active", color);
+      document
+        .querySelector(":root")
+        .style.setProperty("--spice-accent", color);
     }
   }
 
@@ -118,9 +120,15 @@
 
   function changeAccentColors(imageUrl) {
     getMostProminentColor(imageUrl, function (color) {
-      document.querySelector(':root').style.setProperty('--spice-button', color);
-      document.querySelector(':root').style.setProperty('--spice-button-active', color);
-      document.querySelector(':root').style.setProperty('--spice-accent', color);
+      document
+        .querySelector(":root")
+        .style.setProperty("--spice-button", color);
+      document
+        .querySelector(":root")
+        .style.setProperty("--spice-button-active", color);
+      document
+        .querySelector(":root")
+        .style.setProperty("--spice-accent", color);
     });
   }
 
@@ -129,13 +137,18 @@
     img.crossOrigin = "Anonymous"; // allows CORS-enabled images
 
     img.onload = function () {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
       canvas.width = img.width;
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0);
 
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      const imageData = ctx.getImageData(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      ).data;
       let rgbList = buildRgb(imageData);
 
       // attempt with filters
@@ -160,11 +173,14 @@
   //gets the most prominent color in a list of rgb values
   function findColor(rgbList, skipFilters = false) {
     const colorCount = {};
-    let maxColor = '';
+    let maxColor = "";
     let maxCount = 0;
 
     for (let i = 0; i < rgbList.length; i++) {
-      if (!skipFilters && (isTooDark(rgbList[i]) || isTooCloseToWhite(rgbList[i]))) {
+      if (
+        !skipFilters &&
+        (isTooDark(rgbList[i]) || isTooCloseToWhite(rgbList[i]))
+      ) {
         continue;
       }
 
@@ -178,7 +194,7 @@
     }
 
     if (maxColor) {
-      const [r, g, b] = maxColor.split(',').map(Number);
+      const [r, g, b] = maxColor.split(",").map(Number);
       return rgbToHex(r, g, b);
     } else {
       return null; // no color found
@@ -205,7 +221,7 @@
 
   //converts RGB to Hex
   function rgbToHex(r, g, b) {
-    return "#" + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+    return "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("");
   }
 
   //checks if a color is too dark
@@ -282,32 +298,8 @@
   })();
 
   function windowControls() {
-    function detectOS() {
-      const userAgent = window.navigator.userAgent;
-
-      if (userAgent.indexOf("Win") !== -1) {
-        document.body.classList.add("windows");
-      }
-    }
-
-    // Call detectOS() immediately
-    detectOS();
-  }
-
-  /* Transparent Controls */
-  function addTransparentControls(height, width) {
-    document.documentElement.style.setProperty(
-      "--control-height",
-      `${height}px`
-    );
-    document.documentElement.style.setProperty("--control-width", `${width}px`);
-  }
-
-  async function setMainWindowControlHeight(height) {
-    await Spicetify.CosmosAsync.post("sp://messages/v1/container/control", {
-      type: "update_titlebar",
-      height: height,
-    });
+    const userAgent = window.navigator.userAgent;
+    if (userAgent.indexOf("Win") !== -1) document.body.classList.add("windows");
   }
 
   // Window Zoom Variable
@@ -549,35 +541,22 @@
       localStorage.getItem("UseCustomBackground")
     );
 
-    //save the selected custom color 
+    //save the selected custom color
     //to the config (added by lily)
     //-------------------------
-    config.useCustomColor = JSON.parse(
-      localStorage.getItem("UseCustomColor")
-    );
+    config.useCustomColor = JSON.parse(localStorage.getItem("UseCustomColor"));
     //-------------------------
   }
 
   parseOptions();
 
   function loopOptions(page) {
-    if (page === "/") {
-      if (config.useCurrSongAsHome) {
-        document.documentElement.style.setProperty(
-          "--image_url",
-          `url("${startImage}")`
-        );
-      } else {
-        const bgImage = Spicetify.Player.data.item.metadata.image_url;
-        document.documentElement.style.setProperty(
-          "--image_url",
-          `url("${bgImage}")`
-        );
-      }
-    }
+    if (page !== "/") return;
+    const img_url = Spicetify.Player.data.item.metadata.image_url;
+    const img = !config.useCurrSongAsHome && img_url ? img_url : startImage;
+    document.documentElement.style.setProperty("--image_url", `url("${img}")`);
   }
 
-  const defImage = "https://i.imgur.com/Wl2D0h0.png";
   let startImage = localStorage.getItem("hazy:startupBg") || defImage;
 
   // input for custom background images
@@ -593,76 +572,6 @@
     "image/svg+xml",
     "image/webp",
   ].join(",");
-
-  // listen for edit playlist popup
-  const editObserver = new MutationObserver((mutation_list) => {
-    for (const mutation of mutation_list) {
-      if (mutation.addedNodes.length) {
-        const popupContent = mutation.addedNodes[0].querySelector(
-          ".main-trackCreditsModal-container"
-        );
-        if (!popupContent) continue;
-
-        const coverSelect = popupContent.querySelector(
-          ".main-playlistEditDetailsModal-albumCover"
-        );
-        const bannerSelect = coverSelect.cloneNode(true);
-        bannerSelect.id = "banner-select";
-
-        const [, , uid] =
-          Spicetify.Platform.History.location.pathname.split("/");
-
-        const srcInput = document.createElement("input");
-        srcInput.type = "text";
-        srcInput.classList.add(
-          "main-playlistEditDetailsModal-textElement",
-          "main-playlistEditDetailsModal-titleInput"
-        );
-        srcInput.id = "src-input";
-        srcInput.placeholder = "Background image URL (recommended)";
-
-        const optButton = bannerSelect.querySelector(
-          ".main-playlistEditDetailsModal-imageDropDownButton"
-        );
-        optButton.querySelector("svg").children[0].remove();
-        optButton
-          .querySelector("svg")
-          .append(
-            document
-              .querySelector(".main-playlistEditDetailsModal-closeBtn path")
-              .cloneNode()
-          );
-
-        optButton.onclick = () => {
-          localStorage.removeItem(`hazy:playlistBg:${uid}`);
-          bannerSelect.querySelector("img").src =
-            coverSelect.querySelector("img").src;
-        };
-
-        popupContent.append(bannerSelect);
-        popupContent.append(bannerInput);
-        popupContent.append(srcInput);
-
-        const editButton = bannerSelect.querySelector(
-          ".main-editImageButton-image.main-editImageButton-overlay"
-        );
-        editButton.onclick = () => {
-          bannerInput.click();
-        };
-
-        const save = popupContent.querySelector(
-          ".main-playlistEditDetailsModal-save button"
-        );
-        save.addEventListener("click", () => {
-          if (srcInput.value) {
-            localStorage.setItem(`hazy:playlistBg:${uid}`, srcInput.value);
-          }
-        });
-      }
-    }
-  });
-
-  editObserver.observe(document.body, { childList: true });
 
   // when user selects a custom background image
   bannerInput.onchange = () => {
@@ -681,16 +590,6 @@
           return;
         }
         document.querySelector("#home-select img").src = result;
-      } else {
-        try {
-          localStorage.setItem(`hazy:playlistBg:${uid}`, result);
-        } catch {
-          Spicetify.showNotification("File too large");
-          return;
-        }
-
-        document.querySelector("#banner-select img").src = result;
-        document.querySelector("#banner-select img").removeAttribute("srcset");
       }
     };
     reader.readAsDataURL(file);
@@ -923,17 +822,17 @@
     saveButton.innerHTML = "Apply";
 
     saveButton.addEventListener("click", () => {
-       // Change the button text to "Applied!", add "applied" class, and disable the button
-       saveButton.innerHTML = "Applied!";
-       saveButton.classList.add("applied");
-       saveButton.disabled = true;
- 
-       // Revert back to "Apply", remove "applied" class, and enable the button after 2 seconds
-       setTimeout(() => {
-         saveButton.innerHTML = "Apply";
-         saveButton.classList.remove("applied");
-         saveButton.disabled = false;
-       }, 2000);
+      // Change the button text to "Applied!", add "applied" class, and disable the button
+      saveButton.innerHTML = "Applied!";
+      saveButton.classList.add("applied");
+      saveButton.disabled = true;
+
+      // Revert back to "Apply", remove "applied" class, and enable the button after 2 seconds
+      setTimeout(() => {
+        saveButton.innerHTML = "Apply";
+        saveButton.classList.remove("applied");
+        saveButton.disabled = false;
+      }, 2000);
 
       // update changed bg image
       startImage = srcInput.value || content.querySelector("img").src;
@@ -949,7 +848,6 @@
 
       // save options to local storage
       for (const option of [...optionList.children]) {
-
         //ignore the color changing options
         //as they are handled differently (added by lily)
         //-------------------------
