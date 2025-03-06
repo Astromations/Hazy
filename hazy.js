@@ -7,83 +7,88 @@
   console.log("Hazy is running");
 
   const defImage = "https://i.imgur.com/Wl2D0h0.png";
+  const config = {};
 
   function valueSet() {
-    // Check if blurValue is NaN
     const blurValue = Number.parseInt(localStorage.getItem("blurAmount"));
     const contValue = Number.parseInt(localStorage.getItem("contAmount"));
     const satuValue = Number.parseInt(localStorage.getItem("satuAmount"));
     const brightValue = Number.parseInt(localStorage.getItem("brightAmount"));
 
-    if (!Number.isNaN(blurValue)) {
-      document.documentElement.style.setProperty("--blur", `${blurValue}px`);
-    } else {
-      document.documentElement.style.setProperty("--blur", "15px");
-    }
-
-    if (!Number.isNaN(contValue)) {
-      document.documentElement.style.setProperty("--cont", `${contValue}%`);
-    } else {
-      document.documentElement.style.setProperty("--cont", "50%");
-    }
-
-    if (!Number.isNaN(satuValue)) {
-      document.documentElement.style.setProperty("--satu", `${satuValue}%`);
-    } else {
-      document.documentElement.style.setProperty("--satu", "70%");
-    }
-
-    if (!Number.isNaN(brightValue)) {
-      document.documentElement.style.setProperty("--bright", `${brightValue}%`);
-    } else {
-      document.documentElement.style.setProperty("--bright", "120%");
-    }
+    document.documentElement.style.setProperty(
+      "--blur",
+      Number.isNaN(blurValue) ? "15px" : `${blurValue}px`
+    );
+    document.documentElement.style.setProperty(
+      "--cont",
+      Number.isNaN(contValue) ? "50%" : `${contValue}%`
+    );
+    document.documentElement.style.setProperty(
+      "--satu",
+      Number.isNaN(satuValue) ? "70%" : `${satuValue}%`
+    );
+    document.documentElement.style.setProperty(
+      "--bright",
+      Number.isNaN(brightValue) ? "120%" : `${brightValue}%`
+    );
   }
 
   valueSet();
 
+  function setAccentColor(color) {
+    document.querySelector(":root").style.setProperty("--spice-button", color);
+    document
+      .querySelector(":root")
+      .style.setProperty("--spice-button-active", color);
+    document.querySelector(":root").style.setProperty("--spice-accent", color);
+  }
+
   async function fetchFadeTime() {
-    /* It seems that ._prefs isnt available anymore. Therefore the crossfade is being disabled for now.
-    const response = await Spicetify.Platform.PlayerAPI._prefs.get({ key: "audio.crossfade_v2" });
-    const crossfadeEnabled = response.entries["audio.crossfade_v2"].bool;
-    */
-    const crossfadeEnabled = false;
+    const response = await Spicetify.Platform.PlayerAPI._prefs.get({
+      key: "audio.crossfade_v2",
+    });
 
-    let FadeTime = "0.4s"; // Default value of 0.4 seconds, otherwise syncs with crossfade time
-
-    if (crossfadeEnabled) {
-      /*const fadeTimeResponse = await Spicetify.Platform.PlayerAPI._prefs.get({ key: "audio.crossfade.time_v2" });
-      const fadeTime = fadeTimeResponse.entries["audio.crossfade.time_v2"].number;*/
-      const fadeTime = FadeTime;
-      const dividedTime = fadeTime / 1000;
-      FadeTime = `${dividedTime}s`;
+    // Default to 0.4s if crossfade is disabled
+    if (!response.entries["audio.crossfade_v2"].bool) {
+      document.documentElement.style.setProperty("--fade-time", "0.4s");
+      return;
     }
+    const fadeTimeResponse = await Spicetify.Platform.PlayerAPI._prefs.get({
+      key: "audio.crossfade.time_v2",
+    });
+    const fadeTime = fadeTimeResponse.entries["audio.crossfade.time_v2"].number;
 
     // Use the CSS variable "--fade-time" for transition time
-    document.documentElement.style.setProperty("--fade-time", FadeTime);
+    document.documentElement.style.setProperty(
+      "--fade-time",
+      `${fadeTime / 1000}s`
+    );
   }
 
   async function onSongChange() {
-    fetchFadeTime(); // Call fetchFadeTime after songchange
+    // Call fetchFadeTime after songchange
+    fetchFadeTime();
 
     const album_uri = Spicetify.Player.data.item.metadata.album_uri;
     let bgImage = Spicetify.Player.data.item.metadata.image_url;
 
-    if (Spicetify.Player.data.item.uri.includes("spotify:episode")) {
-      // podcast
+    if (album_uri !== undefined && !album_uri.includes("spotify:show")) {
+      // Album
+    } else if (Spicetify.Player.data.item.uri.includes("spotify:episode")) {
+      // Podcast
       bgImage = bgImage.replace("spotify:image:", "https://i.scdn.co/image/");
     } else if (Spicetify.Player.data.item.provider === "ad") {
-      // ad
+      // Ad
       return;
     } else {
       // When clicking a song from the homepage, songChange is fired with half empty metadata
       setTimeout(onSongChange, 200);
     }
 
-    loopOptions("/");
+    loopOptions();
     updateLyricsPageProperties();
 
-    //custom code added by lily
+    // Custom code added by lily
     if (!config.useCustomColor) {
       let imageUrl;
       if (
@@ -98,43 +103,19 @@
         imageUrl = localStorage.getItem("hazy:startupBg") || defImage;
       }
 
-      changeAccentColors(imageUrl);
+      // Functions added by lily
+      // Changes the accent colors to the most prominent color
+      // in the background image when the background is changed
+      getMostProminentColor(imageUrl, setAccentColor);
     } else {
-      let color = localStorage.getItem("CustomColor") || "#FFC0EA";
-      document
-        .querySelector(":root")
-        .style.setProperty("--spice-button", color);
-      document
-        .querySelector(":root")
-        .style.setProperty("--spice-button-active", color);
-      document
-        .querySelector(":root")
-        .style.setProperty("--spice-accent", color);
+      setAccentColor(localStorage.getItem("CustomColor") || "#FFC0EA");
     }
-  }
-
-  //functions added by lily
-  //changes the accent colors to the most prominent color
-  //in the background image when the background is changed
-  //-------------------------------------
-
-  function changeAccentColors(imageUrl) {
-    getMostProminentColor(imageUrl, function (color) {
-      document
-        .querySelector(":root")
-        .style.setProperty("--spice-button", color);
-      document
-        .querySelector(":root")
-        .style.setProperty("--spice-button-active", color);
-      document
-        .querySelector(":root")
-        .style.setProperty("--spice-accent", color);
-    });
   }
 
   function getMostProminentColor(imageUrl, callback) {
     const img = new Image();
-    img.crossOrigin = "Anonymous"; // allows CORS-enabled images
+    // Allows CORS-enabled images
+    img.crossOrigin = "Anonymous";
 
     img.onload = function () {
       const canvas = document.createElement("canvas");
@@ -151,13 +132,11 @@
       ).data;
       let rgbList = buildRgb(imageData);
 
-      // attempt with filters
+      // Attempt with filters
       let hexColor = findColor(rgbList);
 
-      // retry without filters if no color is found
-      if (!hexColor) {
-        hexColor = findColor(rgbList, true);
-      }
+      // Retry without filters if no color is found
+      if (!hexColor) hexColor = findColor(rgbList, true);
 
       callback(hexColor);
     };
@@ -170,7 +149,7 @@
     img.src = imageUrl;
   }
 
-  //gets the most prominent color in a list of rgb values
+  // Gets the most prominent color in a list of rgb values
   function findColor(rgbList, skipFilters = false) {
     const colorCount = {};
     let maxColor = "";
@@ -197,15 +176,15 @@
       const [r, g, b] = maxColor.split(",").map(Number);
       return rgbToHex(r, g, b);
     } else {
-      return null; // no color found
+      // No color found
+      return null;
     }
   }
 
-  //creates a list of rgb values from image data
+  // Creates a list of RGB values from image data
   const buildRgb = (imageData) => {
     const rgbValues = [];
-    // note that we are loopin every 4!
-    // for every Red, Green, Blue and Alpha
+    // Note that we are looping every 4 (red, green, blue and alpha)
     for (let i = 0; i < imageData.length; i += 4) {
       const rgb = {
         r: imageData[i],
@@ -219,25 +198,24 @@
     return rgbValues;
   };
 
-  //converts RGB to Hex
+  // Converts RGB to Hex
   function rgbToHex(r, g, b) {
     return "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("");
   }
 
-  //checks if a color is too dark
+  // Checks if a color is too dark
   function isTooDark(rgb) {
     const brightness = 0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b;
-    const threshold = 100; // adjust this value to control the "darkness" threshold
+    // Adjust this value to control the "darkness" threshold
+    const threshold = 100;
     return brightness < threshold;
   }
 
-  //checks if a color is too close to white
+  // Checks if a color is too close to white
   function isTooCloseToWhite(rgb) {
     const threshold = 200;
     return rgb.r > threshold && rgb.g > threshold && rgb.b > threshold;
   }
-
-  //-------------------------------------
 
   Spicetify.Player.addEventListener("songchange", onSongChange);
   onSongChange();
@@ -251,9 +229,7 @@
 
   document.addEventListener("click", (event) => {
     const clickedElement = event.target;
-    if (clickedElement.closest(".main-entityHeader-topbarTitle")) {
-      scrollToTop();
-    }
+    if (clickedElement.closest(".main-entityHeader-topbarTitle")) scrollToTop();
   });
   (function sidebar() {
     // Sidebar settings
@@ -349,16 +325,10 @@
 
   function getAndApplyNav(element) {
     const isCenteredGlobalNav = Spicetify.Platform.version >= "1.2.46.462";
-
-    document.body.classList.add(
-      `${
-        element?.[0]?.classList.contains("Root__globalNav")
-          ? isCenteredGlobalNav
-            ? "global-nav-centered"
-            : "global-nav"
-          : "control-nav"
-      }`
-    );
+    let addedClass = "control-nav";
+    if (element?.[0]?.classList.contains("Root__globalNav"))
+      addedClass = isCenteredGlobalNav ? "global-nav-centered" : "global-nav";
+    document.body.classList.add(addedClass);
   }
 
   waitForElement([".Root__globalNav"], getAndApplyNav, 10000);
@@ -383,7 +353,8 @@
     mainViewContainerResizeObserver.observe(mainViewContainer);
   });
 
-  // fixes container shifting & active line clipping | taken from Bloom: https://github.com/nimsandu/spicetify-bloom
+  // Fixes container shifting & active line clipping
+  // Taken from Bloom | https://github.com/nimsandu/spicetify-bloom
   function updateLyricsPageProperties() {
     function setLyricsPageProperties() {
       function detectTextDirection() {
@@ -396,17 +367,10 @@
       }
 
       function setLyricsTransformOrigin(textDirection) {
-        if (textDirection === "rtl") {
-          document.documentElement.style.setProperty(
-            "--lyrics-text-direction",
-            "right"
-          );
-        } else {
-          document.documentElement.style.setProperty(
-            "--lyrics-text-direction",
-            "left"
-          );
-        }
+        document.documentElement.style.setProperty(
+          "--lyrics-text-direction",
+          textDirection === "rtl" ? "right" : "left"
+        );
       }
 
       function calculateLyricsMaxWidth(lyricsContentWrapper) {
@@ -446,13 +410,10 @@
     }
 
     function lyricsCallback(mutationsList, lyricsObserver) {
-      for (const mutation of mutationsList) {
-        for (addedNode of mutation.addedNodes) {
-          if (addedNode.classList?.contains("lyrics-lyricsContent-provider")) {
+      for (const mutation of mutationsList)
+        for (addedNode of mutation.addedNodes)
+          if (addedNode.classList?.contains("lyrics-lyricsContent-provider"))
             setLyricsPageProperties();
-          }
-        }
-      }
       lyricsObserver.disconnect;
     }
 
@@ -468,14 +429,29 @@
     );
   }
 
+  function setFadeDirection(scrollNode) {
+    let fadeDirection = "full";
+    if (scrollNode.scrollTop === 0) {
+      fadeDirection = "bottom";
+    } else if (
+      scrollNode.scrollHeight -
+        scrollNode.scrollTop -
+        scrollNode.clientHeight ===
+      0
+    ) {
+      fadeDirection = "top";
+    }
+    scrollNode.setAttribute("fade", fadeDirection);
+  }
+
   function galaxyFade() {
-    //Borrowed from the Galaxy theme | https://github.com/harbassan/spicetify-galaxy/
-    // add fade and dimness effects to mainview and the the artist image on scroll
+    // Add fade and dimness effects to mainview and the artist image on scroll
+    // Taken from Galaxy | https://github.com/harbassan/spicetify-galaxy/
     waitForElement(
       [".Root__main-view [data-overlayscrollbars-viewport]"],
       ([scrollNode]) => {
         scrollNode.addEventListener("scroll", () => {
-          //artist fade
+          // Artist fade
           const scrollValue = scrollNode.scrollTop;
           const artist_fade = Math.max(0, (-0.3 * scrollValue + 100) / 100);
           document.documentElement.style.setProperty(
@@ -483,30 +459,7 @@
             artist_fade
           );
 
-          const fadeDirection =
-            scrollNode.scrollTop === 0
-              ? "bottom"
-              : scrollNode.scrollHeight -
-                  scrollNode.scrollTop -
-                  scrollNode.clientHeight ===
-                0
-              ? "top"
-              : "full";
-          scrollNode.setAttribute("fade", fadeDirection);
-
-          // fade
-          if (scrollNode.scrollTop === 0) {
-            scrollNode.setAttribute("fade", "bottom");
-          } else if (
-            scrollNode.scrollHeight -
-              scrollNode.scrollTop -
-              scrollNode.clientHeight ===
-            0
-          ) {
-            scrollNode.setAttribute("fade", "top");
-          } else {
-            scrollNode.setAttribute("fade", "full");
-          }
+          setFadeDirection(scrollNode);
         });
       }
     );
@@ -515,43 +468,25 @@
       [".Root__nav-bar [data-overlayscrollbars-viewport]"],
       ([scrollNode]) => {
         scrollNode.setAttribute("fade", "bottom");
-        scrollNode.addEventListener("scroll", () => {
-          // fade
-          if (scrollNode.scrollTop === 0) {
-            scrollNode.setAttribute("fade", "bottom");
-          } else if (
-            scrollNode.scrollHeight -
-              scrollNode.scrollTop -
-              scrollNode.clientHeight ===
-            0
-          ) {
-            scrollNode.setAttribute("fade", "top");
-          } else {
-            scrollNode.setAttribute("fade", "full");
-          }
-        });
+        scrollNode.addEventListener("scroll", () =>
+          setFadeDirection(scrollNode)
+        );
       }
     );
   }
-
-  const config = {};
 
   function parseOptions() {
     config.useCurrSongAsHome = JSON.parse(
       localStorage.getItem("UseCustomBackground")
     );
 
-    //save the selected custom color
-    //to the config (added by lily)
-    //-------------------------
+    // Save the selected custom color to the config (added by lily)
     config.useCustomColor = JSON.parse(localStorage.getItem("UseCustomColor"));
-    //-------------------------
   }
 
   parseOptions();
 
-  function loopOptions(page) {
-    if (page !== "/") return;
+  function loopOptions() {
     const img_url = Spicetify.Player.data.item.metadata.image_url;
     const img = !config.useCurrSongAsHome && img_url ? img_url : startImage;
     document.documentElement.style.setProperty("--image_url", `url("${img}")`);
@@ -559,7 +494,7 @@
 
   let startImage = localStorage.getItem("hazy:startupBg") || defImage;
 
-  // input for custom background images
+  // Input for custom background images
   const bannerInput = document.createElement("input");
   bannerInput.type = "file";
   bannerInput.className = "banner-input";
@@ -573,7 +508,7 @@
     "image/webp",
   ].join(",");
 
-  // when user selects a custom background image
+  // When user selects a custom background image
   bannerInput.onchange = () => {
     if (!bannerInput.files.length) return;
 
@@ -595,7 +530,7 @@
     reader.readAsDataURL(file);
   };
 
-  // create edit home topbar button
+  // Create edit home topbar button
   const homeEdit = new Spicetify.Topbar.Button("Hazy Settings", "edit", () => {
     const content = document.createElement("div");
     content.innerHTML = `
@@ -685,8 +620,9 @@
         let content = valueRow.querySelector("#blur-value").textContent.trim();
         const number = Number.parseInt(content);
         if (content.length > 3) {
+          // Truncate the content to 3 characters
           content = valueRow.querySelector("#blur-value").textContent =
-            content.slice(0, 3); // Truncate the content to 3 characters
+            content.slice(0, 3);
         }
         valueRow.querySelector("#blur-input").value = number;
       });
@@ -695,8 +631,9 @@
         let content = valueRow.querySelector("#cont-value").textContent.trim();
         const number = Number.parseInt(content);
         if (content.length > 3) {
+          // Truncate the content to 3 characters
           content = valueRow.querySelector("#cont-value").textContent =
-            content.slice(0, 3); // Truncate the content to 3 characters
+            content.slice(0, 3);
         }
         valueRow.querySelector("#cont-input").value = number;
       });
@@ -705,8 +642,9 @@
         let content = valueRow.querySelector("#satu-value").textContent.trim();
         const number = Number.parseInt(content);
         if (content.length > 3) {
+          // Truncate the content to 3 characters
           content = valueRow.querySelector("#satu-value").textContent =
-            content.slice(0, 3); // Truncate the content to 3 characters
+            content.slice(0, 3);
         }
         valueRow.querySelector("#satu-input").value = number;
       });
@@ -717,8 +655,9 @@
           .textContent.trim();
         const number = Number.parseInt(content);
         if (content.length > 3) {
+          // Truncate the content to 3 characters
           content = valueRow.querySelector("#bright-value").textContent =
-            content.slice(0, 3); // Truncate the content to 3 characters
+            content.slice(0, 3);
         }
         valueRow.querySelector("#bright-input").value = number;
       });
@@ -769,10 +708,9 @@
     createOption("UseCustomBackground", "Custom background:", false);
     setValue("blurAmount", "contAmount", "satuAmount", "brightAmount", " ");
 
-    //additional settings (added by lily)
-    //-------------------
+    // Additional settings (added by lily)
 
-    //color label
+    // Color label
     const colorLabel = document.createElement("label");
     colorLabel.id = "color-label";
     colorLabel.htmlFor = "color";
@@ -782,7 +720,7 @@
     colorLabel.style.fontSize = "0.875rem";
     optionList.append(colorLabel);
 
-    //color picker
+    // Color picker
     const colorInput = document.createElement("input");
     colorInput.type = "color";
     colorInput.id = "color-input";
@@ -790,10 +728,8 @@
     colorInput.style.border = "none";
     optionList.append(colorInput);
 
-    //color toggle
+    // Color toggle
     createOption("UseCustomColor", "Custom color:", true);
-
-    //-------------------
 
     content.append(optionList);
     content.append(valueList);
@@ -834,27 +770,20 @@
         saveButton.disabled = false;
       }, 2000);
 
-      // update changed bg image
+      // Update changed bg image
       startImage = srcInput.value || content.querySelector("img").src;
       localStorage.setItem("hazy:startupBg", startImage);
 
-      //save the selected custom color (added by lily)
-      //-------------------------
+      // Save the selected custom color (added by lily)
       let colorElem = document.getElementById("color-input");
       localStorage.setItem("CustomColor", colorElem.value);
-      //-------------------------
 
       onSongChange();
 
-      // save options to local storage
+      // Save options to local storage
       for (const option of [...optionList.children]) {
-        //ignore the color changing options
-        //as they are handled differently (added by lily)
-        //-------------------------
-        if (option.id == "color-input" || option.id == "color-label") {
-          continue;
-        }
-        //-------------------------
+        // Ignore the color changing options as they are handled differently (added by lily)
+        if (option.id == "color-input" || option.id == "color-label") continue;
 
         localStorage.setItem(
           option.getAttribute("name"),
@@ -888,7 +817,7 @@
       }
 
       parseOptions();
-      loopOptions("/");
+      loopOptions();
     });
 
     resetButton.addEventListener("click", () => {
@@ -912,7 +841,7 @@
       }
 
       parseOptions();
-      loopOptions("/");
+      loopOptions();
     });
 
     content.append(resetButton);
@@ -928,6 +857,6 @@
   });
   homeEdit.element.classList.toggle("hidden", false);
 
-  // startup parse
-  loopOptions("/");
+  // Startup parse
+  loopOptions();
 })();
