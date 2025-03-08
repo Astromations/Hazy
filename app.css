@@ -1722,6 +1722,7 @@ div[aria-label="Hazy Settings"] .main-trackCreditsModal-mainSection {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 10px;
 }
 
 button.hazyOptionToggle {
@@ -1762,7 +1763,7 @@ span.toggle.enabled {
 }
 
 #src-input {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .main-editImageButton-icon svg {
@@ -1775,9 +1776,7 @@ span.toggle.enabled {
 
 #home-save {
   display: inline-block;
-  margin-left: auto;
-  position: relative;
-  left: 230px;
+  margin-left: 20px;
   width: 80px;
   height: 38px;
   color: rgb(30, 30, 30);
@@ -1808,9 +1807,7 @@ span.toggle.enabled {
 
 #value-reset {
   display: inline-block;
-  position: relative;
-  left: 210px;
-  margin-top: 20px;
+  margin-left: auto;
   width: 80px;
   height: 38px;
   color: #ffffff;
@@ -1834,7 +1831,6 @@ span.toggle.enabled {
 /* report issue link */
 .issue-button {
   display: block;
-  padding-bottom: 10px;
   font-size: 0.8em;
   width: fit-content;
   opacity: 0.8;
@@ -1844,14 +1840,9 @@ span.toggle.enabled {
   opacity: 0.9;
 }
 
-.blur-amount {
-  width: 100%;
-  padding-top: 10px;
-}
-
 .slider-container {
   display: flex;
-  padding: 15px 0 0 0;
+  width: 100%;
 }
 
 .hazyOptionDesc {
@@ -1970,13 +1961,12 @@ POPUP MODAL
 /*-------------------
   COLOR PICKER
   -------------------*/
-input[type="color"] {
-    border: none;
-    background-color: black;
-    overflow: hidden;
-    cursor: pointer;
-    border-radius: 4px;
-	border: none;
-	padding: 2px;
-    vertical-align: middle;
+#color-input {
+  border: none !important;
+  background-color: black;
+  overflow: hidden;
+  cursor: pointer;
+  vertical-align: middle;
+  inline-size: 42px;
+  block-size: 25px;
 }

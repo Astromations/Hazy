@@ -5,11 +5,23 @@
   }
 
   const defImage = "https://i.imgur.com/Wl2D0h0.png";
-  const cfgToggles = {
-    useCurrSongAsHome: false,
-    useCustomColor: true,
+  const toggleInfo = [
+    {
+      id: "UseCustomBackground",
+      name: "Custom background",
+      defVal: false,
+    },
+    {
+      id: "UseCustomColor",
+      name: "Custom color",
+      defVal: true,
+    },
+  ];
+  const toggles = {
+    UseCustomBackground: false,
+    UseCustomColor: true,
   };
-  const cfgSliders = [
+  const sliders = [
     {
       id: "blur",
       name: "Blur",
@@ -31,8 +43,8 @@
     },
   ];
 
-  function valueSet() {
-    cfgSliders.forEach((opt) => {
+  function loadSliders() {
+    sliders.forEach((opt) => {
       const val = localStorage.getItem(`${opt.id}Amount`) || opt.defVal;
       document.documentElement.style.setProperty(
         `--${opt.id}`,
@@ -41,7 +53,7 @@
     });
   }
 
-  valueSet();
+  loadSliders();
 
   function setAccentColor(color) {
     document.querySelector(":root").style.setProperty("--spice-button", color);
@@ -97,10 +109,10 @@
     updateLyricsPageProperties();
 
     // Custom code added by lily
-    if (!cfgToggles.useCustomColor) {
+    if (!toggles.UseCustomColor) {
       let imageUrl;
       if (
-        !cfgToggles.useCurrSongAsHome &&
+        !toggles.UseCustomBackground &&
         Spicetify.Player.data.item.metadata.image_url
       ) {
         imageUrl = Spicetify.Player.data.item.metadata.image_url.replace(
@@ -210,6 +222,7 @@
     return rgb.r > threshold && rgb.g > threshold && rgb.b > threshold;
   }
 
+  loadToggles();
   Spicetify.Player.addEventListener("songchange", onSongChange);
   onSongChange();
   windowControls();
@@ -405,11 +418,11 @@
     waitForElement(
       [".lyrics-lyricsContent-provider"],
       ([lyricsContentProvider]) => {
-        const lyricsContentWrapper = lyricsContentProvider.parentElement;
         setLyricsPageProperties();
         const lyricsObserver = new MutationObserver(lyricsCallback);
-        const lyricsObserverConfig = { childList: true };
-        lyricsObserver.observe(lyricsContentWrapper, lyricsObserverConfig);
+        lyricsObserver.observe(lyricsContentProvider.parentElement, {
+          childList: true,
+        });
       }
     );
   }
@@ -429,9 +442,9 @@
     scrollNode.setAttribute("fade", fadeDirection);
   }
 
+  // Add fade and dimness effects to mainview and the artist image on scroll
+  // Taken from Galaxy | https://github.com/harbassan/spicetify-galaxy/
   function galaxyFade() {
-    // Add fade and dimness effects to mainview and the artist image on scroll
-    // Taken from Galaxy | https://github.com/harbassan/spicetify-galaxy/
     waitForElement(
       [".Root__main-view [data-overlayscrollbars-viewport]"],
       ([scrollNode]) => {
@@ -460,20 +473,16 @@
   }
 
   function loadToggles() {
-    cfgToggles.useCurrSongAsHome = JSON.parse(
+    toggles.UseCustomBackground = JSON.parse(
       localStorage.getItem("UseCustomBackground")
     );
 
-    cfgToggles.useCustomColor = JSON.parse(
-      localStorage.getItem("UseCustomColor")
-    );
+    toggles.UseCustomColor = JSON.parse(localStorage.getItem("UseCustomColor"));
   }
-
-  loadToggles();
 
   function loopOptions() {
     const img_url = Spicetify.Player.data.item.metadata.image_url;
-    const img = !cfgToggles.useCurrSongAsHome && img_url ? img_url : startImage;
+    const img = !toggles.UseCustomBackground && img_url ? img_url : startImage;
     document.documentElement.style.setProperty("--image_url", `url("${img}")`);
   }
 
@@ -530,10 +539,8 @@
                 <path d="M17.318 1.975a3.329 3.329 0 114.707 4.707L8.451 20.256c-.49.49-1.082.867-1.735 1.103L2.34 22.94a1 1 0 01-1.28-1.28l1.581-4.376a4.726 4.726 0 011.103-1.735L17.318 1.975zm3.293 1.414a1.329 1.329 0 00-1.88 0L5.159 16.963c-.283.283-.5.624-.636 1l-.857 2.372 2.371-.857a2.726 2.726 0 001.001-.636L20.611 5.268a1.329 1.329 0 000-1.879z"></path></svg><span class="Type__TypeElement-goli3j-0 gAmaez main-editImageButton-copy">Choose photo</span></div></button></div></div><div class="main-playlistEditDetailsModal-imageDropDownContainer"><button class="main-playlistEditDetailsModal-imageDropDownButton" type="button"><svg role="img" height="16" width="16" viewBox="0 0 16 16" class="Svg-sc-1bi12j5-0 EQkJl"><path d="M1.47 1.47a.75.75 0 011.06 0L8 6.94l5.47-5.47a.75.75 0 111.06 1.06L9.06 8l5.47 5.47a.75.75 0 11-1.06 1.06L8 9.06l-5.47 5.47a.75.75 0 01-1.06-1.06L6.94 8 1.47 2.53a.75.75 0 010-1.06z"></path>
               </svg><span class="hidden-visually">Edit photo</span></button></div></div>`;
 
-    const toggleList = document.createElement("div");
-    const sliderList = document.createElement("div");
-
-    function createToggle(id, name, defVal) {
+    function createToggle(opt) {
+      let { id, name, defVal } = opt;
       const toggleRow = document.createElement("div");
       toggleRow.classList.add("hazyOptionRow");
       toggleRow.innerHTML = `
@@ -551,17 +558,15 @@
         );
       const isEnabled = JSON.parse(localStorage.getItem(id)) ?? defVal;
       toggleRow.querySelector(".toggle").classList.toggle("enabled", isEnabled);
-      toggleList.append(toggleRow);
+      content.append(toggleRow);
     }
-
-    const sliderRow = document.createElement("div");
-    sliderRow.classList.add("hazyOptionRow");
-    let values = "";
 
     function createSlider(opt) {
       let { id, name, min, max, step, defVal, end } = opt;
       const val = localStorage.getItem(`${id}Amount`) || defVal;
-      values += `
+      const slider = document.createElement("div");
+      slider.classList.add("hazyOptionRow");
+      slider.innerHTML = `
       <div class="slider-container">
         <label for="${id}-input">${name}:</label>
         <input class="slider" id="${id}-input" type="range" min="${min}" max="${max}" step="${step}" value="${val}">
@@ -569,9 +574,23 @@
           <p id="${id}-value" contenteditable="true" >${val}${end || "%"}</p>
         </div>
       </div>`;
+      slider.querySelector(`#${id}-value`).addEventListener("input", () => {
+        let content = slider.querySelector(`#${id}-value`).textContent.trim();
+        const number = Number.parseInt(content);
+        if (content.length > 3) {
+          // Truncate the content to 3 characters
+          content = slider.querySelector(`#${id}-value`).textContent =
+            content.slice(0, 3);
+        }
+        slider.querySelector(`#${id}-input`).value = number;
+      });
+      slider.querySelector(`#${id}-input`).addEventListener("input", () => {
+        slider.querySelector(`#${id}-value`).textContent = `${
+          slider.querySelector(`#${id}-input`).value
+        }${opt.end || "%"}`;
+      });
+      content.append(slider);
     }
-
-    cfgSliders.forEach(createSlider);
 
     const srcInput = document.createElement("input");
     srcInput.type = "text";
@@ -587,33 +606,11 @@
     }
     content.append(srcInput);
 
-    createToggle("UseCustomBackground", "Custom background", false);
-
-    sliderRow.innerHTML = `<div class="blur-amount" style='width: 100%'>${values}</div>`;
-    cfgSliders.forEach((opt) => {
-      const id = opt.id;
-
-      sliderRow.querySelector(`#${id}-value`).addEventListener("input", () => {
-        let content = sliderRow.querySelector(`#${id}-value`).textContent.trim();
-        const number = Number.parseInt(content);
-        if (content.length > 3) {
-          // Truncate the content to 3 characters
-          content = sliderRow.querySelector(`#${id}-value`).textContent =
-            content.slice(0, 3);
-        }
-        sliderRow.querySelector(`#${id}-input`).value = number;
-      });
-
-      sliderRow.querySelector(`#${id}-input`).addEventListener("input", () => {
-        sliderRow.querySelector(`#${id}-value`).textContent = `${
-          sliderRow.querySelector(`#${id}-input`).value
-        }${opt.end || "%"}`;
-      });
-    });
-    valueSet();
-    sliderList.appendChild(sliderRow);
+    toggleInfo.forEach(createToggle);
 
     // Additional settings (added by lily)
+    const colorRow = document.createElement("div");
+    colorRow.classList.add("hazyOptionRow");
 
     // Color label
     const colorLabel = document.createElement("label");
@@ -623,7 +620,7 @@
     colorLabel.style.textAlign = "right";
     colorLabel.style.marginRight = "10px";
     colorLabel.style.fontSize = "0.875rem";
-    toggleList.append(colorLabel);
+    colorRow.append(colorLabel);
 
     // Color picker
     const colorInput = document.createElement("input");
@@ -631,13 +628,12 @@
     colorInput.id = "color-input";
     colorInput.value = localStorage.getItem("CustomColor") || "#30bf63";
     colorInput.style.border = "none";
-    toggleList.append(colorInput);
+    colorRow.append(colorInput);
 
-    // Color toggle
-    createToggle("UseCustomColor", "Custom color", true);
+    content.append(colorRow);
 
-    content.append(toggleList);
-    content.append(sliderList);
+    sliders.forEach(createSlider);
+    loadSliders();
 
     img = content.querySelector("img");
     img.src = localStorage.getItem("hazy:startupBg") || defImage;
@@ -673,7 +669,7 @@
         saveButton.innerHTML = "Apply";
         saveButton.classList.remove("applied");
         saveButton.disabled = false;
-      }, 2000);
+      }, 1000);
 
       // Update changed bg image
       startImage = srcInput.value || content.querySelector("img").src;
@@ -683,53 +679,57 @@
       let colorElem = document.getElementById("color-input");
       localStorage.setItem("CustomColor", colorElem.value);
 
-      onSongChange();
-
-      // Save options to local storage
-      for (const option of [...toggleList.children]) {
-        // Ignore the color changing options as they are handled differently (added by lily)
-        if (option.id == "color-input" || option.id == "color-label") continue;
-
+      toggleInfo.forEach((opt) =>
         localStorage.setItem(
-          option.getAttribute("name"),
-          option.querySelector(".toggle").classList.contains("enabled")
-        );
-      }
-
-      cfgSliders.forEach((opt) =>
+          opt.id,
+          document
+            .querySelector(`.hazyOptionRow[name=${opt.id}] .toggle`)
+            .classList.contains("enabled")
+        )
+      );
+      sliders.forEach((opt) =>
         localStorage.setItem(
           opt.id + "Amount",
-          value.querySelector(`#${opt.id}-input`).value
+          document.querySelector(`.hazyOptionRow #${opt.id}-input`).value
         )
       );
 
-      valueSet();
+      loadSliders();
       loadToggles();
+      onSongChange();
       loopOptions();
     });
 
     resetButton.addEventListener("click", () => {
-      cfgSliders.forEach((opt) => {
+      sliders.forEach((opt) => {
         document.querySelector(`.hazyOptionRow #${opt.id}-input`).value =
           opt.defVal;
         document.querySelector(
           `.hazyOptionRow #${opt.id}-value`
         ).textContent = `${opt.defVal}${opt.end || "%"}`;
       });
+      toggleInfo.forEach((opt) => {
+        document
+          .querySelector(`.hazyOptionRow[name=${opt.id}] .toggle`)
+          .classList.toggle("enabled", opt.defVal);
+      });
+      document.getElementById("color-input").value = "#30bf63";
 
-      valueSet();
-      loadToggles();
       loopOptions();
     });
 
-    content.append(resetButton);
-    content.append(saveButton);
+    const buttonsRow = document.createElement("div");
+    buttonsRow.style.display = "flex";
+    buttonsRow.style.paddingTop = "15px";
+    buttonsRow.style.alignItems = "flex-end";
 
     const issueButton = document.createElement("a");
     issueButton.classList.add("issue-button");
     issueButton.innerHTML = "Report Issue";
     issueButton.href = "https://github.com/Astromations/Hazy/issues";
-    content.append(issueButton);
+
+    buttonsRow.append(issueButton, resetButton, saveButton);
+    content.append(buttonsRow);
 
     Spicetify.PopupModal.display({ title: "Hazy Settings", content });
   });
