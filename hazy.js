@@ -4,33 +4,41 @@
     return;
   }
 
-  console.log("Hazy is running");
-
   const defImage = "https://i.imgur.com/Wl2D0h0.png";
-  const config = {};
+  const cfgToggles = {
+    useCurrSongAsHome: false,
+    useCustomColor: true,
+  };
+  const cfgSliders = [
+    {
+      id: "blur",
+      name: "Blur",
+      min: 0,
+      max: 50,
+      step: 1,
+      defVal: 15,
+      end: "px",
+    },
+    { id: "cont", name: "Contrast", min: 0, max: 200, step: 2, defVal: 50 },
+    { id: "satu", name: "Saturation", min: 0, max: 200, step: 2, defVal: 70 },
+    {
+      id: "bright",
+      name: "Brightness",
+      min: 0,
+      max: 200,
+      step: 2,
+      defVal: 120,
+    },
+  ];
 
   function valueSet() {
-    const blurValue = Number.parseInt(localStorage.getItem("blurAmount"));
-    const contValue = Number.parseInt(localStorage.getItem("contAmount"));
-    const satuValue = Number.parseInt(localStorage.getItem("satuAmount"));
-    const brightValue = Number.parseInt(localStorage.getItem("brightAmount"));
-
-    document.documentElement.style.setProperty(
-      "--blur",
-      Number.isNaN(blurValue) ? "15px" : `${blurValue}px`
-    );
-    document.documentElement.style.setProperty(
-      "--cont",
-      Number.isNaN(contValue) ? "50%" : `${contValue}%`
-    );
-    document.documentElement.style.setProperty(
-      "--satu",
-      Number.isNaN(satuValue) ? "70%" : `${satuValue}%`
-    );
-    document.documentElement.style.setProperty(
-      "--bright",
-      Number.isNaN(brightValue) ? "120%" : `${brightValue}%`
-    );
+    cfgSliders.forEach((opt) => {
+      const val = localStorage.getItem(`${opt.id}Amount`) || opt.defVal;
+      document.documentElement.style.setProperty(
+        `--${opt.id}`,
+        `${val}${opt.end || "%"}`
+      );
+    });
   }
 
   valueSet();
@@ -89,10 +97,10 @@
     updateLyricsPageProperties();
 
     // Custom code added by lily
-    if (!config.useCustomColor) {
+    if (!cfgToggles.useCustomColor) {
       let imageUrl;
       if (
-        !config.useCurrSongAsHome &&
+        !cfgToggles.useCurrSongAsHome &&
         Spicetify.Player.data.item.metadata.image_url
       ) {
         imageUrl = Spicetify.Player.data.item.metadata.image_url.replace(
@@ -103,16 +111,16 @@
         imageUrl = localStorage.getItem("hazy:startupBg") || defImage;
       }
 
-      // Functions added by lily
-      // Changes the accent colors to the most prominent color
-      // in the background image when the background is changed
-      getMostProminentColor(imageUrl, setAccentColor);
+      setAccentColorImage(imageUrl);
     } else {
       setAccentColor(localStorage.getItem("CustomColor") || "#FFC0EA");
     }
   }
 
-  function getMostProminentColor(imageUrl, callback) {
+  // Functions added by lily
+  // Changes the accent colors to the most prominent color
+  // in the background image when the background is changed
+  function setAccentColorImage(imageUrl) {
     const img = new Image();
     // Allows CORS-enabled images
     img.crossOrigin = "Anonymous";
@@ -130,7 +138,15 @@
         canvas.width,
         canvas.height
       ).data;
-      let rgbList = buildRgb(imageData);
+
+      const rgbList = [];
+      // Note that we are looping every 4 (red, green, blue and alpha)
+      for (let i = 0; i < imageData.length; i += 4)
+        rgbList.push({
+          r: imageData[i],
+          g: imageData[i + 1],
+          b: imageData[i + 2],
+        });
 
       // Attempt with filters
       let hexColor = findColor(rgbList);
@@ -138,7 +154,7 @@
       // Retry without filters if no color is found
       if (!hexColor) hexColor = findColor(rgbList, true);
 
-      callback(hexColor);
+      setAccentColor(hexColor);
     };
 
     img.onerror = function () {
@@ -172,31 +188,8 @@
       }
     }
 
-    if (maxColor) {
-      const [r, g, b] = maxColor.split(",").map(Number);
-      return rgbToHex(r, g, b);
-    } else {
-      // No color found
-      return null;
-    }
+    return maxColor ? rgbToHex(...maxColor.split(",").map(Number)) : null;
   }
-
-  // Creates a list of RGB values from image data
-  const buildRgb = (imageData) => {
-    const rgbValues = [];
-    // Note that we are looping every 4 (red, green, blue and alpha)
-    for (let i = 0; i < imageData.length; i += 4) {
-      const rgb = {
-        r: imageData[i],
-        g: imageData[i + 1],
-        b: imageData[i + 2],
-      };
-
-      rgbValues.push(rgb);
-    }
-
-    return rgbValues;
-  };
 
   // Converts RGB to Hex
   function rgbToHex(r, g, b) {
@@ -233,8 +226,9 @@
   });
   (function sidebar() {
     // Sidebar settings
-    const item = localStorage.getItem("spicetify-exp-features");
-    const parsedObject = JSON.parse(item);
+    const parsedObject = JSON.parse(
+      localStorage.getItem("spicetify-exp-features")
+    );
 
     // Variable if client needs to reload
     let reload = false;
@@ -323,15 +317,17 @@
     }
   }
 
-  function getAndApplyNav(element) {
-    const isCenteredGlobalNav = Spicetify.Platform.version >= "1.2.46.462";
-    let addedClass = "control-nav";
-    if (element?.[0]?.classList.contains("Root__globalNav"))
-      addedClass = isCenteredGlobalNav ? "global-nav-centered" : "global-nav";
-    document.body.classList.add(addedClass);
-  }
-
-  waitForElement([".Root__globalNav"], getAndApplyNav, 10000);
+  waitForElement(
+    [".Root__globalNav"],
+    (element) => {
+      const isCenteredGlobalNav = Spicetify.Platform.version >= "1.2.46.462";
+      let addedClass = "control-nav";
+      if (element?.[0]?.classList.contains("Root__globalNav"))
+        addedClass = isCenteredGlobalNav ? "global-nav-centered" : "global-nav";
+      document.body.classList.add(addedClass);
+    },
+    10000
+  );
 
   Spicetify.Platform.History.listen(updateLyricsPageProperties);
 
@@ -357,22 +353,6 @@
   // Taken from Bloom | https://github.com/nimsandu/spicetify-bloom
   function updateLyricsPageProperties() {
     function setLyricsPageProperties() {
-      function detectTextDirection() {
-        // 0, 1 - blank lines
-        const lyric = document.querySelectorAll(
-          ".lyrics-lyricsContent-lyric"
-        )[2];
-        const rtl_rx = /[\u0591-\u07FF]/;
-        return rtl_rx.test(lyric.innerText) ? "rtl" : "ltr";
-      }
-
-      function setLyricsTransformOrigin(textDirection) {
-        document.documentElement.style.setProperty(
-          "--lyrics-text-direction",
-          textDirection === "rtl" ? "right" : "left"
-        );
-      }
-
       function calculateLyricsMaxWidth(lyricsContentWrapper) {
         const lyricsContentContainer = lyricsContentWrapper.parentElement;
         const marginLeft = Number.parseInt(
@@ -385,26 +365,31 @@
         );
       }
 
-      function lockLyricsWrapperWidth(lyricsWrapper) {
-        const lyricsWrapperWidth = lyricsWrapper.getBoundingClientRect().width;
-        lyricsWrapper.style.maxWidth = `${lyricsWrapperWidth}px`;
-        lyricsWrapper.style.width = `${lyricsWrapperWidth}px`;
-      }
-
       waitForElement(
         [".lyrics-lyrics-contentWrapper"],
         ([lyricsContentWrapper]) => {
           lyricsContentWrapper.style.maxWidth = "";
           lyricsContentWrapper.style.width = "";
 
-          const lyricsTextDirection = detectTextDirection();
-          setLyricsTransformOrigin(lyricsTextDirection);
-          const lyricsMaxWidth = calculateLyricsMaxWidth(lyricsContentWrapper);
+          // 0, 1 - blank lines
+          const lyric = document.querySelector(
+            ".lyrics-lyricsContent-lyric"
+          )[2];
+          document.documentElement.style.setProperty(
+            "--lyrics-text-direction",
+            /[\u0591-\u07FF]/.test(lyric.innerText) ? "right" : "left"
+          );
+
           document.documentElement.style.setProperty(
             "--lyrics-active-max-width",
-            `${lyricsMaxWidth}px`
+            `${calculateLyricsMaxWidth(lyricsContentWrapper)}px`
           );
-          lockLyricsWrapperWidth(lyricsContentWrapper);
+
+          // Lock lyrics wrapper width
+          const lyricsWrapperWidth =
+            lyricsContentWrapper.getBoundingClientRect().width;
+          lyricsContentWrapper.style.maxWidth = `${lyricsWrapperWidth}px`;
+          lyricsContentWrapper.style.width = `${lyricsWrapperWidth}px`;
         }
       );
     }
@@ -453,10 +438,9 @@
         scrollNode.addEventListener("scroll", () => {
           // Artist fade
           const scrollValue = scrollNode.scrollTop;
-          const artist_fade = Math.max(0, (-0.3 * scrollValue + 100) / 100);
           document.documentElement.style.setProperty(
             "--artist-fade",
-            artist_fade
+            Math.max(0, (-0.3 * scrollValue + 100) / 100)
           );
 
           setFadeDirection(scrollNode);
@@ -475,20 +459,21 @@
     );
   }
 
-  function parseOptions() {
-    config.useCurrSongAsHome = JSON.parse(
+  function loadToggles() {
+    cfgToggles.useCurrSongAsHome = JSON.parse(
       localStorage.getItem("UseCustomBackground")
     );
 
-    // Save the selected custom color to the config (added by lily)
-    config.useCustomColor = JSON.parse(localStorage.getItem("UseCustomColor"));
+    cfgToggles.useCustomColor = JSON.parse(
+      localStorage.getItem("UseCustomColor")
+    );
   }
 
-  parseOptions();
+  loadToggles();
 
   function loopOptions() {
     const img_url = Spicetify.Player.data.item.metadata.image_url;
-    const img = !config.useCurrSongAsHome && img_url ? img_url : startImage;
+    const img = !cfgToggles.useCurrSongAsHome && img_url ? img_url : startImage;
     document.documentElement.style.setProperty("--image_url", `url("${img}")`);
   }
 
@@ -545,151 +530,48 @@
                 <path d="M17.318 1.975a3.329 3.329 0 114.707 4.707L8.451 20.256c-.49.49-1.082.867-1.735 1.103L2.34 22.94a1 1 0 01-1.28-1.28l1.581-4.376a4.726 4.726 0 011.103-1.735L17.318 1.975zm3.293 1.414a1.329 1.329 0 00-1.88 0L5.159 16.963c-.283.283-.5.624-.636 1l-.857 2.372 2.371-.857a2.726 2.726 0 001.001-.636L20.611 5.268a1.329 1.329 0 000-1.879z"></path></svg><span class="Type__TypeElement-goli3j-0 gAmaez main-editImageButton-copy">Choose photo</span></div></button></div></div><div class="main-playlistEditDetailsModal-imageDropDownContainer"><button class="main-playlistEditDetailsModal-imageDropDownButton" type="button"><svg role="img" height="16" width="16" viewBox="0 0 16 16" class="Svg-sc-1bi12j5-0 EQkJl"><path d="M1.47 1.47a.75.75 0 011.06 0L8 6.94l5.47-5.47a.75.75 0 111.06 1.06L9.06 8l5.47 5.47a.75.75 0 11-1.06 1.06L8 9.06l-5.47 5.47a.75.75 0 01-1.06-1.06L6.94 8 1.47 2.53a.75.75 0 010-1.06z"></path>
               </svg><span class="hidden-visually">Edit photo</span></button></div></div>`;
 
-    const optionList = document.createElement("div");
-    const valueList = document.createElement("div");
+    const toggleList = document.createElement("div");
+    const sliderList = document.createElement("div");
 
-    function createOption(name, desc, defVal) {
-      const optionRow = document.createElement("div");
-      optionRow.classList.add("hazyOptionRow");
-      optionRow.innerHTML = `
-      <span class="hazyOptionDesc">${desc}</span>
+    function createToggle(id, name, defVal) {
+      const toggleRow = document.createElement("div");
+      toggleRow.classList.add("hazyOptionRow");
+      toggleRow.innerHTML = `
+      <span class="hazyOptionDesc">${name}:</span>
       <button class="hazyOptionToggle">
         <span class="toggleWrapper">
           <span class="toggle"></span>
         </span>
       </button>`;
-      optionRow.setAttribute("name", name);
-      optionRow.querySelector("button").addEventListener("click", () => {
-        optionRow.querySelector(".toggle").classList.toggle("enabled");
-      });
-      const isEnabled = JSON.parse(localStorage.getItem(name)) ?? defVal;
-      optionRow.querySelector(".toggle").classList.toggle("enabled", isEnabled);
-      optionList.append(optionRow);
+      toggleRow.setAttribute("name", id);
+      toggleRow
+        .querySelector("button")
+        .addEventListener("click", () =>
+          toggleRow.querySelector(".toggle").classList.toggle("enabled")
+        );
+      const isEnabled = JSON.parse(localStorage.getItem(id)) ?? defVal;
+      toggleRow.querySelector(".toggle").classList.toggle("enabled", isEnabled);
+      toggleList.append(toggleRow);
     }
 
-    function setValue(blur_am, cont, satu, bright, desc) {
-      const valueRow = document.createElement("div");
-      const blur_val = localStorage.getItem(blur_am) || "15";
-      const cont_val = localStorage.getItem(cont) || "50";
-      const satu_val = localStorage.getItem(satu) || "70";
-      const bright_val = localStorage.getItem(bright) || "120";
+    const sliderRow = document.createElement("div");
+    sliderRow.classList.add("hazyOptionRow");
+    let values = "";
 
-      valueRow.classList.add("hazyOptionRow");
-      valueRow.innerHTML = `
-      <div class="blur-amount" style='width: 100%'>
-      <p>${desc}</p>
+    function createSlider(opt) {
+      let { id, name, min, max, step, defVal, end } = opt;
+      const val = localStorage.getItem(`${id}Amount`) || defVal;
+      values += `
       <div class="slider-container">
-        <label for="blur-input">Blur:</label>
-        <input class="slider" id="blur-input" type="range" min="0" max="50" step="1" value="${blur_val}">
+        <label for="${id}-input">${name}:</label>
+        <input class="slider" id="${id}-input" type="range" min="${min}" max="${max}" step="${step}" value="${val}">
         <div class="slider-value">
-          <div id="blur-value" contenteditable="true" >${blur_val}</div>
-          <div id="unit" class="blur-editable">px</div>
+          <p id="${id}-value" contenteditable="true" >${val}${end || "%"}</p>
         </div>
-      </div>
-    
-      <div class="slider-container">
-        <label for="cont-input">Contrast:</label>
-        <input class="slider" id="cont-input" type="range" min="0" max="200" step="2" value="${cont_val}">
-        <div class="slider-value">
-          <div id="cont-value" contenteditable="true" >${cont_val}</div>
-          <div id="unit" class="cont-editable">%</div>
-        </div>
-      </div>
-
-      <div class="slider-container">
-        <label for="satu-input">Saturation:</label>
-        <input class="slider"  id="satu-input" type="range" min="0" max="200" step="2" value="${satu_val}">
-        <div class="slider-value">
-          <div id="satu-value" contenteditable="true">${satu_val}</div>
-          <div id="unit" class="satu-editable">%</div>
-        </div>
-      </div>
-
-      <div class="slider-container">
-        <label for="bright-input">Brightness:</label>
-        <input class="slider" id="bright-input" type="range" min="0" max="200" step="2" value="${bright_val}">
-        <div class="slider-value">
-          <div id="bright-value" contenteditable="true">${bright_val}</div>
-          <div id="unit" class="bright-editable">%</div>
-        </div>
-      </div>
-
-    </div>`;
-
-      valueRow.querySelector("#blur-value").addEventListener("input", () => {
-        let content = valueRow.querySelector("#blur-value").textContent.trim();
-        const number = Number.parseInt(content);
-        if (content.length > 3) {
-          // Truncate the content to 3 characters
-          content = valueRow.querySelector("#blur-value").textContent =
-            content.slice(0, 3);
-        }
-        valueRow.querySelector("#blur-input").value = number;
-      });
-
-      valueRow.querySelector("#cont-value").addEventListener("input", () => {
-        let content = valueRow.querySelector("#cont-value").textContent.trim();
-        const number = Number.parseInt(content);
-        if (content.length > 3) {
-          // Truncate the content to 3 characters
-          content = valueRow.querySelector("#cont-value").textContent =
-            content.slice(0, 3);
-        }
-        valueRow.querySelector("#cont-input").value = number;
-      });
-
-      valueRow.querySelector("#satu-value").addEventListener("input", () => {
-        let content = valueRow.querySelector("#satu-value").textContent.trim();
-        const number = Number.parseInt(content);
-        if (content.length > 3) {
-          // Truncate the content to 3 characters
-          content = valueRow.querySelector("#satu-value").textContent =
-            content.slice(0, 3);
-        }
-        valueRow.querySelector("#satu-input").value = number;
-      });
-
-      valueRow.querySelector("#bright-value").addEventListener("input", () => {
-        let content = valueRow
-          .querySelector("#bright-value")
-          .textContent.trim();
-        const number = Number.parseInt(content);
-        if (content.length > 3) {
-          // Truncate the content to 3 characters
-          content = valueRow.querySelector("#bright-value").textContent =
-            content.slice(0, 3);
-        }
-        valueRow.querySelector("#bright-input").value = number;
-      });
-
-      valueRow.querySelector("#blur-input").addEventListener("input", () => {
-        valueRow.querySelector("#blur-value").textContent =
-          valueRow.querySelector("#blur-input").value;
-      });
-
-      valueRow.querySelector("#cont-input").addEventListener("input", () => {
-        valueRow.querySelector("#cont-value").textContent =
-          valueRow.querySelector("#cont-input").value;
-      });
-
-      valueRow.querySelector("#satu-input").addEventListener("input", () => {
-        valueRow.querySelector("#satu-value").textContent =
-          valueRow.querySelector("#satu-input").value;
-      });
-
-      valueRow.querySelector("#bright-input").addEventListener("input", () => {
-        valueRow.querySelector("#bright-value").textContent =
-          valueRow.querySelector("#bright-input").value;
-      });
-
-      valueSet();
-
-      valueList.appendChild(valueRow);
-      valueRow.setAttribute("blur_am", blur_am);
-      valueRow.setAttribute("cont", cont);
-      valueRow.setAttribute("satu", satu);
-      valueRow.setAttribute("bright", bright);
+      </div>`;
     }
+
+    cfgSliders.forEach(createSlider);
 
     const srcInput = document.createElement("input");
     srcInput.type = "text";
@@ -705,8 +587,31 @@
     }
     content.append(srcInput);
 
-    createOption("UseCustomBackground", "Custom background:", false);
-    setValue("blurAmount", "contAmount", "satuAmount", "brightAmount", " ");
+    createToggle("UseCustomBackground", "Custom background", false);
+
+    sliderRow.innerHTML = `<div class="blur-amount" style='width: 100%'>${values}</div>`;
+    cfgSliders.forEach((opt) => {
+      const id = opt.id;
+
+      sliderRow.querySelector(`#${id}-value`).addEventListener("input", () => {
+        let content = sliderRow.querySelector(`#${id}-value`).textContent.trim();
+        const number = Number.parseInt(content);
+        if (content.length > 3) {
+          // Truncate the content to 3 characters
+          content = sliderRow.querySelector(`#${id}-value`).textContent =
+            content.slice(0, 3);
+        }
+        sliderRow.querySelector(`#${id}-input`).value = number;
+      });
+
+      sliderRow.querySelector(`#${id}-input`).addEventListener("input", () => {
+        sliderRow.querySelector(`#${id}-value`).textContent = `${
+          sliderRow.querySelector(`#${id}-input`).value
+        }${opt.end || "%"}`;
+      });
+    });
+    valueSet();
+    sliderList.appendChild(sliderRow);
 
     // Additional settings (added by lily)
 
@@ -718,7 +623,7 @@
     colorLabel.style.textAlign = "right";
     colorLabel.style.marginRight = "10px";
     colorLabel.style.fontSize = "0.875rem";
-    optionList.append(colorLabel);
+    toggleList.append(colorLabel);
 
     // Color picker
     const colorInput = document.createElement("input");
@@ -726,13 +631,13 @@
     colorInput.id = "color-input";
     colorInput.value = localStorage.getItem("CustomColor") || "#30bf63";
     colorInput.style.border = "none";
-    optionList.append(colorInput);
+    toggleList.append(colorInput);
 
     // Color toggle
-    createOption("UseCustomColor", "Custom color:", true);
+    createToggle("UseCustomColor", "Custom color", true);
 
-    content.append(optionList);
-    content.append(valueList);
+    content.append(toggleList);
+    content.append(sliderList);
 
     img = content.querySelector("img");
     img.src = localStorage.getItem("hazy:startupBg") || defImage;
@@ -781,7 +686,7 @@
       onSongChange();
 
       // Save options to local storage
-      for (const option of [...optionList.children]) {
+      for (const option of [...toggleList.children]) {
         // Ignore the color changing options as they are handled differently (added by lily)
         if (option.id == "color-input" || option.id == "color-label") continue;
 
@@ -789,58 +694,31 @@
           option.getAttribute("name"),
           option.querySelector(".toggle").classList.contains("enabled")
         );
-        console.log(
-          `hazy: ${option.getAttribute("name")} set to ${option
-            .querySelector(".toggle")
-            .classList.contains("enabled")}`
-        );
       }
 
-      for (const value of [...valueList.children]) {
-        const blurValueInput = value.querySelector("#blur-input");
-        const contValueInput = value.querySelector("#cont-input");
-        const satuValueInput = value.querySelector("#satu-input");
-        const brightValueInput = value.querySelector("#bright-input");
-
+      cfgSliders.forEach((opt) =>
         localStorage.setItem(
-          value.getAttribute("blur_am"),
-          blurValueInput.value
-        );
-        localStorage.setItem(value.getAttribute("cont"), contValueInput.value);
-        localStorage.setItem(value.getAttribute("satu"), satuValueInput.value);
-        localStorage.setItem(
-          value.getAttribute("bright"),
-          brightValueInput.value
-        );
+          opt.id + "Amount",
+          value.querySelector(`#${opt.id}-input`).value
+        )
+      );
 
-        valueSet();
-      }
-
-      parseOptions();
+      valueSet();
+      loadToggles();
       loopOptions();
     });
 
     resetButton.addEventListener("click", () => {
-      for (const value of [...valueList.children]) {
-        document.querySelector(".hazyOptionRow #blur-input").value = 15;
-        document.querySelector(".hazyOptionRow #cont-input").value = 50;
-        document.querySelector(".hazyOptionRow #satu-input").value = 70;
-        document.querySelector(".hazyOptionRow #bright-input").value = 120;
+      cfgSliders.forEach((opt) => {
+        document.querySelector(`.hazyOptionRow #${opt.id}-input`).value =
+          opt.defVal;
+        document.querySelector(
+          `.hazyOptionRow #${opt.id}-value`
+        ).textContent = `${opt.defVal}${opt.end || "%"}`;
+      });
 
-        document.querySelector(".hazyOptionRow #blur-value").textContent = "15";
-        document.querySelector(".hazyOptionRow #cont-value").textContent = "50";
-        document.querySelector(".hazyOptionRow #satu-value").textContent = "70";
-        document.querySelector(".hazyOptionRow #bright-value").textContent =
-          "120";
-
-        localStorage.setItem(value.getAttribute("blur_am"), 8);
-        localStorage.setItem(value.getAttribute("cont"), 50);
-        localStorage.setItem(value.getAttribute("satu"), 70);
-        localStorage.setItem(value.getAttribute("bright"), 120);
-        valueSet();
-      }
-
-      parseOptions();
+      valueSet();
+      loadToggles();
       loopOptions();
     });
 
@@ -853,7 +731,7 @@
     issueButton.href = "https://github.com/Astromations/Hazy/issues";
     content.append(issueButton);
 
-    Spicetify.PopupModal.display({ title: "Hazy Settings", content: content });
+    Spicetify.PopupModal.display({ title: "Hazy Settings", content });
   });
   homeEdit.element.classList.toggle("hidden", false);
 
