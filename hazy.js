@@ -43,6 +43,49 @@
     },
   ];
 
+  (function sidebar() {
+    // Sidebar settings
+    const parsedObject = JSON.parse(
+      localStorage.getItem("spicetify-exp-features")
+    );
+
+    // Variable if client needs to reload
+    let reload = false;
+
+    // Array of features
+    const features = [
+      "enableYLXSidebar",
+      "enableRightSidebar",
+      "enableRightSidebarTransitionAnimations",
+      "enableRightSidebarLyrics",
+      "enableRightSidebarExtractedColors",
+      "enablePanelSizeCoordination",
+    ];
+
+    if (!localStorage.getItem("Hazy Sidebar Activated")) {
+      localStorage.setItem("Hazy Sidebar Activated", true);
+      for (const feature of features) {
+        // Ignore if feature not present
+        if (!parsedObject[feature]) continue;
+
+        // Change value if disabled
+        if (!parsedObject[feature].value) {
+          parsedObject[feature].value = true;
+          reload = true;
+        }
+      }
+    }
+
+    localStorage.setItem(
+      "spicetify-exp-features",
+      JSON.stringify(parsedObject)
+    );
+    if (reload) {
+      window.location.reload();
+      reload = false;
+    }
+  })();
+
   function loadSliders() {
     sliders.forEach((opt) => {
       const val = localStorage.getItem(`${opt.id}Amount`) || opt.defVal;
@@ -52,8 +95,6 @@
       );
     });
   }
-
-  loadSliders();
 
   function setAccentColor(color) {
     document.querySelector(":root").style.setProperty("--spice-button", color);
@@ -104,8 +145,6 @@
       // When clicking a song from the homepage, songChange is fired with half empty metadata
       setTimeout(onSongChange, 200);
     }
-
-    loopOptions();
     updateLyricsPageProperties();
 
     // Custom code added by lily
@@ -177,7 +216,7 @@
     img.src = imageUrl;
   }
 
-  // Gets the most prominent color in a list of rgb values
+  // Gets the most prominent color in a list of RGB values
   function findColor(rgbList, skipFilters = false) {
     const colorCount = {};
     let maxColor = "";
@@ -222,10 +261,11 @@
     return rgb.r > threshold && rgb.g > threshold && rgb.b > threshold;
   }
 
+  loadSliders();
   loadToggles();
   Spicetify.Player.addEventListener("songchange", onSongChange);
-  onSongChange();
-  windowControls();
+  if (window.navigator.userAgent.indexOf("Win") !== -1)
+    document.body.classList.add("windows");
   galaxyFade();
 
   function scrollToTop() {
@@ -234,56 +274,8 @@
   }
 
   document.addEventListener("click", (event) => {
-    const clickedElement = event.target;
-    if (clickedElement.closest(".main-entityHeader-topbarTitle")) scrollToTop();
+    if (event.target.closest(".main-entityHeader-topbarTitle")) scrollToTop();
   });
-  (function sidebar() {
-    // Sidebar settings
-    const parsedObject = JSON.parse(
-      localStorage.getItem("spicetify-exp-features")
-    );
-
-    // Variable if client needs to reload
-    let reload = false;
-
-    // Array of features
-    const features = [
-      "enableYLXSidebar",
-      "enableRightSidebar",
-      "enableRightSidebarTransitionAnimations",
-      "enableRightSidebarLyrics",
-      "enableRightSidebarExtractedColors",
-      "enablePanelSizeCoordination",
-    ];
-
-    if (!localStorage.getItem("Hazy Sidebar Activated")) {
-      localStorage.setItem("Hazy Sidebar Activated", true);
-      for (const feature of features) {
-        // Ignore if feature not present
-        if (!parsedObject[feature]) continue;
-
-        // Change value if disabled
-        if (!parsedObject[feature].value) {
-          parsedObject[feature].value = true;
-          reload = true;
-        }
-      }
-    }
-
-    localStorage.setItem(
-      "spicetify-exp-features",
-      JSON.stringify(parsedObject)
-    );
-    if (reload) {
-      window.location.reload();
-      reload = false;
-    }
-  })();
-
-  function windowControls() {
-    const userAgent = window.navigator.userAgent;
-    if (userAgent.indexOf("Win") !== -1) document.body.classList.add("windows");
-  }
 
   // Window Zoom Variable
   function updateZoomVariable() {
@@ -476,11 +468,12 @@
     toggles.UseCustomBackground = JSON.parse(
       localStorage.getItem("UseCustomBackground")
     );
-
     toggles.UseCustomColor = JSON.parse(localStorage.getItem("UseCustomColor"));
+    updateBackground();
+    onSongChange();
   }
 
-  function loopOptions() {
+  function updateBackground() {
     const img_url = Spicetify.Player.data.item.metadata.image_url;
     const img = !toggles.UseCustomBackground && img_url ? img_url : startImage;
     document.documentElement.style.setProperty("--image_url", `url("${img}")`);
@@ -629,7 +622,6 @@
     colorInput.value = localStorage.getItem("CustomColor") || "#30bf63";
     colorInput.style.border = "none";
     colorRow.append(colorInput);
-
     content.append(colorRow);
 
     sliders.forEach(createSlider);
@@ -650,6 +642,11 @@
       content.querySelector("img").src = defImage;
     };
 
+    const buttonsRow = document.createElement("div");
+    buttonsRow.style.display = "flex";
+    buttonsRow.style.paddingTop = "15px";
+    buttonsRow.style.alignItems = "flex-end";
+
     const resetButton = document.createElement("button");
     resetButton.id = "value-reset";
     resetButton.innerHTML = "Reset";
@@ -658,7 +655,7 @@
     saveButton.id = "home-save";
     saveButton.innerHTML = "Apply";
 
-    saveButton.addEventListener("click", () => {
+    saveButton.onclick = () => {
       // Change the button text to "Applied!", add "applied" class, and disable the button
       saveButton.innerHTML = "Applied!";
       saveButton.classList.add("applied");
@@ -676,8 +673,10 @@
       localStorage.setItem("hazy:startupBg", startImage);
 
       // Save the selected custom color (added by lily)
-      let colorElem = document.getElementById("color-input");
-      localStorage.setItem("CustomColor", colorElem.value);
+      localStorage.setItem(
+        "CustomColor",
+        document.getElementById("color-input").value
+      );
 
       toggleInfo.forEach((opt) =>
         localStorage.setItem(
@@ -696,11 +695,9 @@
 
       loadSliders();
       loadToggles();
-      onSongChange();
-      loopOptions();
-    });
+    };
 
-    resetButton.addEventListener("click", () => {
+    resetButton.onclick = () => {
       sliders.forEach((opt) => {
         document.querySelector(`.hazyOptionRow #${opt.id}-input`).value =
           opt.defVal;
@@ -715,13 +712,8 @@
       });
       document.getElementById("color-input").value = "#30bf63";
 
-      loopOptions();
-    });
-
-    const buttonsRow = document.createElement("div");
-    buttonsRow.style.display = "flex";
-    buttonsRow.style.paddingTop = "15px";
-    buttonsRow.style.alignItems = "flex-end";
+      updateBackground();
+    };
 
     const issueButton = document.createElement("a");
     issueButton.classList.add("issue-button");
@@ -734,7 +726,4 @@
     Spicetify.PopupModal.display({ title: "Hazy Settings", content });
   });
   homeEdit.element.classList.toggle("hidden", false);
-
-  // Startup parse
-  loopOptions();
 })();
