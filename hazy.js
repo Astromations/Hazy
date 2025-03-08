@@ -126,18 +126,24 @@
     );
   }
 
+  function getCurrentBackground(replace) {
+    let url = Spicetify.Player.data.item.metadata.image_url;
+    if (toggles.UseCustomBackground || !url) return startImage;
+    if (replace)
+      url = url.replace("spotify:image:", "https://i.scdn.co/image/");
+    return url;
+  }
+
   async function onSongChange() {
     // Call fetchFadeTime after songchange
     fetchFadeTime();
 
     const album_uri = Spicetify.Player.data.item.metadata.album_uri;
-    let bgImage = Spicetify.Player.data.item.metadata.image_url;
 
     if (album_uri !== undefined && !album_uri.includes("spotify:show")) {
       // Album
     } else if (Spicetify.Player.data.item.uri.includes("spotify:episode")) {
       // Podcast
-      bgImage = bgImage.replace("spotify:image:", "https://i.scdn.co/image/");
     } else if (Spicetify.Player.data.item.provider === "ad") {
       // Ad
       return;
@@ -149,23 +155,11 @@
 
     // Custom code added by lily
     if (!toggles.UseCustomColor) {
-      let imageUrl;
-      if (
-        !toggles.UseCustomBackground &&
-        Spicetify.Player.data.item.metadata.image_url
-      ) {
-        imageUrl = Spicetify.Player.data.item.metadata.image_url.replace(
-          "spotify:image:",
-          "https://i.scdn.co/image/"
-        );
-      } else {
-        imageUrl = localStorage.getItem("hazy:startupBg") || defImage;
-      }
-
-      setAccentColorImage(imageUrl);
+      setAccentColorImage(getCurrentBackground(true));
     } else {
       setAccentColor(localStorage.getItem("CustomColor") || "#FFC0EA");
     }
+    updateBackground();
   }
 
   // Functions added by lily
@@ -474,9 +468,10 @@
   }
 
   function updateBackground() {
-    const img_url = Spicetify.Player.data.item.metadata.image_url;
-    const img = !toggles.UseCustomBackground && img_url ? img_url : startImage;
-    document.documentElement.style.setProperty("--image_url", `url("${img}")`);
+    document.documentElement.style.setProperty(
+      "--image_url",
+      `url("${getCurrentBackground(false)}")`
+    );
   }
 
   let startImage = localStorage.getItem("hazy:startupBg") || defImage;
