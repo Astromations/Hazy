@@ -154,7 +154,48 @@
 
     // Custom code added by lily
     if (!toggles.UseCustomColor) {
-      setAccentColorImage(getCurrentBackground(true));
+      // Get the accent color from the background image
+      const img = new Image();
+      // Allows CORS-enabled images
+      img.crossOrigin = "Anonymous";
+  
+      img.onload = function () {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+  
+        const imageData = ctx.getImageData(
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        ).data;
+  
+        const rgbList = [];
+        // Note that we are looping every 4 (red, green, blue and alpha)
+        for (let i = 0; i < imageData.length; i += 4)
+          rgbList.push({
+            r: imageData[i],
+            g: imageData[i + 1],
+            b: imageData[i + 2],
+          });
+  
+        // Attempt with filters
+        let hexColor = findColor(rgbList);
+  
+        // Retry without filters if no color is found
+        if (!hexColor) hexColor = findColor(rgbList, true);
+  
+        setAccentColor(hexColor);
+      };
+  
+      img.onerror = function () {
+        console.error("Image load error");
+      };
+  
+      img.src = getCurrentBackground(true);
     } else {
       setAccentColor(localStorage.getItem("CustomColor") || "#ffc0ea");
     }
@@ -164,54 +205,6 @@
       "--image_url",
       `url("${getCurrentBackground(false)}")`
     );
-  }
-
-  // Functions added by lily
-  // Changes the accent colors to the most prominent color
-  // in the background image when the background is changed
-  function setAccentColorImage(imageUrl) {
-    const img = new Image();
-    // Allows CORS-enabled images
-    img.crossOrigin = "Anonymous";
-
-    img.onload = function () {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
-
-      const imageData = ctx.getImageData(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      ).data;
-
-      const rgbList = [];
-      // Note that we are looping every 4 (red, green, blue and alpha)
-      for (let i = 0; i < imageData.length; i += 4)
-        rgbList.push({
-          r: imageData[i],
-          g: imageData[i + 1],
-          b: imageData[i + 2],
-        });
-
-      // Attempt with filters
-      let hexColor = findColor(rgbList);
-
-      // Retry without filters if no color is found
-      if (!hexColor) hexColor = findColor(rgbList, true);
-
-      setAccentColor(hexColor);
-    };
-
-    img.onerror = function () {
-      console.error("Image load error");
-      callback(null);
-    };
-
-    img.src = imageUrl;
   }
 
   // Gets the most prominent color in a list of RGB values
