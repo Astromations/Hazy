@@ -134,6 +134,13 @@
     return url;
   }
 
+  function updateBackground() {
+    document.documentElement.style.setProperty(
+      "--image_url",
+      `url("${getCurrentBackground(false)}")`
+    );
+  }
+
   async function onSongChange() {
     // Call fetchFadeTime after songchange
     fetchFadeTime();
@@ -463,15 +470,7 @@
       localStorage.getItem("UseCustomBackground")
     );
     toggles.UseCustomColor = JSON.parse(localStorage.getItem("UseCustomColor"));
-    updateBackground();
     onSongChange();
-  }
-
-  function updateBackground() {
-    document.documentElement.style.setProperty(
-      "--image_url",
-      `url("${getCurrentBackground(false)}")`
-    );
   }
 
   let startImage = localStorage.getItem("hazy:startupBg") || defImage;
