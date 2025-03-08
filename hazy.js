@@ -134,19 +134,10 @@
     return url;
   }
 
-  function updateBackground() {
-    document.documentElement.style.setProperty(
-      "--image_url",
-      `url("${getCurrentBackground(false)}")`
-    );
-  }
-
   async function onSongChange() {
-    // Call fetchFadeTime after songchange
     fetchFadeTime();
 
     const album_uri = Spicetify.Player.data.item.metadata.album_uri;
-
     if (album_uri !== undefined && !album_uri.includes("spotify:show")) {
       // Album
     } else if (Spicetify.Player.data.item.uri.includes("spotify:episode")) {
@@ -158,15 +149,21 @@
       // When clicking a song from the homepage, songChange is fired with half empty metadata
       setTimeout(onSongChange, 200);
     }
+
     updateLyricsPageProperties();
 
     // Custom code added by lily
     if (!toggles.UseCustomColor) {
       setAccentColorImage(getCurrentBackground(true));
     } else {
-      setAccentColor(localStorage.getItem("CustomColor") || "#FFC0EA");
+      setAccentColor(localStorage.getItem("CustomColor") || "#ffc0ea");
     }
-    updateBackground();
+
+    // Update background
+    document.documentElement.style.setProperty(
+      "--image_url",
+      `url("${getCurrentBackground(false)}")`
+    );
   }
 
   // Functions added by lily
@@ -705,8 +702,6 @@
           .classList.toggle("enabled", opt.defVal);
       });
       document.getElementById("color-input").value = "#30bf63";
-
-      updateBackground();
     };
 
     const issueButton = document.createElement("a");
