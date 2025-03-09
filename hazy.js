@@ -645,7 +645,7 @@
       saveButton.classList.add("applied");
       saveButton.disabled = true;
 
-      // Revert back to "Apply", remove "applied" class, and enable the button after 2 seconds
+      // Revert back to "Apply", remove "applied" class, and enable the button after a second
       setTimeout(() => {
         saveButton.innerHTML = "Apply";
         saveButton.classList.remove("applied");
