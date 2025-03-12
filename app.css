@@ -804,6 +804,11 @@ SEARCH BAR
   background: none;
 }
 
+div#recent-searches-dropdown div[tabindex] > button {
+  height: 32px;
+  width: 172px;
+}
+
 /*-----------
 MISCELLANEOUS
 -----------*/
