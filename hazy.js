@@ -5,6 +5,7 @@
   }
 
   const defImage = "https://i.imgur.com/Wl2D0h0.png";
+  let startImage = localStorage.getItem("hazy:startupBg") || defImage;
   const toggleInfo = [
     {
       id: "UseCustomBackground",
@@ -44,6 +45,7 @@
   ];
 
   (function sidebar() {
+    if (localStorage.getItem("Hazy Sidebar Activated")) return;
     // Sidebar settings
     const parsedObject = JSON.parse(
       localStorage.getItem("spicetify-exp-features")
@@ -62,17 +64,14 @@
       "enablePanelSizeCoordination",
     ];
 
-    if (!localStorage.getItem("Hazy Sidebar Activated")) {
-      localStorage.setItem("Hazy Sidebar Activated", true);
-      for (const feature of features) {
-        // Ignore if feature not present
-        if (!parsedObject[feature]) continue;
+    for (const feature of features) {
+      // Ignore if feature not present
+      if (!parsedObject[feature]) continue;
 
-        // Change value if disabled
-        if (!parsedObject[feature].value) {
-          parsedObject[feature].value = true;
-          reload = true;
-        }
+      // Change value if disabled
+      if (!parsedObject[feature].value) {
+        parsedObject[feature].value = true;
+        reload = true;
       }
     }
 
@@ -80,6 +79,7 @@
       "spicetify-exp-features",
       JSON.stringify(parsedObject)
     );
+    localStorage.setItem("Hazy Sidebar Activated", true);
     if (reload) {
       window.location.reload();
       reload = false;
@@ -142,6 +142,8 @@
       // Album
     } else if (Spicetify.Player.data.item.uri.includes("spotify:episode")) {
       // Podcast
+    } else if (Spicetify.Player.data.item.isLocal) {
+      // Local file
     } else if (Spicetify.Player.data.item.provider === "ad") {
       // Ad
       return;
@@ -158,21 +160,21 @@
       const img = new Image();
       // Allows CORS-enabled images
       img.crossOrigin = "Anonymous";
-  
+
       img.onload = function () {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
-  
+
         const imageData = ctx.getImageData(
           0,
           0,
           canvas.width,
           canvas.height
         ).data;
-  
+
         const rgbList = [];
         // Note that we are looping every 4 (red, green, blue and alpha)
         for (let i = 0; i < imageData.length; i += 4)
@@ -181,20 +183,20 @@
             g: imageData[i + 1],
             b: imageData[i + 2],
           });
-  
+
         // Attempt with filters
         let hexColor = findColor(rgbList);
-  
+
         // Retry without filters if no color is found
         if (!hexColor) hexColor = findColor(rgbList, true);
-  
+
         setAccentColor(hexColor);
       };
-  
+
       img.onerror = function () {
         console.error("Image load error");
       };
-  
+
       img.src = getCurrentBackground(true);
     } else {
       setAccentColor(localStorage.getItem("CustomColor") || "#ffc0ea");
@@ -462,8 +464,6 @@
     toggles.UseCustomColor = JSON.parse(localStorage.getItem("UseCustomColor"));
     onSongChange();
   }
-
-  let startImage = localStorage.getItem("hazy:startupBg") || defImage;
 
   // Input for custom background images
   const bannerInput = document.createElement("input");
