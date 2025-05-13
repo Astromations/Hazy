@@ -103,7 +103,7 @@ html:not(.spotify__container--is-desktop.fullscreen)
   );
   top: calc(
     (
-        var(--topbar-height, 64px) / var(--zoom, 1) -
+        var(--topbar-height, 64px) / 1 -
           min(32px / var(--zoom, 1), var(--topbar-height, 64px))
       ) / 2
   );
