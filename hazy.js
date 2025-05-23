@@ -105,25 +105,30 @@
   }
 
   async function fetchFadeTime() {
-    const response = await Spicetify.Platform.PlayerAPI._prefs.get({
-      key: "audio.crossfade_v2",
-    });
+    try {
+      const response = await Spicetify.Platform.PlayerAPI._prefs.get({
+        key: "audio.crossfade_v2",
+      });
 
-    // Default to 0.4s if crossfade is disabled
-    if (!response.entries["audio.crossfade_v2"].bool) {
-      document.documentElement.style.setProperty("--fade-time", "0.4s");
-      return;
+      // Default to 0.4s if crossfade is disabled
+      if (!response.entries["audio.crossfade_v2"].bool) {
+        document.documentElement.style.setProperty("--fade-time", "0.4s");
+        return;
+      }
+      const fadeTimeResponse = await Spicetify.Platform.PlayerAPI._prefs.get({
+        key: "audio.crossfade.time_v2",
+      });
+      const fadeTime = fadeTimeResponse.entries["audio.crossfade.time_v2"].number;
+  
+      // Use the CSS variable "--fade-time" for transition time
+      document.documentElement.style.setProperty(
+        "--fade-time",
+        `${fadeTime / 1000}s`
+      );
     }
-    const fadeTimeResponse = await Spicetify.Platform.PlayerAPI._prefs.get({
-      key: "audio.crossfade.time_v2",
-    });
-    const fadeTime = fadeTimeResponse.entries["audio.crossfade.time_v2"].number;
-
-    // Use the CSS variable "--fade-time" for transition time
-    document.documentElement.style.setProperty(
-      "--fade-time",
-      `${fadeTime / 1000}s`
-    );
+    catch (error) {
+      document.documentElement.style.setProperty("--fade-time", "0.4s");
+    }
   }
 
   function getCurrentBackground(replace) {
