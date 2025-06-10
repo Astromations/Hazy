@@ -118,15 +118,15 @@
       const fadeTimeResponse = await Spicetify.Platform.PlayerAPI._prefs.get({
         key: "audio.crossfade.time_v2",
       });
-      const fadeTime = fadeTimeResponse.entries["audio.crossfade.time_v2"].number;
-  
+      const fadeTime =
+        fadeTimeResponse.entries["audio.crossfade.time_v2"].number;
+
       // Use the CSS variable "--fade-time" for transition time
       document.documentElement.style.setProperty(
         "--fade-time",
         `${fadeTime / 1000}s`
       );
-    }
-    catch (error) {
+    } catch (error) {
       document.documentElement.style.setProperty("--fade-time", "0.4s");
     }
   }
@@ -435,29 +435,56 @@
   // Add fade and dimness effects to mainview and the artist image on scroll
   // Taken from Galaxy | https://github.com/harbassan/spicetify-galaxy/
   function galaxyFade() {
-    waitForElement(
-      [".Root__main-view [data-overlayscrollbars-viewport]"],
-      ([scrollNode]) => {
-        scrollNode.addEventListener("scroll", () => {
-          // Artist fade
-          const scrollValue = scrollNode.scrollTop;
-          document.documentElement.style.setProperty(
-            "--artist-fade",
-            Math.max(0, (-0.3 * scrollValue + 100) / 100)
-          );
+    const setupFade = (selector, onScrollCallback) => {
+      waitForElement([selector], ([scrollNode]) => {
+        let ticking = false;
 
-          setFadeDirection(scrollNode);
+        scrollNode.addEventListener("scroll", () => {
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              onScrollCallback(scrollNode);
+              ticking = false;
+            });
+            ticking = true;
+          }
         });
+
+        // Initial trigger
+        onScrollCallback(scrollNode);
+      });
+    };
+
+    // Apply artist fade function
+    const applyArtistFade = (scrollNode) => {
+      const scrollValue = scrollNode.scrollTop;
+      const fadeValue = Math.max(0, (-0.3 * scrollValue + 100) / 100);
+      document.documentElement.style.setProperty("--artist-fade", fadeValue);
+    };
+
+    // Main view - apply artist fade + fade direction
+    setupFade(
+      ".Root__main-view [data-overlayscrollbars-viewport]",
+      (scrollNode) => {
+        applyArtistFade(scrollNode);
+        setFadeDirection(scrollNode);
       }
     );
 
-    waitForElement(
-      [".Root__nav-bar [data-overlayscrollbars-viewport]"],
-      ([scrollNode]) => {
+    // Nav bar - fade direction only
+    setupFade(
+      ".Root__nav-bar [data-overlayscrollbars-viewport]",
+      (scrollNode) => {
         scrollNode.setAttribute("fade", "bottom");
-        scrollNode.addEventListener("scroll", () =>
-          setFadeDirection(scrollNode)
-        );
+        setFadeDirection(scrollNode);
+      }
+    );
+
+    // Right sidebar - fade direction only
+    setupFade(
+      ".Root__right-sidebar [data-overlayscrollbars-viewport]",
+      (scrollNode) => {
+        scrollNode.setAttribute("fade", "bottom");
+        setFadeDirection(scrollNode);
       }
     );
   }
