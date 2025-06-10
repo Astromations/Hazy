@@ -117,6 +117,10 @@ NAVIGATION BAR
   background-color: transparent;
 }
 
+.TkqXOzhmCCuE6YI3hlgA {
+  backdrop-filter: blur(20px);
+}
+
 .Root__nav-bar [fade="top"] {
   -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%);
   mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%);
@@ -168,6 +172,10 @@ NAVIGATION BAR
 
 .main-yourLibraryX-listRowEntityImage {
   box-shadow: -2px 4px 6px 2px rgb(0 0 0 / 14%);
+}
+
+.RHRitk6QC3rvuG24RAdj {
+  box-shadow: none !important;
 }
 
 /*-------------
@@ -271,9 +279,30 @@ NOW PLAYING BAR
 SIDEBAR
 ------*/
 
+.Root__right-sidebar [fade="top"] {
+  -webkit-mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%);
+  mask-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 1) 20%);
+}
+
+.Root__right-sidebar [fade="full"] {
+  -webkit-mask-image: linear-gradient(
+    transparent 0%,
+    rgba(0, 0, 0, 1) 12%,
+    rgba(0, 0, 0, 1) 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    transparent 0%,
+    rgba(0, 0, 0, 1) 12%,
+    rgba(0, 0, 0, 1) 92%,
+    transparent 100%
+  );
+}
+
 .main-buddyFeed-container,
 .ffFwfKcPDbmAPLXzxzKq {
   --background-base: var(--backdrop) !important;
+  border-radius: 8px;
 }
 
 .ffFwfKcPDbmAPLXzxzKq:before {
@@ -281,7 +310,8 @@ SIDEBAR
 }
 
 /* tentative fix for sidebar box shadow */
-.main-nowPlayingView-nowPlayingWidget > div > div:nth-child(1) > div {
+.main-nowPlayingView-nowPlayingWidget > div > div:nth-child(1) > div,
+.mdMUqcSHFw1lZIcYEblu {
   box-shadow: none !important;
 }
 
@@ -339,7 +369,8 @@ SIDEBAR
   display: none;
 }
 
-.main-nowPlayingView-aboutArtistV2ImageContainer.main-nowPlayingView-aboutArtistV2Image {
+.main-nowPlayingView-aboutArtistV2ImageContainer.main-nowPlayingView-aboutArtistV2Image,
+.Rol5Gmuk1O2tMw7NMtxF {
   -webkit-mask-image: linear-gradient(
     rgba(0, 0, 0, 0.95) 75%,
     transparent 100%
@@ -570,14 +601,14 @@ TOP BAR
 
 [fade="full"] {
   -webkit-mask-image: linear-gradient(
-    transparent 9%,
+    transparent 0%,
     rgba(0, 0, 0, 1) 15%,
     rgba(0, 0, 0, 1) 95%,
     transparent 100%
   );
   mask-image: linear-gradient(
-    transparent 9%,
-    rgba(0, 0, 0, 1) 15%,
+    transparent 0%,
+    rgba(0, 0, 0, 1) 5%,
     rgba(0, 0, 0, 1) 95%,
     transparent 100%
   );
@@ -1123,8 +1154,17 @@ HOME VIEW
 }
 
 .view-homeShortcutsGrid-grid {
-  --item-height: 56px;
-  grid-template-columns: repeat(3, 1fr);
+  --item-height: 60px !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+/* padding*/
+.main-home-filterChipsContainer {
+  padding-top: 40px !important;
+}
+
+.view-homeShortcutsGrid-grid > :nth-child(n + 7) {
+  display: none;
 }
 
 .view-homeShortcutsGrid-shortcut {
@@ -1168,24 +1208,35 @@ HOME VIEW
   background-color: var(--backdrop);
 }
 
-.main-card-draggable {
+.hZjAwWMA54TvbGYwReET,
+main-card-draggable {
   background-color: var(--backdrop) !important;
   transition: transform 0.2s ease;
+  margin-left: 16px !important;
   border-radius: 6px;
   box-shadow: 4px 0px 15px rgb(0 0 0 / 20%);
 }
 
-.BoxComponent-group-card-naked-isInteractive-draggable:hover::after {
-  display: none;
+.e-9921-box--hover-custom.e-9921-box--interactive {
+  background-color: var(--backdrop) !important;
+  border-radius: 6px;
+  box-shadow: 4px 0px 15px rgb(0 0 0 / 20%);
+  max-height: unset !important;
 }
 
-.main-card-draggable .main-card-imageContainer {
+.e-9921-box--interactive.e-9921-box--contrasting:hover,
+.e-9921-box--interactive:hover:after,
+.e-9921-box--hover-custom.e-9921-box--interactive:hover:after {
+  background: none;
+}
+
+.hZjAwWMA54TvbGYwReET .main-card-imageContainer {
   transition: all 0.35s ease;
   transform-origin: 50% -40px;
   overflow: hidden;
 }
 
-.main-card-draggable:hover .main-card-imageContainer {
+.hZjAwWMA54TvbGYwReET:hover .main-card-imageContainer {
   transform: perspective(76em) rotateX(14deg) translateY(-1px);
   opacity: 0.8;
 }
@@ -1287,14 +1338,6 @@ ARTIST PAGE
   filter: grayscale(5%) brightness(94%);
 }
 
-.under-main-view div:after {
-  display: none;
-}
-
-.I0bVSxvqA3rm5HvciMap {
-  background: none;
-}
-
 .main-entityHeader-background.main-entityHeader-gradient,
 .sv5suqIPUwjgUF_BzM41,
 .wozXSN04ZBOkhrsuY5i2 {
@@ -1347,7 +1390,8 @@ ARTIST PAGE
   background: none;
 }
 
-.EmeHQXR87mUskYK6xEde {
+.EmeHQXR87mUskYK6xEde,
+.Bdcf5g__Rug3TGqSdbiy {
   background: none;
 }
 
