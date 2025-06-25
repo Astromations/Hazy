@@ -1268,7 +1268,7 @@ HOME VIEW
 main-card-draggable {
   background-color: var(--backdrop) !important;
   transition: transform 0.2s ease;
-  margin-left: 16px !important;
+  margin-right: 16px !important;
   border-radius: 6px;
   box-shadow: 4px 0px 15px rgb(0 0 0 / 20%);
 }
