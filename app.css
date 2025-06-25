@@ -901,6 +901,22 @@ SEARCH BAR
   background: none;
 }
 
+/* Fix sizing for clear button */
+.MdMAXXFPalD99eigsBug {
+  padding-inline: 6px !important;
+  margin-right: 12px !important;
+}
+
+/* Fix vertical alignment of browse button */
+.e-9960-form-input-icon__icon {
+  align-items: center;
+}
+
+/* Fix size of clear recent searches button */
+.sxCQ4toOdQ6hMN2rU8Kn {
+  aspect-ratio: 4/1 !important;
+}
+
 /*-----------
 MISCELLANEOUS
 -----------*/
@@ -1314,6 +1330,14 @@ main-card-draggable {
 /* For cards in carousel (to fix tint coverage) */
 .main-card-cardContainer {
   height: 100%;
+}
+
+/* For tint going off side of carousel */
+.a2NTH51fJWzWsds0OYv_:before {
+  background: none !important;
+}
+.a2NTH51fJWzWsds0OYv_:after {
+  width:10%;
 }
 
 /*------
