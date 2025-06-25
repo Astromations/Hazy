@@ -1255,6 +1255,10 @@ HOME VIEW
   grid-gap: 24px;
 }
 
+.main-gridContainer-gridContainer.nrVisibleCards-6 {
+  grid-gap: 0px;
+}
+
 .main-card-card {
   background-color: var(--backdrop);
 }
