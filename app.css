@@ -287,6 +287,18 @@ NOW PLAYING BAR
   filter: drop-shadow(0 0 2px rgba(var(--spice-rgb-selected-row), 0.7));
 }
 
+.main-genericButton-button .Wrapper-sm-only.Wrapper-small-only {
+  display: flex;
+}
+
+/* fullscreen button */
+.button.fsd-button.control-button {
+  display: flex;
+  align-items: center;
+
+  color: rgba(var(--spice-rgb-selected-row),.7);
+}
+
 /*-----
 SIDEBAR
 ------*/
