@@ -16,7 +16,7 @@
 */
 }
 
-.encore-layout-themes {
+.encore-layout-themes, .encore-bright-accent-set {
   --background-highlight: var(--backdrop) !important;
   --background-press: var(--backdrop-darker) !important;
   --background-elevated-base: var(--backdrop) !important;
@@ -435,6 +435,15 @@ SIDEBAR
   -webkit-transform: scale(1) !important;
   transform: scale(1) !important;
   cursor: pointer;
+}
+
+/* start a jam button */
+.encore-bright-accent-set.e-9960-button--small {
+  color: var(--spice-text)
+}
+
+.encore-bright-accent-set.e-9960-button--small:hover {
+  background-color: var(--backdrop)
 }
 
 /*--------
@@ -1121,12 +1130,23 @@ MISCELLANEOUS
 SNACKBAR NOTIFS
 -------------*/
 
-.notistack-Snackbar > div > div.e-9960-box, /* normal toast */
-.notistack-Snackbar > div.notistack-MuiContent /* error toast */
-{
-  backdrop-filter: blur(3.5px) !important;
-  -webkit-backdrop-filter: blur(15px) !important;
+/* normal toast */
+.notistack-Snackbar > div > div.e-9960-box {
+  background-color: var(--backdrop-dark);
   
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(3.5px) !important;
+}
+  
+/* error toast */
+.notistack-Snackbar > div.notistack-MuiContent {
+  backdrop-filter: blur(3.5px) !important;
+  -webkit-backdrop-filter: blur(3.5px) !important;
+}
+
+.notistack-Snackbar > div > div.e-9960-box, 
+.notistack-Snackbar > div.notistack-MuiContent 
+{
   box-shadow: 0 16px 24px rgba(var(--spice-rgb-shadow),.3),0 6px 8px rgba(var(--spice-rgb-shadow),.2);
   -webkit-box-shadow: 0 16px 24px rgba(var(--spice-rgb-shadow),.3),0 6px 8px rgba(var(--spice-rgb-shadow),.2);
 }
@@ -1983,13 +2003,13 @@ span.toggle {
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  background-color: rgb(30, 30, 30);
+  background-color: white;
   margin-left: 2px;
   transition: 0.25s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
 span.toggleWrapper:has(span.toggle.enabled) {
-  background-color: rgb(230, 230, 230);
+  background-color: var(--spice-accent);
 }
 
 span.toggleWrapper:not(:has(span.toggle.enabled)) span.toggle {
