@@ -58,6 +58,28 @@ NAV STYLES
     var(--top-bar-padding-end, var(--panel-gap, 0.5rem));
 }
 
+/* Fix top nav left button sizes */
+div.main-globalNav-historyButtonsContainer div > button,
+.custom-navlink {
+  box-shadow: none !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-block-size: 0 !important;
+}
+
+div.main-globalNav-historyButtonsContainer div > button svg,
+div.main-topBar-topbarContentRight div > button svg,
+.custom-navlink > span > svg
+{
+  width: 18px !important;
+  height: 18px !important;
+}
+
+/* Remove spacer on left side of page controls */
+.Kgjmt7IX5samBYUpbkBu {
+  display: none;
+}
+
 /*-------------------
 ALBUM ART BACKGROUND
 -------------------*/
