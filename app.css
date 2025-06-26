@@ -1,5 +1,8 @@
 :root {
+  --backdrop-lighter: rgba(0, 0, 0, 0.2);
   --backdrop: rgba(0, 0, 0, 0.3);
+  --backdrop-darker: rgba(0, 0, 0, 0.5);
+  --backdrop-dark: rgba(0, 0, 0, 0.7);
   --button-border: 8px;
 
   /* root variables from color.ini
@@ -11,6 +14,15 @@
 --spice-button-active: FFC0EA;
 --spice-accent: FFC0EA;
 */
+}
+
+.encore-layout-themes, .encore-bright-accent-set {
+  --background-highlight: var(--backdrop) !important;
+  --background-press: var(--backdrop-darker) !important;
+  --background-elevated-base: var(--backdrop) !important;
+  --background-elevated-highlight: var(--backdrop-darker) !important;
+  --background-elevated-press: var(--backdrop-lighter) !important;
+  --spice-card: rgba(var(--spice-rgb-card), 0.6) !important;
 }
 
 svg {
@@ -44,6 +56,28 @@ NAV STYLES
 .control-nav .main-topBar-container {
   padding-inline: var(--top-bar-padding-start, var(--panel-gap, 0.5rem))
     var(--top-bar-padding-end, var(--panel-gap, 0.5rem));
+}
+
+/* Fix top nav left button sizes */
+div.main-globalNav-historyButtonsContainer div > button,
+.custom-navlink {
+  box-shadow: none !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-block-size: 0 !important;
+}
+
+div.main-globalNav-historyButtonsContainer div > button svg,
+div.main-topBar-topbarContentRight div > button svg,
+.custom-navlink > span > svg
+{
+  width: 18px !important;
+  height: 18px !important;
+}
+
+/* Remove spacer on left side of page controls */
+.Kgjmt7IX5samBYUpbkBu {
+  display: none;
 }
 
 /*-------------------
@@ -275,6 +309,18 @@ NOW PLAYING BAR
   filter: drop-shadow(0 0 2px rgba(var(--spice-rgb-selected-row), 0.7));
 }
 
+.main-genericButton-button .Wrapper-sm-only.Wrapper-small-only {
+  display: flex;
+}
+
+/* fullscreen button */
+.button.fsd-button.control-button {
+  display: flex;
+  align-items: center;
+
+  color: rgba(var(--spice-rgb-selected-row),.7);
+}
+
 /*-----
 SIDEBAR
 ------*/
@@ -391,6 +437,15 @@ SIDEBAR
   cursor: pointer;
 }
 
+/* start a jam button */
+.encore-bright-accent-set.e-9960-button--small {
+  color: var(--spice-text)
+}
+
+.encore-bright-accent-set.e-9960-button--small:hover {
+  background-color: var(--backdrop)
+}
+
 /*--------
 WHAT'S NEW
 ---------*/
@@ -486,7 +541,7 @@ PLAYLIST VIEW
   background: none !important;
 }
 
-.main-rootlist-wrapper > div[role="presentation"] > div[aria-selected="true"] {
+.main-rootlist-wrapper div[role="presentation"] div[role="row"]:hover {
   background-color: hsla(0, 0%, 100%, 0.1);
   border-radius: 8px;
 }
@@ -573,7 +628,7 @@ PLAYLIST VIEW
   display: none;
 }
 
-.main-entityHeader-container.JYKKZFIXuf9lIHVeszuS .PeLrpasyfBW8ql_bmoAi {
+.main-entityHeader-container.JYKKZFIXuf9lIHVeszuS .XVz4BMGP5zAEE5p90mYK {
   display: none;
 }
 
@@ -615,7 +670,9 @@ TOP BAR
 }
 
 .main-topBar-background {
-  background: none !important;
+  background: none;
+  -webkit-backdrop-filter: blur(25px) !important;
+  backdrop-filter: blur(25px) !important;
 }
 
 .main-topBar-overlay {
@@ -822,6 +879,10 @@ SEARCH BAR
   margin-top: 3px;
 }
 
+.search-searchCategory-contentArea {
+  --encore-cards-margin: 0px !important;
+}
+
 .search-searchCategory-categoryGridItem > button > span {
   border-radius: var(--button-border);
   font-weight: 700 !important;
@@ -881,6 +942,22 @@ SEARCH BAR
 
 .qG4q41T8PJl0SkVgUeJc {
   background: none;
+}
+
+/* Fix sizing for clear button */
+.MdMAXXFPalD99eigsBug {
+  padding-inline: 6px !important;
+  margin-right: 12px !important;
+}
+
+/* Fix vertical alignment of browse button */
+.e-9960-form-input-icon__icon {
+  align-items: center;
+}
+
+/* Fix size of clear recent searches button */
+.sxCQ4toOdQ6hMN2rU8Kn {
+  aspect-ratio: 4/1 !important;
 }
 
 /*-----------
@@ -1049,6 +1126,39 @@ MISCELLANEOUS
   background: none;
 }
 
+/*-------------
+SNACKBAR NOTIFS
+-------------*/
+
+/* normal toast */
+.notistack-Snackbar > div > div.e-9960-box {
+  background-color: var(--backdrop-dark);
+  
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(3.5px) !important;
+}
+  
+/* error toast */
+.notistack-Snackbar > div.notistack-MuiContent {
+  backdrop-filter: blur(3.5px) !important;
+  -webkit-backdrop-filter: blur(3.5px) !important;
+}
+
+.notistack-Snackbar > div > div.e-9960-box, 
+.notistack-Snackbar > div.notistack-MuiContent 
+{
+  box-shadow: 0 16px 24px rgba(var(--spice-rgb-shadow),.3),0 6px 8px rgba(var(--spice-rgb-shadow),.2);
+  -webkit-box-shadow: 0 16px 24px rgba(var(--spice-rgb-shadow),.3),0 6px 8px rgba(var(--spice-rgb-shadow),.2);
+}
+
+.notistack-Snackbar > div[role="alert"] > div > div > div > span {
+  color: white !important;
+}
+
+.go1888806478 {
+  background-color: hsl(from #d32f2f h s l / 0.65);
+}
+
 /*----------
 TEXT SHADOWS
 ----------*/
@@ -1199,6 +1309,10 @@ HOME VIEW
   grid-gap: 24px;
 }
 
+.main-gridContainer-gridContainer.nrVisibleCards-6 {
+  grid-gap: 0px;
+}
+
 .main-card-card {
   background-color: var(--backdrop);
 }
@@ -1212,7 +1326,7 @@ HOME VIEW
 main-card-draggable {
   background-color: var(--backdrop) !important;
   transition: transform 0.2s ease;
-  margin-left: 16px !important;
+  margin-right: 16px !important;
   border-radius: 6px;
   box-shadow: 4px 0px 15px rgb(0 0 0 / 20%);
 }
@@ -1293,6 +1407,19 @@ main-card-draggable {
   transition: 0.2s ease;
 }
 
+/* For cards in carousel (to fix tint coverage) */
+.main-card-cardContainer {
+  height: 100%;
+}
+
+/* For tint going off side of carousel */
+.a2NTH51fJWzWsds0OYv_:before {
+  background: none !important;
+}
+.a2NTH51fJWzWsds0OYv_:after {
+  width:10%;
+}
+
 /*------
 SETTINGS
 ------*/
@@ -1323,6 +1450,23 @@ input:hover:not([disabled], :active) ~ .x-toggle-indicatorWrapper {
 
 input:hover ~ .x-toggle-indicatorWrapper {
   background-color: var(--backdrop);
+}
+
+/* Radio button */
+.U0PJm5wLwGsOlehID1n1.C8YxC7zborN_tF5zBizw:before {
+  background-color: white;
+}
+
+.U0PJm5wLwGsOlehID1n1 {
+  background-color: var(--backdrop);
+}
+
+.daF_Uu6SkaxFXuW1tXC1:before {
+  background-color: var(--backdrop);
+}
+
+.bY4mttCZiFb6AXdiyTWl {
+  background-color: transparent;
 }
 
 /*---------
@@ -1859,13 +2003,13 @@ span.toggle {
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  background-color: rgb(30, 30, 30);
+  background-color: white;
   margin-left: 2px;
   transition: 0.25s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
 span.toggleWrapper:has(span.toggle.enabled) {
-  background-color: rgb(230, 230, 230);
+  background-color: var(--spice-accent);
 }
 
 span.toggleWrapper:not(:has(span.toggle.enabled)) span.toggle {
@@ -2068,13 +2212,40 @@ POPUP MODAL
   background-color: rgba(var(--spice-rgb-selected-row), 0.1);
 }
 
+.main-confirmDialog-container {
+  --background-highlight: hsl(from var(--spice-button) h s l / 0.7) !important;
+  --background-press: hsl(from var(--spice-button) h s l / 0.5) !important;
+  
+  background-color: rgba(0, 0, 0, 0.5);
+  color: var(--spice-text) !important;
+  
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+
+  box-shadow: 0 16px 24px rgba(var(--spice-rgb-shadow),.3),0 6px 8px rgba(var(--spice-rgb-shadow),.2) !important;
+  -webkit-box-shadow: 0 16px 24px rgba(var(--spice-rgb-shadow),.3),0 6px 8px rgba(var(--spice-rgb-shadow),.2) !important;
+}
+
+.main-confirmDialog-container > * {
+  color: var(--spice-text) !important;
+}
+
+.main-confirmDialog-button {
+  --background-highlight: hsl(from var(--spice-button) h s l / 0.7) !important;
+  --background-press: hsl(from var(--spice-button) h s l / 0.5) !important;
+
+  color: var(--spice-text) !important;
+}
+
 /*-------------------
 NOW PLAYING COLOR FIX
 -------------------*/
 .main-trackList-playingIcon {
+  mask-image: url("data:image/svg+xml,%3Csvg id='playing-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cdefs%3E%3Cstyle%3E %23playing-icon %7B fill: %2320BC54; %7D @keyframes play %7B 0%25 %7Btransform: scaleY(1);%7D 3.3%25 %7Btransform: scaleY(0.9583);%7D 6.6%25 %7Btransform: scaleY(0.9166);%7D 9.9%25 %7Btransform: scaleY(0.8333);%7D 13.3%25 %7Btransform: scaleY(0.7083);%7D 16.6%25 %7Btransform: scaleY(0.5416);%7D 19.9%25 %7Btransform: scaleY(0.4166);%7D 23.3%25 %7Btransform: scaleY(0.25);%7D 26.6%25 %7Btransform: scaleY(0.1666);%7D 29.9%25 %7Btransform: scaleY(0.125);%7D 33.3%25 %7Btransform: scaleY(0.125);%7D 36.6%25 %7Btransform: scaleY(0.1666);%7D 39.9%25 %7Btransform: scaleY(0.1666);%7D 43.3%25 %7Btransform: scaleY(0.2083);%7D 46.6%25 %7Btransform: scaleY(0.2916);%7D 49.9%25 %7Btransform: scaleY(0.375);%7D 53.3%25 %7Btransform: scaleY(0.5);%7D 56.6%25 %7Btransform: scaleY(0.5833);%7D 59.9%25 %7Btransform: scaleY(0.625);%7D 63.3%25 %7Btransform: scaleY(0.6666);%7D 66.6%25 %7Btransform: scaleY(0.6666);%7D 69.9%25 %7Btransform: scaleY(0.6666);%7D 73.3%25 %7Btransform: scaleY(0.6666);%7D 76.6%25 %7Btransform: scaleY(0.7083);%7D 79.9%25 %7Btransform: scaleY(0.75);%7D 83.3%25 %7Btransform: scaleY(0.8333);%7D 86.6%25 %7Btransform: scaleY(0.875);%7D 89.9%25 %7Btransform: scaleY(0.9166);%7D 93.3%25 %7Btransform: scaleY(0.9583);%7D 96.6%25 %7Btransform: scaleY(1);%7D %7D %23bar1 %7B transform-origin: bottom; animation: play 0.9s -0.51s infinite; %7D %23bar2 %7B transform-origin: bottom; animation: play 0.9s infinite; %7D %23bar3 %7B transform-origin: bottom; animation: play 0.9s -0.15s infinite; %7D %23bar4 %7B transform-origin: bottom; animation: play 0.9s -0.75s infinite; %7D %3C/style%3E%3C/defs%3E%3Ctitle%3Eplaying-icon%3C/title%3E%3Crect id='bar1' class='cls-1' width='4' height='24'/%3E%3Crect id='bar2' class='cls-1' x='6' width='4' height='24'/%3E%3Crect id='bar3' class='cls-1' x='12' width='4' height='24'/%3E%3Crect id='bar4' class='cls-1' x='18' width='4' height='24'/%3E%3C/svg%3E");
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg id='playing-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cdefs%3E%3Cstyle%3E %23playing-icon %7B fill: %2320BC54; %7D @keyframes play %7B 0%25 %7Btransform: scaleY(1);%7D 3.3%25 %7Btransform: scaleY(0.9583);%7D 6.6%25 %7Btransform: scaleY(0.9166);%7D 9.9%25 %7Btransform: scaleY(0.8333);%7D 13.3%25 %7Btransform: scaleY(0.7083);%7D 16.6%25 %7Btransform: scaleY(0.5416);%7D 19.9%25 %7Btransform: scaleY(0.4166);%7D 23.3%25 %7Btransform: scaleY(0.25);%7D 26.6%25 %7Btransform: scaleY(0.1666);%7D 29.9%25 %7Btransform: scaleY(0.125);%7D 33.3%25 %7Btransform: scaleY(0.125);%7D 36.6%25 %7Btransform: scaleY(0.1666);%7D 39.9%25 %7Btransform: scaleY(0.1666);%7D 43.3%25 %7Btransform: scaleY(0.2083);%7D 46.6%25 %7Btransform: scaleY(0.2916);%7D 49.9%25 %7Btransform: scaleY(0.375);%7D 53.3%25 %7Btransform: scaleY(0.5);%7D 56.6%25 %7Btransform: scaleY(0.5833);%7D 59.9%25 %7Btransform: scaleY(0.625);%7D 63.3%25 %7Btransform: scaleY(0.6666);%7D 66.6%25 %7Btransform: scaleY(0.6666);%7D 69.9%25 %7Btransform: scaleY(0.6666);%7D 73.3%25 %7Btransform: scaleY(0.6666);%7D 76.6%25 %7Btransform: scaleY(0.7083);%7D 79.9%25 %7Btransform: scaleY(0.75);%7D 83.3%25 %7Btransform: scaleY(0.8333);%7D 86.6%25 %7Btransform: scaleY(0.875);%7D 89.9%25 %7Btransform: scaleY(0.9166);%7D 93.3%25 %7Btransform: scaleY(0.9583);%7D 96.6%25 %7Btransform: scaleY(1);%7D %7D %23bar1 %7B transform-origin: bottom; animation: play 0.9s -0.51s infinite; %7D %23bar2 %7B transform-origin: bottom; animation: play 0.9s infinite; %7D %23bar3 %7B transform-origin: bottom; animation: play 0.9s -0.15s infinite; %7D %23bar4 %7B transform-origin: bottom; animation: play 0.9s -0.75s infinite; %7D %3C/style%3E%3C/defs%3E%3Ctitle%3Eplaying-icon%3C/title%3E%3Crect id='bar1' class='cls-1' width='4' height='24'/%3E%3Crect id='bar2' class='cls-1' x='6' width='4' height='24'/%3E%3Crect id='bar3' class='cls-1' x='12' width='4' height='24'/%3E%3Crect id='bar4' class='cls-1' x='18' width='4' height='24'/%3E%3C/svg%3E");
   background: var(--spice-button);
   content-visibility: hidden;
+  mask-repeat: no-repeat;
   -webkit-mask-repeat: no-repeat;
 }
 
