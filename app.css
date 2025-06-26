@@ -6,14 +6,18 @@
   --button-border: 8px;
 
   /* root variables from color.ini
---spice-main: 0A0A0A;
---spice-subtext: F0F0F0;
---spice-shadow: 000000;
---spice-text: FFFFFF;
---spice-button: FFC0EA;
---spice-button-active: FFC0EA;
---spice-accent: FFC0EA;
-*/
+    --spice-main: 0A0A0A;
+    --spice-subtext: F0F0F0;
+    --spice-shadow: 000000;
+    --spice-text: FFFFFF;
+    --spice-button: FFC0EA;
+    --spice-button-active: FFC0EA;
+    --spice-accent: FFC0EA;
+  */
+}
+
+.encore-dark-theme {
+  --background-base: transparent;
 }
 
 .encore-layout-themes, .encore-bright-accent-set {
@@ -210,6 +214,21 @@ NAVIGATION BAR
 
 .RHRitk6QC3rvuG24RAdj {
   box-shadow: none !important;
+}
+
+/*----------
+YOUR LIBRARY
+----------*/
+
+/* expanded library grid view */
+.wJTUKAyYI219kJtclJLa > .eWZOJQ {
+  background-color: var(--backdrop)
+}
+
+/* expanded library compact list view */
+.fYWNdY4zhj4OX_T2Xtg6.BRX6aJUAuAsvHKD_fpbo {
+  padding-left: 8px;
+  align-content: center
 }
 
 /*-------------
@@ -446,6 +465,11 @@ SIDEBAR
   background-color: var(--backdrop)
 }
 
+/* Fix alignment of headphones next to "current device" */
+.FpmhhFL8lCsiyh3X0fjK {
+  display: flex;
+}
+
 /*--------
 WHAT'S NEW
 ---------*/
@@ -563,7 +587,7 @@ PLAYLIST VIEW
 }
 
 .x-filterBox-filterInput {
-  border-radius: var(--button-border);
+  border-radius: var(--button-border) !important;
 }
 
 .main-entityHeader-imageContainer {
@@ -958,6 +982,11 @@ SEARCH BAR
 /* Fix size of clear recent searches button */
 .sxCQ4toOdQ6hMN2rU8Kn {
   aspect-ratio: 4/1 !important;
+}
+
+/* Recent searches background */
+.GimJ6fo6WOYPyWNVpSr1.ZjfaJlGQZ42nCWjD3FDm {
+  backdrop-filter: blur(25px);
 }
 
 /*-----------
@@ -1510,6 +1539,11 @@ ARTIST PAGE
   cursor: pointer;
 }
 
+/* "# in the world" badge */
+.tLjX9htIKD_OCmEX01UN {
+  background-color: var(--spice-accent);
+}
+
 .main-trackCreditsModal-container,
 .main-aboutRecsModal-container,
 .main-playlistEditDetailsModal-container,
@@ -1524,6 +1558,10 @@ ARTIST PAGE
 .main-cardImage-circular,
 .main-cardImage-imageWrapper {
   border-radius: var(--button-border) !important;
+}
+
+.od_kF1rLZbir8kM_F607 {
+  margin-top: 32px;
 }
 
 .ChipInner__ChipInnerComponent-sc-1ly6j4j-0 {
