@@ -903,10 +903,6 @@ div._b3hhmbWtOY8_1M1mM1H:has(form > .ODl7TwNawIfBwiZv1Czg > input[tabindex="0"])
   background-color: transparent !important;
 }
 
-.main-globalNav-searchContainer button {
-  background: none !important;
-}
-
 .IYex0sXu8fnCz1FqFbRe {
   background: none;
 }
@@ -1388,6 +1384,10 @@ main-card-draggable {
 
 .main-card-PlayButtonContainer {
   box-shadow: none;
+}
+
+.main-globalNav-searchContainer {
+  justify-content: center;
 }
 
 /* For buttons inside the Search Container */
