@@ -133,9 +133,9 @@
 
   function getCurrentBackground(replace) {
     let url = Spicetify.Player.data.item.metadata.image_url;
+    if (toggles.UseCustomBackground || !URL.canParse(url)) return startImage;
     if (replace)
       url = url.replace("spotify:image:", "https://i.scdn.co/image/");
-    if (toggles.UseCustomBackground || !URL.canParse(url)) return startImage;
     return url;
   }
 
