@@ -960,7 +960,7 @@ div._b3hhmbWtOY8_1M1mM1H:has(form > .ODl7TwNawIfBwiZv1Czg > input[tabindex="0"])
 }
 
 /* Recent searches background */
-#search-dropdown {
+#search-dropdown > div {
   backdrop-filter: blur(25px);
 }
 
@@ -1414,6 +1414,11 @@ form[role="search"] button.MdMAXXFPalD99eigsBug svg {
 
 .a2NTH51fJWzWsds0OYv_:after {
   width: 10%;
+}
+
+/* Disable square box shadow on circular artist photo */
+.GOcsybnoHYyJGQGDRuwj.MxmW8QkHqHWtuhO589PV:has(.MxmW8QkHqHWtuhO589PV) {
+  box-shadow: none !important;
 }
 
 /*------
@@ -2232,19 +2237,22 @@ POPUP MODAL
 /*----------------
 QUICK SEARCH MODAL
 ----------------*/
-.zZMsUUWG29PYcwWPXhOV,
-.search-modal-keyboard-accessibility-bar,
-.search-modal-listbox {
+.N9tnwm0XDrt_eGJd2D2A {
   background: var(--backdrop-light);
   backdrop-filter: blur(25px);
-
   box-shadow:
     0 16px 24px rgba(var(--spice-rgb-shadow), 0.075),
     0 6px 8px rgba(var(--spice-rgb-shadow), 0.05) !important;
+
+  border-radius: 8px;
+}
+
+.search-modal-keyboard-accessibility-bar {
+  padding-top: 8px;
 }
 
 .search-modal-searchBar {
-  background-color: hsl(from white h s l / 0.95);
+  background-color: hsl(from white h s l / 0.925);
 }
 
 /*-------------------
