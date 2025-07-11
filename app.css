@@ -456,6 +456,21 @@ SIDEBAR
   display: flex;
 }
 
+/* Blur header background in now playing view */
+.vDev2BqBHloweL24GNHK .yvZooOj0rpfRS__cAUCo {
+  backdrop-filter: blur(12px);
+}
+
+/* Fix friend activity play icon hover background */
+.xU4sacBisQneHoQeHMP5 .srjSlmxMGzXnJBc32BJa {
+  border-radius: var(--button-border);
+}
+
+/* Theme equalizer icon for friend activity currently playing */
+.Ydxgl4Y23orfVVVI9O2k svg {
+  fill: var(--spice-accent)
+}
+
 /*--------
 WHAT'S NEW
 ---------*/
@@ -499,6 +514,10 @@ WHAT'S NEW
 .main-buddyFeed-overlay {
   border-radius: var(--button-border) !important;
   transition: all 0.3s ease;
+}
+
+.main-avatar-image {
+  border-radius: var(--button-border);
 }
 
 .main-avatar-avatar.main-avatar-withBadge:after {
@@ -991,16 +1010,16 @@ MISCELLANEOUS
 .queue-tabBar-headerItemLink,
 .lyrics-tabBar-active,
 .lyrics-tabBar-headerItemLink {
-  padding: 2px 16px;
+  padding: 7px 16px;
   transition: background-color 0.3s ease;
-  height: 32px;
+  height: 36px;
 }
 
 .queue-tabBar-headerItemLink:hover,
 .lyrics-tabBar-headerItemLink:hover {
-  padding: 2px 16px;
+  padding: 7px 16px;
   background-color: rgba(0, 0, 0, 0.2);
-  height: 32px;
+  height: 36px;
 }
 
 .lyrics-config-button {
@@ -1521,7 +1540,7 @@ ARTIST PAGE
 .profile-userEditDetails-container,
 .artist-artistAbout-modal {
   background-color: rgb(48 48 48 / 30%) !important;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(15px);
   border-radius: var(--button-border);
   padding-bottom: 1rem;
 }
@@ -1729,7 +1748,7 @@ EXPERIMENTAL FEATURES
 -------------------*/
 
 .GenericModal > .main-embedWidgetGenerator-container {
-  background-color: var(--backdrop) !important;
+  background-color: rgb(48 48 48 / 30%) !important;
   backdrop-filter: blur(15px);
   height: 680px;
 }
@@ -1795,37 +1814,44 @@ a[href="/marketplace"] {
   box-shadow: none !important;
 }
 
+.Dropdown-control,
+.marketplace-tabBar-headerItemLink,
+.searchbar-bar
+.marketplace-header-icon-button
+{
+  height: 36px;
+}
+
 .marketplace-tabBar-headerItemLink.marketplace-tabBar-active,
 .Dropdown-control {
   background-color: var(--backdrop);
-  border-radius: 4px;
-  height: 32px;
+  border-radius: 6px;
 }
 
 .marketplace-tabBar-headerItemLink {
-  padding: 4px 16px;
+  padding: 7px 16px;
   transition: background-color 0.3s ease;
-  height: 32px;
+}
+
+.marketplace-tabBar-headerItemLink:hover {
+  padding: 7px 16px;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .Dropdown-control {
   background-color: var(--backdrop);
   border-radius: 6px !important;
   color: var(--spice-text);
-  height: 32px;
   padding: 6px 36px 8px 16px;
   transition: all 0.3s ease;
   font-size: 0.875rem;
   font-weight: 700;
+  display: flex;
+  align-items: center;
 }
 
 .Dropdown-arrow {
-  top: 15px;
-}
-
-.marketplace-tabBar-headerItemLink:hover {
-  padding: 4px 16px;
-  background-color: rgba(0, 0, 0, 0.2);
+  top: 17px;
 }
 
 .main-cardHeader-text {
@@ -1835,29 +1861,22 @@ a[href="/marketplace"] {
 .searchbar-bar {
   border-style: none;
   background-color: var(--backdrop) !important;
-  height: 32px;
 }
 
 .marketplace-header-icon-button {
   background-color: var(--backdrop);
 }
 
-#marketplace-settings-button {
-  height: 32px;
-  width: 32;
-}
-
 .marketplace-header-icon-button:hover {
   background-color: rgba(255, 255, 255, 0.01);
 }
 
-.Root.global-nav .marketplace-header {
-  padding-top: 4rem;
-}
-
 .marketplace-header {
-  padding-top: 10px;
+  padding-top: 6px; /* Already has 14px padding */
+  padding-bottom: 20px;
   background: none;
+
+  position: relative; /* Moves, because there's not a solid bg colour */
 }
 
 #marketplace-readme {
@@ -1870,12 +1889,26 @@ a[href="/marketplace"] {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+.marketplace-tooltip-icon {
+  fill: white;
+}
+
+.devtools-column {
+  background-color: transparent;
+}
+
+.marketplace-code-editor {
+  background-color: var(--backdrop-light);
+  backdrop-filter: blur(25px);
+}
+
 /*-----------------
 CONTEXT MENUS
 -----------------*/
 
 div#context-menu:before,
-.main-contextMenu-menu:before {
+.main-contextMenu-menu:before,
+.Dropdown-menu:before {
   content: "";
   z-index: -1;
   position: absolute;
@@ -1887,9 +1920,14 @@ div#context-menu:before,
   backdrop-filter: blur(25px);
 }
 
+.Dropdown-menu,
 .main-contextMenu-menu {
   border-radius: var(--button-border);
   padding: 6px;
+}
+
+.Dropdown-option {
+  border-radius: 8px;
 }
 
 .main-contextMenu-menu::-webkit-scrollbar-thumb {
@@ -1907,7 +1945,8 @@ div#context-menu:before,
 
 .main-contextMenu-menu,
 .main-contextMenu-tippy,
-.aCtCKL9BxAoHeVZS0uRs {
+.aCtCKL9BxAoHeVZS0uRs,
+.Dropdown-menu {
   background-color: rgba(var(--spice-rgb-card), 0.6) !important;
 }
 
@@ -2012,12 +2051,18 @@ span.toggle {
   transition: 0.25s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
-span.toggleWrapper:has(span.toggle.enabled) {
+.toggle-module__toggle-input___ceLM4_marketplace~.toggle-module__toggle-indicator-wrapper___6Lcp0_marketplace .toggle-module__toggle-indicator___nCxwE_marketplace {
+  background-color: white !important;
+}
+
+span.toggleWrapper:has(span.toggle.enabled),
+.toggle-module__toggle-input___ceLM4_marketplace:checked~.toggle-module__toggle-indicator-wrapper___6Lcp0_marketplace
+{
   background-color: var(--spice-accent);
 }
 
 span.toggleWrapper:not(:has(span.toggle.enabled)) span.toggle {
-  background-color: rgb(130, 130, 130);
+  background-color: rgb(130, 130, 130) !important;;
 }
 
 span.toggle.enabled {
