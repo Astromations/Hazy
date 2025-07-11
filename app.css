@@ -188,7 +188,7 @@ NAVIGATION BAR
 
 .main-navBar-navBarLinkActive,
 .main-collectionLinkButton-selected {
-  border-radius: 8px !important;
+  border-radius: var(--button-border) !important;
 }
 
 .main-yourLibraryX-libraryContainer {
@@ -235,7 +235,7 @@ NOW PLAYING BAR
 
 .Root__now-playing-bar {
   background-color: var(--backdrop) !important;
-  border-radius: 8px;
+  border-radius: var(--button-border);
 }
 
 .main-nowPlayingBar-nowPlayingBar {
@@ -358,7 +358,7 @@ SIDEBAR
 .main-buddyFeed-container,
 .ffFwfKcPDbmAPLXzxzKq {
   --background-base: var(--backdrop) !important;
-  border-radius: 8px;
+  border-radius: var(--button-border);
 }
 
 .ffFwfKcPDbmAPLXzxzKq:before {
@@ -395,7 +395,7 @@ SIDEBAR
 
 .main-nowPlayingView-section {
   background-color: var(--backdrop);
-  border-radius: 8px;
+  border-radius: var(--button-border);
   padding: 16px;
   box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 10%);
 }
@@ -552,7 +552,7 @@ PLAYLIST VIEW
 
 .main-rootlist-wrapper div[role="presentation"] div[role="row"]:hover {
   background-color: hsla(0, 0%, 100%, 0.1);
-  border-radius: 8px;
+  border-radius: var(--button-border);
 }
 
 .main-trackList-rowSectionStart > img {
@@ -580,7 +580,7 @@ PLAYLIST VIEW
 }
 
 .main-entityHeader-image {
-  border-radius: 8px !important;
+  border-radius: var(--button-border) !important;
   box-shadow: -2px 4px 9px 3px rgb(0 0 0 / 15%);
 }
 
@@ -610,7 +610,7 @@ PLAYLIST VIEW
 
 .main-editImageButton-overlay {
   background-color: rgb(0 0 0 / 50%);
-  border-radius: 8px;
+  border-radius: var(--button-border);
 }
 
 .main-image-image.main-trackList-rowImage.main-image-loaded {
@@ -1087,7 +1087,7 @@ MISCELLANEOUS
 
 .hcuLp8V4uEEfWZ4k6aLV {
   background: none;
-  border-radius: 8px;
+  border-radius: var(--button-border);
 }
 
 .main-devicePicker-controlButton[aria-expanded="true"] {
@@ -1115,6 +1115,10 @@ MISCELLANEOUS
 
 .N_8iI7NKHP0iG2jp3g0R {
   background: none;
+}
+
+.StyledTabItem-tab-tabItem-useBrowserDefaultFocusStyle {
+  border-radius: var(--button-border);
 }
 
 /*-------------
@@ -1518,7 +1522,7 @@ ARTIST PAGE
 .artist-artistAbout-modal {
   background-color: rgb(48 48 48 / 30%) !important;
   backdrop-filter: blur(8px);
-  border-radius: 8px;
+  border-radius: var(--button-border);
   padding-bottom: 1rem;
 }
 
@@ -1532,7 +1536,7 @@ ARTIST PAGE
 }
 
 .ChipInner__ChipInnerComponent-sc-1ly6j4j-0 {
-  border-radius: 8px !important;
+  border-radius: var(--button-border) !important;
 }
 
 .GenericModal {
@@ -1549,12 +1553,12 @@ ARTIST PAGE
 }
 
 .SxHlW6byhoJSUJNugaE1 > figure > div > img {
-  border-radius: 8px;
+  border-radius: var(--button-border);
 }
 
 .mYvNDps8FDVgHSCzpeqC,
 .o6lOM3qmit24hWlOBbw0 > img {
-  border-radius: 8px !important;
+  border-radius: var(--button-border) !important;
 }
 
 .Kujbn0F68QOf_o44cNxw {
@@ -1737,7 +1741,7 @@ EXPERIMENTAL FEATURES
 
 .main-embedWidgetGenerator-container
   > .main-trackCreditsModal-mainSection::-webkit-scrollbar-thumb {
-  border-radius: 8px;
+  border-radius: var(--button-border);
 }
 
 .spicetify-exp-features button.switch {
@@ -1858,7 +1862,7 @@ a[href="/marketplace"] {
 
 #marketplace-readme {
   background: var(--backdrop) !important;
-  border-radius: 8px !important;
+  border-radius: var(--button-border) !important;
   padding: 20px !important;
 }
 
@@ -1879,12 +1883,12 @@ div#context-menu:before,
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 8px !important;
+  border-radius: var(--button-border) !important;
   backdrop-filter: blur(25px);
 }
 
 .main-contextMenu-menu {
-  border-radius: 8px;
+  border-radius: var(--button-border);
   padding: 6px;
 }
 
@@ -2244,7 +2248,7 @@ QUICK SEARCH MODAL
     0 16px 24px rgba(var(--spice-rgb-shadow), 0.075),
     0 6px 8px rgba(var(--spice-rgb-shadow), 0.05) !important;
 
-  border-radius: 8px;
+  border-radius: var(--button-border);
 }
 
 .search-modal-keyboard-accessibility-bar {
