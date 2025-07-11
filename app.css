@@ -1512,8 +1512,9 @@ ARTIST PAGE
 .profile-userEditDetails-container,
 .artist-artistAbout-modal {
   background-color: rgb(48 48 48 / 30%) !important;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(8px);
   border-radius: 8px;
+  padding-bottom: 1rem;
 }
 
 .main-cardImage-circular,
