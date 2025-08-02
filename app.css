@@ -234,6 +234,9 @@ NOW PLAYING BAR
 --------------*/
 
 .Root__now-playing-bar {
+  margin: 0;
+  padding: 0;
+
   background-color: var(--backdrop) !important;
   border-radius: var(--button-border);
 }
@@ -471,6 +474,11 @@ SIDEBAR
   fill: var(--spice-accent)
 }
 
+/* Transparent card background */
+.pIxPdfuNasUDLbEDmuK_ {
+  background-color: var(--background-elevated-base);
+}
+
 /*--------
 WHAT'S NEW
 ---------*/
@@ -705,6 +713,10 @@ TOP BAR
   opacity: 0 !important;
 }
 
+.mxGhI8Lr7MoGOnFrbsUa.BHHXR8xc6m009ohY6aKU {
+  background: var(--backdrop);
+}
+
 .nav-ylx .main-trackList-trackListHeaderStuck.main-trackList-trackListHeader,
 .main-trackList-trackListHeader.main-trackList-trackListHeaderStuck {
   background: none;
@@ -830,6 +842,7 @@ PLAY BUTTONS
   background-color: var(--backdrop);
 }
 
+.main-globalNav-buddyFeed,
 .main-topBar-buddyFeed {
   box-shadow: none !important;
   width: 32px;
@@ -837,7 +850,9 @@ PLAY BUTTONS
 }
 
 .main-topBar-buddyFeed,
-.main-topBar-buddyFeed:active {
+.main-topBar-buddyFeed:active,
+.main-globalNav-buddyFeed,
+.main-globalNav-buddyFeed:active {
   border-style: none !important;
 }
 
@@ -973,12 +988,18 @@ div._b3hhmbWtOY8_1M1mM1H:has(form > .ODl7TwNawIfBwiZv1Czg > input[tabindex="0"])
   align-items: center;
 }
 
+/* Fix height & misplacement of browse button */
+form[role="search"] > .e-91000-form-input-icon__icon.e-91000-form-input-icon__icon--trailing {
+  max-height: 24px;
+}
+
 /* Fix size of clear recent searches button */
 .sxCQ4toOdQ6hMN2rU8Kn {
   aspect-ratio: 4/1 !important;
 }
 
 /* Recent searches background */
+#recent-searches-dropdown > div,
 #search-dropdown > div {
   backdrop-filter: blur(25px);
 }
@@ -1145,10 +1166,10 @@ SNACKBAR NOTIFS
 -------------*/
 
 /* normal toast */
-.notistack-Snackbar > div > div.e-9960-box {
-  background-color: var(--backdrop-dark);
+.notistack-Snackbar > div > div.RQREWe_yBdtc_g6eC3wQ {
+  background-color: var(--backdrop-darker);
 
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: blur(10px) !important;
 }
 
 /* error toast */
@@ -1314,14 +1335,6 @@ HOME VIEW
 
 .PpFTgmA5yHE2_VdobCMS {
   margin-inline: unset !important;
-}
-
-.main-gridContainer-gridContainer {
-  grid-gap: 24px;
-}
-
-.main-gridContainer-gridContainer.nrVisibleCards-6 {
-  grid-gap: 0px;
 }
 
 .main-card-card {
@@ -1534,6 +1547,7 @@ ARTIST PAGE
   background-color: var(--spice-accent);
 }
 
+dialog,
 .main-trackCreditsModal-container,
 .main-aboutRecsModal-container,
 .main-playlistEditDetailsModal-container,
@@ -1548,10 +1562,6 @@ ARTIST PAGE
 .main-cardImage-circular,
 .main-cardImage-imageWrapper {
   border-radius: var(--button-border) !important;
-}
-
-.od_kF1rLZbir8kM_F607 {
-  margin-top: 32px;
 }
 
 .ChipInner__ChipInnerComponent-sc-1ly6j4j-0 {
@@ -1749,7 +1759,7 @@ EXPERIMENTAL FEATURES
 
 .GenericModal > .main-embedWidgetGenerator-container {
   background-color: rgb(48 48 48 / 30%) !important;
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(25px);
   height: 680px;
 }
 
@@ -1956,6 +1966,28 @@ div#context-menu:before,
 
 .main-contextMenu-filterPlaylistSearchContainer {
   height: auto;
+}
+
+.yO0rvyTlM0Hu4iDIycZE:last-child {
+  display: none
+}
+
+/* Right click context menu (container) */
+.wlb3dYO07PZuYfmNfmkS {
+  border-radius: var(--button-border);
+}
+
+/* Right click context menu (indented container) */
+.jzMBaEByD6M9xRmS9mv8 > div {
+  backdrop-filter: blur(25px);
+  clip-path: inset(0 round var(--button-border)); /* so the stupid blur filter doesn't go outside of the border radius */
+}
+
+/* Right click context menu (item) */
+.niXChlbt7kxslMUdfwu9 {
+  width: calc(100% - 4px);
+  margin: 2px;
+  border-radius: 5px;
 }
 
 /* ----ANIMATIONS ----*/
@@ -2266,7 +2298,7 @@ POPUP MODAL
   background-color: var(--backdrop-light);
   color: var(--spice-text) !important;
 
-  backdrop-filter: blur(15px) !important;
+  backdrop-filter: blur(25px) !important;
   box-shadow:
     0 16px 24px rgba(var(--spice-rgb-shadow), 0.075),
     0 6px 8px rgba(var(--spice-rgb-shadow), 0.05) !important;
@@ -2286,14 +2318,20 @@ POPUP MODAL
 /*----------------
 QUICK SEARCH MODAL
 ----------------*/
-.N9tnwm0XDrt_eGJd2D2A {
+.zZMsUUWG29PYcwWPXhOV:not(._kfmGT75UTPoF_D2afwa),
+.N9tnwm0XDrt_eGJd2D2A:has(div._kfmGT75UTPoF_D2afwa) {
   background: var(--backdrop-light);
   backdrop-filter: blur(25px);
   box-shadow:
     0 16px 24px rgba(var(--spice-rgb-shadow), 0.075),
     0 6px 8px rgba(var(--spice-rgb-shadow), 0.05) !important;
-
   border-radius: var(--button-border);
+}
+
+.zZMsUUWG29PYcwWPXhOV._kfmGT75UTPoF_D2afwa,
+.search-modal-listbox,
+.search-modal-keyboard-accessibility-bar{
+  background: none;
 }
 
 .search-modal-keyboard-accessibility-bar {
