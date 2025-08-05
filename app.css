@@ -446,11 +446,12 @@ SIDEBAR
 }
 
 /* start a jam button */
-.encore-bright-accent-set.e-9960-button--small {
-  color: var(--spice-text);
+.encore-bright-accent-set.e-91000-button--small:hover,
+.encore-bright-accent-set.e-91000-button--small:hover span
+{
+  color: white;
 }
-
-.encore-bright-accent-set.e-9960-button--small:hover {
+.encore-bright-accent-set.e-91000-button--small:hover {
   background-color: var(--backdrop);
 }
 
@@ -568,18 +569,20 @@ PLAYLIST VIEW
   background-color: transparent !important;
 }
 
-.main-trackList-trackListRow.main-trackList-selected,
-.main-trackList-trackListRow.main-trackList-selected:hover {
-  background-color: transparent !important;
-}
+
 
 .playlist-playlist-playlistContent {
   background: none !important;
 }
 
+.main-trackList-selected,
 .main-rootlist-wrapper div[role="presentation"] div[role="row"]:hover {
   background-color: hsla(0, 0%, 100%, 0.1);
   border-radius: var(--button-border);
+}
+
+.main-trackList-selected {
+  background-color: hsla(0, 0%, 100%, 0.2) !important;
 }
 
 .main-trackList-rowSectionStart > img {
@@ -1022,6 +1025,10 @@ MISCELLANEOUS
 .lyrics-tabBar-active {
   background-color: var(--backdrop);
   height: 32px;
+}
+
+.main-trackList-curationButton > span {
+  height: 16px;
 }
 
 .MnW5SczTcbdFHxLZ_Z8j {
@@ -1547,16 +1554,29 @@ ARTIST PAGE
   background-color: var(--spice-accent);
 }
 
-dialog,
 .main-trackCreditsModal-container,
 .main-aboutRecsModal-container,
 .main-playlistEditDetailsModal-container,
 .profile-userEditDetails-container,
-.artist-artistAbout-modal {
+.artist-artistAbout-modal,
+dialog.NiqTdDnFi5KAXoGukrdo.aOxbsZDBlepfQptv_EfI,
+.GenericModal__overlay > div[role="dialog"] > div
+{
   background-color: rgb(48 48 48 / 30%) !important;
   backdrop-filter: blur(15px);
   border-radius: var(--button-border);
   padding-bottom: 1rem;
+}
+
+.GenericModal__overlay button[data-encore-id="buttonPrimary"] span:hover,
+.GenericModal__overlay > div[role="dialog"] > div,
+.GenericModal__overlay > div[role="dialog"] button[data-encore-id="buttonTertiary"]
+{
+  color: white;
+}
+
+.GenericModal__overlay > div[role="dialog"] > div {
+  padding: 1.5rem
 }
 
 .main-cardImage-circular,
