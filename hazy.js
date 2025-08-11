@@ -202,7 +202,7 @@
       };
 
       img.onerror = function () {
-        console.error("Image load error");
+        console.error("[Hazy] Image load error");
       };
 
       img.src = getCurrentBackground(true);
@@ -298,7 +298,7 @@
         const zoomFactor = newOuterWidth / newInnerWidth || 1;
         document.documentElement.style.setProperty("--zoom", zoomFactor);
         console.debug(
-          `Zoom Updated: ${newOuterWidth} / ${newInnerWidth} = ${zoomFactor}`
+          `[Hazy] Zoom Updated: ${newOuterWidth} / ${newInnerWidth} = ${zoomFactor}`
         );
 
         // Update previous values
