@@ -2162,6 +2162,15 @@ span.toggle.enabled {
   box-shadow: 0px 0px 15px 5px rgb(75, 150, 75, 0.4);
 }
 
+#home-save.applyfailed,
+#home-save.applyfailed:hover {
+  background-color: rgb(255 84 84);
+  color: white;
+  letter-spacing: 2px;
+  cursor: default;
+  box-shadow: 0px 0px 15px 5px rgba(150, 75, 75, 0.4);
+}
+
 #home-save:hover {
   opacity: 0.9;
   box-shadow: 0px 0px 15px 5px rgba(200, 200, 200, 0.4);

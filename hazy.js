@@ -1,5 +1,5 @@
 (function hazy() {
-  if (!Spicetify?.Platform) {
+  if (!Spicetify?.Platform || !Spicetify?.Platform?.History?.listen) {
     setTimeout(hazy, 100);
     return;
   }
@@ -136,7 +136,7 @@
 
   function getCurrentBackground(replace) {
     let url = Spicetify?.Player?.data?.item?.metadata?.image_url;
-    if (toggles.UseCustomBackground || !URL.canParse(url)) return startImage;
+    if (toggles.UseCustomBackground || !url || !URL.canParse(url)) return startImage;
     if (replace)
       url = url.replace("spotify:image:", "https://i.scdn.co/image/");
     return url;
@@ -199,10 +199,6 @@
         if (!hexColor) hexColor = findColor(rgbList, true);
 
         setAccentColor(hexColor);
-      };
-
-      img.onerror = function () {
-        console.error("[Hazy] Image load error");
       };
 
       img.src = getCurrentBackground(true);
@@ -675,7 +671,30 @@
     saveButton.id = "home-save";
     saveButton.innerHTML = "Apply";
 
-    saveButton.onclick = () => {
+    saveButton.onclick = async () => {
+      // Check if image background is valid
+      let invalidImage = false;
+      try {
+        await fetch(srcInput.value);
+      }
+      catch (error) {
+        invalidImage = true;
+      }
+
+      if (!srcInput.value || !URL.canParse(srcInput.value) || invalidImage) {
+        saveButton.innerHTML = "Invalid image";
+        saveButton.classList.add("applyfailed");
+        saveButton.disabled = true;
+
+        setTimeout(() => {
+          saveButton.innerHTML = "Apply";
+          saveButton.classList.remove("applyfailed");
+          saveButton.disabled = false;
+        }, 3000);
+
+        return;
+      }
+
       // Change the button text to "Applied!", add "applied" class, and disable the button
       saveButton.innerHTML = "Applied!";
       saveButton.classList.add("applied");
@@ -730,6 +749,8 @@
           .querySelector(`.hazyOptionRow[name=${opt.id}] .toggle`)
           .classList.toggle("enabled", opt.defVal);
       });
+      document.getElementById("src-input").value = defImage;
+      img.src = defImage;
       document.getElementById("color-input").value = "#30bf63";
     };
 
