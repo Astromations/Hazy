@@ -1,5 +1,5 @@
 (function hazy() {
-  if (!(Spicetify.Player.data && Spicetify.Platform)) {
+  if (!(Spicetify?.Player?.data && Spicetify?.Platform)) {
     setTimeout(hazy, 100);
     return;
   }
@@ -132,7 +132,7 @@
   }
 
   function getCurrentBackground(replace) {
-    let url = Spicetify.Player.data.item.metadata.image_url;
+    let url = Spicetify?.Player?.data?.item?.metadata?.image_url;
     if (toggles.UseCustomBackground || !URL.canParse(url)) return startImage;
     if (replace)
       url = url.replace("spotify:image:", "https://i.scdn.co/image/");
@@ -142,14 +142,14 @@
   async function onSongChange() {
     fetchFadeTime();
 
-    const album_uri = Spicetify.Player.data.item.metadata.album_uri;
+    const album_uri = Spicetify?.Player?.data?.item?.metadata?.album_uri;
     if (album_uri !== undefined && !album_uri.includes("spotify:show")) {
       // Album
-    } else if (Spicetify.Player.data.item.uri.includes("spotify:episode")) {
+    } else if (Spicetify?.Player?.data?.item?.uri?.includes("spotify:episode")) {
       // Podcast
-    } else if (Spicetify.Player.data.item.isLocal) {
+    } else if (Spicetify?.Player?.data?.item?.isLocal) {
       // Local file
-    } else if (Spicetify.Player.data.item.provider === "ad") {
+    } else if (Spicetify?.Player?.data?.item?.provider === "ad") {
       // Ad
       return;
     } else {
