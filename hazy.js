@@ -1,7 +1,10 @@
 (function hazy() {
-  if (!(Spicetify?.Player?.data && Spicetify?.Platform)) {
+  if (!Spicetify?.Platform) {
     setTimeout(hazy, 100);
     return;
+  }
+  if (!Spicetify?.Player?.data) {
+    console.warn('[Hazy] Could not load track data, falling back to default background')
   }
 
   const defImage = "https://i.imgur.com/Wl2D0h0.png";
