@@ -480,6 +480,16 @@ SIDEBAR
   background-color: var(--background-elevated-base);
 }
 
+/* Hide not completely collapsed sidebar */
+.Root__right-sidebar:has(div[aria-hidden=true]) {
+  display: none !important;
+}
+
+/* Compensate for extra gap space when right sidebar is hidden */
+.Root__top-container:has(.Root__right-sidebar div[aria-hidden=true]) .Root__main-view {
+  width: calc(100% + var(--panel-gap)) !important;
+}
+
 /*--------
 WHAT'S NEW
 ---------*/
