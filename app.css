@@ -1721,7 +1721,7 @@ BLOOM LYRICS
 
 .lyrics-lyricsContainer-LyricsContainer {
   --lyrics-color-active: white !important;
-  --lyrics-color-inactive: rgba(255, 255, 255, 0.5) !important;
+  --lyrics-color-inactive: rgba(200, 200, 200 / 45%) !important;
 }
 
 .lyrics-lyricsContainer-LyricsLine {
@@ -1732,13 +1732,15 @@ BLOOM LYRICS
   transition-property: transform, color, opacity, text-shadow !important;
 }
 
-.lyrics-lyricsContainer-Karaoke-Word {
+/* TODO: Make setting to toggle word popout in karaoke mode */
+/* .lyrics-lyricsContainer-Karaoke-Word {
   transition:
     var(--word-duration) color ease,
     var(--word-duration) text-shadow ease !important;
   text-shadow: none;
-}
+} */
 
+/* TODO: Make setting to toggle glow intensity */
 .lyrics-lyricsContainer-Karaoke-WordActive,
 .lyrics-lyricsContainer-SyncedLyrics .lyrics-lyricsContainer-LyricsLine-active {
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
@@ -1770,6 +1772,18 @@ BLOOM LYRICS
 .Root__top-container:has(.FUYNhisXTCmbzt9IDxnT) .main-topBar-container,
 .Root__top-container:has(.FUYNhisXTCmbzt9IDxnT) .under-main-view {
   display: none;
+}
+
+body:has(div#lyrics-fullscreen-container) div.Root__top-container > * {
+  display: none;
+}
+body:has(div#lyrics-fullscreen-container) div.Root__top-container:before {
+  opacity: 0.325;
+}
+
+body:has(div#lyrics-fullscreen-container) .lyrics-lyricsContainer-SyncedLyrics .lyrics-lyricsContainer-LyricsLine {
+  font-size: calc(var(--lyrics-font-size) * 2);
+  line-height: calc(var(--lyrics-line-height) * 2);
 }
 
 /*-------
@@ -2513,3 +2527,6 @@ EXTENSION-SPECIFIC TWEAKS
 }
 
 /*------------------------------------------------------------*/
+.Root__top-container > * {
+  display: none
+}
