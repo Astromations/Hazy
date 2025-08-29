@@ -480,15 +480,38 @@ SIDEBAR
   background-color: var(--background-elevated-base);
 }
 
-/* Hide not completely collapsed sidebar */
-.Root__right-sidebar:has(div[aria-hidden=true]) {
-  display: none !important;
+/* Semi collapsed sidebar (button present on right of screen to reopen */
+
+/* Hidden sidebar hover enter transition */
+.Root__right-sidebar div[aria-hidden=true] .AAdBM1nhG73supMfnYX7 {
+  opacity: 0;
+  transition: opacity .5s ease-in-out;
 }
 
-/* Compensate for extra gap space when right sidebar is hidden */
-.Root__top-container:has(.Root__right-sidebar div[aria-hidden=true]) .Root__main-view {
-  width: calc(100% + var(--panel-gap)) !important;
+/* Hidden sidebar hover exit transition */
+.Root__right-sidebar .iXXcc7CtzmTm5yA3ZXbl.hYAxYCXtABXg35wNC2TR.bMaQdOqIiAZtt4cKEhWf:hover .AAdBM1nhG73supMfnYX7 {
+  opacity: 0.3;
+  transition: opacity .3s ease-out,-webkit-transform .5s ease-out;
 }
+
+/* Fix black gap between main view & sidebar on hover when closed */
+.UQRh5VQzvqcMfTje1JUe.tLZZlY6dyQ31AIGTg_AF > * {
+  background: transparent !important;
+}
+
+/* Main container with sidebar enter transition */
+.Root__top-container:has(.Root__right-sidebar .iXXcc7CtzmTm5yA3ZXbl.hYAxYCXtABXg35wNC2TR.bMaQdOqIiAZtt4cKEhWf:hover) .Root__main-view {
+  width: calc(100% - (var(--panel-gap) * 1.5)) !important;
+
+  transition: width .3s ease-in-out !important;
+}
+
+/* Main container with sidebar exit transition */
+.Root__main-view {
+  transition: width .5s ease-out,-webkit-transform .5s ease-out !important;
+}
+
+
 
 /*--------
 WHAT'S NEW
@@ -2409,22 +2432,4 @@ TRANSPARENT BG FIXES
 ------------------*/
 .Ps9zgW56WZaBVLo1n3cg {
   color: black !important;
-}
-
-.UQRh5VQzvqcMfTje1JUe.tLZZlY6dyQ31AIGTg_AF > * {
-  background: transparent !important;
-}
-
-.Root__top-container:has(.Root__right-sidebar .iXXcc7CtzmTm5yA3ZXbl.hYAxYCXtABXg35wNC2TR.bMaQdOqIiAZtt4cKEhWf:hover) .Root__main-view {
-  width: calc(100% - (var(--panel-gap) * 2)) !important;
-}
-
-/* Enter transition */
-.Root__right-sidebar .iXXcc7CtzmTm5yA3ZXbl.hYAxYCXtABXg35wNC2TR.bMaQdOqIiAZtt4cKEhWf:hover {
-  transition: margin .3s ease-in-out !important;
-}
-
-/* Exit transition */
-.Root__main-view {
-  transition: width .5s ease-out,-webkit-transform .5s ease-out !important;
 }
