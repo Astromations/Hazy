@@ -186,6 +186,10 @@ NAVIGATION BAR
   color: var(--spice-subtext);
 }
 
+.main-yourLibraryX-collapseButton.iYP0xuQiJCgi7gx1jUPJ .Gj4v3278oIywygaUyBbt {
+  opacity: 0;
+}
+
 .main-navBar-navBarLinkActive,
 .main-collectionLinkButton-selected {
   border-radius: var(--button-border) !important;
