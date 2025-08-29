@@ -1613,6 +1613,10 @@ dialog.NiqTdDnFi5KAXoGukrdo.aOxbsZDBlepfQptv_EfI,
   padding: 1.5rem
 }
 
+.bhvAemcPYUmxOdBe1mVi {
+  --modal-max-height: 90vh !important;
+}
+
 .main-cardImage-circular,
 .main-cardImage-imageWrapper {
   border-radius: var(--button-border) !important;
