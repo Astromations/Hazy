@@ -697,7 +697,7 @@ PLAYLIST VIEW
   display: none;
 }
 
-.main-entityHeader-container.JYKKZFIXuf9lIHVeszuS .XVz4BMGP5zAEE5p90mYK {
+.main-entityHeader-container.JYKKZFIXuf9lIHVeszuS .main-entityHeader-backgroundColor {
   display: none;
 }
 
@@ -798,7 +798,7 @@ PLAY BUTTONS
 }
 
 .playlist-playlist-playlist span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set,
-.ix_8kg3iUb9VS5SmTnBY span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set,
+.main-playButton-PlayButton span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set,
 .view-homeShortcutsGrid-playButton>span>svg
 
 /* Home Shortcut Grid Play Button */ {
@@ -898,7 +898,7 @@ PLAY BUTTONS
 
 /* Optimize for cramped view */
 @media screen and (max-width: 852px) {
-  ._b3hhmbWtOY8_1M1mM1H {
+  .main-globalNav-searchInputSection {
     width: auto !important;
   }
 }
@@ -919,7 +919,7 @@ SEARCH BAR
 .main-globalNav-searchInputContainer input,
 .NtkAQg9R1r5CjuP0XHwl,
 .NtkAQg9R1r5CjuP0XHwl:hover,
-.b7r2WRiu5f9Q99qmyreh .main-topBar-searchBar {
+.main-globalNav-searchInputContainer .main-topBar-searchBar {
   background-color: var(--backdrop) !important;
   height: 32px;
   border-radius: var(--button-border) !important;
@@ -964,7 +964,7 @@ SEARCH BAR
 }
 
 /* Fix look of search button background in cramped view */
-div._b3hhmbWtOY8_1M1mM1H:has(form > .ODl7TwNawIfBwiZv1Czg > input[tabindex="0"])
+div.main-globalNav-searchInputSection:has(form > .ODl7TwNawIfBwiZv1Czg > input[tabindex="0"])
   > form
   div
   > button {
@@ -1334,14 +1334,14 @@ ALBUM VIEW
   scale: 1.2;
 }
 
-.ix_8kg3iUb9VS5SmTnBY > button > span {
+.main-playButton-PlayButton > button > span {
   color: var(--spice-text);
   background: none;
   scale: 1.2;
   transition: all 0.2s ease;
 }
 
-.ix_8kg3iUb9VS5SmTnBY > button > span:hover {
+.main-playButton-PlayButton > button > span:hover {
   color: var(--spice-text);
   background: none !important;
   scale: 1.3;
@@ -1587,7 +1587,7 @@ ARTIST PAGE
 
 .main-entityHeader-background.main-entityHeader-gradient,
 .sv5suqIPUwjgUF_BzM41,
-.wozXSN04ZBOkhrsuY5i2 {
+.main-entityHeader-background {
   mask-image: linear-gradient(
     rgba(0, 0, 0, var(--artist-fade)) 58%,
     transparent 100%
@@ -1613,6 +1613,27 @@ ARTIST PAGE
   background-color: var(--spice-accent);
 }
 
+.main-trackCreditsModal-container,
+.main-aboutRecsModal-container,
+.main-playlistEditDetailsModal-container,
+.profile-userEditDetails-container,
+.artist-artistAbout-modal,
+dialog.NiqTdDnFi5KAXoGukrdo.aOxbsZDBlepfQptv_EfI,
+.GenericModal__overlay > div[role="dialog"] > div
+{
+  background-color: rgb(48 48 48 / 30%) !important;
+  backdrop-filter: blur(15px);
+  border-radius: var(--button-border);
+  padding-bottom: 1rem;
+}
+
+.GenericModal__overlay button[data-encore-id="buttonPrimary"] span:hover,
+.GenericModal__overlay > div[role="dialog"] > div,
+.GenericModal__overlay > div[role="dialog"] button[data-encore-id="buttonTertiary"]
+{
+  color: white;
+}
+
 .main-cardImage-circular,
 .main-cardImage-imageWrapper {
   border-radius: var(--button-border) !important;
@@ -1627,7 +1648,7 @@ ARTIST PAGE
 }
 
 .EmeHQXR87mUskYK6xEde,
-.Bdcf5g__Rug3TGqSdbiy {
+.playlist-playlist-actionBarBackground-background {
   background: none;
 }
 
@@ -2036,23 +2057,23 @@ div#context-menu:before,
   height: auto;
 }
 
-.yO0rvyTlM0Hu4iDIycZE:last-child {
+.main-contextMenu-dividerAfter:last-child {
   display: none
 }
 
 /* Right click context menu (container) */
-.wlb3dYO07PZuYfmNfmkS {
+.main-contextMenu-menu {
   border-radius: var(--button-border);
 }
 
 /* Right click context menu (indented container) */
-.jzMBaEByD6M9xRmS9mv8 > div {
+.main-contextMenu-menuItem > div {
   backdrop-filter: blur(25px);
   clip-path: inset(0 round var(--button-border)); /* so the stupid blur filter doesn't go outside of the border radius */
 }
 
 /* Right click context menu (item) */
-.niXChlbt7kxslMUdfwu9 {
+.main-contextMenu-menuItemButton {
   width: calc(100% - 4px);
   margin: 2px;
   border-radius: 5px;
