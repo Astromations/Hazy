@@ -2307,14 +2307,13 @@ THEMED PRIMARY BUTTON
 -------------------*/
 .e-91000-button-primary .e-91000-button-primary__inner
 {
-  color: black !important;
+  color: var(--spice-text) !important;
 
   background-color: var(--spice-button-active);
 }
 
 .e-91000-button-primary .e-91000-button-primary__inner:hover
 {
-  color: var(--spice-text) !important;
   background-color: hsl(from var(--spice-button-active) h s l / 0.7);
 }
 
@@ -2416,9 +2415,8 @@ dialog > div.encore-light-theme .Button-buttonTertiary-textSubdued-medium-useBro
 /*----------------
 QUICK SEARCH MODAL
 ----------------*/
-.N9tnwm0XDrt_eGJd2D2A:has(div._kfmGT75UTPoF_D2afwa) {
-  background: var(--backdrop-light);
-  backdrop-filter: blur(25px);
+.zogFp9G1AEqb8AKOd5BO.mXdNvIO9PYnBFoyoMyUO.Xf30G8NSPQ3pex0iD4zB {
+  backdrop-filter: blur(25px) !important;
   box-shadow:
     0 16px 24px rgba(var(--spice-rgb-shadow), 0.075),
     0 6px 8px rgba(var(--spice-rgb-shadow), 0.05) !important;
@@ -2438,6 +2436,10 @@ QUICK SEARCH MODAL
 
 .search-modal-searchBar {
   background-color: hsl(from white h s l / 0.925);
+}
+
+.search-modal-resultItem {
+  border-radius: var(--button-border);
 }
 
 /*-------------------
