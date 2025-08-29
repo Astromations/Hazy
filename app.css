@@ -1045,7 +1045,8 @@ MISCELLANEOUS
 -----------*/
 
 .main-actionBarBackground-background,
-.main-nowPlayingBar-container {
+.main-nowPlayingBar-container,
+.playlist-playlist-actionBarBackground-background {
   background: none !important;
 }
 
