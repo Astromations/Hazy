@@ -1,0 +1,17 @@
+name: Purge JSDelivr CDN Cache
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+    purge-cache:
+        runs-on: ubuntu-latest
+        
+        steps:
+        - uses: egad13/purge-jsdelivr-cache@v1
+          with:
+            url: |
+                https://cdn.jsdelivr.net/gh/astromations/Hazy/app.css
+                https://cdn.jsdelivr.net/gh/astromations/Hazy/hazy.js

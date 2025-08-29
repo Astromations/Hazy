@@ -80,6 +80,10 @@ div.main-topBar-topbarContentRight div > button svg,
   height: 18px !important;
 }
 
+div.main-globalNav-historyButtonsContainer {
+  padding-inline-end: 8px !important;
+}
+
 /* Remove spacer on left side of page controls */
 .Kgjmt7IX5samBYUpbkBu {
   display: none;
@@ -184,6 +188,10 @@ NAVIGATION BAR
 
 .main-yourLibraryX-header .main-yourLibraryX-collapseButtonWrapper {
   color: var(--spice-subtext);
+}
+
+.main-yourLibraryX-collapseButton.iYP0xuQiJCgi7gx1jUPJ .Gj4v3278oIywygaUyBbt {
+  opacity: 0;
 }
 
 .main-navBar-navBarLinkActive,
@@ -445,16 +453,6 @@ SIDEBAR
   cursor: pointer;
 }
 
-/* start a jam button */
-.encore-bright-accent-set.e-91000-button--small:hover,
-.encore-bright-accent-set.e-91000-button--small:hover span
-{
-  color: white;
-}
-.encore-bright-accent-set.e-91000-button--small:hover {
-  background-color: var(--backdrop);
-}
-
 /* Fix alignment of headphones next to "current device" */
 .FpmhhFL8lCsiyh3X0fjK {
   display: flex;
@@ -479,6 +477,39 @@ SIDEBAR
 .pIxPdfuNasUDLbEDmuK_ {
   background-color: var(--background-elevated-base);
 }
+
+/* Semi collapsed sidebar (button present on right of screen to reopen */
+
+/* Hidden sidebar hover enter transition */
+.Root__right-sidebar div[aria-hidden=true] .AAdBM1nhG73supMfnYX7 {
+  opacity: 0;
+  transition: opacity .5s ease-in-out;
+}
+
+/* Hidden sidebar hover exit transition */
+.Root__right-sidebar .iXXcc7CtzmTm5yA3ZXbl.hYAxYCXtABXg35wNC2TR.bMaQdOqIiAZtt4cKEhWf:hover .AAdBM1nhG73supMfnYX7 {
+  opacity: 0.3;
+  transition: opacity .3s ease-out,-webkit-transform .5s ease-out;
+}
+
+/* Fix black gap between main view & sidebar on hover when closed */
+.UQRh5VQzvqcMfTje1JUe.tLZZlY6dyQ31AIGTg_AF > * {
+  background: transparent !important;
+}
+
+/* Main container with sidebar enter transition */
+.Root__top-container:has(.Root__right-sidebar .iXXcc7CtzmTm5yA3ZXbl.hYAxYCXtABXg35wNC2TR.bMaQdOqIiAZtt4cKEhWf:hover) .Root__main-view {
+  width: calc(100% - (var(--panel-gap) * 1.5)) !important;
+
+  transition: width .3s ease-in-out !important;
+}
+
+/* Main container with sidebar exit transition */
+.Root__main-view {
+  transition: width .5s ease-out,-webkit-transform .5s ease-out !important;
+}
+
+
 
 /*--------
 WHAT'S NEW
@@ -980,20 +1011,58 @@ div.main-globalNav-searchInputSection:has(form > .ODl7TwNawIfBwiZv1Czg > input[t
   background: none;
 }
 
-/* Fix sizing for clear button */
-.MdMAXXFPalD99eigsBug {
+/* Center align buttons when search bar collapsed */
+.main-globalNav-searchContainer {
+  justify-content: center ;
+}
+
+.main-topBar-searchBar:has(input.main-topBar-searchBar[tabindex="-1"]) {
+  width: 0%;
+}
+
+@media(width <= 860px) {
+  .main-topBar-searchBar:has(input.main-topBar-searchBar[tabindex="0"]) {
+    width: 85%;
+  }
+}
+@media(width > 860px) {
+  .main-topBar-searchBar:has(input.main-topBar-searchBar[tabindex="0"]) {
+    width: 100%;
+  }
+}
+
+/* For buttons inside the Search Container */
+.main-globalNav-searchContainer button {
+  background-color: var(--backdrop) !important;
+  border-radius: var(--button-border) !important;
+  transition: 0.2s ease;
+}
+
+/* For the search button in the Search Container */
+.main-globalNav-searchInputSection button {
+  background-color: transparent !important;
+}
+
+/* For the x button in the Search Container */
+form[role="search"] button.MdMAXXFPalD99eigsBug {
   padding-inline: 6px !important;
-  margin-right: 12px !important;
+  margin-right: 6px !important;
+}
+.main-globalNav-searchInputContainer .main-topBar-searchBar {
+  padding-inline-end: 102px !important;
 }
 
-/* Fix vertical alignment of browse button */
-.e-9960-form-input-icon__icon {
-  align-items: center;
+/* Fix alignment and background of browse button */
+.BV0jjn_h5TtMMl8YKuZ0 {
+  display: flex;
+  justify-content:center !important;
+}
+div.BV0jjn_h5TtMMl8YKuZ0 > button {
+  background: transparent !important;
 }
 
-/* Fix height & misplacement of browse button */
-form[role="search"] > .e-91000-form-input-icon__icon.e-91000-form-input-icon__icon--trailing {
-  max-height: 24px;
+.BV0jjn_h5TtMMl8YKuZ0 {
+  padding-inline-start: 14px;
 }
 
 /* Fix size of clear recent searches button */
@@ -1007,12 +1076,18 @@ form[role="search"] > .e-91000-form-input-icon__icon.e-91000-form-input-icon__ic
   backdrop-filter: blur(25px);
 }
 
+/* Remove extra margin added to "browse all" page header */
+._YN9HVrnrcvnaCjYnNkM {
+  margin-top: 0 !important;
+}
+
 /*-----------
 MISCELLANEOUS
 -----------*/
 
 .main-actionBarBackground-background,
-.main-nowPlayingBar-container {
+.main-nowPlayingBar-container,
+.playlist-playlist-actionBarBackground-background {
   background: none !important;
 }
 
@@ -1429,22 +1504,6 @@ main-card-draggable {
   box-shadow: none;
 }
 
-.main-globalNav-searchContainer {
-  justify-content: center;
-}
-
-/* For buttons inside the Search Container */
-.main-globalNav-searchContainer button {
-  background-color: var(--backdrop) !important;
-  border-radius: var(--button-border) !important;
-  transition: 0.2s ease;
-}
-
-/* For the x button in the Search Container */
-form[role="search"] button.MdMAXXFPalD99eigsBug svg {
-  width: 20px !important;
-}
-
 /* For cards in carousel (to fix tint coverage) */
 .main-card-cardContainer {
   height: 100%;
@@ -1683,7 +1742,7 @@ BLOOM LYRICS
 
 .lyrics-lyricsContainer-LyricsContainer {
   --lyrics-color-active: white !important;
-  --lyrics-color-inactive: rgba(255, 255, 255, 0.5) !important;
+  --lyrics-color-inactive: rgba(200, 200, 200 / 45%) !important;
 }
 
 .lyrics-lyricsContainer-LyricsLine {
@@ -1694,13 +1753,15 @@ BLOOM LYRICS
   transition-property: transform, color, opacity, text-shadow !important;
 }
 
-.lyrics-lyricsContainer-Karaoke-Word {
+/* TODO: Make setting to toggle word popout in karaoke mode */
+/* .lyrics-lyricsContainer-Karaoke-Word {
   transition:
     var(--word-duration) color ease,
     var(--word-duration) text-shadow ease !important;
   text-shadow: none;
-}
+} */
 
+/* TODO: Make setting to toggle glow intensity */
 .lyrics-lyricsContainer-Karaoke-WordActive,
 .lyrics-lyricsContainer-SyncedLyrics .lyrics-lyricsContainer-LyricsLine-active {
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
@@ -1732,6 +1793,18 @@ BLOOM LYRICS
 .Root__top-container:has(.FUYNhisXTCmbzt9IDxnT) .main-topBar-container,
 .Root__top-container:has(.FUYNhisXTCmbzt9IDxnT) .under-main-view {
   display: none;
+}
+
+body:has(div#lyrics-fullscreen-container) div.Root__top-container > * {
+  display: none;
+}
+body:has(div#lyrics-fullscreen-container) div.Root__top-container:before {
+  opacity: 0.325;
+}
+
+body:has(div#lyrics-fullscreen-container) .lyrics-lyricsContainer-SyncedLyrics .lyrics-lyricsContainer-LyricsLine {
+  font-size: calc(var(--lyrics-font-size) * 2);
+  line-height: calc(var(--lyrics-line-height) * 2);
 }
 
 /*-------
@@ -2296,6 +2369,26 @@ span.toggle.enabled {
 }
 
 /*-------------------
+THEMED PRIMARY BUTTON
+-------------------*/
+.e-91000-button-primary .e-91000-button-primary__inner
+{
+  color: var(--spice-text) !important;
+
+  background-color: var(--spice-button-active);
+}
+
+.e-91000-button-primary .e-91000-button-primary__inner:hover
+{
+  background-color: hsl(from var(--spice-button-active) h s l / 0.7);
+}
+
+.e-91000-button-primary .e-91000-button-primary__inner:active
+{
+  background-color: hsl(from var(--spice-button-active) h s l / 0.5);
+}
+
+/*-------------------
 POPUP MODAL
 -------------------*/
 
@@ -2333,26 +2426,70 @@ POPUP MODAL
   color: var(--spice-text) !important;
 }
 
-.main-confirmDialog-button {
+.main-confirmDialog-button,
+dialog > div.encore-light-theme button[data-encore-id="buttonPrimary"]
+{
   --background-highlight: hsl(from var(--spice-button) h s l / 0.7) !important;
   --background-press: hsl(from var(--spice-button) h s l / 0.5) !important;
+  color: black !important;
+}
 
+.main-trackCreditsModal-container,
+.main-aboutRecsModal-container,
+.main-playlistEditDetailsModal-container,
+.profile-userEditDetails-container,
+.artist-artistAbout-modal,
+.GenericModal__overlay > div[role="dialog"] > div,
+dialog > div.encore-light-theme,
+dialog.NiqTdDnFi5KAXoGukrdo.aOxbsZDBlepfQptv_EfI
+{
+  background-color: rgb(48 48 48 / 30%) !important;
+  backdrop-filter: blur(15px);
+  border-radius: var(--button-border);
+  padding-bottom: 2rem;
+}
+
+.GenericModal__overlay button[data-encore-id="buttonPrimary"] span:hover,
+.GenericModal__overlay > div[role="dialog"] > div,
+.GenericModal__overlay > div[role="dialog"] button[data-encore-id="buttonTertiary"],
+dialog > div.encore-light-theme *
+{
   color: var(--spice-text) !important;
+}
+
+dialog > div.encore-light-theme > h2 {
+  margin-bottom: 0.25rem;
+}
+
+dialog > div.encore-light-theme > p {
+  color: var(--spice-subtext) !important;
+}
+
+dialog > div.encore-light-theme .Button-buttonTertiary-textSubdued-medium-useBrowserDefaultFocusStyle:hover {
+  transform: scale(1.04) !important;
+  transition-duration: var(--shortest-1);
+}
+
+.GenericModal__overlay > div[role="dialog"] > div {
+  padding: 1.5rem
+}
+
+.bhvAemcPYUmxOdBe1mVi {
+  --modal-max-height: 90vh !important;
 }
 
 /*----------------
 QUICK SEARCH MODAL
 ----------------*/
-.zZMsUUWG29PYcwWPXhOV:not(._kfmGT75UTPoF_D2afwa),
-.N9tnwm0XDrt_eGJd2D2A:has(div._kfmGT75UTPoF_D2afwa) {
-  background: var(--backdrop-light);
-  backdrop-filter: blur(25px);
+.zogFp9G1AEqb8AKOd5BO.mXdNvIO9PYnBFoyoMyUO.Xf30G8NSPQ3pex0iD4zB {
+  backdrop-filter: blur(25px) !important;
   box-shadow:
     0 16px 24px rgba(var(--spice-rgb-shadow), 0.075),
     0 6px 8px rgba(var(--spice-rgb-shadow), 0.05) !important;
   border-radius: var(--button-border);
 }
 
+.zZMsUUWG29PYcwWPXhOV:not(._kfmGT75UTPoF_D2afwa),
 .zZMsUUWG29PYcwWPXhOV._kfmGT75UTPoF_D2afwa,
 .search-modal-listbox,
 .search-modal-keyboard-accessibility-bar{
@@ -2365,6 +2502,10 @@ QUICK SEARCH MODAL
 
 .search-modal-searchBar {
   background-color: hsl(from white h s l / 0.925);
+}
+
+.search-modal-resultItem {
+  border-radius: var(--button-border);
 }
 
 /*-------------------
@@ -2395,4 +2536,13 @@ TRANSPARENT BG FIXES
 ------------------*/
 .Ps9zgW56WZaBVLo1n3cg {
   color: black !important;
+}
+
+/*-----------------------
+EXTENSION-SPECIFIC TWEAKS
+-----------------------*/
+
+/* Fix lyrics plus now playing bar button not appearing */
+.main-nowPlayingBar-extraControls > button.main-nowPlayingBar-lyricsButton:not([data-testid="lyrics-button"]) {
+  display: flex !important;
 }
