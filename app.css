@@ -2502,3 +2502,14 @@ TRANSPARENT BG FIXES
 .Ps9zgW56WZaBVLo1n3cg {
   color: black !important;
 }
+
+/*-----------------------
+EXTENSION-SPECIFIC TWEAKS
+-----------------------*/
+
+/* Fix lyrics plus now playing bar button not appearing */
+.main-nowPlayingBar-extraControls > button.main-nowPlayingBar-lyricsButton:not([data-testid="lyrics-button"]) {
+  display: flex !important;
+}
+
+/*------------------------------------------------------------*/
