@@ -1592,35 +1592,6 @@ ARTIST PAGE
   background-color: var(--spice-accent);
 }
 
-.main-trackCreditsModal-container,
-.main-aboutRecsModal-container,
-.main-playlistEditDetailsModal-container,
-.profile-userEditDetails-container,
-.artist-artistAbout-modal,
-dialog.NiqTdDnFi5KAXoGukrdo.aOxbsZDBlepfQptv_EfI,
-.GenericModal__overlay > div[role="dialog"] > div
-{
-  background-color: rgb(48 48 48 / 30%) !important;
-  backdrop-filter: blur(15px);
-  border-radius: var(--button-border);
-  padding-bottom: 1rem;
-}
-
-.GenericModal__overlay button[data-encore-id="buttonPrimary"] span:hover,
-.GenericModal__overlay > div[role="dialog"] > div,
-.GenericModal__overlay > div[role="dialog"] button[data-encore-id="buttonTertiary"]
-{
-  color: white;
-}
-
-.GenericModal__overlay > div[role="dialog"] > div {
-  padding: 1.5rem
-}
-
-.bhvAemcPYUmxOdBe1mVi {
-  --modal-max-height: 90vh !important;
-}
-
 .main-cardImage-circular,
 .main-cardImage-imageWrapper {
   border-radius: var(--button-border) !important;
@@ -2379,11 +2350,71 @@ POPUP MODAL
   color: var(--spice-text) !important;
 }
 
-.main-confirmDialog-button {
+.main-confirmDialog-button,
+dialog > div.encore-light-theme button[data-encore-id="buttonPrimary"]
+{
   --background-highlight: hsl(from var(--spice-button) h s l / 0.7) !important;
   --background-press: hsl(from var(--spice-button) h s l / 0.5) !important;
-
   color: var(--spice-text) !important;
+}
+
+.main-trackCreditsModal-container,
+.main-aboutRecsModal-container,
+.main-playlistEditDetailsModal-container,
+.profile-userEditDetails-container,
+.artist-artistAbout-modal,
+.GenericModal__overlay > div[role="dialog"] > div,
+dialog > div.encore-light-theme,
+dialog.NiqTdDnFi5KAXoGukrdo.aOxbsZDBlepfQptv_EfI
+{
+  background-color: rgb(48 48 48 / 30%) !important;
+  backdrop-filter: blur(15px);
+  border-radius: var(--button-border);
+  padding-bottom: 2rem;
+}
+
+.GenericModal__overlay button[data-encore-id="buttonPrimary"] span:hover,
+.GenericModal__overlay > div[role="dialog"] > div,
+.GenericModal__overlay > div[role="dialog"] button[data-encore-id="buttonTertiary"],
+dialog > div.encore-light-theme *
+{
+  color: var(--spice-text) !important;
+}
+
+dialog > div.encore-light-theme > h2 {
+  margin-bottom: 0.25rem;
+}
+
+dialog > div.encore-light-theme > p {
+  color: var(--spice-subtext) !important;
+}
+
+dialog > div.encore-light-theme .Button-buttonTertiary-textSubdued-medium-useBrowserDefaultFocusStyle:hover {
+  transform: scale(1.04) !important;
+  transition-duration: var(--shortest-1);
+}
+
+.GenericModal__overlay > div[role="dialog"] > div {
+  padding: 1.5rem
+}
+
+.bhvAemcPYUmxOdBe1mVi {
+  --modal-max-height: 90vh !important;
+}
+
+.e-91000-button-primary .e-91000-button-primary__inner {
+  color: white;
+  background-color: var(--spice-button-active);
+}
+
+.e-91000-button-primary:hover .e-91000-button-primary__inner {
+  color: white;
+  background-color: hsl(from var(--spice-button-active) h s l / 0.7);
+}
+
+.e-91000-button-primary:active .e-91000-button-primary__inner {
+  color: white;
+  background-color: hsl(from var(--spice-button-active) h s l / 0.5);
 }
 
 /*----------------
