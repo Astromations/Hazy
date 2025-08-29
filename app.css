@@ -449,16 +449,6 @@ SIDEBAR
   cursor: pointer;
 }
 
-/* start a jam button */
-.encore-bright-accent-set.e-91000-button--small:hover,
-.encore-bright-accent-set.e-91000-button--small:hover span
-{
-  color: white;
-}
-.encore-bright-accent-set.e-91000-button--small:hover {
-  background-color: var(--backdrop);
-}
-
 /* Fix alignment of headphones next to "current device" */
 .FpmhhFL8lCsiyh3X0fjK {
   display: flex;
@@ -2313,6 +2303,27 @@ span.toggle.enabled {
 }
 
 /*-------------------
+THEMED PRIMARY BUTTON
+-------------------*/
+.e-91000-button-primary .e-91000-button-primary__inner
+{
+  color: black !important;
+
+  background-color: var(--spice-button-active);
+}
+
+.e-91000-button-primary .e-91000-button-primary__inner:hover
+{
+  color: var(--spice-text) !important;
+  background-color: hsl(from var(--spice-button-active) h s l / 0.7);
+}
+
+.e-91000-button-primary .e-91000-button-primary__inner:active
+{
+  background-color: hsl(from var(--spice-button-active) h s l / 0.5);
+}
+
+/*-------------------
 POPUP MODAL
 -------------------*/
 
@@ -2355,7 +2366,7 @@ dialog > div.encore-light-theme button[data-encore-id="buttonPrimary"]
 {
   --background-highlight: hsl(from var(--spice-button) h s l / 0.7) !important;
   --background-press: hsl(from var(--spice-button) h s l / 0.5) !important;
-  color: var(--spice-text) !important;
+  color: black !important;
 }
 
 .main-trackCreditsModal-container,
@@ -2400,21 +2411,6 @@ dialog > div.encore-light-theme .Button-buttonTertiary-textSubdued-medium-useBro
 
 .bhvAemcPYUmxOdBe1mVi {
   --modal-max-height: 90vh !important;
-}
-
-.e-91000-button-primary .e-91000-button-primary__inner {
-  color: white;
-  background-color: var(--spice-button-active);
-}
-
-.e-91000-button-primary:hover .e-91000-button-primary__inner {
-  color: white;
-  background-color: hsl(from var(--spice-button-active) h s l / 0.7);
-}
-
-.e-91000-button-primary:active .e-91000-button-primary__inner {
-  color: white;
-  background-color: hsl(from var(--spice-button-active) h s l / 0.5);
 }
 
 /*----------------
