@@ -80,6 +80,10 @@ div.main-topBar-topbarContentRight div > button svg,
   height: 18px !important;
 }
 
+div.main-globalNav-historyButtonsContainer {
+  padding-inline-end: 8px !important;
+}
+
 /* Remove spacer on left side of page controls */
 .Kgjmt7IX5samBYUpbkBu {
   display: none;
@@ -1007,20 +1011,58 @@ div._b3hhmbWtOY8_1M1mM1H:has(form > .ODl7TwNawIfBwiZv1Czg > input[tabindex="0"])
   background: none;
 }
 
-/* Fix sizing for clear button */
-.MdMAXXFPalD99eigsBug {
+/* Center align buttons when search bar collapsed */
+.main-globalNav-searchContainer {
+  justify-content: center ;
+}
+
+.main-topBar-searchBar:has(input.main-topBar-searchBar[tabindex="-1"]) {
+  width: 0%;
+}
+
+@media(width <= 860px) {
+  .main-topBar-searchBar:has(input.main-topBar-searchBar[tabindex="0"]) {
+    width: 85%;
+  }
+}
+@media(width > 860px) {
+  .main-topBar-searchBar:has(input.main-topBar-searchBar[tabindex="0"]) {
+    width: 100%;
+  }
+}
+
+/* For buttons inside the Search Container */
+.main-globalNav-searchContainer button {
+  background-color: var(--backdrop) !important;
+  border-radius: var(--button-border) !important;
+  transition: 0.2s ease;
+}
+
+/* For the search button in the Search Container */
+.main-globalNav-searchInputSection button {
+  background-color: transparent !important;
+}
+
+/* For the x button in the Search Container */
+form[role="search"] button.MdMAXXFPalD99eigsBug {
   padding-inline: 6px !important;
-  margin-right: 12px !important;
+  margin-right: 6px !important;
+}
+.main-globalNav-searchInputContainer .main-topBar-searchBar {
+  padding-inline-end: 102px !important;
 }
 
-/* Fix vertical alignment of browse button */
-.e-9960-form-input-icon__icon {
-  align-items: center;
+/* Fix alignment and background of browse button */
+.BV0jjn_h5TtMMl8YKuZ0 {
+  display: flex;
+  justify-content:center !important;
+}
+div.BV0jjn_h5TtMMl8YKuZ0 > button {
+  background: transparent !important;
 }
 
-/* Fix height & misplacement of browse button */
-form[role="search"] > .e-91000-form-input-icon__icon.e-91000-form-input-icon__icon--trailing {
-  max-height: 24px;
+.BV0jjn_h5TtMMl8YKuZ0 {
+  padding-inline-start: 14px;
 }
 
 /* Fix size of clear recent searches button */
@@ -1032,6 +1074,11 @@ form[role="search"] > .e-91000-form-input-icon__icon.e-91000-form-input-icon__ic
 #recent-searches-dropdown > div,
 #search-dropdown > div {
   backdrop-filter: blur(25px);
+}
+
+/* Remove extra margin added to "browse all" page header */
+._YN9HVrnrcvnaCjYnNkM {
+  margin-top: 0 !important;
 }
 
 /*-----------
@@ -1455,22 +1502,6 @@ main-card-draggable {
 
 .main-card-PlayButtonContainer {
   box-shadow: none;
-}
-
-.main-globalNav-searchContainer {
-  justify-content: center;
-}
-
-/* For buttons inside the Search Container */
-.main-globalNav-searchContainer button {
-  background-color: var(--backdrop) !important;
-  border-radius: var(--button-border) !important;
-  transition: 0.2s ease;
-}
-
-/* For the x button in the Search Container */
-form[role="search"] button.MdMAXXFPalD99eigsBug svg {
-  width: 20px !important;
 }
 
 /* For cards in carousel (to fix tint coverage) */
