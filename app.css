@@ -2525,8 +2525,3 @@ EXTENSION-SPECIFIC TWEAKS
 .main-nowPlayingBar-extraControls > button.main-nowPlayingBar-lyricsButton:not([data-testid="lyrics-button"]) {
   display: flex !important;
 }
-
-/*------------------------------------------------------------*/
-.Root__top-container > * {
-  display: none
-}
