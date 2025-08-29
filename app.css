@@ -1624,7 +1624,6 @@ dialog.NiqTdDnFi5KAXoGukrdo.aOxbsZDBlepfQptv_EfI,
   background-color: rgb(48 48 48 / 30%) !important;
   backdrop-filter: blur(15px);
   border-radius: var(--button-border);
-  padding-bottom: 1rem;
 }
 
 .GenericModal__overlay button[data-encore-id="buttonPrimary"] span:hover,
@@ -2434,21 +2433,6 @@ dialog > div.encore-light-theme button[data-encore-id="buttonPrimary"]
   color: black !important;
 }
 
-.main-trackCreditsModal-container,
-.main-aboutRecsModal-container,
-.main-playlistEditDetailsModal-container,
-.profile-userEditDetails-container,
-.artist-artistAbout-modal,
-.GenericModal__overlay > div[role="dialog"] > div,
-dialog > div.encore-light-theme,
-dialog.NiqTdDnFi5KAXoGukrdo.aOxbsZDBlepfQptv_EfI
-{
-  background-color: rgb(48 48 48 / 30%) !important;
-  backdrop-filter: blur(15px);
-  border-radius: var(--button-border);
-  padding-bottom: 2rem;
-}
-
 .GenericModal__overlay button[data-encore-id="buttonPrimary"] span:hover,
 .GenericModal__overlay > div[role="dialog"] > div,
 .GenericModal__overlay > div[role="dialog"] button[data-encore-id="buttonTertiary"],
@@ -2468,10 +2452,6 @@ dialog > div.encore-light-theme > p {
 dialog > div.encore-light-theme .Button-buttonTertiary-textSubdued-medium-useBrowserDefaultFocusStyle:hover {
   transform: scale(1.04) !important;
   transition-duration: var(--shortest-1);
-}
-
-.GenericModal__overlay > div[role="dialog"] > div {
-  padding: 1.5rem
 }
 
 .bhvAemcPYUmxOdBe1mVi {

@@ -3,9 +3,6 @@
     setTimeout(hazy, 100);
     return;
   }
-  if (!Spicetify?.Player?.data) {
-    console.warn('[Hazy] Could not load track data, falling back to default background')
-  }
 
   const defImage = "https://i.imgur.com/Wl2D0h0.png";
   let startImage = localStorage.getItem("hazy:startupBg") || defImage;
@@ -538,10 +535,12 @@
     content.innerHTML = `
     <div class="main-playlistEditDetailsModal-albumCover" id="home-select">
       <div class="main-entityHeader-image" draggable="false">
-        <img aria-hidden="false" draggable="false" loading="eager" class="main-image-image main-entityHeader-image main-entityHeader-shadow"></div>
+        <img aria-hidden="false" draggable="false" loading="eager" class="main-image-image main-entityHeader-image main-entityHeader-shadow">
+      </div>
       <div class="main-playlistEditDetailsModal-imageChangeButton">
-        <div class="main-editImage-buttonContainer">
-        </div></div>`;
+        <div class="main-editImage-buttonContainer"></div>
+      </div>
+    </div>`;
 
     function createToggle(opt) {
       let { id, name, defVal } = opt;
