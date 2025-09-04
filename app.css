@@ -574,6 +574,18 @@ WHAT'S NEW
   border-radius: var(--button-border) !important;
 }
 
+/* Avatar notification dot (in top right) */
+.FZ4y0Q61kFpjJzUjCvSa svg > circle {
+  r: 8;
+  
+  stroke: var(--backdrop-dark);
+  stroke-width: 2.px;
+}
+.FZ4y0Q61kFpjJzUjCvSa {
+  top: 1.5px;
+  right: 1.5px;
+}
+
 /*-----------
 PLAYLIST VIEW
 ------------*/
