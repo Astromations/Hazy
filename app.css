@@ -2534,11 +2534,15 @@ QUICK SEARCH MODAL
 }
 
 .search-modal-keyboard-accessibility-bar {
-  padding-top: 8px;
+  padding-top: 4px;
+  padding-bottom: 20px;
 }
 
 .search-modal-searchBar {
-  background-color: hsl(from white h s l / 0.925);
+  background-color: hsl(from white h s l / 0.85);
+}
+div:has(> .search-modal-searchBar) {
+  padding-top: 20px;
 }
 
 .search-modal-resultItem {
