@@ -1626,6 +1626,10 @@ dialog.NiqTdDnFi5KAXoGukrdo.aOxbsZDBlepfQptv_EfI,
   border-radius: var(--button-border);
 }
 
+.main-trackCreditsModal-container {
+  padding-bottom: 32px;
+}
+
 .GenericModal__overlay button[data-encore-id="buttonPrimary"] span:hover,
 .GenericModal__overlay > div[role="dialog"] > div,
 .GenericModal__overlay > div[role="dialog"] button[data-encore-id="buttonTertiary"]
