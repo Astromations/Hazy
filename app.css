@@ -227,11 +227,6 @@ NAVIGATION BAR
 YOUR LIBRARY
 ----------*/
 
-/* expanded library grid view */
-.wJTUKAyYI219kJtclJLa > .eWZOJQ {
-  background-color: var(--backdrop);
-}
-
 /* expanded library compact list view */
 .fYWNdY4zhj4OX_T2Xtg6.BRX6aJUAuAsvHKD_fpbo {
   padding-left: 8px;
@@ -557,8 +552,9 @@ WHAT'S NEW
   transition: all 0.3s ease;
 }
 
+/* Spotify profile avatar */
 .main-avatar-image {
-  border-radius: var(--button-border);
+  border-radius: 6px;
 }
 
 .main-avatar-avatar.main-avatar-withBadge:after {
@@ -673,6 +669,10 @@ PLAYLIST VIEW
 .main-editImageButton-overlay {
   background-color: rgb(0 0 0 / 50%);
   border-radius: var(--button-border);
+}
+
+.profile-editImage-imageContainer:hover {
+  transform: scale(0.98);
 }
 
 .main-image-image.main-trackList-rowImage.main-image-loaded {
@@ -1649,6 +1649,11 @@ dialog:has(.main-duplicateTrackModal-container)
 
 .GenericModal {
   background: none;
+}
+
+/* Album art viewing modal */
+.hmgHdasWrZaA9tiXVw_u {
+  padding-bottom: 0.75rem;
 }
 
 .EmeHQXR87mUskYK6xEde,
