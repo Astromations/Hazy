@@ -233,6 +233,35 @@ YOUR LIBRARY
   align-content: center;
 }
 
+/*---
+CHIPS
+---*/
+.ChipInnerComponent-sm-selected {
+  background-color: var(--backdrop-lighter) !important;
+  color: white
+}
+
+.ChipInnerComponent-sm:hover,
+.ChipInnerComponent-sm-selected:hover {
+  background-color: hsl(from var(--spice-button-active) h s l / 0.5) !important;
+}
+
+.ChipInnerComponent-sm:active,
+.ChipInnerComponent-sm-selected:active {
+  background-color: hsl(from var(--spice-button-active) h s l / 0.3) !important;
+}
+
+/* Nested chip */
+.Pdw_sPQYAnkCFPFIs6Vd {
+  margin-left: -83.5px !important;
+}
+.ChipInnerComponent-sm-selected-secondary {
+  background-color: hsl(from var(--spice-button-active) h s l / 0.2) !important;
+  color: white;
+
+  padding-inline-start: calc(48px + 35.5px) !important;
+}
+
 /*-------------
 NOW PLAYING BAR
 --------------*/
