@@ -583,7 +583,7 @@ WHAT'S NEW
 
 /* Spotify profile avatar */
 .main-avatar-image {
-  border-radius: 6px;
+  border-radius: 6px !important;
 }
 
 .main-avatar-avatar.main-avatar-withBadge:after {
