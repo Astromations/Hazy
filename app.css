@@ -22,6 +22,7 @@
 }
 
 .encore-layout-themes,
+.encore-dark-theme .encore-announcement-set,
 .encore-bright-accent-set {
   --background-highlight: var(--backdrop) !important;
   --background-press: var(--backdrop-darker) !important;
@@ -2471,6 +2472,23 @@ QUICK SEARCH MODAL
 
 .search-modal-resultItem {
   border-radius: var(--button-border);
+}
+
+/*-----
+POPOVER
+-----*/
+.encore-announcement-set {
+  background-color: var(--backdrop-light);
+  color: var(--spice-text) !important;
+
+  backdrop-filter: blur(40px) !important;
+  box-shadow:
+    0 16px 24px rgba(var(--spice-rgb-shadow), 0.09),
+    0 6px 8px rgba(var(--spice-rgb-shadow), 0.15) !important;
+}
+
+.encore-announcement-set button > span > svg {
+  fill: var(--spice-text);
 }
 
 /*-------------------
