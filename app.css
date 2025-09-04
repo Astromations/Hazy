@@ -2439,8 +2439,8 @@ dialog > div.encore-light-theme button[data-encore-id="buttonPrimary"]
 }
 
 .GenericModal__overlay button[data-encore-id="buttonPrimary"] span:hover,
-.GenericModal__overlay > div[role="dialog"] > div,
-.GenericModal__overlay > div[role="dialog"] button[data-encore-id="buttonTertiary"],
+div[role="dialog"] > div,
+div[role="dialog"] button[data-encore-id="buttonTertiary"],
 dialog > div.encore-light-theme *
 {
   color: var(--spice-text) !important;
@@ -2508,6 +2508,13 @@ POPOVER
 
 .encore-announcement-set button > span > svg {
   fill: var(--spice-text);
+}
+
+.yzZ_VZHrZBb3REPcU7tD:before {
+  background: linear-gradient(to bottom right,transparent 50%, rgb(68 68 68 / 45%) 50%);
+  mask-image: linear-gradient(to bottom right,transparent 50%, black 50%);
+  
+  backdrop-filter: blur(40px);
 }
 
 /*-------------------
