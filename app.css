@@ -308,7 +308,7 @@ NOW PLAYING BAR
 .main-repeatButton-button.main-repeatButton-active,
 .main-shuffleButton-button.main-shuffleButton-active,
 .main-genericButton-button {
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);;
 }
 
 .main-repeatButton-button.main-repeatButton-active:not([disabled]):hover,
@@ -438,7 +438,7 @@ SIDEBAR
 
 .Button-sc-y0gtbx-0 {
   border-radius: var(--button-border) !important;
-  transition: 0.2s ease !important;
+  transition: 0.2s cubic-bezier(0, 0, 0.2, 1) !important;
   border-width: 1px;
   border-color: rgb(255 255 255 / 60%);
 }
@@ -710,7 +710,7 @@ PLAYLIST VIEW
 .profile-editImage-imageContainer,
 .main-editImageButton-overlay,
 .main-entityHeader-imageContainerClickable {
-  transition: all 0.25s cubic-bezier(0, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .main-editImageButton-overlay {
@@ -1102,7 +1102,7 @@ div.main-globalNav-searchInputSection:has(form > .ODl7TwNawIfBwiZv1Czg > input[t
 .main-globalNav-searchContainer button {
   background-color: var(--backdrop) !important;
   border-radius: var(--button-border) !important;
-  transition: 0.2s ease;
+  transition: 0.2s cubic-bezier(0, 0, 0.2, 1);
 }
 
 /* For the search button in the Search Container */
@@ -1514,7 +1514,7 @@ main-card-draggable {
 }
 
 .main-cardImage-imageWrapper {
-  transition: opacity 0.25s ease;
+  transition: opacity 0.25s cubic-bezier(0, 0, 0.2, 1);;
 }
 
 .main-shelf-shelf {
