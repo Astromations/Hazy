@@ -2502,13 +2502,27 @@ NOW PLAYING COLOR FIX
 COLOR PICKER
 -------------------*/
 #color-input {
-  border: none !important;
-  background-color: black;
+  background-color: transparent;
+  
+  height: 32px;
+  width: 32px;
+  
+  padding: 2px !important;
+  margin-left: 5px;
+  margin-right:5px;
+
   overflow: hidden;
   cursor: pointer;
   vertical-align: middle;
-  inline-size: 42px;
-  block-size: 25px;
+}
+
+#color-input::-webkit-color-swatch {
+  border-radius: 50%;
+
+  border: 3.375px rgb(230, 230, 230) solid !important;
+}
+#color-input::-webkit-color-swatch-wrapper {
+  padding: 0;
 }
 
 /*------------------
