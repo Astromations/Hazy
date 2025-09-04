@@ -666,6 +666,12 @@ PLAYLIST VIEW
   border-radius: var(--button-border);
 }
 
+.profile-editImage-imageContainer,
+.main-editImageButton-overlay,
+.main-entityHeader-imageContainerClickable {
+  transition: all 0.25s cubic-bezier(0, 0, 0.2, 1);
+}
+
 .main-editImageButton-overlay {
   background-color: rgb(0 0 0 / 50%);
   border-radius: var(--button-border);
