@@ -706,6 +706,25 @@ PLAYLIST VIEW
   scale: 1;
 }
 
+/*-----------
+SONG PREVIEWS
+-----------*/
+
+/* Background */
+.FP_XXx0FMQPJEu3WzfpM {
+  --background-base: rgba(25, 25, 25, 0.55) !important;
+}
+
+/* Add to playlist button */
+.FP_XXx0FMQPJEu3WzfpM .BLIxyum1wPNrFibaQ9wr > span > svg {
+  fill: var(--text-subdued);
+}
+
+/* Next button */
+.FP_XXx0FMQPJEu3WzfpM button > span.kT3dFHdVmU0vyeE71IDE {
+  background-color: var(--backdrop) !important;
+}
+
 /*-----
 TOP BAR
 ------*/
