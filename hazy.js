@@ -674,7 +674,9 @@
       // Check if image background is valid
       let invalidImage = false;
       try {
-        await fetch(srcInput.value);
+        await fetch(srcInput.value, {
+          "mode": "no-cors"
+        });
       }
       catch (error) {
         invalidImage = true;
