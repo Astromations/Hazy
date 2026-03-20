@@ -15,12 +15,12 @@
     {
       id: "UseCustomColor",
       name: "Custom color",
-      defVal: true,
+      defVal: false,
     },
   ];
   const toggles = {
     UseCustomBackground: false,
-    UseCustomColor: true,
+    UseCustomColor: false,
   };
   const sliders = [
     {
@@ -66,10 +66,10 @@
 
     for (const feature of features) {
       // Ignore if feature not present
-      if (!parsedObject[feature]) continue;
+      if (!parsedObject?.[feature]) continue;
 
       // Change value if disabled
-      if (!parsedObject[feature].value) {
+      if (!parsedObject?.[feature]?.value) {
         parsedObject[feature].value = true;
         reload = true;
       }
