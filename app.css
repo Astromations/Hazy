@@ -265,7 +265,8 @@ YOUR LIBRARY
 
 /* Modify border radius for artist images */
 .ijMb5PbEEQgbsXLRI_q8,
-.gmNQCzeK5b2wiebA87rg {
+.gmNQCzeK5b2wiebA87rg,
+.XGU2hiOPwlUs2HhaOnX1 {
   border-radius: var(--button-border);
 }
 
@@ -470,6 +471,17 @@ SIDEBAR
     rgba(0, 0, 0, 1) 92%,
     transparent 100%
   );
+}
+
+/* Fix black border next to now playing sidebar on hover */
+.Nn5XB58EgONWij7zBn_a > * {
+  background-color: transparent !important;
+}
+
+/* Fix now playing sidebar "About the artist" background */
+.Q8TIE2Y2AX304EkuFSZh,
+.Uw4tcZdmh7s4BMdgCCuu {
+  background-color: transparent !important;
 }
 
 .main-buddyFeed-container,
@@ -1019,7 +1031,6 @@ TOP BAR
 PLAY BUTTONS
 ----------*/
 
-.main-playButton-PlayButton,
 .main-playButton-PlayButton {
   transition: transform 0.2s ease;
   transform-origin: center;
@@ -1313,7 +1324,7 @@ div.BV0jjn_h5TtMMl8YKuZ0 > button {
 
 /* Fix size of clear follow button */
 .XnpcFS6w_pjB4jhYgZHf[data-encore-id="buttonSecondary"] {
-  aspect-ratio: 2.375/1 !important;
+  aspect-ratio: 2.625/1 !important;
 }
 
 /* Search dropdown background */
@@ -2112,7 +2123,8 @@ SPOTIFY CINEMA FULLSCREEN
 
 /* Hide elements seen through transparent bg */
 
-.Root__top-container:has(.Root__cinema-view.E3V79f6uQHeTnFxMhoju) > .Root__globalNav {
+.Root__top-container:has(.Root__cinema-view.E3V79f6uQHeTnFxMhoju) > .Root__globalNav,
+.Root__top-container:has(.Root__cinema-view--controls-hidden) > .Root__now-playing-bar {
   opacity: 1 !important;
   animation: hideLayer 0s linear 0.85s forwards;
 }
@@ -2121,14 +2133,47 @@ SPOTIFY CINEMA FULLSCREEN
   to { z-index: -1; }
 }
 
-.Root__right-sidebar aside.NowPlayingView {
+.Root__top-container:has(.Root__cinema-view) .Root__right-sidebar aside.NowPlayingView {
   display: none;
 }
 
-.Root__cinema-view {
+.Root__cinema-view,
+.x0lJCeJrx_56dJTWdATl.mpdgC9UTkN5_fMm1pFiz {
   outline: none;
 
   border-radius: var(--button-border);
+}
+
+.Root__cinema-view--controls-hidden {
+  margin-bottom: calc(-96px - var(--bottom-bar-height) - var(--panel-gap)) !important;
+}
+
+.Root__top-container:has(.Root__cinema-view--controls-hidden) .LO4qETPsZnDBbeRptb_l.J48cLGRUDKjPDyApbN9h {
+  margin-bottom: calc(-90px - var(--bottom-bar-height) - var(--panel-gap)) !important;
+}
+
+.Root__cinema-view video {
+  border-radius: var(--button-border) !important;
+}
+
+/* Hide "related music videos" shelf */
+.Root__cinema-view .main-nowPlayingView-section.tB3JVNYttFlVC_oYVfjI {
+  display: none;
+}
+
+/* Fix black border next to sidebar */
+.LO4qETPsZnDBbeRptb_l.J48cLGRUDKjPDyApbN9h:before {
+  background-color: transparent !important;
+}
+
+/* Fix "About this artist" background border radius */
+.Root__cinema-view .Q8TIE2Y2AX304EkuFSZh {
+  border-radius: var(--button-border);
+}
+
+/* Theme "Switch to video" controls button */
+.w6TUXPT2a5qzDorMgZoz button {
+  background-color: transparent;
 }
 
 /* Credits / Next in queue cards */
