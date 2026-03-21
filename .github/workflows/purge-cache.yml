@@ -13,5 +13,5 @@ jobs:
         - uses: egad13/purge-jsdelivr-cache@v1
           with:
             url: |
-                https://cdn.jsdelivr.net/gh/astromations/Hazy/app.css
-                https://cdn.jsdelivr.net/gh/astromations/Hazy/hazy.js
+                https://cdn.jsdelivr.net/gh/astromations/hazy/app.css
+                https://cdn.jsdelivr.net/gh/astromations/hazy/hazy.js
