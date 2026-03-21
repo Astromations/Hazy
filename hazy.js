@@ -17,10 +17,16 @@
       name: "Custom color",
       defVal: false,
     },
+    {
+      id: "HideNowPlayingSidebar",
+      name: "Hide now playing sidebar",
+      defVal: false,
+    },
   ];
   const toggles = {
     UseCustomBackground: false,
     UseCustomColor: false,
+    HideNowPlayingSidebar: false
   };
   const sliders = [
     {
@@ -490,6 +496,15 @@
       localStorage.getItem("UseCustomBackground")
     );
     toggles.UseCustomColor = JSON.parse(localStorage.getItem("UseCustomColor"));
+    toggles.HideNowPlayingSidebar = JSON.parse(localStorage.getItem("HideNowPlayingSidebar"));
+
+    if (toggles.HideNowPlayingSidebar) {
+      document.body.classList.add("__hazy_hidenowplayingsidebar");
+    }
+    else {
+      document.body.classList.remove("__hazy_hidenowplayingsidebar");
+    }
+
     onSongChange();
   }
 
