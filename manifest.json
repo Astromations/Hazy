@@ -3,9 +3,9 @@
   "description": "A Hazy spicetify theme",
   "preview": "hazy_home.png",
   "readme": "README.md",
-  "usercss": "https://astromations.github.io/hazy/app.css",
-  "schemes": "https://astromations.github.io/hazy/color.ini",
-  "include": ["https://astromations.github.io/hazy/hazy.js"],
+  "usercss": "https://cdn.jsdelivr.net/gh/astromations/hazy/app.css",
+  "schemes": "https://cdn.jsdelivr.net/gh/astromations/hazy/color.ini",
+  "include": ["https://cdn.jsdelivr.net/gh/astromations/hazy/hazy.js"],
   "authors": [
     {
       "name": "Astromations",
