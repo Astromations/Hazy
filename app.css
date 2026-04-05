@@ -139,22 +139,9 @@ html:not(.spotify__container--is-desktop.fullscreen)
 }
 
 html:not(.spotify__container--is-desktop.fullscreen)
-  body.global-nav.windows:not(.video-full-window)::after {
-  --topbar-height: 64px;
-}
-
-html:not(.spotify__container--is-desktop.fullscreen)
   body.global-nav-centered.windows:not(.video-full-window)::after {
-  height: min(
-    32px / var(--zoom, 1),
-    var(--topbar-height, 64px) / var(--zoom, 1)
-  );
-  top: calc(
-    (
-        var(--topbar-height, 64px) / 1 -
-          min(32px / var(--zoom, 1), var(--topbar-height, 64px))
-      ) / 2
-  );
+  height: calc(var(--topbar-height, 64px) / var(--zoom, 1));
+  top: 0;
 }
 
 /* Hide empty window controls from DOM to fix spacing */
