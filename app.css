@@ -3007,6 +3007,17 @@ EXTENSION-SPECIFIC TWEAKS
   display: flex !important;
 }
 
+/* Fix extension buttons (Spicy Lyrics, Spicetify Jam, etc.) having a
+   visible background after the 1.3.x button restyle */
+.main-nowPlayingBar-extraControls > button.main-genericButton-button,
+.main-nowPlayingBar-extraControls > button.main-genericButton-button:hover,
+.main-nowPlayingBar-extraControls > button.main-genericButton-button:focus,
+.main-nowPlayingBar-extraControls > button.main-genericButton-button:active {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
 /*---------------------
 THEMED VISUALIZER ICONS
 ---------------------*/
