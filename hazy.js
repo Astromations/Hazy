@@ -377,12 +377,12 @@
           lyricsContentWrapper.style.width = "";
 
           // 0, 1 - blank lines
-          const lyric = document.querySelector(
+          const lyric = document.querySelectorAll(
             ".lyrics-lyricsContent-lyric"
           )[2];
           document.documentElement.style.setProperty(
             "--lyrics-text-direction",
-            /[\u0591-\u07FF]/.test(lyric.innerText) ? "right" : "left"
+            /[\u0591-\u07FF]/.test(lyric?.innerText ?? "") ? "right" : "left"
           );
 
           document.documentElement.style.setProperty(
