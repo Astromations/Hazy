@@ -512,6 +512,15 @@ SIDEBAR
   border-radius: var(--button-border) !important;
 }
 
+.Root__right-sidebar > div:not(.LayoutResizer__resize-bar) {
+  --background-base: var(--backdrop) !important;
+  border-radius: var(--button-border) !important;
+}
+
+.Root__right-sidebar aside.NowPlayingView {
+  background: transparent;
+}
+
 .mzBZbIt7NDzzTffimVhn.TjX06ItOHm0J21btzLaj {
     background: none
 }
