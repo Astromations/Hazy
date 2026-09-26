@@ -1,0 +1,11 @@
+{
+  "name": "hazy",
+  "kind": "theme",
+  "version": "0.1.0",
+  "authors": ["Astromations"],
+  "description": "A Hazy spicetify theme",
+  "tags": ["dark", "transparent", "hazy"],
+  "entries": { "js": "index.js", "css": "app.css" },
+  "hasMixins": false,
+  "dependencies": {}
+}
