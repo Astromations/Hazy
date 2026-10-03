@@ -330,7 +330,8 @@ NOW PLAYING BAR
 
 .main-nowPlayingBar-nowPlayingBar {
   height: 90px !important;
-  margin-right: 16px;
+  background: var(--backdrop) !important;
+  border-radius: var(--button-border);
 }
 
 /* Thumbnail (album art) */
