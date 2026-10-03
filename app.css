@@ -1389,6 +1389,7 @@ MISCELLANEOUS
 
 .main-actionBarBackground-background,
 .main-nowPlayingBar-container,
+*:has(> .main-nowPlayingBar-container),
 .playlist-playlist-actionBarBackground-background {
   background: none !important;
 }
