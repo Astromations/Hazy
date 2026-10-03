@@ -836,6 +836,15 @@ PLAYLIST VIEW
   justify-content: center;
 }
 
+/* Remove default playlist background color */
+.main-entityHeader-container .kMUtWcOMOZmCWTMAc_gu {
+  background-color: transparent !important;
+}
+
+.M7ECcaA17LC8UqL2GKVD {
+  background-color: transparent !important;
+}
+
 /*semi dark overlay on artist/podcast header image */
 .ZLQMyiECjwh0Fat0ymny {
   display: none
