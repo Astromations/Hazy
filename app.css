@@ -2581,6 +2581,26 @@ div[aria-label="Hazy Settings"] .main-trackCreditsModal-mainSection {
   max-height: 100%;
 }
 
+.main-trackCreditsModal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 0;
+}
+
+.main-trackCreditsModal-closeBtn {
+  display: flex;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--spice-subtext);
+  cursor: pointer;
+}
+
+.main-trackCreditsModal-closeBtn:hover {
+  color: var(--spice-text);
+}
+
 .main-userWidget-dropDownMenu li.main-contextMenu-menuItem > div {
   width: 225px;
 }
