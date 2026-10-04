@@ -834,6 +834,13 @@ PLAYLIST VIEW
 .main-entityHeader-image {
   border-radius: var(--button-border) !important;
   box-shadow: -2px 4px 9px 3px rgb(0 0 0 / 15%);
+  height: 100%;
+  display: inline-flex;
+}
+
+.main-playlistEditDetailsModal-albumCover {
+    display: flex;
+    justify-content: center;
 }
 
 .main-entityHeader-shadow {
