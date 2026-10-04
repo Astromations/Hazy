@@ -1158,7 +1158,7 @@ PLAY BUTTONS
   aspect-ratio: 1/1;
 }
 
-.Root__globalNav button,
+.Root__globalNav button button:not([aria-label="Search"]),
 .Root__globalNav .main-globalNav-link-icon,
 .main-topBar-historyButtons .main-topBar-button {
   background-color: var(--backdrop);
