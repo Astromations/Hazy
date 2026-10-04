@@ -330,7 +330,8 @@ NOW PLAYING BAR
 
 .main-nowPlayingBar-nowPlayingBar {
   height: 90px !important;
-  margin-right: 16px;
+  background: var(--backdrop) !important;
+  border-radius: var(--button-border);
 }
 
 /* Thumbnail (album art) */
@@ -1396,6 +1397,7 @@ MISCELLANEOUS
 
 .main-actionBarBackground-background,
 .main-nowPlayingBar-container,
+*:has(> .main-nowPlayingBar-container),
 .playlist-playlist-actionBarBackground-background {
   background: none !important;
 }
