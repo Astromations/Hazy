@@ -59,4 +59,17 @@ spicetify config inject_css 1 replace_colors 1 overwrite_assets 1 inject_theme_j
 spicetify apply
 ```
 
+### 🧪 Spicetify v3 (beta) 🧪
+
+---
+
+Spicetify v3 loads themes as modules from `~/.config/spicetify/modules/` and ignores the `Themes` folder. From a clone of this repo, run:
+
+```bash
+./install-v3.sh
+spicetify apply
+```
+
+Then enable Hazy from the Spicetify manager in the client. Only one theme loads at a time, and if the last active theme is disabled no theme loads, so enable Hazy explicitly.
+
 
