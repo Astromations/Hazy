@@ -854,11 +854,9 @@ PLAYLIST VIEW
 }
 
 /* Remove default playlist background color */
-.main-entityHeader-container .kMUtWcOMOZmCWTMAc_gu {
-  background-color: transparent !important;
-}
-
-.M7ECcaA17LC8UqL2GKVD {
+.main-entityHeader-container .main-entityHeader-backgroundColor,
+.main-actionBarBackground-background,
+[data-testid="overscroll-background"] {
   background-color: transparent !important;
 }
 
@@ -1898,10 +1896,12 @@ ARTIST PAGE
   filter: grayscale(5%) brightness(94%);
 }
 
+/* Mask the portaled banner wrapper so its color overlay fades with the artwork. */
 .main-entityHeader-background.main-entityHeader-gradient,
 .sv5suqIPUwjgUF_BzM41,
 .main-entityHeader-background,
-.XR9tiExSLOuxgWTKxzse {
+.XR9tiExSLOuxgWTKxzse,
+.main-view-container :has(> [data-testid="background-image"]) {
   mask-image: linear-gradient(
     rgba(0, 0, 0, var(--artist-fade)) 58%,
     transparent 100%
