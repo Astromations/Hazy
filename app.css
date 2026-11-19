@@ -518,7 +518,8 @@ SIDEBAR
   border-radius: var(--button-border) !important;
 }
 
-.Root__right-sidebar aside.NowPlayingView {
+.Root__right-sidebar aside.NowPlayingView,
+#Desktop_PanelContainer_Id {
   background: transparent;
 }
 
@@ -527,7 +528,8 @@ SIDEBAR
 }
 
 .ffFwfKcPDbmAPLXzxzKq:before,
-.UrfDp0_mKGL9hkfh9g_R:before {
+.UrfDp0_mKGL9hkfh9g_R:before,
+#Desktop_PanelContainer_Id:before {
   display: none;
 }
 
@@ -551,7 +553,8 @@ SIDEBAR
   padding-top: 0px !important;
 }
 
-.main-nowPlayingView-content.main-nowPlayingView-gradient {
+.main-nowPlayingView-content.main-nowPlayingView-gradient,
+[data-npv-root] {
   background: none !important;
 }
 
