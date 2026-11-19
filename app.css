@@ -3104,3 +3104,123 @@ body.__hazy_hidenowplayingsidebar .Root__right-sidebar:has(div[aria-hidden=true]
 body.__hazy_hidenowplayingsidebar .Root__top-container:has(.Root__right-sidebar div[aria-hidden=true]) .Root__main-view {
   width: calc(100% + var(--panel-gap)) !important;
 }
+
+/* Spotify 1.3.x: keep native playlist color layers from covering Hazy's backdrop. */
+main .hbNOZbHD3bPL3OcHQWNn,
+main .uP1rcUSIWCFaOZaoH0ZG,
+main .r8bczAWCEgb9_L0iyIcc,
+main .IfBZ5VdI_2nwDMl4H6Yh {
+  background: transparent !important;
+}
+
+/* New Now Playing section component: match Hazy's translucent, rounded cards. */
+aside.NowPlayingView .yUjdM2oRRn7kw8tR1rqV {
+  background-color: var(--backdrop) !important;
+  border-radius: var(--button-border) !important;
+  box-shadow: 0px 2px 10px 2px rgb(0 0 0 / 10%);
+}
+
+/* The current sidebar no longer has the old Root__right-sidebar wrapper. */
+aside.NowPlayingView,
+aside.NowPlayingView::before {
+  background: transparent !important;
+}
+
+/* Do not paint an extra panel behind playlist title text. */
+main .bXvkHCNOXigrpicAqmgd,
+main .bXvkHCNOXigrpicAqmgd::before,
+main .bXvkHCNOXigrpicAqmgd::after,
+main .pFAP8VxepVipwnPit9wH {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* The new Now Playing feed adds its own opaque gradient behind track info. */
+aside.NowPlayingView .Y5huKChFVkAFLWvPr4jg.S4OnXiJxYBoZlm5n1hRL {
+  background: transparent !important;
+}
+
+/* Track-info shadow extends 200px below the song title on current Spotify. */
+aside.NowPlayingView .KkJD1yUJYSEJITpev6rF::before {
+  display: none !important;
+}
+
+/* Canvas uses an absolute video layer rather than the rounded cover image. */
+aside.NowPlayingView .HE0101Kj0ngC9_tWhlDN {
+  border-radius: var(--button-border);
+  overflow: hidden;
+}
+
+aside.NowPlayingView .HE0101Kj0ngC9_tWhlDN::before,
+aside.NowPlayingView .HE0101Kj0ngC9_tWhlDN::after {
+  border-radius: inherit;
+}
+
+/* Anchor and clip Canvas to its visual frame, not the full sidebar height. */
+aside.NowPlayingView .vC8rkf_pM5KSx3V6GYWw.jkHe7O1fLz6Q31gGdsBQ {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--button-border);
+}
+
+aside.NowPlayingView .jkHe7O1fLz6Q31gGdsBQ .HE0101Kj0ngC9_tWhlDN {
+  inset: 0;
+  height: 100%;
+}
+
+/* Canvas now sits in its own frame, so it needs no text-readability dimming. */
+aside.NowPlayingView .jkHe7O1fLz6Q31gGdsBQ .HE0101Kj0ngC9_tWhlDN::before,
+aside.NowPlayingView .jkHe7O1fLz6Q31gGdsBQ .HE0101Kj0ngC9_tWhlDN::after {
+  background: none !important;
+}
+
+/* Current home header and chips replace Hazy's older semantic selectors. */
+main .kMaYBahSBLOnErF7DLR2,
+main .xCEkyVpabf3oVGmFQVej,
+main .xCEkyVpabf3oVGmFQVej::after {
+  background: transparent !important;
+}
+/* Preserve Hazy's clear sticky headers when artist pages are scrolled. */
+.Root__top-container .B_NENXC7AHTEKsYhv3qv,
+.Root__top-container .B_NENXC7AHTEKsYhv3qv::after,
+.Root__top-container .EJTHIv1RyutH0yibEwgn,
+main .SdObJk3_bmCg1nV_PTUU.tnEtMe827oywEa8TgLqg {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.Root__top-container .B_NENXC7AHTEKsYhv3qv {
+  backdrop-filter: blur(25px);
+}
+
+/* Give Canvas a definite height so its centred cover crop uses the visual frame. */
+aside.NowPlayingView .jkHe7O1fLz6Q31gGdsBQ .HE0101Kj0ngC9_tWhlDN > div,
+aside.NowPlayingView .jkHe7O1fLz6Q31gGdsBQ .canvasVideoContainerNPV {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+aside.NowPlayingView .jkHe7O1fLz6Q31gGdsBQ .canvasVideoContainerNPV > video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Current artist banners sit outside main and need Hazy's feathered scroll fade. */
+@keyframes hazy-panel-artist-fade {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+.main-view-container .MlWLm9_5qALi6Ay0_OCr {
+  mask-image: linear-gradient(#000 58%, transparent 100%);
+  animation: hazy-panel-artist-fade 1s linear both;
+  animation-timeline: --main-view-scroll;
+  animation-range: 0px 334px;
+}
+.main-view-container .venMPE3QitySGonlITLf {
+  background: transparent !important;
+}
+.main-view-container .venMPE3QitySGonlITLf::after {
+  display: none !important;
+}
