@@ -553,7 +553,8 @@ SIDEBAR
   padding-top: 0px !important;
 }
 
-.main-nowPlayingView-content.main-nowPlayingView-gradient {
+.main-nowPlayingView-content.main-nowPlayingView-gradient,
+[data-npv-root] {
   background: none !important;
 }
 
