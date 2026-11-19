@@ -2582,7 +2582,7 @@ HOME POPUP
 }
 
 div[aria-label="Hazy Settings"] .main-trackCreditsModal-mainSection {
-  overflow-y: hidden;
+  overflow-y: scroll;
   padding: 24px;
 }
 
